@@ -67,39 +67,43 @@ const Todos = props => {
     const {className, ...rest} = props;
 
     const classes = useStyles();
-    const [todos, setTodos] = useState([]);
-
-    useEffect(() => {
-      let mounted = true;
-
-      const fetchTodos = () => {
-        axios.get('/api/account/todos')
-            .then(response => {
-          if (mounted) {
-            setTodos(todosMock);
-          }
-        });
-      };
-
-      fetchTodos();
-
-      return () => {
-        mounted = false;
-      };
-    }, []);
+    // const [todos, setTodos] = useState([]);
+    //
+    // useEffect(() => {
+    //   let mounted = true;
+    //
+    //   if(mounted) {
+    //       setTodos(todosMock)
+    //   }
+    //
+    //   const fetchTodos = () => {
+    //     axios.get('/api/account/todos')
+    //         .then(response => {
+    //       if (mounted) {
+    //         setTodos(todosMock);
+    //       }
+    //     });
+    //   };
+    //
+    //   fetchTodos();
+    //
+    //   return () => {
+    //     mounted = false;
+    //   };
+    // }, []);
 
     const handleChange = (event, todo) => {
         event.persist();
 
-        setTodos(todosMock =>
-            todosMock.map(t => {
-                if (t.id === todo.id) {
-                    return {...todo, done: !todo.done};
-                }
-
-                return t;
-            })
-        );
+        // setTodos(todos =>
+        //     todos.map(t => {
+        //         if (t.id === todo.id) {
+        //             return {...todo, done: !todo.done};
+        //         }
+        //
+        //         return t;
+        //     })
+        // );
     };
 
     const todosMock = [

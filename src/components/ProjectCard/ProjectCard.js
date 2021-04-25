@@ -22,6 +22,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 import getInitials from "../../utils/getInitials";
 import Label from "../Label";
+import moment from 'moment';
 
 
 const useStyles = makeStyles(theme => ({
@@ -91,7 +92,7 @@ const ProjectCard = props => {
         disableTypography
         subheader={
           <Typography variant="body2">
-            by{' '}
+            от{' '}
             <Link
               color="textPrimary"
               component={RouterLink}
@@ -100,7 +101,7 @@ const ProjectCard = props => {
             >
               {project.author.name}
             </Link>{' '}
-            {/*| Updated: {moment(project.updated_at).fromNow()}*/}
+            | Обновлен: {moment(project.updated_at).fromNow()}
           </Typography>
         }
         title={
@@ -120,8 +121,7 @@ const ProjectCard = props => {
             colo="textSecondary"
             variant="subtitle2"
           >
-            We're looking for experienced Developers and Product Designers to
-            come aboard and help us build succesful businesses through softare.
+            {project.description}
           </Typography>
         </div>
         <div className={classes.tags}>
@@ -143,16 +143,16 @@ const ProjectCard = props => {
             spacing={3}
           >
             <Grid item>
-              <Typography variant="h5">${project.price}</Typography>
-              <Typography variant="body2">Per Project</Typography>
+              <Typography variant="h5">{project.duration} месяцев</Typography>
+              <Typography variant="body2">Длительность плана</Typography>
             </Grid>
             <Grid item>
-              <Typography variant="h5">{project.location}</Typography>
-              <Typography variant="body2">Location</Typography>
+              <Typography variant="h5">{project.difficult}</Typography>
+              <Typography variant="body2">Сложность</Typography>
             </Grid>
             <Grid item>
               <Typography variant="h5">{project.type}</Typography>
-              <Typography variant="body2">Type</Typography>
+              <Typography variant="body2">Тип плана</Typography>
             </Grid>
             <Grid item>
               {liked ? (
@@ -190,7 +190,7 @@ const ProjectCard = props => {
                 size="small"
                 to="/projects/1/overview"
               >
-                Learn more
+                Подробнее
               </Button>
             </Grid>
           </Grid>

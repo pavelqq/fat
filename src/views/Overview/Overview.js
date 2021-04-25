@@ -40,10 +40,10 @@ const Overview = () => {
       title="Home"
     >
       <Header />
+      <Projects className={classes.projects} />
       <Statistics className={classes.statistics} />
       <Notifications className={classes.notifications} />
       <Todos className={classes.todos} />
-      <Projects className={classes.projects} />
     </Page>
   );
 };
