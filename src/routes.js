@@ -136,16 +136,16 @@ const routes = [
                 exact: true,
                 component: PresentationView
             },
-            // {
-            //     path: '/profile/:id',
-            //     exact: true,
-            //     component: lazy(() => import('views/Profile'))
-            // },
-            // {
-            //     path: '/profile/:id/:tab',
-            //     exact: true,
-            //     component: lazy(() => import('views/Profile'))
-            // },
+            {
+                path: '/profile/:id',
+                exact: true,
+                component: lazy(() => import('./views/Profile'))
+            },
+            {
+                path: '/profile/:id/:tab',
+                exact: true,
+                component: lazy(() => import('./views/Profile'))
+            },
             // {
             //     path: '/projects/create',
             //     exact: true,

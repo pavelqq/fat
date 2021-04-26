@@ -41,11 +41,12 @@ const Overview = () => {
     >
       <Header />
       <Projects className={classes.projects} />
+      <Todos className={classes.todos} />
       <Statistics className={classes.statistics} />
       <Notifications className={classes.notifications} />
-      <Todos className={classes.todos} />
     </Page>
   );
 };
 
 export default Overview;
+

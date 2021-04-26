@@ -80,7 +80,7 @@ const Header = props => {
             gutterBottom
             variant="h4"
           >
-            Добрый день, Pavel
+            Добрый день, Павел
           </Typography>
           <Typography
             gutterBottom
@@ -94,7 +94,7 @@ const Header = props => {
             variant="contained"
           >
             <BarChartIcon className={classes.barChartIcon} />
-            Посмотреть сводку
+            Посмотреть задания на сегодня
           </Button>
         </Grid>
         <Hidden smDown>

@@ -42,12 +42,11 @@ const SourceFiles = () => {
               gutterBottom
               variant="h3"
             >
-              Source Files
+              Детализация планов
             </Typography>
             <Typography variant="subtitle2">
-              We've included the source Sketch & Figma files so you can get
-              creative! We designed all components with Symbols in Sketch which
-              allows you to change the main colors as you like.
+              Огромные возможности детализации планов питания и тренировок. Следите за каждым шагом ваших друзей или
+              сравнивайте свой прогресс.
             </Typography>
           </Grid>
           <Grid

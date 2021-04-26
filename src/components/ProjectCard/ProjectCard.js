@@ -143,15 +143,15 @@ const ProjectCard = props => {
             spacing={3}
           >
             <Grid item>
-              <Typography variant="h5">{project.duration} месяцев</Typography>
+              <Typography variant="h4">{project.duration} месяцев</Typography>
               <Typography variant="body2">Длительность плана</Typography>
             </Grid>
             <Grid item>
-              <Typography variant="h5">{project.difficult}</Typography>
+              <Typography variant="h4">{project.difficult}</Typography>
               <Typography variant="body2">Сложность</Typography>
             </Grid>
             <Grid item>
-              <Typography variant="h5">{project.type}</Typography>
+              <Typography variant="h4">{project.type}</Typography>
               <Typography variant="body2">Тип плана</Typography>
             </Grid>
             <Grid item>

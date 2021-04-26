@@ -42,12 +42,10 @@ const PluginsSupport = () => {
               gutterBottom
               variant="h3"
             >
-              Support for Plugins
+              Функционал
             </Typography>
             <Typography variant="subtitle2">
-              The kit provides support for multiple third-party plugins right
-              out of the box like Chart.js, Dropzone.js, Kanban Plugin and many
-              more.
+              Огромное множество функций: графики, статистики, достижения.
             </Typography>
           </Grid>
           <Grid

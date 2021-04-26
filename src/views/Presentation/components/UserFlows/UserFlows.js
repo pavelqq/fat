@@ -42,12 +42,10 @@ const UserFlows = () => {
               gutterBottom
               variant="h3"
             >
-              Complete User Flows
+              Комьюнити
             </Typography>
             <Typography variant="subtitle2">
-              Not just a set of tools, the package includes the most common use
-              cases of user flows like User Management, Second Level Layout, and
-              many more.
+              Общайся с людьми, обменивайся опытом, спрашивай советы, изучай планы
             </Typography>
           </Grid>
           <Grid
