@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Projects = props => {
+const Plans = props => {
     const {className, ...rest} = props;
 
     const classes = useStyles();
@@ -63,7 +63,7 @@ const Projects = props => {
     //   };
     // }, []);
 
-    const projectsMock = [
+    const plans = [
         {
             id: uuidv4(),
             title: '"Череда-10" - программа тренировок от Дениса Борисова',
@@ -186,7 +186,7 @@ const Projects = props => {
                     <KeyboardArrowRightIcon className={classes.arrowIcon}/>
                 </Button>
             </div>
-            {projectsMock.map(project => (
+            {plans.map(project => (
                 <ProjectCard
                     className={classes.projectCard}
                     key={project.id}
@@ -197,4 +197,4 @@ const Projects = props => {
     );
 };
 
-export default Projects;
+export default Plans;

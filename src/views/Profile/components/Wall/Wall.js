@@ -8,6 +8,9 @@ import moment from "moment";
 import AddPost from "../../../../components/AddPost";
 import PostCard from "../../../../components/PostCard";
 
+import Grid from "@material-ui/core/Grid";
+import TimelinePosts from "../TimelinePosts";
+
 const useStyles = makeStyles(theme => ({
     root: {},
     posts: {
@@ -15,10 +18,13 @@ const useStyles = makeStyles(theme => ({
     },
     post: {
         marginBottom: theme.spacing(2)
+    },
+    timeline: {
+        paddingTop: theme.spacing(3),
     }
 }));
 
-const Timeline = props => {
+const Wall = props => {
     const {className, ...rest} = props;
 
     const posts = [
@@ -28,8 +34,7 @@ const Timeline = props => {
                 name: 'Ирина Николаева',
                 avatar: '/images/avatars/avatar_11.png'
             },
-            message: 'Здарова',
-            media: '/images/posts/post_1.jpg',
+            message: 'Здарова. Как дела?',
             liked: true,
             likes: 24,
             comments: [
@@ -51,7 +56,26 @@ const Timeline = props => {
                     message:
                         'Хмм, вот это гений мысли',
                     created_at: moment().subtract(2, 'hours')
-                }
+                },
+                {
+                    id: uuidv4(),
+                    author: {
+                        name: 'Женя Грибоедова',
+                        avatar: '/images/avatars/avatar_8.png'
+                    },
+                    message:
+                        'Ахахахах',
+                    created_at: moment().subtract(2, 'hours')
+                },
+                {
+                    id: uuidv4(),
+                    author: {
+                        name: 'Аня Пупкина',
+                        avatar: '/images/avatars/avatar_5.png'
+                    },
+                    message: 'Это точно',
+                    created_at: moment().subtract(2, 'hours')
+                },
             ],
             created_at: moment().subtract(4, 'hours')
         },
@@ -61,6 +85,7 @@ const Timeline = props => {
                 name: 'Ирина Николаева',
                 avatar: '/images/avatars/avatar_11.png'
             },
+            media: 'https://livacha.com/upload/user/13/c2/user_1oG8F_OcDvWV3TRaxO289lGgL8GlVoDblD0oyuj5mZA5va.jpeg',
             message:
                 'Ну ты и жирдяй, худей давай, а то совсем уродом стал!',
             liked: false,
@@ -117,18 +142,31 @@ const Timeline = props => {
             className={clsx(classes.root, className)}
         >
             <AddPost/>
-            <div className={classes.posts}>
-                {posts.map(post => (
-                    <PostCard
-                        className={classes.post}
-                        key={post.id}
-                        post={post}
-                    />
-                ))}
-            </div>
+            <Grid container spacing={1}>
+                <Grid item xs={12} sm={8}>
+                    <div className={classes.posts}>
+                        {posts.map(post => (
+                            <PostCard
+                                className={classes.post}
+                                key={post.id}
+                                post={post}
+                            />
+                        ))}
+                    </div>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                    {posts.map(post => (
+                        <TimelinePosts
+                            className={classes.timeline}
+                            key={post.id}
+                            post={post}
+                        />
+                    ))}
+                </Grid>
+            </Grid>
         </div>
     );
 };
 
 
-export default Timeline;
+export default Wall;

@@ -25,7 +25,7 @@ import Label from "../../../../components/Label";
 
 export default [
   {
-    title: 'Pages',
+    // title: 'Страницы',
     pages: [
       {
         title: 'Домашняя страница',
@@ -61,7 +61,7 @@ export default [
         //     href: '/management/customers/1/summary'
         //   },
         //   {
-        //     title: 'Projects',
+        //     title: 'Plans',
         //     href: '/management/projects'
         //   },
         //   {
@@ -81,20 +81,20 @@ export default [
       },
       {
         title: 'Профиль',
-        href: '/profile',
+        href: '/profile/1',
         icon: PersonIcon,
         // children: [
         //   {
-        //     title: 'Timeline',
-        //     href: '/profile/1/timeline'
+        //     title: 'Стена',
+        //     href: '/profile/1/wall'
         //   },
         //   {
-        //     title: 'Connections',
-        //     href: '/profile/1/connections'
+        //     title: 'Друзья',
+        //     href: '/profile/1/friends'
         //   },
         //   {
-        //     title: 'Projects',
-        //     href: '/profile/1/projects'
+        //     title: 'Планы',
+        //     href: '/profile/1/plans'
         //   },
         //   {
         //     title: 'Reviews',
@@ -235,7 +235,7 @@ export default [
     ]
   },
   {
-    title: 'Помощь',
+    title: 'Дополнительно',
     pages: [
       {
         title: 'Презентация',
@@ -248,10 +248,10 @@ export default [
       //   icon: CodeIcon
       // },
       {
-        title: 'Версия',
+        title: 'О проекте',
         href: '',
         icon: ViewModuleIcon,
-        label: () => <Label color={colors.blue['500']}>v1.2.0</Label>
+        label: () => <Label color={colors.blue['500']}>v1.0.0</Label>
       }
     ]
   }

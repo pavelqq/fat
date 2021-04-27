@@ -176,11 +176,11 @@ const routes = [
             //     exact: true,
             //     component: lazy(() => import('views/Settings'))
             // },
-            // {
-            //     path: '/social-feed',
-            //     exact: true,
-            //     component: lazy(() => import('views/SocialFeed'))
-            // },
+            {
+                path: '/social-feed',
+                exact: true,
+                component: lazy(() => import('./views/SocialFeed'))
+            },
             // {
             //     path: '/getting-started',
             //     exact: true,

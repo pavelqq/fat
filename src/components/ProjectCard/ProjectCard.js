@@ -143,20 +143,20 @@ const ProjectCard = props => {
             spacing={3}
           >
             <Grid item>
-              <Typography variant="h4">{project.duration} месяцев</Typography>
+              <Typography variant="h5">{project.duration} месяцев</Typography>
               <Typography variant="body2">Длительность плана</Typography>
             </Grid>
             <Grid item>
-              <Typography variant="h4">{project.difficult}</Typography>
+              <Typography variant="h5">{project.difficult}</Typography>
               <Typography variant="body2">Сложность</Typography>
             </Grid>
             <Grid item>
-              <Typography variant="h4">{project.type}</Typography>
+              <Typography variant="h5">{project.type}</Typography>
               <Typography variant="body2">Тип плана</Typography>
             </Grid>
             <Grid item>
               {liked ? (
-                <Tooltip title="Unlike">
+                <Tooltip title="Дизлайк">
                   <IconButton
                     className={classes.likedButton}
                     onClick={handleUnlike}
@@ -166,7 +166,7 @@ const ProjectCard = props => {
                   </IconButton>
                 </Tooltip>
               ) : (
-                <Tooltip title="Like">
+                <Tooltip title="Лайк">
                   <IconButton
                     className={classes.likeButton}
                     onClick={handleLike}
@@ -176,7 +176,7 @@ const ProjectCard = props => {
                   </IconButton>
                 </Tooltip>
               )}
-              <Tooltip title="Share">
+              <Tooltip title="Отправить">
                 <IconButton
                   className={classes.shareButton}
                   size="small"

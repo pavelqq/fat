@@ -43,14 +43,14 @@ const CommentBubble = props => {
         alt="Person"
         component={RouterLink}
         src={comment.author.avatar}
-        to="/profile/1/timeline"
+        to="/profile/1/"
       />
       <div className={classes.bubble}>
         <div className={classes.header}>
           <Link
             color="textPrimary"
             component={RouterLink}
-            to="/profile/1/timeline"
+            to="/profile/1/"
             variant="h6"
           >
             {comment.author.name}

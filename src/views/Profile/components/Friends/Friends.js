@@ -25,9 +25,13 @@ import CheckIcon from '@material-ui/icons/Check';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import { v4 as uuidv4 } from 'uuid';
 import axios from '../../../../utils/axios';
+import ChatIcon from '@material-ui/icons/ChatOutlined';
+
 
 const useStyles = makeStyles(theme => ({
-    root: {},
+    root: {
+
+    },
     content: {
         paddingTop: 0
     },
@@ -54,11 +58,14 @@ const useStyles = makeStyles(theme => ({
     listItemText: {
         marginLeft: theme.spacing(2)
     },
+    sendButton: {
+        marginRight: theme.spacing(2)
+    },
     connectButton: {
-        marginLeft: 'auto'
+        marginRight: theme.spacing(2)
     },
     pendingButton: {
-        marginLeft: 'auto',
+        marginRight: theme.spacing(2),
         color: theme.palette.white,
         backgroundColor: colors.red[600],
         '&:hover': {
@@ -66,7 +73,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     connectedButton: {
-        marginLeft: 'auto',
+        marginRight: theme.spacing(2),
         color: theme.palette.white,
         backgroundColor: colors.green[600],
         '&:hover': {
@@ -75,10 +82,10 @@ const useStyles = makeStyles(theme => ({
     },
     buttonIcon: {
         marginRight: theme.spacing(1)
-    }
+    },
 }));
 
-const Connections = props => {
+const Friends = props => {
     const {className, ...rest} = props;
 
     const classes = useStyles();
@@ -87,35 +94,35 @@ const Connections = props => {
     const connections = [
         {
             id: uuidv4(),
-            name: 'Ekaterina Tankova',
+            name: 'Катя Танкова',
             avatar: '/images/avatars/avatar_2.png',
             common: 12,
             status: 'connected'
         },
         {
             id: uuidv4(),
-            name: 'Cao Yu',
+            name: 'Чао Мао',
             avatar: '/images/avatars/avatar_3.png',
             common: 10,
-            status: 'rejected'
+            status: 'connected'
         },
         {
             id: uuidv4(),
-            name: 'Alexa Richardson',
+            name: 'Алиса Ройзман',
             avatar: '/images/avatars/avatar_4.png',
             common: 8,
-            status: 'pending'
+            status: 'connected'
         },
         {
             id: uuidv4(),
-            name: 'Adam Denisov',
+            name: 'Адам Денисов',
             avatar: '/images/avatars/avatar_7.png',
             common: 5,
-            status: 'not_connected'
+            status: 'connected'
         },
         {
             id: uuidv4(),
-            name: 'Ava Gregoraci',
+            name: 'Анастас Грушев',
             avatar: '/images/avatars/avatar_8.png',
             common: 1,
             status: 'connected'
@@ -194,9 +201,9 @@ const Connections = props => {
                         {connections.map((connection, i) => (
                             <ListItem
                                 className={classes.listItem}
-                                disableGutters
                                 divider={i < connections.length - 1}
                                 key={connection.id}
+                                alignItems="flex-start"
                             >
                                 <ListItemAvatar>
                                     <Avatar
@@ -212,6 +219,17 @@ const Connections = props => {
                                     primary={connection.name}
                                     secondary={`${connection.common} друзей`}
                                 />
+                                <Button
+                                    align=""
+                                    color="secondary"
+                                    component={RouterLink}
+                                    to="/chat"
+                                    variant="contained"
+                                    className={classes.sendButton}
+                                >
+                                    <ChatIcon className={classes.buttonIcon}/>
+                                    Отправить сообщение
+                                </Button>
                                 {connection.status === 'not_connected' && (
                                     <Button
                                         className={classes.connectButton}
@@ -231,7 +249,7 @@ const Connections = props => {
                                         variant="contained"
                                     >
                                         <PersonAddIcon className={classes.buttonIcon}/>
-                                        В ожидании
+                                        Подписан
                                     </Button>
                                 )}
                                 {connection.status === 'connected' && (
@@ -272,4 +290,4 @@ const Connections = props => {
 };
 
 
-export default Connections;
+export default Friends;

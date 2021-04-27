@@ -6,7 +6,7 @@ import {
   Header,
   Statistics,
   Notifications,
-  Projects,
+  Plans,
   Todos
 } from './components';
 import Page from "../../components/Page";
@@ -40,10 +40,10 @@ const Overview = () => {
       title="Home"
     >
       <Header />
-      <Projects className={classes.projects} />
+      <Plans className={classes.projects} />
       <Todos className={classes.todos} />
       <Statistics className={classes.statistics} />
-      <Notifications className={classes.notifications} />
+      {/*<Notifications className={classes.notifications} />*/}
     </Page>
   );
 };

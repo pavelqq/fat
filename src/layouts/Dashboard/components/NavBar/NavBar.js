@@ -15,10 +15,9 @@ import {useSelector} from "react-redux";
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100%',
-    overflowY: 'auto'
   },
   content: {
-    padding: theme.spacing(3)
+    padding: theme.spacing(2)
   },
   profile: {
     display: 'flex',
@@ -34,10 +33,10 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1)
   },
   divider: {
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(1)
   },
   navigation: {
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   }
 }));
 
@@ -52,7 +51,6 @@ const NavBar = props => {
   //   if (openMobile) {
   //     onMobileClose && onMobileClose();
   //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [router.location.pathname]);
 
   const navbarContent = (
@@ -64,18 +62,18 @@ const NavBar = props => {
           component={RouterLink}
           // src={session.user.avatar}
           src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
-          to="/profile/1/timeline"
+          to="/profile/1/wall"
         />
         <Typography
           className={classes.name}
           variant="h4"
         >
           {/*{session.user.first_name} {session.user.last_name}*/}
-          Pavel Bure
+          Павел Буре
         </Typography>
         <Typography variant="body2">
           {/*{session.user.bio}*/}
-          Biography
+          Лох какой-то
         </Typography>
       </div>
       <Divider className={classes.divider} />

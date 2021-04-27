@@ -82,10 +82,10 @@ const Reactions = props => {
       <Button
         className={classes.shareButton}
         size="small"
-        variant="contained"
+        variant="outlined"
       >
         <ShareIcon className={classes.shareIcon} />
-        Share
+        Поделиться
       </Button>
     </div>
   );

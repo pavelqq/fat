@@ -112,10 +112,10 @@ const Header = props => {
     const classes = useStyles();
 
     const user = {
-        name: 'Shen Zhi',
-        bio: 'Web Developer',
-        avatar: '/images/avatars/avatar_11.png',
-        cover: '/images/covers/cover_2.jpg',
+        name: 'Павел Буре',
+        bio: 'Лох какой-то',
+        avatar: 'https://sun9-46.userapi.com/impf/c830408/v830408400/1121ca/C9t_7tL35pk.jpg?size=960x719&quality=96&sign=0835df69212f360830dfa1f7d204df31&type=album',
+        cover: 'https://sun9-9.userapi.com/impg/66sf9QM28QKH6LygEiELQFYZsKy5sn_g_wigLQ/LcRvXzMVA0o.jpg?size=1279x1920&quality=96&sign=e509acbea617fc117bb763cc32326f88&type=album',
         connectedStatus: 'not_connected'
     };
 
@@ -152,7 +152,7 @@ const Header = props => {
                     variant="contained"
                 >
                     <AddPhotoIcon className={classes.addPhotoIcon}/>
-                    Change Cover
+                    Изменить фон
                 </Button>
             </div>
             <div className={classes.container}>
@@ -164,14 +164,13 @@ const Header = props => {
                 <div className={classes.details}>
                     <Typography
                         component="h2"
-                        gutterBottom
                         variant="overline"
                     >
                         {user.bio}
                     </Typography>
                     <Typography
                         component="h1"
-                        variant="h4"
+                        variant="h3"
                     >
                         {user.name}
                     </Typography>
@@ -179,32 +178,35 @@ const Header = props => {
                 <Hidden smDown>
                     <div className={classes.actions}>
                         <Button
+                            disabled
                             color="secondary"
                             component={RouterLink}
                             to="/chat"
                             variant="contained"
                         >
                             <ChatIcon className={classes.mailIcon}/>
-                            Send message
+                            Отправить сообщение
                         </Button>
                         {connectedStatus === 'not_connected' && (
                             <Button
+                                disabled
                                 color="primary"
                                 onClick={handleConnectToggle}
                                 variant="contained"
                             >
                                 <PersonAddIcon className={classes.personAddIcon}/>
-                                Add connection
+                                Добавить в друзья
                             </Button>
                         )}
                         {connectedStatus === 'pending' && (
                             <Button
+                                disabled
                                 className={classes.pendingButton}
                                 onClick={handleConnectToggle}
                                 variant="contained"
                             >
                                 <PersonAddIcon className={classes.personAddIcon}/>
-                                Pending connection
+                                Подписан
                             </Button>
                         )}
                         <Tooltip title="More options">

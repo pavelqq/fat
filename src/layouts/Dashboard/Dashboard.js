@@ -32,8 +32,8 @@ const useStyles = makeStyles(() => ({
     content: {
         overflowY: 'auto',
         flex: '1 1 auto',
-        paddingRight: '5em',
-        paddingLeft: '5em',
+        paddingRight: '1em',
+        paddingLeft: '1em',
         // overflowX: 'hidden'
     }
 }));
