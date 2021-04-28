@@ -4,6 +4,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import {LinearProgress} from '@material-ui/core';
 
 import {NavBar, TopBar} from './components';
+import ChatBar from "./components/ChatBar";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles(() => ({
         position: 'relative'
     },
     container: {
-        paddingTop: '5em',
+        paddingTop: '60px',
         display: 'flex',
         flex: '1 1 auto',
         overflow: 'hidden',
@@ -32,8 +33,8 @@ const useStyles = makeStyles(() => ({
     content: {
         overflowY: 'auto',
         flex: '1 1 auto',
-        paddingRight: '1em',
-        paddingLeft: '1em',
+        paddingRight: '3%',
+        paddingLeft: '3%',
         // overflowX: 'hidden'
     }
 }));
@@ -70,7 +71,7 @@ const Dashboard = props => {
                     </Suspense>
                 </main>
             </div>
-            {/*<ChatBar />*/}
+            <ChatBar />
         </div>
     );
 };

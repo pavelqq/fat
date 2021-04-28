@@ -35,7 +35,10 @@ import AndroidOutlinedIcon from '@material-ui/icons/AndroidOutlined';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    boxShadow: 'none'
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    color: 'white',
+    padding: '0 3.5%',
   },
   flexGrow: {
     flexGrow: 1
@@ -44,7 +47,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: 'rgba(255,255,255, 0.1)',
     borderRadius: 4,
     flexBasis: 300,
-    height: 36,
+    height: 40,
     padding: theme.spacing(0, 2),
     display: 'flex',
     alignItems: 'center'
@@ -171,7 +174,8 @@ const TopBar = props => {
 
   return (
     <AppBar
-      color="primary"
+      // color="primary"
+        className={classes.root}
     >
       <Toolbar>
         {/*<RouterLink to="/">*/}
@@ -179,8 +183,8 @@ const TopBar = props => {
         {/*    FAT*/}
         {/*  </Typography>*/}
         {/*</RouterLink>*/}
-        <AndroidOutlinedIcon fontSize="large" />
-        <Typography className={classes.title} component="h3" variant="h3">
+        <AndroidOutlinedIcon fontSize="medium" />
+        <Typography className={classes.title} component="h1" variant="h4">
           FAT
         </Typography>
         <div className={classes.flexGrow} />

@@ -38,12 +38,11 @@ const useStyles = makeStyles(theme => ({
         marginBottom: theme.spacing(2)
     },
     mediaArea: {
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(2),
     },
     media: {
-        height: 0,
-        paddingTop: '100%',
-        backgroundPosition: 'initial'
+        backgroundSize: 'contain',
+        height: 300
     },
     divider: {
         marginTop: theme.spacing(2),

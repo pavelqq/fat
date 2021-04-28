@@ -10,6 +10,7 @@ import PostCard from "../../../../components/PostCard";
 
 import Grid from "@material-ui/core/Grid";
 import TimelinePosts from "../TimelinePosts";
+import Gallery from "../Gallery";
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -141,6 +142,7 @@ const Wall = props => {
             {...rest}
             className={clsx(classes.root, className)}
         >
+            <Gallery/>
             <AddPost/>
             <Grid container spacing={1}>
                 <Grid item xs={12} sm={8}>

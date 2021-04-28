@@ -16,7 +16,9 @@ import AddPhotoIcon from '@material-ui/icons/AddPhotoAlternate';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 
 const useStyles = makeStyles(theme => ({
-    root: {},
+    root: {
+        marginTop: theme.spacing(2),
+    },
     content: {
         display: 'flex',
         alignItems: 'center'

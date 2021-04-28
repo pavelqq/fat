@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     root: {},
     cover: {
         position: 'relative',
-        height: 360,
+        height: 320,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
@@ -73,14 +73,14 @@ const useStyles = makeStyles(theme => ({
     },
     avatar: {
         border: `2px solid ${theme.palette.white}`,
-        height: 120,
-        width: 120,
+        height: 130,
+        width: 130,
         top: -60,
         left: theme.spacing(3),
         position: 'absolute'
     },
     details: {
-        marginLeft: 136
+        marginLeft: 150
     },
     actions: {
         marginLeft: 'auto',
@@ -170,7 +170,7 @@ const Header = props => {
                     </Typography>
                     <Typography
                         component="h1"
-                        variant="h3"
+                        variant="h4"
                     >
                         {user.name}
                     </Typography>
