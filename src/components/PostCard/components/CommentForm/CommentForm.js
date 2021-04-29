@@ -75,16 +75,16 @@ const CommentForm = props => {
           className={classes.input}
           disableUnderline
           onChange={handleChange}
-          placeholder="..."
+          placeholder="Напишите что-нибудь"
         />
       </Paper>
-      <Tooltip title="Send">
+      <Tooltip title="Отправить">
         <IconButton color={value.length > 0 ? 'primary' : 'default'}>
           <SendIcon />
         </IconButton>
       </Tooltip>
       <Divider className={classes.divider} />
-      <Tooltip title="Attach image">
+      <Tooltip title="Прикрепить картинку">
         <IconButton
           edge="end"
           onClick={handleAttach}
@@ -92,7 +92,7 @@ const CommentForm = props => {
           <AddPhotoIcon />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Attach file">
+      <Tooltip title="Прикрепить файл">
         <IconButton
           edge="end"
           onClick={handleAttach}
