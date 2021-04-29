@@ -75,7 +75,7 @@ const CommentForm = props => {
           className={classes.input}
           disableUnderline
           onChange={handleChange}
-          placeholder="Leave a message"
+          placeholder="..."
         />
       </Paper>
       <Tooltip title="Send">

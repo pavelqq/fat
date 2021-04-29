@@ -86,7 +86,7 @@ const Wall = props => {
                 name: 'Ирина Николаева',
                 avatar: '/images/avatars/avatar_11.png'
             },
-            media: 'https://livacha.com/upload/user/13/c2/user_1oG8F_OcDvWV3TRaxO289lGgL8GlVoDblD0oyuj5mZA5va.jpeg',
+            media: 'https://pp.userapi.com/c850224/v850224250/14bda2/Jcnvta1AAQk.jpg',
             message:
                 'Ну ты и жирдяй, худей давай, а то совсем уродом стал!',
             liked: false,

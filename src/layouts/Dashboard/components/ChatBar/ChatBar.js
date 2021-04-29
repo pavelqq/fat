@@ -39,8 +39,8 @@ const useStyles = makeStyles(theme => ({
     },
     fab: {
         position: 'fixed',
-        bottom: 32,
-        right: 32,
+        bottom: 36,
+        right: 36,
         zIndex: theme.zIndex.drawer - 100
     }
 }));
@@ -61,7 +61,6 @@ const ChatBar = props => {
             name: 'Друзья'
         }
     ];
-
     const connections = [
         {
             id: uuidv4(),
@@ -143,102 +142,6 @@ const ChatBar = props => {
             lastActivity: moment().subtract(2, 'days')
         }
     ];
-
-    // const data = [
-    //     {
-    //         groups: [
-    //             {
-    //                 id: 'important',
-    //                 name: 'important'
-    //             },
-    //             {
-    //                 id: 'friends',
-    //                 name: 'Friends'
-    //             }
-    //         ],
-    //         connections: [
-    //             {
-    //                 id: uuidv4(),
-    //                 name: 'Ekaterina Tankova',
-    //                 avatar: '/images/avatars/avatar_2.png',
-    //                 active: false,
-    //                 lastActivity: moment().subtract(24, 'minutes'),
-    //                 group: 'important'
-    //             },
-    //             {
-    //                 id: uuidv4(),
-    //                 name: 'Cao Yu',
-    //                 avatar: '/images/avatars/avatar_3.png',
-    //                 active: true,
-    //                 lastActivity: moment(),
-    //                 group: 'important'
-    //             },
-    //             {
-    //                 id: uuidv4(),
-    //                 name: 'Anje Keizer',
-    //                 avatar: '/images/avatars/avatar_5.png',
-    //                 active: false,
-    //                 lastActivity: moment().subtract(1, 'minutes'),
-    //                 group: 'important'
-    //             },
-    //             {
-    //                 id: uuidv4(),
-    //                 name: 'Ava Gregoraci',
-    //                 avatar: '/images/avatars/avatar_8.png',
-    //                 active: true,
-    //                 lastActivity: moment(),
-    //                 group: 'important'
-    //             },
-    //             {
-    //                 id: uuidv4(),
-    //                 name: 'Clarke Gillebert',
-    //                 avatar: '/images/avatars/avatar_6.png',
-    //                 active: true,
-    //                 lastActivity: moment(),
-    //                 group: 'friends'
-    //             },
-    //             {
-    //                 id: uuidv4(),
-    //                 name: 'Adam Denisov',
-    //                 avatar: '/images/avatars/avatar_7.png',
-    //                 active: false,
-    //                 lastActivity: moment().subtract(24, 'minutes'),
-    //                 group: 'friends'
-    //             },
-    //             {
-    //                 id: uuidv4(),
-    //                 name: 'Emilee Simchenko',
-    //                 avatar: '/images/avatars/avatar_9.png',
-    //                 active: true,
-    //                 lastActivity: moment(),
-    //                 group: 'friends'
-    //             },
-    //             {
-    //                 id: uuidv4(),
-    //                 name: 'Kwak Seong-Min',
-    //                 avatar: '/images/avatars/avatar_10.png',
-    //                 active: true,
-    //                 lastActivity: moment(),
-    //                 group: 'friends'
-    //             },
-    //             {
-    //                 id: uuidv4(),
-    //                 name: 'Shen Zhi',
-    //                 avatar: '/images/avatars/avatar_11.png',
-    //                 active: true,
-    //                 lastActivity: moment(),
-    //                 group: 'friends'
-    //             },
-    //             {
-    //                 id: uuidv4(),
-    //                 name: 'Merrile Burgett',
-    //                 avatar: '/images/avatars/avatar_12.png',
-    //                 active: false,
-    //                 lastActivity: moment().subtract(2, 'days')
-    //             }
-    //         ]
-    //     }
-    // ];
 
     // const [data, setData] = useState(null);
     //
@@ -362,7 +265,7 @@ const ChatBar = props => {
             color="error"
         >
           <Fab
-              color="primary"
+              color="secondary"
               onClick={handleOpen}
           >
             <PeopleIcon />

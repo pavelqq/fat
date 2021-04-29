@@ -38,8 +38,8 @@ const Profile = props => {
     };
 
     const tabs = [
-        {value: 'wall', label: 'Стена'},
-        {value: 'friends', label: 'Друзья'},
+        {value: 'wall', label: 'Фото и Записи'},
+        {value: 'friends', label: '35 Друзей'},
         {value: 'plans', label: 'Планы'},
         // { value: 'reviews', label: 'Ревью' }
     ];
