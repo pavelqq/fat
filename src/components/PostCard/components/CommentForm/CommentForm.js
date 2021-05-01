@@ -45,7 +45,7 @@ const CommentForm = props => {
   const [value, setValue] = useState('');
 
   const sender = {
-    avatar: '/images/avatars/avatar_11.png'
+    avatar: 'https://sun9-37.userapi.com/impg/P4iaWmLhlicRzZvLAC_er6toAB8kH8-HYoosYg/jnY0KD1HkXw.jpg?size=1365x2048&quality=96&sign=501cc11eaab8c5bbfccf5c825b4d43c5&type=album'
   };
 
   const handleChange = event => {

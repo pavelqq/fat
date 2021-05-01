@@ -76,13 +76,6 @@ const Profile = props => {
                 </Tabs>
                 <Divider className={classes.divider}/>
                 <div className={classes.content}>
-                    {/*<Button*/}
-                    {/*    className={classes.changeButton}*/}
-                    {/*    variant="contained"*/}
-                    {/*>*/}
-                    {/*    <AddPhotoIcon className={classes.addPhotoIcon}/>*/}
-                    {/*    Изменить фон*/}
-                    {/*</Button>*/}
                     {tab === 'wall' && <Wall/>}
                     {tab === 'friends' && <Friends/>}
                     {tab === 'plans' && <Plans/>}
