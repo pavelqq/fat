@@ -146,26 +146,26 @@ const routes = [
                 exact: true,
                 component: lazy(() => import('./views/Profile'))
             },
-            // {
-            //     path: '/projects/create',
-            //     exact: true,
-            //     component: lazy(() => import('views/ProjectCreate'))
-            // },
-            // {
-            //     path: '/projects/:id',
-            //     exact: true,
-            //     component: lazy(() => import('views/ProjectDetails'))
-            // },
-            // {
-            //     path: '/projects/:id/:tab',
-            //     exact: true,
-            //     component: lazy(() => import('views/ProjectDetails'))
-            // },
-            // {
-            //     path: '/projects',
-            //     exact: true,
-            //     component: lazy(() => import('views/ProjectList'))
-            // },
+            {
+                path: '/projects/create',
+                exact: true,
+                component: lazy(() => import('./views/ProjectCreate'))
+            },
+            {
+                path: '/projects/:id',
+                exact: true,
+                component: lazy(() => import('./views/ProjectDetails'))
+            },
+            {
+                path: '/projects/:id/:tab',
+                exact: true,
+                component: lazy(() => import('./views/ProjectDetails'))
+            },
+            {
+                path: '/projects',
+                exact: true,
+                component: lazy(() => import('./views/ProjectList'))
+            },
             // {
             //     path: '/settings',
             //     exact: true,

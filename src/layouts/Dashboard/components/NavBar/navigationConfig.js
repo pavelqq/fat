@@ -83,55 +83,55 @@ export default [
         title: 'Профиль',
         href: '/profile/1',
         icon: PersonIcon,
-        // children: [
-        //   {
-        //     title: 'Стена',
-        //     href: '/profile/1/wall'
-        //   },
-        //   {
-        //     title: 'Друзья',
-        //     href: '/profile/1/friends'
-        //   },
-        //   {
-        //     title: 'Планы',
-        //     href: '/profile/1/plans'
-        //   },
-        //   {
-        //     title: 'Reviews',
-        //     href: '/profile/1/reviews'
-        //   }
-        // ]
+        children: [
+          {
+            title: 'Стена',
+            href: '/profile/1/wall'
+          },
+          {
+            title: 'Друзья',
+            href: '/profile/1/friends'
+          },
+          {
+            title: 'Планы',
+            href: '/profile/1/plans'
+          },
+          // {
+          //   title: 'Reviews',
+          //   href: '/profile/1/reviews'
+          // }
+        ]
       },
       {
         title: 'Проекты',
         href: '/projects',
         icon: FolderIcon,
-        // children: [
-        //   {
-        //     title: 'Открыть',
-        //     href: '/projects'
-        //   },
-        //   {
-        //     title: 'Создать',
-        //     href: '/projects/create'
-        //   },
-        //   {
-        //     title: 'Overview',
-        //     href: '/projects/1/overview'
-        //   },
-        //   {
-        //     title: 'Files',
-        //     href: '/projects/1/files'
-        //   },
-        //   {
-        //     title: 'Activity',
-        //     href: '/projects/1/activity'
-        //   },
-        //   {
-        //     title: 'Subscribers',
-        //     href: '/projects/1/subscribers'
-        //   }
-        // ]
+        children: [
+          {
+            title: 'Найти',
+            href: '/projects'
+          },
+          {
+            title: 'Создать',
+            href: '/projects/create'
+          },
+          // {
+          //   title: 'Overview',
+          //   href: '/projects/1/overview'
+          // },
+          // {
+          //   title: 'Files',
+          //   href: '/projects/1/files'
+          // },
+          // {
+          //   title: 'Activity',
+          //   href: '/projects/1/activity'
+          // },
+          // {
+          //   title: 'Subscribers',
+          //   href: '/projects/1/subscribers'
+          // }
+        ]
       },
       // {
       //   title: 'Invoice',

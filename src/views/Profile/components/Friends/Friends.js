@@ -59,12 +59,15 @@ const useStyles = makeStyles(theme => ({
         marginLeft: theme.spacing(2)
     },
     sendButton: {
+        marginTop: theme.spacing(2),
         marginRight: theme.spacing(2)
     },
     connectButton: {
+        marginTop: theme.spacing(2),
         marginRight: theme.spacing(2)
     },
     pendingButton: {
+        marginTop: theme.spacing(2),
         marginRight: theme.spacing(2),
         color: theme.palette.white,
         backgroundColor: colors.red[600],
@@ -73,6 +76,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     connectedButton: {
+        marginTop: theme.spacing(2),
         marginRight: theme.spacing(2),
         color: theme.palette.white,
         backgroundColor: colors.green[600],
@@ -220,7 +224,6 @@ const Friends = props => {
                                     secondary={`${connection.common} друзей`}
                                 />
                                 <Button
-                                    align=""
                                     color="secondary"
                                     component={RouterLink}
                                     to="/chat"

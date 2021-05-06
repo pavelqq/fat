@@ -1,317 +1,576 @@
-import uuid from 'uuid/v1';
+import {v4 as uuidv4} from 'uuid';
 import moment from 'moment';
-import { colors } from '@material-ui/core';
+import {colors} from '@material-ui/core';
 
-import mock from 'utils/mock';
+import mock from '../utils/mock'
+
 
 mock.onGet('/api/projects').reply(200, {
-  projects: [
-    {
-      id: uuid(),
-      title: 'Mella Full Screen Slider',
-      author: {
-        name: 'Anje Keizer',
-        avatar: '/images/avatars/avatar_5.png'
-      },
-      price: '12,500',
-      currency: '$',
-      type: 'Full-Time',
-      location: 'Europe',
-      status: 'In progress',
-      members: 5,
-      tags: [
+    projects: [
         {
-          text: 'Angular JS',
-          color: colors.red[600]
-        }
-      ],
-      start_date: moment(),
-      end_date: moment(),
-      updated_at: moment().subtract(24, 'minutes')
-    },
-    {
-      id: uuid(),
-      title: 'Dashboard Design',
-      author: {
-        name: 'Emilee Simchenko',
-        avatar: '/images/avatars/avatar_9.png'
-      },
-      price: '15,750',
-      currency: '$',
-      type: 'Full-Time',
-      location: 'Europe',
-      status: 'In progress',
-      members: 3,
-      tags: [
-        {
-          text: 'HTML & CSS',
-          color: colors.grey[600]
-        }
-      ],
-      start_date: moment(),
-      end_date: moment(),
-      updated_at: moment().subtract(1, 'hour')
-    },
-    {
-      id: uuid(),
-      title: 'Ten80 Web Design',
-      author: {
-        name: 'Kwak Seong-Min',
-        avatar: '/images/avatars/avatar_10.png'
-      },
-      price: '15,750',
-      currency: '$',
-      type: 'Full-Time',
-      location: 'Europe',
-      status: 'Completed',
-      members: 8,
-      tags: [
-        {
-          text: 'React JS',
-          color: colors.indigo[600]
-        }
-      ],
-      start_date: moment(),
-      end_date: moment(),
-      updated_at: moment().subtract(16, 'hour')
-    },
-    {
-      id: uuid(),
-      title: 'Neura e-commerce UI Kit',
-      author: {
-        name: 'Shen Zhi',
-        avatar: '/images/avatars/avatar_11.png'
-      },
-      price: '12,500',
-      currency: '$',
-      type: 'Full-Time',
-      location: 'Europe',
-      status: 'In progress',
-      members: 10,
-      tags: [
-        {
-          text: 'Vue JS',
-          color: colors.green[600]
-        }
-      ],
-      start_date: moment(),
-      end_date: moment(),
-      updated_at: moment().subtract(3, 'days')
-    },
-    {
-      id: uuid(),
-      title: 'Administrator Dashboard',
-      author: {
-        name: 'Cao Yu',
-        avatar: '/images/avatars/avatar_3.png'
-      },
-      price: '15,750',
-      currency: '$',
-      type: 'Full-Time',
-      location: 'Europe',
-      status: 'Canceled',
-      members: 2,
-      tags: [
-        {
-          text: 'Angular JS',
-          color: colors.red[600]
+            id: 1,
+            title: '"Череда-10" - программа тренировок от Дениса Борисова',
+            duration: '6',
+            type: 'Тренировка',
+            difficult: '5 из 10',
+            description: 'Тренировочная программа Борисова является системой набора мышечной массы. Как и любая система, она основывается на некоторых принципах, соблюдая которые атлет сможет нарастить солидный мышечный объем. Большим плюсом данной системы тренировок является то, что она учитывает уровень подготовленности атлетов, а так же их восстановительные возможности.',
+            author: {
+                name: 'Денис Борисов',
+                avatar: 'https://i0.wp.com/denis-borisov.com/wp-content/uploads/2014/03/silovyie-parametryi.jpg',
+                bio: 'Тренер. Стаж 10 лет. Банка - 50 см'
+            },
+            tags: [
+                {
+                    id: uuidv4(),
+                    text: 'Мясо',
+                    color: colors.green[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Матюки',
+                    color: colors.purple[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Саня',
+                    color: colors.blue[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Силовая',
+                    color: colors.red[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Тренировка на массу',
+                    color: colors.yellow[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Денис Борисов',
+                    color: colors.cyan[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Борисов',
+                    color: colors.pink[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: '+10кг',
+                    color: colors.orange[600]
+                }
+            ],
+            members: [
+                {
+                    id: uuidv4(),
+                    name: 'Ekaterina Tankova',
+                    avatar: '/images/avatars/avatar_2.png',
+                    bio: 'Front End Developer'
+                },
+                {
+                    id: uuidv4(),
+                    name: 'Cao Yu',
+                    avatar: '/images/avatars/avatar_3.png',
+                    bio: 'UX Designer'
+                },
+                {
+                    id: uuidv4(),
+                    name: 'Anje Keizer',
+                    avatar: '/images/avatars/avatar_5.png',
+                    bio: 'Copyright'
+                }
+            ],
+            files: [
+                {
+                    id: uuidv4(),
+                    name: 'example-project1.jpg',
+                    url: '/images/projects/project_2.jpg',
+                    mimeType: 'image/png',
+                    size: 1024 * 1024 * 3
+                },
+                {
+                    id: uuidv4(),
+                    name: 'docs.zip',
+                    url: '#',
+                    mimeType: 'application/zip',
+                    size: 1024 * 1024 * 25
+                },
+                {
+                    id: uuidv4(),
+                    name: 'example-project2.jpg',
+                    url: '/images/projects/project_1.jpg',
+                    mimeType: 'image/png',
+                    size: 1024 * 1024 * 2
+                }
+            ],
+            activities: [
+                {
+                    id: uuidv4(),
+                    subject: 'Project owner',
+                    subject_type: 'user',
+                    action_type: 'upload_file',
+                    action_desc: 'has uploaded a new file',
+                    created_at: moment().subtract(23, 'minutes')
+                },
+                {
+                    id: uuidv4(),
+                    subject: 'Adrian Stefan',
+                    subject_type: 'user',
+                    action_type: 'join_team',
+                    action_desc: 'joined team as a Front-End Developer',
+                    created_at: moment().subtract(2, 'hours')
+                },
+                {
+                    id: uuidv4(),
+                    subject: 'Alexandru Robert',
+                    action_type: 'join_team',
+                    action_desc: 'joined team as a Full Stack Developer',
+                    created_at: moment().subtract(9, 'hours')
+                },
+                {
+                    id: uuidv4(),
+                    subject: 'Project owner',
+                    subject_type: 'user',
+                    action_type: 'price_change',
+                    action_desc: 'raised the project budget',
+                    created_at: moment().subtract(2, 'days')
+                },
+                {
+                    id: uuidv4(),
+                    subject: 'Contest',
+                    subject_type: 'project',
+                    action_type: 'contest_created',
+                    action_desc: 'created',
+                    created_at: moment().subtract(4, 'days')
+                }
+            ],
+            updated_at: moment().subtract(24, 'minutes')
         },
         {
-          text: 'HTML & CSS',
-          color: colors.grey[600]
+            id: 2,
+            title: 'Королевский рацион Дениса Семенихина',
+            duration: '6',
+            type: 'Диета',
+            difficult: '8 из 10',
+            description: 'Мне давно предлагали разработать свой "фирменный рацион" или набор блюд, чтобы упростить людям построение питания и избавить от этих забот. Чтобы все их внимание было направлено именно на тренировки. Наконец это удалось совершить.',
+            author: {
+                name: 'Денис Семенихин',
+                avatar: 'https://lh3.googleusercontent.com/proxy/3Q7ACVeQ243tSzl923TbTnsuinD-rOlwlH5kLoFPHnc1LkSXXn_Hwlyx4O7vYQ1zj69hmZFEOix16dqas3SrikA'
+            },
+            tags: [
+                {
+                    id: uuidv4(),
+                    text: 'Мясо',
+                    color: colors.lightGreen[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Диета',
+                    color: colors.purple[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Санчес',
+                    color: colors.lightBlue[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Похудеть на 10 кг',
+                    color: colors.yellow[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Убрать бока',
+                    color: colors.blueGrey[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Денис Борисов',
+                    color: colors.brown[600]
+                }
+            ],
+
+            updated_at: moment().subtract(4, 'days')
         }
-      ],
-      start_date: moment(),
-      end_date: moment(),
-      updated_at: moment().subtract(7, 'days')
-    },
-    {
-      id: uuid(),
-      title: 'Kalli UI Kit',
-      author: {
-        name: 'Anje Keizer',
-        avatar: '/images/avatars/avatar_5.png'
-      },
-      price: '15,750',
-      currency: '$',
-      type: 'Full-Time',
-      location: 'Europe',
-      status: 'Completed',
-      members: 12,
-      tags: [
-        {
-          text: 'Vue JS',
-          color: colors.green[600]
-        }
-      ],
-      start_date: moment(),
-      end_date: moment(),
-      updated_at: moment().subtract(8, 'days')
-    }
-  ]
+    ]
 });
 
-mock.onGet('/api/projects/1').reply(200, {
-  project: {
-    title: 'Develop a PDF Export App',
-    author: {
-      name: 'Emilee Simchenko',
-      avatar: '/images/avatars/avatar_9.png',
-      bio: 'We build beautiful functional themes for web professionals'
-    },
-    brief: `
-#### TL;DR
+mock.onGet(`/api/projects/1`).reply(200, {
+    project: {
+            title: 'Череда 10',
+            id: 1,
+            author: {
+                name: 'Денис Борисов',
+                avatar: 'https://денис-борисов.рф/wp-content/uploads/2018/01/denchik-denis-borisov-600x400.jpg',
+                bio: 'Тренер. Стаж 10 лет. Банка - 50 см'
+            },
+            brief: `
+#### "Череда-10": Программа Тренировок на Массу
 
-The primary aim of the product is to convert survery responses into PDF reports, these reports are generated on to what we call templates. This product is designer to work with 3rd party survery providers. The first MVP will integrate with TypeForm, because the's no direct way to convert results to PDF from the form people create in TypeForm and then ask users to fill out.
+Я давал вам очень много теории по различным аспектам тренировок в тренажерном зале.  Как показывает мой опыт - для большинства людей этого мало. Мене регулярно просят дать ПРАКТИЧЕСКУЮ СХЕМУ тренировок.  Сегодня я решил поделиться с вами одной из своих программ тренировок на массу, которая мне очень нравится благодаря чередованию упражнений на мышцы антагонисты (поэтому такое название "ЧЕРЕДА-10").  Мне показалось что сейчас самое время для программы ориентированной на МАССАНАБОР потому что лето прошло и традиционно многие люди уходят зимой в набор.  Итак, приступим...
 
-#### Background information
+#### ОСОБЕННОСТИ ПРОГРАММЫ "ЧЕРЕДА-10"
+- УПРАЖНЕНИЯ: БАЗОВЫЕ
+- ПОВЫШЕНИЕ ИНТЕНСИВНОСТИ:  РАСТЯНУТЫЕ СУПЕРСЕТЫ
+- НАГРУЗКА:  ПРОГРЕССИВНАЯ весом
+- ПОВТОРЕНИЯ:  10 (ДЕСЯТЬ)
 
-Design files are attachedin the files tab.
+#### БАЗОВЫЕ УПРАЖНЕНИЯ
+Это такие упражнения, в которых задействовано несколько (больше одного) суставов.  Почему она важна в массонаборном цикле? Потому что такая нагрузка более естественна для нашего костно-мышечного аппарата и задействует больше мышц, чем изолированные упражнения.  А значит в этих упражнениях вы сильнее.
 
-Develop the web app screens for our product called "PDFace". Please look at the wireframes, system activity workflow and read the section above to understand what we're trying to archive.
+Логично, что чем больше мышц работает, тем лучше для общего развития мускулатуры. Кроме того, чем больше мышц сокращается, тем большую нагрузку можно осилить. А это уже напрямую влияет на ЦНС (связь мозг-мышцы). Т.е. в базовых упражнениях уровень нервной стимуляции мышечных сокращений более мощный.  Что приводит к лучшему росту больших мышц.
 
-There's not many screens we need designed, but there will be modals and various other system triggered evenets that will need to be considered.
+#### РАСТЯНУТЫЕ СУПЕРСЕТЫ (ЧЕРЕДОВАНИЕ)
+по сути речь идет о суперсетах С ОТДЫХОМ.  Традиционно СУПЕРСЕТ - это ДВА упражнения, выполняемых на МЫШЦЫ-АНТАГОНИСТЫ, друг за другом,  без отдыха.
 
-The project has benn created in Sketch so let me know if there are any problmes opening this project and I'll try to convert into a usable file.
+#### ПРИМЕР:
 
-I have attached a chat with our users most used devices.
+#### ГРУДЬ, ДЕЛЬТЫ ЗАДНИЕ
 
-#### Goals:
-  - Maintainable Code
-  - Easy UX
-  - Readable Code
-  - No Redux
+- скручивания лежа                     5 Х макс.
+- Наклонный жим шт. лежа       3 размин. +   5 Х 10
+- Тяга штанги к подбородку      3 размин. +   5 Х 10
+
+
+- Жим гантелей лежа                   1 размин. + 5 Х 10
+- Махи гантелями стоя                1 размин. + 5 Х 10
+- Разводка гантелей лежа             1 размин. + 5 Х 10
+- Махи гантелями в наклоне       1 размин + 5 Х 10
+
+
+#### СПИНА, ДЕЛЬТЫ ПЕРЕДНИЕ
+
+- Обратные скручивания         5 Х макс.
+- Тяга Т-грифа                          3 размин. +   5 Х 10
+- Жим штанги с груди стоя    3 размин. +   5 Х 10
+
+
+Вертикальная тяга сверху    1 размин. + 5 Х 10
+- жим гантелей сидя                  1 размин. + 5 Х 10
+- Тяга одной рукой                     1 размин. + 5 Х 10
+- Махи гантелью перед собой   1 размин + 5 Х 10
+
+
+#### БИЦЕПС, ТРИЦЕПС
+
+- Скручивания лежа                    5 Х макс.
+- Подьем штанги на бицепс       3 размин. +   4 Х 10
+- Жим лежа узким хватом          3 размин. +   4 Х 10
+
+- Молотковые сгибания стоя       1 размин. + 4 Х 10
+- Французский ж. из-за головы    1 размин. + 4 Х 10
+- Сгибания на верхнем блоке       1 размин. + 4 Х 10
+- Разгибания на верхнем блоке   1 размин + 4 Х 10
+
+
+#### НОГИ, ИКРЫ
+
+- обратные скручивания              5 Х макс.
+- Икры стоя                                    2 размин. + 5 Х 10
+
+- Приседания с штангой              3 размин. +   5 Х 10
+- Сгибания ног лежа                     3 размин. +   5 Х 10
+- Жим ногами                                  1 размин. + 5 Х 10
+- Сгибания ног стоя (или сидя)    1 размин + 5 Х 10
+
+- Мертвая тяга на прямых             1 размин. + 5 Х 10
+- Разгибание ног сидя                      1 размин. + 5 Х 10
     `,
-    price: '12,500',
-    currency: 'USD',
-    tags: [
-      {
-        text: 'React JS',
-        color: colors.indigo[600]
-      }
-    ],
-    members: [
-      {
-        id: uuid(),
-        name: 'Ekaterina Tankova',
-        avatar: '/images/avatars/avatar_2.png',
-        bio: 'Front End Developer'
-      },
-      {
-        id: uuid(),
-        name: 'Cao Yu',
-        avatar: '/images/avatars/avatar_3.png',
-        bio: 'UX Designer'
-      },
-      {
-        id: uuid(),
-        name: 'Anje Keizer',
-        avatar: '/images/avatars/avatar_5.png',
-        bio: 'Copyright'
-      }
-    ],
-    files: [
-      {
-        id: uuid(),
-        name: 'example-project1.jpg',
-        url: '/images/projects/project_2.jpg',
-        mimeType: 'image/png',
-        size: 1024 * 1024 * 3
-      },
-      {
-        id: uuid(),
-        name: 'docs.zip',
-        url: '#',
-        mimeType: 'application/zip',
-        size: 1024 * 1024 * 25
-      },
-      {
-        id: uuid(),
-        name: 'example-project2.jpg',
-        url: '/images/projects/project_1.jpg',
-        mimeType: 'image/png',
-        size: 1024 * 1024 * 2
-      }
-    ],
-    activities: [
-      {
-        id: uuid(),
-        subject: 'Project owner',
-        subject_type: 'user',
-        action_type: 'upload_file',
-        action_desc: 'has uploaded a new file',
-        created_at: moment().subtract(23, 'minutes')
-      },
-      {
-        id: uuid(),
-        subject: 'Adrian Stefan',
-        subject_type: 'user',
-        action_type: 'join_team',
-        action_desc: 'joined team as a Front-End Developer',
-        created_at: moment().subtract(2, 'hours')
-      },
-      {
-        id: uuid(),
-        subject: 'Alexandru Robert',
-        action_type: 'join_team',
-        action_desc: 'joined team as a Full Stack Developer',
-        created_at: moment().subtract(9, 'hours')
-      },
-      {
-        id: uuid(),
-        subject: 'Project owner',
-        subject_type: 'user',
-        action_type: 'price_change',
-        action_desc: 'raised the project budget',
-        created_at: moment().subtract(2, 'days')
-      },
-      {
-        id: uuid(),
-        subject: 'Contest',
-        subject_type: 'project',
-        action_type: 'contest_created',
-        action_desc: 'created',
-        created_at: moment().subtract(4, 'days')
-      }
-    ],
-    subscribers: [
-      {
-        id: uuid(),
-        name: 'Ekaterina Tankova',
-        avatar: '/images/avatars/avatar_2.png',
-        cover: '/images/covers/cover_1.jpg',
-        common_connections: 12,
-        labels: [
-          'User Experience',
-          'FrontEnd development',
-          'HTML5',
-          'VueJS',
-          'ReactJS'
-        ]
-      },
-      {
-        id: uuid(),
-        name: 'Cao Yu',
-        avatar: '/images/avatars/avatar_3.png',
-        cover: '/images/covers/cover_2.jpg',
-        common_connections: 5,
-        labels: [
-          'User Interface',
-          'FullStack development',
-          'Angular',
-          'ExpressJS'
-        ]
-      },
-      {
-        id: uuid(),
-        name: 'Clarke Gillebert',
-        avatar: '/images/avatars/avatar_6.png',
-        cover: '/images/covers/cover_2.jpg',
-        common_connections: 17,
-        labels: ['BackEnd development', 'Firebase', 'MongoDB', 'ExpressJS']
-      }
-    ],
-    deadline: moment().add(7, 'days'),
-    updated_at: moment().subtract(23, 'minutes')
-  }
+            price: '1',
+            currency: 'чел',
+            tags: [
+                {
+                    id: uuidv4(),
+                    text: 'Мясо',
+                    color: colors.green[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Матюки',
+                    color: colors.purple[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Саня',
+                    color: colors.blue[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Силовая',
+                    color: colors.red[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Тренировка на массу',
+                    color: colors.yellow[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Денис Борисов',
+                    color: colors.cyan[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: 'Борисов',
+                    color: colors.pink[600]
+                },
+                {
+                    id: uuidv4(),
+                    text: '+10кг',
+                    color: colors.orange[600]
+                }
+            ],
+            members: [
+                {
+                    id: uuidv4(),
+                    name: 'Анюта Никонова',
+                    avatar: '/images/avatars/avatar_2.png',
+                    bio: 'Фитнес-модель'
+                },
+            ],
+            files: [
+                {
+                    id: uuidv4(),
+                    name: 'тренировка_по_жиму.jpg',
+                    url: '/images/projects/project_2.jpg',
+                    mimeType: 'image/png',
+                    size: 1024 * 1024 * 3
+                },
+                {
+                    id: uuidv4(),
+                    name: 'архив_статей.zip',
+                    url: '#',
+                    mimeType: 'application/zip',
+                    size: 1024 * 1024 * 25
+                },
+                {
+                    id: uuidv4(),
+                    name: 'тренировка_амбала.jpg',
+                    url: '/images/projects/project_1.jpg',
+                    mimeType: 'image/png',
+                    size: 1024 * 1024 * 2
+                }
+            ],
+            activities: [
+                {
+                    id: uuidv4(),
+                    subject: 'Вася Пупкин',
+                    subject_type: 'user',
+                    action_type: 'join_team',
+                    action_desc: 'Присоединился к проекту',
+                    created_at: moment().subtract(2, 'days')
+                },
+                {
+                    id: uuidv4(),
+                    subject: 'Автор проекта',
+                    subject_type: 'user',
+                    action_type: 'upload_file',
+                    action_desc: 'Загрузил новый файл',
+                    created_at: moment().subtract(23, 'minutes')
+                },
+                {
+                    id: uuidv4(),
+                    subject: 'Проект',
+                    subject_type: 'project',
+                    action_type: 'contest_created',
+                    action_desc: 'создан',
+                    created_at: moment().subtract(4, 'days')
+                }
+            ],
+            subscribers: [
+                {
+                    id: uuidv4(),
+                    name: 'Николай Станазалол',
+                    avatar: '/images/avatars/avatar_6.png',
+                    cover: '/images/covers/cover_2.jpg',
+                    common_connections: 17,
+                    labels: [
+                        '-5кг',
+                        'Лучшая бицепс недели'
+                    ]
+                }
+            ],
+            deadline: moment().add(7, 'days'),
+            updated_at: moment().subtract(23, 'minutes')
+        },
+});
+
+mock.onGet(`/api/projects/2`).reply(200, {
+    project: {
+        title: 'Диета Дениса Семенихина',
+        id: 2,
+        author: {
+            name: 'Денис Семинихин',
+            avatar: 'https://upload.wikimedia.org/wikipedia/commons/3/34/%D0%94%D0%B5%D0%BD%D0%B8%D1%81_%D0%A1%D0%B5%D0%BC%D0%B5%D0%BD%D0%B8%D1%85%D0%B8%D0%BD.jpg',
+            bio: 'Российский телеведущий, видеоблогер, работающий в направлении фитнеса, автор двух книг о фитнесе и одной о философии (социальное исследование). Наиболее известен благодаря реалити-шоу «Взвешенные люди» на телеканале СТС и популярным видеоблогам в YouTube о тренировках и питании.'
+        },
+        brief: `
+#### КАК ПИТАТЬСЯ ПРАВИЛЬНО: 8 СОВЕТОВ ОТ ДЕНИСА СЕМЕНИХИНА
+
+Мы попросили Дениса Семенихина — соавтора программ «Рацион. Fitness» и «Королевский рацион», видеоблогера, фитнес-эксперта и телеведущего — рассказать базовые принципы, на которые вы должны опираться, планируя своё ежедневное меню.
+
+#### 1. Не забывайте про углеводы
+Базовый источник энергии — это углеводы, они хранятся в мышцах и клетках печени в виде гликогена. В экстренных ситуациях при нехватке углеводов организм начинает использовать жировую ткань для производства энергии. Сбалансированный рацион предполагает преобладание сложных углеводов над простыми в пропорции 70/30. Но это не значит, что простые углеводы нужно полностью исключить, напротив — они дают организму быструю энергию и часто идут в тандеме со сложными углеводами. Так, в овсяную или манную кашу добавляют сухофрукты, а на утренний тост намазывают джем.
+
+#### 2. Чередуйте белковые дни с углеводными
+Рацион, состоящий исключительно из белковых продуктов, может существенно замедлить обмен веществ. Стоит ли говорить, что эффективность такого питания равна нулю. Чтобы своевременно пополнять запасы гликогена в мышцах и не дать метаболизму замедлиться, периодически устраивайте так называемые углеводные дни. Этот трюк позволит организму адаптироваться к небольшому количеству углеводов. Чередуйте белковые дни с углеводными, чтобы нормализовать и ускорить обменные процессы и отдохнуть от жёстких ограничений.
+
+#### 3. Включите в свой рацион достаточное количество жиров
+Жиры, несмотря на высокую калорийность, жизненно необходимы. Но чтобы избежать набора лишнего веса, важно, во-первых, ограничивать количество жиров, а во-вторых, отдавать предпочтение только полезным. Растительные жиры и те, что содержатся в рыбе, богаты омега-3 и омега-6 жирными кислотами, которые необходимы для здоровья человека. Общее количество жиров в сутки должно находиться в пределах 0,5—1 грамм на один килограмм массы тела.
+
+#### 4. Питайтесь после тренировок правильно
+После тренировок не забывайте про всем известное «углеводно-белковое окно» — момент, когда организм особенно восприимчив к любым питательным веществам. Лучше всего поесть через полчаса после окончания физических нагрузок. А если речь идёт о вечерней тренировке, важно помнить о сохранении дефицита энергии. Так, если вы сожгли 400—500 калорий (это в среднем один час активной силовой работы), то вы можете себе позволить съесть блюдо, содержащее максимум 25 граммов углеводов (100 калорий), 30 граммов белка (120 калорий) и несколько граммов жира. Общая калорийность не должна превышать 250 калорий. Я стараюсь в принципе исключать углеводы во время вечернего приёма пищи.
+
+#### 5. Не переживайте из-за срывов
+Если вы не сдержались и всё-таки съели лишний кусок торта, то ни в коем случае не казните себя и не сходите с ума. Отнеситесь к этому философски — просто осознайте, что вы это сделали. Осознали? Тогда спокойно отправляйтесь на лестницу и начинайте ходить пешком — сначала вверх, а потом вниз. Делайте это с удовольствием! Вы ведь знали, что так оно и будет, всё в ваших руках.  30—60 минут подъёма по лестнице смогут компенсировать небольшой десерт. «Цена» среднего куска торта — минимум 50 этажей.
+
+#### 6. Уменьшите размер порций
+Постарайтесь отказаться от объёмных порций. При любых обстоятельствах лучше съедать умеренное количество еды — общая калорийность одного приёма пищи не должна превышать 500 калорий.
+
+#### 7. Разделите свой суточный рацион на 5-6 приёмов пищи
+В день у вас должно быть примерно пять или шесть приёмов пищи с одинаковой калорийностью. При этом старайтесь к концу дня сводить количество углеводов к минимуму — в идеале ужин уже должен быть безуглеводным.
+
+#### 8. Возьмите под контроль сахар
+Избегайте напитков и блюд с большим количеством простых углеводов и с высоким гликемическим индексом. Проще говоря, максимально сократите сладкое. Разбавляйте водой покупные соки, не кладите сахар в кофе или чай и не налегайте на сладкие фрукты, такие как виноград и сухофрукты.
+
+Теперь вы знаете все о «Королевском рационе»
+`,
+        price: '3',
+        currency: 'чел',
+        tags: [
+            {
+                id: uuidv4(),
+                text: 'Мясо',
+                color: colors.lightGreen[600]
+            },
+            {
+                id: uuidv4(),
+                text: 'Диета',
+                color: colors.purple[600]
+            },
+            {
+                id: uuidv4(),
+                text: 'Санчес',
+                color: colors.lightBlue[600]
+            },
+            {
+                id: uuidv4(),
+                text: 'Похудеть на 10 кг',
+                color: colors.yellow[600]
+            },
+            {
+                id: uuidv4(),
+                text: 'Убрать бока',
+                color: colors.blueGrey[600]
+            },
+            {
+                id: uuidv4(),
+                text: 'Денис Борисов',
+                color: colors.brown[600]
+            }
+        ],
+        members: [
+            {
+                id: uuidv4(),
+                name: 'Екатерина Коперник',
+                avatar: '/images/avatars/avatar_2.png',
+                bio: 'Кочушка'
+            },
+            {
+                id: uuidv4(),
+                name: 'Чао Мао',
+                avatar: '/images/avatars/avatar_3.png',
+                bio: 'Тренер, стаж 10 лет'
+            },
+            {
+                id: uuidv4(),
+                name: 'Анна Кайцер',
+                avatar: '/images/avatars/avatar_5.png',
+                bio: 'Фитнес-модель'
+            }
+        ],
+        files: [
+            {
+                id: uuidv4(),
+                name: 'диета.jpg',
+                url: '/images/projects/project_2.jpg',
+                mimeType: 'image/png',
+                size: 1024 * 1024 * 3
+            },
+            {
+                id: uuidv4(),
+                name: 'книга_с_рецептом.zip',
+                url: '#',
+                mimeType: 'application/zip',
+                size: 1024 * 1024 * 25
+            },
+            {
+                id: uuidv4(),
+                name: 'пример_диеты.jpg',
+                url: '/images/projects/project_1.jpg',
+                mimeType: 'image/png',
+                size: 1024 * 1024 * 2
+            }
+        ],
+        activities: [
+            {
+                id: uuidv4(),
+                subject: 'Автор проекта',
+                subject_type: 'user',
+                action_type: 'upload_file',
+                action_desc: 'Загрузил новый файл',
+                created_at: moment().subtract(23, 'minutes')
+            },
+            {
+                id: uuidv4(),
+                subject: 'Адриан Стефанченко',
+                subject_type: 'user',
+                action_type: 'join_team',
+                action_desc: 'Присоединился к проекту',
+                created_at: moment().subtract(2, 'hours')
+            },
+            {
+                id: uuidv4(),
+                subject: 'Санек',
+                subject_type: 'user',
+                action_type: 'join_team',
+                action_desc: 'Присоединился к проекту',
+                created_at: moment().subtract(9, 'hours')
+            },
+            {
+                id: uuidv4(),
+                subject: 'Колян Коликов',
+                subject_type: 'user',
+                action_type: 'join_team',
+                action_desc: 'Присоединился к проекту',
+                created_at: moment().subtract(2, 'days')
+            },
+            {
+                id: uuidv4(),
+                subject: 'Проект',
+                subject_type: 'project',
+                action_type: 'contest_created',
+                action_desc: 'создан',
+                created_at: moment().subtract(4, 'days')
+            }
+        ],
+        subscribers: [
+            {
+                id: uuidv4(),
+                name: 'Катерина Танкова',
+                avatar: '/images/avatars/avatar_2.png',
+                cover: '/images/covers/cover_1.jpg',
+                common_connections: 12,
+                labels: [
+                    '-10кг',
+                    '-20кг',
+                    '-30кг',
+                    'Лучшая попа недели'
+                ]
+            },
+        ],
+        deadline: moment().add(7, 'days'),
+        updated_at: moment().subtract(23, 'minutes')
+    },
 });

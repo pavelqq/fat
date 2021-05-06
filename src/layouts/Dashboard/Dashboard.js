@@ -28,14 +28,11 @@ const useStyles = makeStyles(() => ({
         zIndex: 3,
         width: 256,
         minWidth: 256,
-        flex: '0 0 auto'
+        flex: '0 0 auto',
     },
     content: {
         overflowY: 'auto',
         flex: '1 1 auto',
-        paddingRight: '3%',
-        paddingLeft: '3%',
-        // overflowX: 'hidden'
     }
 }));
 

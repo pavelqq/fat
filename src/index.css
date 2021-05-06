@@ -9,10 +9,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.element::-webkit-scrollbar {
-  width: 0;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;

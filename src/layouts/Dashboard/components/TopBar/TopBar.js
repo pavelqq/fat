@@ -29,7 +29,7 @@ import useRouter from "../../../../utils/useRouter";
 import Typography from "@material-ui/core/Typography";
 import AndroidOutlinedIcon from '@material-ui/icons/AndroidOutlined';
 
-//import axios from 'src/utils/axios';
+// import axios from 'src/utils/axios';
 // import { PricingModal, NotificationsPopover } from 'components';
 // import { logout } from 'actions';
 

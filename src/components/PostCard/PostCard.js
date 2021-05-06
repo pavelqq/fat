@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
         paddingTop: 0
     },
     message: {
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(1)
     },
     mediaArea: {
         marginBottom: theme.spacing(2),
@@ -66,9 +66,7 @@ const useStyles = makeStyles(theme => ({
             duration: theme.transitions.duration.shortest,
         }),
     },
-    expandOpen: {
-        transform: 'rotate(180deg)',
-    },
+    expandOpen: {},
     likeButton: {},
     likedButton: {
         color: colors.red[600]
@@ -138,7 +136,7 @@ const PostCard = props => {
             <CardContent className={classes.content}>
                 <Typography
                     className={classes.message}
-                    variant="body1"
+                    variant="h6"
                 >
                     {post.message}
                 </Typography>
@@ -172,33 +170,27 @@ const PostCard = props => {
                     )}
                     <Typography
                         color="textSecondary"
-                        variant="h6"
+                        variant="subtitle1"
                     >
                         {likes}
                     </Typography>
-                    <Tooltip title="Поделиться">
-                        <IconButton
-                            size="small"
-                        >
-                            <ShareIcon/>
-                        </IconButton>
-                    </Tooltip>
                     <IconButton
+                        size="small"
                         className={clsx(classes.expand, {
                             [classes.expandOpen]: expanded,
                         })}
                         onClick={handleExpandClick}
                         aria-expanded={expanded}
-                        aria-label="show more"
+                        aria-label="Показать комментарии"
                     >
+                        <Typography
+                            color="textSecondary"
+                            variant="subtitle1"
+                        >
+                            Комментарии
+                        </Typography>
                         <ExpandMoreIcon/>
                     </IconButton>
-                    <Typography
-                        color="textSecondary"
-                        variant="h6"
-                    >
-                        2 Комментарии
-                    </Typography>
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <Divider className={classes.divider}/>

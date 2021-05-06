@@ -8,22 +8,31 @@ import AddPost from "../../components/AddPost";
 import PostCard from "../../components/PostCard";
 import Page from "../../components/Page";
 import moment from "moment";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
+import Grid from "@material-ui/core/Grid";
+import TimelinePosts from "../Profile/components/TimelinePosts";
 
 const useStyles = makeStyles(theme => ({
     root: {
         width: theme.breakpoints.values.lg,
         maxWidth: '100%',
         margin: '0 auto',
+        padding: '3em',
     },
     newPost: {
         marginTop: theme.spacing(1)
     },
     posts: {
-        marginTop: theme.spacing(2)
+        marginTop: theme.spacing(1)
     },
     post: {
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(1)
+    },
+    timeline: {
+        paddingTop: theme.spacing(9),
+    },
+    header: {
+        paddingBottom: theme.spacing(1)
     }
 }));
 
@@ -146,17 +155,29 @@ const SocialFeed = () => {
             className={classes.root}
             title="Лента"
         >
-            <Header/>
-            <AddPost className={classes.newPost}/>
-            <div className={classes.posts}>
-                {posts.map(post => (
-                    <PostCard
-                        className={classes.post}
-                        key={post.id}
-                        post={post}
-                    />
-                ))}
-            </div>
+            <Grid container xs={12}>
+                <Grid item xs={8}>
+                    <Header className={classes.header}/>
+                    <AddPost className={classes.newPost}/>
+                    <div className={classes.posts}>
+                        {posts.map(post => (
+                            <PostCard
+                                className={classes.post}
+                                key={post.id}
+                                post={post}
+                            />
+                        ))}
+                    </div>
+                </Grid>
+                <Grid item xs={4} alignItems="flex-start" className={classes.timeline}>
+                    {posts.map(post => (
+                        <TimelinePosts
+                            key={post.id}
+                            post={post}
+                        />
+                    ))}
+                </Grid>
+            </Grid>
         </Page>
     );
 };

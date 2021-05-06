@@ -62,79 +62,194 @@ const data = [
         src: 'https://i.pinimg.com/736x/1f/32/de/1f32de75ae0a1ac218a902f6f361a6d7.jpg',
         title: 'Фото 1',
         author: 'author',
+        comments: [
+            {
+                id: uuidv4(),
+                author: {
+                    name: 'Валерея Жерепа',
+                    avatar: 'https://sun9-25.userapi.com/impg/NVcuVyjAocf9VEZyRm6rwZZNT7unbtOCpP0Diw/5cjtUAm5v0k.jpg?size=2047x2047&quality=96&sign=2e46eaaf544bcb0ab1d33f692d1abe9d&type=album'
+                },
+                message:
+                    'Вау',
+                created_at: moment().subtract(3, 'hours')
+            },
+            {
+                id: uuidv4(),
+                author: {
+                    name: 'Ева Вайсберг',
+                    avatar: 'https://sun9-47.userapi.com/impg/GmyvgEHDHK3zJJWOIkDlES_fhIVN-68vyNVezQ/ktCTj_mMjr0.jpg?size=960x960&quality=96&sign=d45c33ff4361679ea0f72e717ac46518&type=album'
+                },
+                message: 'Обалдеть...😱😱😱',
+                created_at: moment().subtract(2, 'hours')
+            },
+        ]
     },
     {
         id: uuidv4(),
         src: 'https://i.pinimg.com/originals/ab/b6/a8/abb6a800ab2193fcedd9bda566b7402c.jpg',
         title: 'Фото 2',
         author: 'author',
+        comments: [
+            {
+                id: uuidv4(),
+                author: {
+                    name: 'Ева Вайсберг',
+                    avatar: 'https://sun9-47.userapi.com/impg/GmyvgEHDHK3zJJWOIkDlES_fhIVN-68vyNVezQ/ktCTj_mMjr0.jpg?size=960x960&quality=96&sign=d45c33ff4361679ea0f72e717ac46518&type=album'
+                },
+                message: 'Супер',
+                created_at: moment().subtract(2, 'hours')
+            },
+            {
+                id: uuidv4(),
+                author: {
+                    name: 'Ксюша Руденко',
+                    avatar: 'https://sun9-53.userapi.com/impg/f3J4KY-U2TkUT0Harf9HzD1iCXcE-O3CaPJlJg/q9NTq1nZTWk.jpg?size=781x1080&quality=96&sign=ae24537a9661495b8bfdffc2cf0c8fba&type=album'
+                },
+                message:
+                    'Даже красивее чем я🤬😡',
+                created_at: moment().subtract(3, 'hours')
+            },
+        ]
     },
     {
         id: uuidv4(),
         src: 'https://st2.depositphotos.com/3364363/5972/i/600/depositphotos_59728757-stock-photo-waiting-for-a-new-day.jpg',
         title: 'Фото 3',
         author: 'author',
+        comments: [
+            {
+                id: uuidv4(),
+                author: {
+                    name: 'Денис Димитренко',
+                    avatar: 'https://sun9-60.userapi.com/impf/c850324/v850324982/1b71c5/LBDZGsQW8-Y.jpg?size=1472x1472&quality=96&sign=20eb6dfc703c6c32ce1cfebb1d6e79cd&type=album'
+                },
+                message: 'Бля, вот это красотка, какой же я додик, что мы расстались...😰 😰 😰 😰',
+                created_at: moment().subtract(2, 'hours')
+            },
+        ]
     },
     {
         id: uuidv4(),
         src: 'https://st2.depositphotos.com/1064024/10769/i/600/depositphotos_107694484-stock-photo-little-prince-illustration.jpg',
         title: 'Фото 4',
         author: 'author',
+        comments: [
+            {
+                id: uuidv4(),
+                author: {
+                    name: 'Валерея Жерепа',
+                    avatar: 'https://sun9-25.userapi.com/impg/NVcuVyjAocf9VEZyRm6rwZZNT7unbtOCpP0Diw/5cjtUAm5v0k.jpg?size=2047x2047&quality=96&sign=2e46eaaf544bcb0ab1d33f692d1abe9d&type=album'
+                },
+                message:
+                    'Вау, что за красотка 😍',
+                created_at: moment().subtract(3, 'hours')
+            },
+            {
+                id: uuidv4(),
+                author: {
+                    name: 'Ева Вайсберг',
+                    avatar: 'https://sun9-47.userapi.com/impg/GmyvgEHDHK3zJJWOIkDlES_fhIVN-68vyNVezQ/ktCTj_mMjr0.jpg?size=960x960&quality=96&sign=d45c33ff4361679ea0f72e717ac46518&type=album'
+                },
+                message: 'Обалдеть...😱😱😱',
+                created_at: moment().subtract(2, 'hours')
+            },
+            {
+                id: uuidv4(),
+                author: {
+                    name: 'Ксюша Руденко',
+                    avatar: 'https://sun9-53.userapi.com/impg/f3J4KY-U2TkUT0Harf9HzD1iCXcE-O3CaPJlJg/q9NTq1nZTWk.jpg?size=781x1080&quality=96&sign=ae24537a9661495b8bfdffc2cf0c8fba&type=album'
+                },
+                message:
+                    'Даже красивее чем я🤬😡',
+                created_at: moment().subtract(3, 'hours')
+            },
+            {
+                id: uuidv4(),
+                author: {
+                    name: 'Денис Димитренко',
+                    avatar: 'https://sun9-60.userapi.com/impf/c850324/v850324982/1b71c5/LBDZGsQW8-Y.jpg?size=1472x1472&quality=96&sign=20eb6dfc703c6c32ce1cfebb1d6e79cd&type=album'
+                },
+                message: 'Бля, вот это красотка, какой же я додик, что мы расстались...😰 😰 😰 😰',
+                created_at: moment().subtract(2, 'hours')
+            },
+        ]
     },
     {
         id: uuidv4(),
         src: 'https://s1.1zoom.ru/big0/52/Love_Sunrises_and_sunsets_Fingers_Hands_Heart_Sun_532758_1280x897.jpg',
         title: 'Фото 5',
         author: 'author',
+        comments: [
+            {
+                id: uuidv4(),
+                author: {
+                    name: 'Ева Вайсберг',
+                    avatar: 'https://sun9-47.userapi.com/impg/GmyvgEHDHK3zJJWOIkDlES_fhIVN-68vyNVezQ/ktCTj_mMjr0.jpg?size=960x960&quality=96&sign=d45c33ff4361679ea0f72e717ac46518&type=album'
+                },
+                message: 'Отлично, круто!',
+                created_at: moment().subtract(2, 'hours')
+            },
+        ]
     },
     {
         id: uuidv4(),
         src: 'https://i.pinimg.com/736x/1f/32/de/1f32de75ae0a1ac218a902f6f361a6d7.jpg',
         title: 'Фото 6',
         author: 'author',
+        comments: [
+            {
+                id: uuidv4(),
+                author: {
+                    name: 'Ева Вайсберг',
+                    avatar: 'https://sun9-47.userapi.com/impg/GmyvgEHDHK3zJJWOIkDlES_fhIVN-68vyNVezQ/ktCTj_mMjr0.jpg?size=960x960&quality=96&sign=d45c33ff4361679ea0f72e717ac46518&type=album'
+                },
+                message: 'Супер!',
+                created_at: moment().subtract(2, 'hours')
+            },
+        ]
     },
 ];
 
-const comments = [
-    {
-        id: uuidv4(),
-        author: {
-            name: 'Валерея Жерепа',
-            avatar: 'https://sun9-25.userapi.com/impg/NVcuVyjAocf9VEZyRm6rwZZNT7unbtOCpP0Diw/5cjtUAm5v0k.jpg?size=2047x2047&quality=96&sign=2e46eaaf544bcb0ab1d33f692d1abe9d&type=album'
-        },
-        message:
-            'Вау, что за красотка 😍',
-        created_at: moment().subtract(3, 'hours')
-    },
-    {
-        id: uuidv4(),
-        author: {
-            name: 'Ева Вайсберг',
-            avatar: 'https://sun9-47.userapi.com/impg/GmyvgEHDHK3zJJWOIkDlES_fhIVN-68vyNVezQ/ktCTj_mMjr0.jpg?size=960x960&quality=96&sign=d45c33ff4361679ea0f72e717ac46518&type=album'
-        },
-        message: 'Обалдеть...😱😱😱',
-        created_at: moment().subtract(2, 'hours')
-    },
-    {
-        id: uuidv4(),
-        author: {
-            name: 'Ксюша Руденко',
-            avatar: 'https://sun9-53.userapi.com/impg/f3J4KY-U2TkUT0Harf9HzD1iCXcE-O3CaPJlJg/q9NTq1nZTWk.jpg?size=781x1080&quality=96&sign=ae24537a9661495b8bfdffc2cf0c8fba&type=album'
-        },
-        message:
-            'Даже красивее чем я🤬😡',
-        created_at: moment().subtract(3, 'hours')
-    },
-    {
-        id: uuidv4(),
-        author: {
-            name: 'Денис Димитренко',
-            avatar: 'https://sun9-60.userapi.com/impf/c850324/v850324982/1b71c5/LBDZGsQW8-Y.jpg?size=1472x1472&quality=96&sign=20eb6dfc703c6c32ce1cfebb1d6e79cd&type=album'
-        },
-        message: 'Бля, вот это красотка, какой же я додик, что мы расстались...😰 😰 😰 😰',
-        created_at: moment().subtract(2, 'hours')
-    },
-];
+// const comments = [
+//     {
+//         id: uuidv4(),
+//         author: {
+//             name: 'Валерея Жерепа',
+//             avatar: 'https://sun9-25.userapi.com/impg/NVcuVyjAocf9VEZyRm6rwZZNT7unbtOCpP0Diw/5cjtUAm5v0k.jpg?size=2047x2047&quality=96&sign=2e46eaaf544bcb0ab1d33f692d1abe9d&type=album'
+//         },
+//         message:
+//             'Вау, что за красотка 😍',
+//         created_at: moment().subtract(3, 'hours')
+//     },
+//     {
+//         id: uuidv4(),
+//         author: {
+//             name: 'Ева Вайсберг',
+//             avatar: 'https://sun9-47.userapi.com/impg/GmyvgEHDHK3zJJWOIkDlES_fhIVN-68vyNVezQ/ktCTj_mMjr0.jpg?size=960x960&quality=96&sign=d45c33ff4361679ea0f72e717ac46518&type=album'
+//         },
+//         message: 'Обалдеть...😱😱😱',
+//         created_at: moment().subtract(2, 'hours')
+//     },
+//     {
+//         id: uuidv4(),
+//         author: {
+//             name: 'Ксюша Руденко',
+//             avatar: 'https://sun9-53.userapi.com/impg/f3J4KY-U2TkUT0Harf9HzD1iCXcE-O3CaPJlJg/q9NTq1nZTWk.jpg?size=781x1080&quality=96&sign=ae24537a9661495b8bfdffc2cf0c8fba&type=album'
+//         },
+//         message:
+//             'Даже красивее чем я🤬😡',
+//         created_at: moment().subtract(3, 'hours')
+//     },
+//     {
+//         id: uuidv4(),
+//         author: {
+//             name: 'Денис Димитренко',
+//             avatar: 'https://sun9-60.userapi.com/impf/c850324/v850324982/1b71c5/LBDZGsQW8-Y.jpg?size=1472x1472&quality=96&sign=20eb6dfc703c6c32ce1cfebb1d6e79cd&type=album'
+//         },
+//         message: 'Бля, вот это красотка, какой же я додик, что мы расстались...😰 😰 😰 😰',
+//         created_at: moment().subtract(2, 'hours')
+//     },
+// ];
 
 const PhotoCard = (props) => {
     // const {image, className, ...rest} = props;
@@ -162,6 +277,8 @@ const PhotoCard = (props) => {
             // setItems([...items]);
         };
 
+        debugger;
+
         return (
             <>
                 {items.map((item, index) => {
@@ -177,13 +294,15 @@ const PhotoCard = (props) => {
                                 <Grid item xs>
                                     <Grid container justify="space-around" alignItems="center"
                                           className={classes.imageBlock}>
-                                        <ArrowBackIosIcon fontSize='large' color='inherit' key={index} onClick={() => onItemClickBack(index)}/>
+                                        <ArrowBackIosIcon fontSize='large' color='inherit' key={index}
+                                                          onClick={() => onItemClickBack(index)}/>
                                         <CardMedia
                                             key={item.id}
                                             className={classes.cover}
                                             image={item.src}
                                         />
-                                        <ArrowForwardIosIcon fontSize='large' color='inherit' key={index} onClick={() => onItemClickForward(index)}/>
+                                        <ArrowForwardIosIcon fontSize='large' color='inherit' key={index}
+                                                             onClick={() => onItemClickForward(index)}/>
                                     </Grid>
                                 </Grid>
                                 <Grid container
@@ -195,12 +314,12 @@ const PhotoCard = (props) => {
                                     <Grid item className={classes.content}>
                                         <Grid>
                                             <Typography className={classes.photoCounter} variant="body1">
-                                                Фотография 1 из 10
+                                                Фотография {index} из {data.length}
                                             </Typography>
                                         </Grid>
-                                        {comments && (
+                                        {data.comments && (
                                             <div className={classes.comments}>
-                                                {comments.map(comment => (
+                                                {data.comments.map(comment => (
                                                     <CommentBubble
                                                         comment={comment}
                                                         key={comment.id}
@@ -222,7 +341,7 @@ const PhotoCard = (props) => {
     };
 
     return (
-        <Photo items={data} />
+        <Photo items={data}/>
     );
 };
 
