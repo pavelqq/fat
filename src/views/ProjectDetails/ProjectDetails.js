@@ -82,7 +82,6 @@ const ProjectDetails = props => {
             className={classes.root}
             title="Детали проекта"
         >
-            {/*<FuncId/>*/}
             <Header project={project}/>
             <Tabs
                 className={classes.tabs}

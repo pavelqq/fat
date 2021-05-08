@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom';
 import AuthLayout from './layouts/Auth';
 import ErrorLayout from './layouts/Error';
 import DashboardLayout from "./layouts/Dashboard";
-
 import PresentationView from './views/Presentation';
 import OverviewView from './views/Overview'
 
@@ -61,16 +60,16 @@ const routes = [
             //     exact: true,
             //     component: lazy(() => import('views/Changelog'))
             // },
-            // {
-            //     path: '/chat',
-            //     exact: true,
-            //     component: lazy(() => import('views/Chat'))
-            // },
-            // {
-            //     path: '/chat/:id',
-            //     exact: true,
-            //     component: lazy(() => import('views/Chat'))
-            // },
+            {
+                path: '/chat',
+                exact: true,
+                component: lazy(() => import('./views/Chat'))
+            },
+            {
+                path: '/chat/:id',
+                exact: true,
+                component: lazy(() => import('./views/Chat'))
+            },
             // {
             //     path: '/dashboards/analytics',
             //     exact: true,

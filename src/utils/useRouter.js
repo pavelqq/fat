@@ -1,4 +1,4 @@
 import { useContext } from 'react';
-import * as __RouterContext from 'react-router-dom';
+import { __RouterContext } from 'react-router';
 
 export default () => useContext(__RouterContext);

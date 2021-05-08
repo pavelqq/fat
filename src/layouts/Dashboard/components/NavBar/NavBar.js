@@ -8,11 +8,13 @@ import {Hidden} from '@material-ui/core';
 import navigationConfig from './navigationConfig';
 import Navigation from "../../../../components/Navigation";
 import useRouter from "../../../../utils/useRouter";
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 
 const useStyles = makeStyles(theme => ({
     root: {
         height: '100%',
+        overflow: 'hidden',
     },
     content: {
         padding: theme.spacing(2)
@@ -42,13 +44,13 @@ const NavBar = props => {
     const {openMobile, onMobileClose, className, ...rest} = props;
 
     const classes = useStyles();
-    // const router = useRouter();
+    const router = useRouter();
     // const session = useSelector(state => state.session);
-    // useEffect(() => {
-    //     if (openMobile) {
-    //         onMobileClose && onMobileClose();
-    //     }
-    // }, [router.location.pathname]);
+    useEffect(() => {
+        if (openMobile) {
+            onMobileClose && onMobileClose();
+        }
+    }, [router.location.pathname]);
 
     const navbarContent = (
         <div className={classes.content}>
@@ -100,7 +102,9 @@ const NavBar = props => {
                         {...rest}
                         className={clsx(classes.root, className)}
                     >
-                        {navbarContent}
+                        <PerfectScrollbar>
+                            {navbarContent}
+                        </PerfectScrollbar>
                     </div>
                 </Drawer>
             </Hidden>
@@ -111,7 +115,9 @@ const NavBar = props => {
                     elevation={0}
                     square
                 >
-                    {navbarContent}
+                    <PerfectScrollbar>
+                        {navbarContent}
+                    </PerfectScrollbar>
                 </Paper>
             </Hidden>
         </>

@@ -1,5 +1,5 @@
 export * from './accountMock';
-// export * from './chatMock';
+export * from './chatMock';
 // export * from './customerMock';
 // export * from './mailMock';
 export * from './projectMock';

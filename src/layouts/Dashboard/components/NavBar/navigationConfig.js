@@ -143,32 +143,32 @@ export default [
       //   href: '/kanban-board',
       //   icon: ListAltIcon
       // },
-      {
-        title: 'Сообщения',
-        href: '/mail',
-        icon: MailIcon,
-        label: () => (
-          <Label
-            color={colors.red[500]}
-            shape="rounded"
-          >
-            2
-          </Label>
-        )
-      },
       // {
-      //   title: 'Chat',
-      //   href: '/chat',
-      //   icon: ChatIcon,
+      //   title: 'Сообщения',
+      //   href: '/mail',
+      //   icon: MailIcon,
       //   label: () => (
       //     <Label
       //       color={colors.red[500]}
       //       shape="rounded"
       //     >
-      //       4
+      //       2
       //     </Label>
       //   )
       // },
+      {
+        title: 'Чаты',
+        href: '/chat',
+        icon: ChatIcon,
+        label: () => (
+          <Label
+            color={colors.red[500]}
+            shape="rounded"
+          >
+            4
+          </Label>
+        )
+      },
       // {
       //   title: 'Calendar',
       //   href: '/calendar',

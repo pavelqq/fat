@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
         width: theme.breakpoints.values.lg,
         maxWidth: '100%',
         margin: '0 auto',
-        padding: '3em',
+        padding: theme.spacing(3)
     },
     newPost: {
         marginTop: theme.spacing(1)

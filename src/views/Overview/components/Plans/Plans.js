@@ -48,7 +48,7 @@ const Plans = props => {
         let mounted = true;
 
         const fetchProjects = () => {
-            axios.get('/api/account/projects').then(response => {
+            axios.get('/api/projects').then(response => {
                 if (mounted) {
                     setProjects(response.data.projects);
                 }

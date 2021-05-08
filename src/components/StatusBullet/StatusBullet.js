@@ -60,10 +60,14 @@ const StatusBullet = props => {
     <span
       {...rest}
       className={rootClassName}
-      //
     />
   );
 };
 
+
+StatusBullet.defaultProps = {
+  size: 'medium',
+  color: 'default'
+};
 
 export default StatusBullet;

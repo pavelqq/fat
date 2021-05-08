@@ -1,14 +1,13 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
-import {Tabs, Tab, Divider, colors, Button} from '@material-ui/core';
+import {Tabs, Tab, Divider, colors } from '@material-ui/core';
 
 import Page from "../../components/Page";
 import Header from "./components/Header";
 import Wall from "./components/Wall";
 import Friends from "./components/Friends";
 import Plans from "../Overview/components/Plans";
-// import AddPhotoIcon from "@material-ui/core/SvgIcon/SvgIcon";
 
 
 const useStyles = makeStyles(theme => ({
@@ -43,7 +42,6 @@ const Profile = props => {
         {value: 'wall', label: 'Фото и Записи'},
         {value: 'friends', label: '35 Друзей'},
         {value: 'plans', label: 'Планы'},
-        // { value: 'reviews', label: 'Ревью' }
     ];
 
     if (!tab) {
@@ -81,7 +79,6 @@ const Profile = props => {
                     {tab === 'wall' && <Wall/>}
                     {tab === 'friends' && <Friends/>}
                     {tab === 'plans' && <Plans/>}
-                    {/*{tab === 'reviews' && <Reviews />}*/}
                 </div>
             </div>
         </Page>
