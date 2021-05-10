@@ -70,11 +70,8 @@ const Filter = props => {
 
     const [inputValue, setInputValue] = useState('');
     const [chips, setChips] = useState([
-        'Тренировка',
-        'Или',
+        'Тренировочный план',
         'Диета',
-        'Или',
-        'Просто для галочки'
     ]);
 
     const handleInputChange = event => {

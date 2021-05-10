@@ -14,7 +14,6 @@ import {
 const useStyles = makeStyles(theme => ({
     root: {
         height: '100%',
-        cursor: 'pointer',
         display: 'flex',
         '@media (max-width: 863px)': {
             '& $conversationList, & $conversationDetails': {

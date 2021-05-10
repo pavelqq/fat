@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     buttons: {
-        marginTop: theme.spacing(3),
+        marginTop: theme.spacing(6),
         display: 'flex',
         justifyContent: 'center'
     },
@@ -53,36 +53,34 @@ const PresentationHeader = props => {
             className={clsx(classes.root, className)}
         >
             <div className={classes.header}>
-                <>
-                    <Typography
-                        align="center"
-                        gutterBottom
-                        variant="h3"
+                <Typography
+                    align="center"
+                    gutterBottom
+                    variant="h1"
+                >
+                    Привет жиртрест!
+                </Typography>
+                <Typography
+                    align="center"
+                    component="h2"
+                    variant="subtitle1"
+                >
+                    Лорем поменьше лорем поменьше лорем поменьше ну типо заглушка для текста такая, только с
+                    маленьким текстом,
+                    описание лорема заголовка вот. Лорем поменьше лорем поменьше лорем поменьше ну типо заглушка для
+                    текста такая.
+                </Typography>
+                <div className={classes.buttons}>
+                    <Button
+                        color="primary"
+                        component="a"
+                        href="*"
+                        target="_blank"
+                        variant="contained"
                     >
-                        Hello, fatty bitch
-                    </Typography>
-                    <Typography
-                        align="center"
-                        component="h2"
-                        variant="body2"
-                    >
-                        Лорем поменьше лорем поменьше лорем поменьше ну типо заглушка для текста такая, только с
-                        маленьким текстом,
-                        описание лорема заголовка вот. Лорем поменьше лорем поменьше лорем поменьше ну типо заглушка для
-                        текста такая.
-                    </Typography>
-                    <div className={classes.buttons}>
-                        <Button
-                            color="primary"
-                            component="a"
-                            href="*"
-                            target="_blank"
-                            variant="contained"
-                        >
-                            Начать
-                        </Button>
-                    </div>
-                </>
+                        Начать
+                    </Button>
+                </div>
             </div>
             <div className={classes.mediaContainer}>
                 <img

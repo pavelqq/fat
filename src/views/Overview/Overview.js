@@ -49,7 +49,7 @@ const Overview = () => {
             <Plans className={classes.projects}/>
             <Todos className={classes.todos}/>
             <Statistics className={classes.statistics}/>
-            {/*<Notifications className={classes.notifications} />*/}
+            <Notifications className={classes.notifications} />
           </div>
         </Page>
     );

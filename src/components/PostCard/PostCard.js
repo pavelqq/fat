@@ -44,16 +44,17 @@ const useStyles = makeStyles(theme => ({
     },
     content: {
         paddingTop: 0
+
     },
     message: {
-        marginBottom: theme.spacing(1)
+        marginBottom: theme.spacing(2)
     },
     mediaArea: {
-        marginBottom: theme.spacing(2),
+        marginBottom: theme.spacing(2)
     },
     media: {
-        height: 0,
-        paddingTop: '56.25%'
+        height: 400,
+        backgroundPosition: 'initial'
     },
     divider: {
         marginTop: theme.spacing(2),
@@ -71,6 +72,10 @@ const useStyles = makeStyles(theme => ({
     likedButton: {
         color: colors.red[600]
     },
+    actions: {
+        display: 'flex',
+        alignItems: 'center'
+    }
 }));
 
 const PostCard = props => {
@@ -148,7 +153,7 @@ const PostCard = props => {
                         />
                     </CardActionArea>
                 )}
-                <CardActions disableSpacing>
+                <div className={classes.actions}>
                     {liked ? (
                         <IconButton
                             className={classes.likedButton}
@@ -191,7 +196,7 @@ const PostCard = props => {
                         </Typography>
                         <ExpandMoreIcon/>
                     </IconButton>
-                </CardActions>
+                </div>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <Divider className={classes.divider}/>
                     {post.comments && (

@@ -5,7 +5,7 @@ import {Tabs, Tab, Divider, colors} from '@material-ui/core';
 
 import axios from '../../utils/axios';
 import Page from "../../components/Page";
-import {Header, Overview, Files, Activities, Subscribers} from './components';
+import {Header, Overview, Files, Activities, Tasks} from './components';
 
 
 const useStyles = makeStyles(theme => ({
@@ -60,9 +60,9 @@ const ProjectDetails = props => {
 
     const tabs = [
         {value: 'overview', label: 'Подробнее про проект'},
+        {value: 'tasks', label: 'Задачи проекта'},
         {value: 'files', label: 'Прикрепленные файлы'},
         {value: 'activity', label: 'Активность проекта'},
-        {value: 'subscribers', label: 'Подписчки проекта'}
     ];
 
     if (!tab) {
@@ -101,11 +101,9 @@ const ProjectDetails = props => {
             <Divider className={classes.divider}/>
             <div className={classes.content}>
                 {tab === 'overview' && <Overview project={project}/>}
+                {tab === 'tasks' && <Tasks tasks={project.tasks}/>}
                 {tab === 'files' && <Files files={project.files}/>}
                 {tab === 'activity' && <Activities activities={project.activities}/>}
-                {tab === 'subscribers' && (
-                    <Subscribers subscribers={project.subscribers}/>
-                )}
             </div>
         </Page>
     );

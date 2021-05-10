@@ -137,40 +137,40 @@ mock.onGet('/api/account/todos').reply(200, {
     todos: [
         {
             id: uuidv4(),
-            title: 'Finish the proposal design and contract for the client ASAP',
-            deadline: moment().subtract(2, 'days'),
+            title: 'Тренировка спины',
+            deadline: moment().subtract(1, 'days'),
             done: false
         },
         {
             id: uuidv4(),
-            title: 'Finish the proposal design and contract for the client ASAP',
+            title: 'Выпить витамины',
             deadline: moment(),
             done: false
         },
         {
             id: uuidv4(),
             title:
-                'Upload the files for the client @Adrian Stefan with the fonts, assets exported and all the fancy svgs',
-            deadline: moment().add(2, 'days'),
+                'Тренировка груди',
+            deadline: moment().add(0, 'days'),
             done: false
         },
         {
             id: uuidv4(),
-            title: 'Re-write the card component with hooks and context',
-            deadline: moment().add(5, 'days'),
+            title: 'Тренировка ног',
+            deadline: moment().add(1, 'days'),
             done: false
         },
         {
             id: uuidv4(),
-            title: 'Send proposal for the fintech project',
+            title: 'Консультация с тренером',
             deadline: moment().add(5, 'days'),
             done: false
         },
         {
             id: uuidv4(),
             title:
-                'Create todo app with react hooks just to get a better understanding of the concept',
-            deadline: moment().add(7, 'days'),
+                'Сделать замеры',
+            deadline: moment().add(20, 'days'),
             done: true
         }
     ]

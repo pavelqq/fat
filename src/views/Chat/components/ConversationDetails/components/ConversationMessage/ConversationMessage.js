@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
         marginRight: theme.spacing(2)
     },
     body: {
-        backgroundColor: colors.grey[300],
+        backgroundColor: colors.grey[200],
         color: theme.palette.text.primary,
         borderRadius: theme.shape.borderRadius,
         padding: theme.spacing(1, 2)

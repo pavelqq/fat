@@ -56,7 +56,7 @@ const Activities = props => {
                 className={classes.title}
                 variant="h3"
             >
-                Today
+                Сегодня
             </Typography>
             <div className={classes.group}>
                 {todayItems.map(activity => (
@@ -72,7 +72,7 @@ const Activities = props => {
                     className={classes.title}
                     variant="h3"
                 >
-                    Last week
+                    Вчера
                 </Typography>
                 {lastWeekItems.map(activity => (
                     <Activity

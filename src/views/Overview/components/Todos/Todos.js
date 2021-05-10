@@ -1,9 +1,9 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import clsx from 'clsx';
 import 'moment/locale/ru';
 import moment from 'moment';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import {
     Button,
     Card,
@@ -24,6 +24,8 @@ import AddIcon from '@material-ui/icons/Add';
 import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
 import Label from "../../../../components/Label";
 import axios from '../../../../utils/axios'
+import {Link as RouterLink} from "react-router-dom";
+import KeyboardArrowRightIcon from "@material-ui/core/SvgIcon/SvgIcon";
 
 
 const getLabel = todo => {
@@ -51,6 +53,24 @@ const getLabel = todo => {
 
 const useStyles = makeStyles(theme => ({
     root: {},
+    header: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        // marginBottom: theme.spacing(2)
+    },
+    title: {
+        position: 'relative',
+        '&:before': {
+            position: 'absolute',
+            bottom: -8,
+            left: 0,
+            content: '" "',
+            height: 3,
+            width: 48,
+            backgroundColor: theme.palette.primary.main
+        }
+    },
     content: {
         padding: 0
     },
@@ -67,138 +87,110 @@ const Todos = props => {
     const {className, ...rest} = props;
 
     const classes = useStyles();
-    // const [todos, setTodos] = useState([]);
-    //
-    // useEffect(() => {
-    //   let mounted = true;
-    //
-    //   if(mounted) {
-    //       setTodos(todosMock)
-    //   }
-    //
-    //   const fetchTodos = () => {
-    //     axios.get('/api/account/todos')
-    //         .then(response => {
-    //       if (mounted) {
-    //         setTodos(todosMock);
-    //       }
-    //     });
-    //   };
-    //
-    //   fetchTodos();
-    //
-    //   return () => {
-    //     mounted = false;
-    //   };
-    // }, []);
+    const [todos, setTodos] = useState([]);
+
+    useEffect(() => {
+        let mounted = true;
+
+        if (mounted) {
+            setTodos(todos)
+        }
+
+        const fetchTodos = () => {
+            axios.get('/api/account/todos')
+                .then(response => {
+                    if (mounted) {
+                        setTodos(response.data.todos);
+                    }
+                });
+        };
+
+        fetchTodos();
+
+        return () => {
+            mounted = false;
+        };
+    }, []);
+
+    debugger;
 
     const handleChange = (event, todo) => {
         event.persist();
 
-        // setTodos(todos =>
-        //     todos.map(t => {
-        //         if (t.id === todo.id) {
-        //             return {...todo, done: !todo.done};
-        //         }
-        //
-        //         return t;
-        //     })
-        // );
+        setTodos(todos =>
+            todos.map(t => {
+                if (t.id === todo.id) {
+                    return {...todo, done: !todo.done};
+                }
+
+                return t;
+            })
+        );
     };
 
-    const todosMock = [
-        {
-            id: 1,
-            title: 'Тренировка спины',
-            deadline: moment().subtract(1, 'days'),
-            done: false
-        },
-        {
-            id: 2,
-            title: 'Выпить витамины',
-            deadline: moment(),
-            done: false
-        },
-        {
-            id: 3,
-            title:
-                'Тренировка груди',
-            deadline: moment().add(0, 'days'),
-            done: false
-        },
-        {
-            id: 4,
-            title: 'Тренировка ног',
-            deadline: moment().add(1, 'days'),
-            done: false
-        },
-        {
-            id: 5,
-            title: 'Консультация с тренером',
-            deadline: moment().add(5, 'days'),
-            done: false
-        },
-        {
-            id: 6,
-            title:
-                'Сделать замеры',
-            deadline: moment().add(20, 'days'),
-            done: true
-        }
-    ];
 
     return (
-        <Card
-            {...rest}
-            className={clsx(classes.root, className)}
-        >
-            <CardHeader
-                action={
-                    <Button
-                        color="primary"
-                        size="small"
-                    >
-                        <AddIcon className={classes.addIcon}/>
-                        Добавить!
-                    </Button>
-                }
-                title="Задания"
-            />
-            <Divider/>
-            <CardContent className={classes.content}>
-                <List>
-                    {todosMock.map((todo, i) => (
-                        <ListItem
-                            divider={i < todosMock.length - 1}
-                            key={todo.id}
+        <>
+            {/*<div className={classes.header}>*/}
+            {/*    <Typography*/}
+            {/*        className={classes.title}*/}
+            {/*        variant="h5"*/}
+            {/*    >*/}
+            {/*        Задания на сегодня*/}
+            {/*    </Typography>*/}
+            {/*</div>*/}
+            <Card
+                {...rest}
+                className={clsx(classes.root, className)}
+            >
+                <CardHeader
+                    action={
+                        <Button
+                            color="primary"
+                            size="small"
                         >
-                            <ListItemIcon>
-                                <Radio
-                                    checked={todo.done}
-                                    onClick={event => handleChange(event, todo)}
-                                />
-                            </ListItemIcon>
-                            <ListItemText>
-                                <Typography
-                                    className={clsx({
-                                        [classes.done]: todo.done
-                                    })}
-                                    variant="body1"
-                                >
-                                    {todo.title}
-                                </Typography>
-                            </ListItemText>
-                            {getLabel(todo)}
-                            <Tooltip title="Archive">
-                                <IconButton>
-                                    <ArchiveIcon/>
-                                </IconButton>
-                            </Tooltip>
-                        </ListItem>
-                    ))}
-                </List>
-            </CardContent>
-        </Card>
+                            <AddIcon className={classes.addIcon}/>
+                            Добавить!
+                        </Button>
+                    }
+                    title="Задания"
+                />
+                <Divider/>
+                <CardContent className={classes.content}>
+                    <List>
+                        {todos.map((todo, i) => (
+                            <ListItem
+                                divider={i < todos.length - 1}
+                                key={todo.id}
+                            >
+                                <ListItemIcon>
+                                    <Radio
+                                        checked={todo.done}
+                                        onClick={event => handleChange(event, todo)}
+                                    />
+                                </ListItemIcon>
+                                <ListItemText>
+                                    <Typography
+                                        className={clsx({
+                                            [classes.done]: todo.done
+                                        })}
+                                        variant="body1"
+                                    >
+                                        {todo.title}
+                                    </Typography>
+                                </ListItemText>
+                                {getLabel(todo)}
+                                <Tooltip title="Archive">
+                                    <IconButton>
+                                        <ArchiveIcon/>
+                                    </IconButton>
+                                </Tooltip>
+                            </ListItem>
+                        ))}
+                    </List>
+                </CardContent>
+            </Card>
+        </>
     );
 };
 

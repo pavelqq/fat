@@ -21,8 +21,6 @@ const Overview = props => {
 
     const classes = useStyles();
 
-    debugger;
-
     return (
         <Grid
             {...rest}
