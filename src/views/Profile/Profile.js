@@ -24,9 +24,12 @@ const useStyles = makeStyles(theme => ({
     content: {
         marginTop: theme.spacing(3),
         marginBottom: theme.spacing(3),
-        marginLeft: theme.spacing(6),
-        marginRight: theme.spacing(6),
+        marginLeft: theme.spacing(9),
+        marginRight: theme.spacing(9)
     },
+    innerContent: {
+
+    }
 }));
 
 const Profile = props => {
@@ -76,9 +79,11 @@ const Profile = props => {
                 </Tabs>
                 <Divider className={classes.divider}/>
                 <div className={classes.content}>
+                    <div className={classes.innerContent}>
                     {tab === 'wall' && <Wall/>}
                     {tab === 'friends' && <Friends/>}
                     {tab === 'plans' && <Plans/>}
+                    </div>
                 </div>
             </div>
         </Page>

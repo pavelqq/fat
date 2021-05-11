@@ -142,30 +142,39 @@ const Wall = props => {
             {...rest}
             className={clsx(classes.root, className)}
         >
-            <Gallery/>
+            {/*<Gallery/>*/}
             <AddPost/>
-            <Grid container spacing={1}>
-                <Grid item xs={12} sm={8}>
-                    <div className={classes.posts}>
-                        {posts.map(post => (
-                            <PostCard
-                                className={classes.post}
-                                key={post.id}
-                                post={post}
-                            />
-                        ))}
-                    </div>
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    {posts.map(post => (
-                        <TimelinePosts
-                            className={classes.timeline}
-                            key={post.id}
-                            post={post}
-                        />
-                    ))}
-                </Grid>
-            </Grid>
+            <div className={classes.posts}>
+                {posts.map(post => (
+                    <PostCard
+                        className={classes.post}
+                        key={post.id}
+                        post={post}
+                    />
+                ))}
+            </div>
+            {/*<Grid container spacing={1}>*/}
+            {/*    <Grid item xs={12} sm={8}>*/}
+            {/*        <div className={classes.posts}>*/}
+            {/*            {posts.map(post => (*/}
+            {/*                <PostCard*/}
+            {/*                    className={classes.post}*/}
+            {/*                    key={post.id}*/}
+            {/*                    post={post}*/}
+            {/*                />*/}
+            {/*            ))}*/}
+            {/*        </div>*/}
+            {/*    </Grid>*/}
+            {/*    <Grid item xs={12} sm={4}>*/}
+            {/*        {posts.map(post => (*/}
+            {/*            <TimelinePosts*/}
+            {/*                className={classes.timeline}*/}
+            {/*                key={post.id}*/}
+            {/*                post={post}*/}
+            {/*            />*/}
+            {/*        ))}*/}
+            {/*    </Grid>*/}
+            {/*</Grid>*/}
         </div>
     );
 };

@@ -27,6 +27,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import Gallery from "../../views/Profile/components/Gallery";
 
 
 const useStyles = makeStyles(theme => ({
@@ -53,7 +54,6 @@ const useStyles = makeStyles(theme => ({
         marginBottom: theme.spacing(2)
     },
     media: {
-        height: 400,
         backgroundPosition: 'initial'
     },
     divider: {
@@ -146,12 +146,13 @@ const PostCard = props => {
                     {post.message}
                 </Typography>
                 {post.media && (
-                    <CardActionArea className={classes.mediaArea}>
-                        <CardMedia
+                    <div className={classes.mediaArea}>
+                        <div
                             className={classes.media}
-                            image={post.media}
-                        />
-                    </CardActionArea>
+                        >
+                            <Gallery/>
+                        </div>
+                    </div>
                 )}
                 <div className={classes.actions}>
                     {liked ? (
