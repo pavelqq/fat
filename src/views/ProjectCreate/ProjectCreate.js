@@ -9,7 +9,8 @@ import {
     AboutProject,
     Preferences,
     ProjectCover,
-    ProjectDetails
+    ProjectDetails,
+    ProjectCalendar
 } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -20,6 +21,9 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(3, 3, 6, 3)
     },
     aboutAuthor: {
+        marginTop: theme.spacing(3)
+    },
+    projectCalendar: {
         marginTop: theme.spacing(3)
     },
     aboutProject: {
@@ -49,6 +53,7 @@ const ProjectCreate = () => {
         >
             <Header/>
             <AboutAuthor className={classes.aboutAuthor}/>
+            <ProjectCalendar className={classes.projectCalendar}/>
             <AboutProject className={classes.aboutProject}/>
             <ProjectCover className={classes.projectCover}/>
             <ProjectDetails className={classes.projectDetails}/>

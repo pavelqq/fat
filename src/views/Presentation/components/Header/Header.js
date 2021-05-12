@@ -14,7 +14,9 @@ const useStyles = makeStyles(theme => ({
         padding: '80px 24px',
         [theme.breakpoints.up('md')]: {
             padding: '140px 24px'
-        }
+        },
+        marginTop: theme.spacing(4),
+        marginBottom: theme.spacing(4)
     },
     buttons: {
         marginTop: theme.spacing(6),

@@ -88,6 +88,7 @@ const AboutAuthor = props => {
                         </div>
                     </div>
                 ))}
+                {options.title}
             </CardContent>
         </Card>
     );
