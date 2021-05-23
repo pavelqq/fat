@@ -200,7 +200,119 @@ mock.onGet(`/api/projects/1`).reply(200, {
     project: {
         tasks: {
             train: {
-                name: 'Череда 10',
+                date: '21.05.2021',
+                exercises: [
+                    {
+                        id: uuidv4(),
+                        name: 'Жим Лежа',
+                        sets: [
+                            {
+                                set: '1',
+                                weight: '20',
+                                reps: '15',
+                                chill: '60',
+                                tonnage: '300',
+                            },
+                            {
+                                set: '2',
+                                weight: '40',
+                                reps: '10',
+                                chill: '90',
+                                tonnage: '400',
+                            },
+                            {
+                                set: '3',
+                                weight: '60',
+                                reps: '8',
+                                chill: '120',
+                                tonnage: '480',
+                            },
+                            {
+                                set: '4',
+                                weight: '80',
+                                reps: '4',
+                                chill: '120',
+                                tonnage: '320',
+                            },
+                            {
+                                set: '5',
+                                weight: '100',
+                                reps: '2',
+                                chill: '120',
+                                tonnage: '200',
+                            },
+                            {
+                                set: '6',
+                                weight: '100',
+                                reps: '2',
+                                chill: '120',
+                                tonnage: '200',
+                            },
+                            {
+                                set: '7',
+                                weight: '50',
+                                reps: '10',
+                                chill: '120',
+                                tonnage: '500',
+                            },
+                        ]
+                    },
+                    {
+                        id: uuidv4(),
+                        name: 'Подтягивания',
+                        sets: [
+                            {
+                                set: '1',
+                                weight: '90',
+                                reps: '10',
+                                chill: '60',
+                                tonnage: '900',
+                            },
+                            {
+                                set: '2',
+                                weight: '95',
+                                reps: '8',
+                                chill: '90',
+                                tonnage: '760',
+                            },
+                            {
+                                set: '3',
+                                weight: '100',
+                                reps: '6',
+                                chill: '120',
+                                tonnage: '600',
+                            },
+                            {
+                                set: '4',
+                                weight: '105',
+                                reps: '4',
+                                chill: '120',
+                                tonnage: '420',
+                            },
+                            {
+                                set: '5',
+                                weight: '105',
+                                reps: '4',
+                                chill: '120',
+                                tonnage: '420',
+                            },
+                            {
+                                set: '6',
+                                weight: '90',
+                                reps: '10',
+                                chill: '120',
+                                tonnage: '900',
+                            },
+                            {
+                                set: '7',
+                                weight: '90',
+                                reps: '10',
+                                chill: '120',
+                                tonnage: '900',
+                            },
+                        ]
+                    }
+                ]
             },
         },
         title: 'Череда 10',
