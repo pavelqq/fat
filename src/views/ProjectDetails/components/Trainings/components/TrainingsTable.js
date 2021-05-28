@@ -43,6 +43,10 @@ const useStyles = makeStyles(theme => ({
     actions: {
         padding: theme.spacing(1),
         justifyContent: 'flex-end'
+    },
+    nothing: {
+        paddingLeft: theme.spacing(3),
+        paddingTop: theme.spacing(3),
     }
 }));
 
@@ -75,88 +79,94 @@ const TrainingsTable = props => {
                 <CardHeader
                     action={<GenericMoreButton/>}
                     title="Упражнения"
-                    subheader={`Список упражнений, которые нужно выполнить за тренировку ${selectedDate}`}
+                    subheader={`Список упражнений, которые нужно выполнить за тренировку`}
                 >
                 </CardHeader>
                 <Divider/>
                 <CardContent className={classes.content}>
-                    <PerfectScrollbar>
-                        <div className={classes.inner}>
-                            <Table size="small">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Упражнение</TableCell>
-                                        <TableCell>Подходы</TableCell>
-                                        <TableCell>Вес(кг)</TableCell>
-                                        <TableCell>Повторы</TableCell>
-                                        <TableCell>Отдых(сек)</TableCell>
-                                        <TableCell>Тоннаж(кг)</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {train.exercises.map(exercise => (
-                                        <TableRow
-                                            hover
-                                            key={exercise.id}
-                                        >
-                                            <TableCell>
-                                                <Typography
-                                                    variant="subtitle1"
-                                                >
-                                                    {exercise.name}
-                                                </Typography>
-                                            </TableCell>
-                                            <TableCell>
-                                                {exercise.sets.map(e => (
-                                                    <TableRow>
-                                                        <TableCell>
-                                                            {e.set}
-                                                        </TableCell>
-                                                    </TableRow>
-                                                ))}
-                                            </TableCell>
-                                            <TableCell>
-                                                {exercise.sets.map(e => (
-                                                    <TableRow>
-                                                        <TableCell>
-                                                            {e.weight}
-                                                        </TableCell>
-                                                    </TableRow>
-                                                ))}
-                                            </TableCell>
-                                            <TableCell>
-                                                {exercise.sets.map(e => (
-                                                    <TableRow>
-                                                        <TableCell>
-                                                            {e.reps}
-                                                        </TableCell>
-                                                    </TableRow>
-                                                ))}
-                                            </TableCell>
-                                            <TableCell>
-                                                {exercise.sets.map(e => (
-                                                    <TableRow>
-                                                        <TableCell>
-                                                            {e.chill}
-                                                        </TableCell>
-                                                    </TableRow>
-                                                ))}
-                                            </TableCell>
-                                            <TableCell>
-                                                {exercise.sets.map(e => (
-                                                    <TableRow>
-                                                        <TableCell>
-                                                            {e.tonnage}
-                                                        </TableCell>
-                                                    </TableRow>
-                                                ))}
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </div>
-                    </PerfectScrollbar>
+                    {
+                        train
+                            ? <PerfectScrollbar>
+                                <div className={classes.inner}>
+                                    <Table size="small">
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Упражнение</TableCell>
+                                                <TableCell>Подходы</TableCell>
+                                                <TableCell>Вес(кг)</TableCell>
+                                                <TableCell>Повторы</TableCell>
+                                                <TableCell>Отдых(сек)</TableCell>
+                                                <TableCell>Тоннаж(кг)</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {train.exercises.map(exercise => <TableRow
+                                                hover
+                                                key={exercise.id}
+                                            >
+                                                <TableCell>
+                                                    <Typography
+                                                        variant="subtitle1"
+                                                    >
+                                                        {exercise.name}
+                                                    </Typography>
+                                                </TableCell>
+                                                <TableCell>
+                                                    {exercise.sets.map(e => (
+                                                        <TableRow>
+                                                            <TableCell>
+                                                                {e.set}
+                                                            </TableCell>
+                                                        </TableRow>
+                                                    ))}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {exercise.sets.map(e => (
+                                                        <TableRow>
+                                                            <TableCell>
+                                                                {e.weight}
+                                                            </TableCell>
+                                                        </TableRow>
+                                                    ))}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {exercise.sets.map(e => (
+                                                        <TableRow>
+                                                            <TableCell>
+                                                                {e.reps}
+                                                            </TableCell>
+                                                        </TableRow>
+                                                    ))}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {exercise.sets.map(e => (
+                                                        <TableRow>
+                                                            <TableCell>
+                                                                {e.chill}
+                                                            </TableCell>
+                                                        </TableRow>
+                                                    ))}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {exercise.sets.map(e => (
+                                                        <TableRow>
+                                                            <TableCell>
+                                                                {e.tonnage}
+                                                            </TableCell>
+                                                        </TableRow>
+                                                    ))}
+                                                </TableCell>
+                                            </TableRow>)}
+                                        </TableBody>
+                                    </Table>
+                                </div>
+                            </PerfectScrollbar>
+                            : <div className={classes.nothing}>
+                                <Typography variant="subtitle2">
+                                    Здесь пока ничего
+                                </Typography>
+                            </div>
+                    }
                 </CardContent>
                 {/*<CardActions className={classes.actions}>*/}
                 {/*    <TablePagination*/}

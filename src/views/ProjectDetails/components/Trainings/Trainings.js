@@ -1,14 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core';
 import Typography from "@material-ui/core/Typography";
-import ItemsTable from "../Diet/components/ItemsTable";
 import {KeyboardDatePicker} from "@material-ui/pickers";
-import ProteinsFatsCarbohydrates from "../Diet/components/ProteinsFatsCarbohydrates";
 import General from './components/General/General'
 import moment from "moment";
-import EventTable from "../../../ProjectCreate/components/ProjectCalendar/components/EventTable";
 import TrainingsTable from "./components/TrainingsTable";
 
 const useStyles = makeStyles(theme => ({
@@ -39,11 +36,29 @@ const Trainings = props => {
 
     const classes = useStyles();
 
-    const [selectedDate, setSelectedDate] = React.useState(moment());
+    const [selectedDate, setDate] = useState(moment());
+    const [inputValue, setInputValue] = useState(moment().format("DD/MM/YYYY"));
+    // const [selectedDate, setSelectedDate] = useState(moment().format("DD/MM/YYYY"));
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
+    // const handleDateChange = (date) => {
+    //     setSelectedDate(date);
+    // };
+
+    debugger;
+    let first = train[0].date;
+    let last = train[train.length - 1].date
+    debugger;
+
+    const onDateChange = (date, value) => {
+        setDate(date);
+        setInputValue(value);
     };
+
+    const dateFormatter = str => {
+        return str;
+    };
+
+    let currentTrain = train.find(e => e.date === inputValue);
 
     return (
         <div
@@ -67,7 +82,10 @@ const Trainings = props => {
                     <Typography variant="subtitle2" className={classes.desc}>
                         Выберете дату в форме справа для начала.
                     </Typography>
-                    <TrainingsTable selectedDate={selectedDate} train={train}/>
+                    <TrainingsTable
+                        selectedDate={selectedDate}
+                        train={currentTrain ? currentTrain : null}
+                    />
                 </Grid>
                 <Grid
                     className={classes.dates}
@@ -77,15 +95,13 @@ const Trainings = props => {
                     xs={12}
                 >
                     <KeyboardDatePicker
-                        margin="normal"
-                        id="date-picker-dialog"
-                        label="Выберете дату"
-                        format="dd/MM/yyyy"
                         value={selectedDate}
-                        onChange={handleDateChange}
-                        KeyboardButtonProps={{
-                            'aria-label': 'Изменить',
-                        }}
+                        format="DD/MM/YYYY"
+                        inputValue={inputValue}
+                        onChange={onDateChange}
+                        rifmFormatter={dateFormatter}
+                        minDate={first.toString()}
+                        maxDate={last.toString()}
                     />
                     <General className={classes.intensity} />
                 </Grid>
@@ -93,6 +109,5 @@ const Trainings = props => {
         </div>
     );
 };
-
 
 export default Trainings;
