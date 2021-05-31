@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 import clsx from 'clsx';
-// import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux_old';
 import {makeStyles} from '@material-ui/core/styles';
 import {Drawer, Divider, Paper, Avatar, Typography} from '@material-ui/core';
 import {Hidden} from '@material-ui/core';

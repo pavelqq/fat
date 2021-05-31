@@ -203,11 +203,11 @@ export default [
             //   icon: LockOpenIcon,
             //   children: [
             //     {
-            //       title: 'Login',
+            //       title: 'Register',
             //       href: '/auth/login'
             //     },
             //     {
-            //       title: 'Register',
+            //       title: 'Login',
             //       href: '/auth/register'
             //     }
             //   ]

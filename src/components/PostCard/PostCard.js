@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const PostCard = props => {
+const PostCard = (props) => {
     const {post, className, ...rest} = props;
     const classes = useStyles();
 

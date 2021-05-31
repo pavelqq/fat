@@ -3,6 +3,7 @@ import {renderRoutes} from 'react-router-config';
 import {makeStyles} from "@material-ui/core/styles";
 import {LinearProgress} from '@material-ui/core';
 import TopBar from "../Dashboard/components/TopBar";
+import useRoutes from "../../routesOLDOLD";
 
 const useStyles = makeStyles(theme => ({
     content: {
@@ -10,21 +11,26 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+
+debugger;
+
 const Auth = props => {
     const {route} = props;
-
     const classes = useStyles();
 
     return (
         <>
-            <TopBar/>
+            {/*<TopBar/>*/}
             <main className={classes.content}>
                 <Suspense fallback={<LinearProgress/>}>
+                    {/*{renderRoutes(route.routes)}*/}
                     {renderRoutes(route.routes)}
                 </Suspense>
             </main>
         </>
     );
 };
+
+debugger;
 
 export default Auth;

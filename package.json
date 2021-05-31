@@ -27,6 +27,7 @@
     "libphonenumber-js": "^1.9.16",
     "material-ui": "^0.20.2",
     "moment": "^2.26.0",
+    "mongodb": "^3.6.9",
     "namor": "^2.0.2",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
@@ -42,6 +43,10 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-table": "^7.7.0",
+    "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
     "sweetalert2": "^10.16.0",
     "uuid": "^8.3.2",
     "web-vitals": "^1.0.1",
@@ -87,6 +92,6 @@
     "react-datepicker": "^3.8.0",
     "react-paginate": "^7.1.2",
     "react-perfect-scrollbar": "^1.5.8",
-    "react-redux": "^7.2.3"
+    "react-redux": "^7.2.4"
   }
 }

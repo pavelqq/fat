@@ -1,18 +1,25 @@
-import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from "@material-ui/core";
+import React from 'react';
+import clsx from "clsx";
+import {makeStyles} from "@material-ui/core/styles";
 
 
 const useStyles = makeStyles(theme => ({
     root: {}
 }));
 
-const Register = () => {
+const Register = props => {
+
+    const {className, ...rest} = props;
     const classes = useStyles();
 
     return(
-        <Typography className={classes.root}>Register</Typography>
+        <div
+            {...rest}
+            className={clsx(classes.root, className)}
+        >
+            Register
+        </div>
     )
-};
+}
 
 export default Register;
