@@ -11,6 +11,7 @@ import moment from "moment";
 import {v4 as uuidv4} from 'uuid';
 import Grid from "@material-ui/core/Grid";
 import TimelinePosts from "../Profile/components/TimelinePosts";
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -59,96 +60,109 @@ const SocialFeed = () => {
     //   };
     // }, []);
 
-    const posts = [
-        {
-            id: uuidv4(),
-            author: {
-                name: 'Вася Пупкин',
-                avatar: '/images/avatars/avatar_10.png'
-            },
-            message: 'Здарова ребята',
-            liked: true,
-            likes: 1,
-            comments: [
-                {
-                    id: uuidv4(),
-                    author: {
-                        name: 'Никита Сергеич',
-                        avatar: '/images/avatars/avatar_12.png'
-                    },
-                    message: 'Привет',
-                    created_at: moment().subtract(3, 'hours')
-                }
-            ],
-            created_at: moment().subtract(16, 'minutes')
-        },
-        {
-            id: uuidv4(),
-            author: {
-                name: 'Денис Николаев',
-                avatar: '/images/avatars/avatar_11.png'
-            },
-            message: 'Халло епт',
-            media: 'https://s1.1zoom.ru/big0/52/Love_Sunrises_and_sunsets_Fingers_Hands_Heart_Sun_532758_1280x897.jpg',
-            liked: true,
-            likes: 24,
-            comments: [
-                {
-                    id: uuidv4(),
-                    author: {
-                        name: 'Аня Морозова',
-                        avatar: '/images/avatars/avatar_5.png'
-                    },
-                    message: 'Ахахах',
-                    created_at: moment().subtract(3, 'hours')
-                },
-                {
-                    id: uuidv4(),
-                    author: {
-                        name: 'Никола Тесла',
-                        avatar: '/images/avatars/avatar_8.png'
-                    },
-                    message:
-                        'Хмм...',
-                    created_at: moment().subtract(2, 'hours')
-                }
-            ],
-            created_at: moment().subtract(4, 'hours')
-        },
-        {
-            id: uuidv4(),
-            author: {
-                name: 'Денис Николаев',
-                avatar: '/images/avatars/avatar_11.png'
-            },
-            message:
-                'Мда, так и живем',
-            liked: false,
-            likes: 65,
-            comments: [
-                {
-                    id: uuidv4(),
-                    author: {
-                        name: 'Вася Пукин',
-                        avatar: '/images/avatars/avatar_6.png'
-                    },
-                    message:
-                        'Пойдет',
-                    created_at: moment().subtract(3, 'hours')
-                },
-                {
-                    id: uuidv4(),
-                    author: {
-                        name: 'Леха',
-                        avatar: '/images/avatars/avatar_4.png'
-                    },
-                    message: 'Oh... so sentimental',
-                    created_at: moment().subtract(2, 'hours')
-                }
-            ],
-            created_at: moment().subtract(7, 'hours')
+    // const posts = [
+    //     {
+    //         id: uuidv4(),
+    //         author: {
+    //             name: 'Вася Пупкин',
+    //             avatar: '/images/avatars/avatar_10.png'
+    //         },
+    //         message: 'Здарова ребята',
+    //         liked: true,
+    //         likes: 1,
+    //         comments: [
+    //             {
+    //                 id: uuidv4(),
+    //                 author: {
+    //                     name: 'Никита Сергеич',
+    //                     avatar: '/images/avatars/avatar_12.png'
+    //                 },
+    //                 message: 'Привет',
+    //                 created_at: moment().subtract(3, 'hours')
+    //             }
+    //         ],
+    //         created_at: moment().subtract(16, 'minutes')
+    //     },
+    //     {
+    //         id: uuidv4(),
+    //         author: {
+    //             name: 'Денис Николаев',
+    //             avatar: '/images/avatars/avatar_11.png'
+    //         },
+    //         message: 'Халло епт',
+    //         media: 'https://s1.1zoom.ru/big0/52/Love_Sunrises_and_sunsets_Fingers_Hands_Heart_Sun_532758_1280x897.jpg',
+    //         liked: true,
+    //         likes: 24,
+    //         comments: [
+    //             {
+    //                 id: uuidv4(),
+    //                 author: {
+    //                     name: 'Аня Морозова',
+    //                     avatar: '/images/avatars/avatar_5.png'
+    //                 },
+    //                 message: 'Ахахах',
+    //                 created_at: moment().subtract(3, 'hours')
+    //             },
+    //             {
+    //                 id: uuidv4(),
+    //                 author: {
+    //                     name: 'Никола Тесла',
+    //                     avatar: '/images/avatars/avatar_8.png'
+    //                 },
+    //                 message:
+    //                     'Хмм...',
+    //                 created_at: moment().subtract(2, 'hours')
+    //             }
+    //         ],
+    //         created_at: moment().subtract(4, 'hours')
+    //     },
+    //     {
+    //         id: uuidv4(),
+    //         author: {
+    //             name: 'Денис Николаев',
+    //             avatar: '/images/avatars/avatar_11.png'
+    //         },
+    //         message:
+    //             'Мда, так и живем',
+    //         liked: false,
+    //         likes: 65,
+    //         comments: [
+    //             {
+    //                 id: uuidv4(),
+    //                 author: {
+    //                     name: 'Вася Пукин',
+    //                     avatar: '/images/avatars/avatar_6.png'
+    //                 },
+    //                 message:
+    //                     'Пойдет',
+    //                 created_at: moment().subtract(3, 'hours')
+    //             },
+    //             {
+    //                 id: uuidv4(),
+    //                 author: {
+    //                     name: 'Леха',
+    //                     avatar: '/images/avatars/avatar_4.png'
+    //                 },
+    //                 message: 'Oh... so sentimental',
+    //                 created_at: moment().subtract(2, 'hours')
+    //             }
+    //         ],
+    //         created_at: moment().subtract(7, 'hours')
+    //     }
+    // ];
+
+
+
+    const [posts, setPosts] = useState([])
+
+    useEffect( () => {
+        const fetchPosts = async () => {
+            const res = await axios.get("posts/timeline/60b74c2468e8dd0880c2033b")
+            console.log(res.data);
+            setPosts(res.data)
         }
-    ];
+        fetchPosts()
+    }, [])
 
     return (
         <Page
@@ -156,7 +170,7 @@ const SocialFeed = () => {
             title="Лента"
         >
             <Grid container xs={12}>
-                <Grid item xs={8}>
+                <Grid item xs={12}>
                     <Header className={classes.header}/>
                     <AddPost className={classes.newPost}/>
                     <div className={classes.posts}>
@@ -169,14 +183,14 @@ const SocialFeed = () => {
                         ))}
                     </div>
                 </Grid>
-                <Grid item xs={4} alignItems="flex-start" className={classes.timeline}>
-                    {posts.map(post => (
-                        <TimelinePosts
-                            key={post.id}
-                            post={post}
-                        />
-                    ))}
-                </Grid>
+                {/*<Grid item xs={4} alignItems="flex-start" className={classes.timeline}>*/}
+                {/*    {posts.map(post => (*/}
+                {/*        <TimelinePosts*/}
+                {/*            key={post.id}*/}
+                {/*            post={post}*/}
+                {/*        />*/}
+                {/*    ))}*/}
+                {/*</Grid>*/}
             </Grid>
         </Page>
     );

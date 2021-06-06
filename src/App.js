@@ -1,8 +1,6 @@
-import React from "react";
+import React, {useContext} from "react";
 import {BrowserRouter as Router} from "react-router-dom";
-import routes from "./routes";
 import ScrollReset from "./components/ScrollReset";
-import {renderRoutes} from 'react-router-config';
 import {ThemeProvider} from '@material-ui/core/styles';
 import {MuiPickersUtilsProvider} from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
@@ -14,7 +12,9 @@ import './mixins/prismjs';
 import './mock';
 import './assets/scss/index.scss';
 import {createBrowserHistory} from 'history';
-import {connect} from 'react-redux';
+
+import {renderRoutes} from 'react-router-config';
+import routes from "./routes"
 
 moment.locale('ru');
 const history = createBrowserHistory();
@@ -35,6 +35,4 @@ function App() {
     );
 }
 
-export default connect(
-
-)(App);
+export default App;

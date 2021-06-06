@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useRef, useEffect } from 'react';
+import React, {useState, useRef, useEffect, useContext} from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // import { useDispatch } from 'react-redux_old';
 import { makeStyles } from '@material-ui/core/styles';
@@ -33,6 +33,7 @@ import axios from "../../../../utils/axios";
 import PricingModal from "../../../../components/PricingModal";
 import NotificationsPopover from "../../../../components/NotificationsPopover";
 import BreadcrumbsNav from "../../../../components/Breadcrumbs";
+import {AuthContext} from "../../../../context/AuthContext";
 // import { logout } from 'actions';
 
 
@@ -116,6 +117,14 @@ const TopBar = props => {
   const [notifications, setNotifications] = useState([]);
   const [openNotifications, setOpenNotifications] = useState(false);
 
+  const auth = useContext(AuthContext)
+
+  const logoutHandler = event => {
+    event.preventDefault()
+    auth.logout()
+    history.push('/auth/login')
+  }
+
   useEffect(() => {
     let mounted = true;
 
@@ -134,10 +143,10 @@ const TopBar = props => {
     };
   }, []);
 
-  const handleLogout = () => {
-    history.push('/auth/login');
-    // dispatch(logout());
-  };
+  // const handleLogout = () => {
+  //   history.push('/auth/login');
+  //   // dispatch(logout());
+  // };
 
   const handlePricingOpen = () => {
     setPricingModalOpen(true);
@@ -264,10 +273,10 @@ const TopBar = props => {
           <Button
             className={classes.logoutButton}
             color="inherit"
-            onClick={handleLogout}
+            onClick={logoutHandler}
           >
             <InputIcon className={classes.logoutIcon} />
-            Авторизироваться
+            Выйти
           </Button>
         </Hidden>
         <Hidden lgUp>

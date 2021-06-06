@@ -1,12 +1,11 @@
 import React, {Suspense, useState} from 'react';
-//import {renderRoutes} from 'react-router-config';
-import renderRoutes from '../../renderRoutes';
 import {makeStyles} from '@material-ui/core/styles';
 import {LinearProgress} from '@material-ui/core';
 
 import {NavBar, TopBar} from './components';
 import ChatBar from "./components/ChatBar";
-import useRoutes from "../../routesOLDOLD";
+import {renderRoutes} from "react-router-config";
+
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -38,10 +37,9 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
+
 const Dashboard = props => {
-    const {route} = props;
-    const authed = false;
-    const authPath = '/auth/login';
+    const {routes} = props;
 
     const classes = useStyles();
     const [openNavBarMobile, setOpenNavBarMobile] = useState(false);
@@ -68,13 +66,11 @@ const Dashboard = props => {
                 />
                 <main className={classes.content}>
                     <Suspense fallback={<LinearProgress/>}>
-                        {/*{renderRoutes(route.routes)}*/}
-                        {/*{renderRoutes(routes)}*/}
-                        {renderRoutes(route.routes, authed, authPath)}
+                        {renderRoutes(routes)}
                     </Suspense>
                 </main>
             </div>
-            <ChatBar />
+            <ChatBar/>
         </div>
     );
 };
