@@ -127,8 +127,6 @@ const Wall = (props) => {
     //   };
     // }, []);
 
-    debugger;
-
     return (
         <div
             {...rest}

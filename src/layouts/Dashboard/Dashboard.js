@@ -1,12 +1,11 @@
 import React, {Suspense, useState} from 'react';
-//import {renderRoutes} from 'react-router-config';
-import renderRoutes from '../../renderRoutes';
+import {renderRoutes} from 'react-router-config';
+//import renderRoutes from '../../renderRoutes';
 import {makeStyles} from '@material-ui/core/styles';
 import {LinearProgress} from '@material-ui/core';
 
 import {NavBar, TopBar} from './components';
 import ChatBar from "./components/ChatBar";
-import useRoutes from "../../routesOLDOLD";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -70,7 +69,7 @@ const Dashboard = props => {
                     <Suspense fallback={<LinearProgress/>}>
                         {/*{renderRoutes(route.routes)}*/}
                         {/*{renderRoutes(routes)}*/}
-                        {renderRoutes(route.routes, authed, authPath)}
+                        {renderRoutes(route.routes)}
                     </Suspense>
                 </main>
             </div>

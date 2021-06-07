@@ -25,29 +25,28 @@ const Users = () => {
 
     const classes = useStyles();
 
-    const dispatch = useDispatch()
-
-    const postsListData = useSelector(state => state.postsList)
-
-    const {loading, error, posts} = postsListData
-
-    useEffect(() => {
-        dispatch(getPosts())
-    }, [dispatch])
-
-    debugger;
+    // const dispatch = useDispatch()
+    //
+    // const postsListData = useSelector(state => state.postsList)
+    //
+    // const {loading, error, posts} = postsListData
+    //
+    // useEffect(() => {
+    //     dispatch(getPosts())
+    // }, [dispatch])
+    //
 
     return (
         <div>
-            {loading ? "Loading..." : error ? error.message : posts.map(post =>
-                (
-                    <PostCard
-                        className={classes.post}
-                        key={post.id}
-                        post={post}
-                    />
-                )
-            )}
+            {/*{loading ? "Loading..." : error ? error.message : posts.map(post =>*/}
+            {/*    (*/}
+            {/*        <PostCard*/}
+            {/*            className={classes.post}*/}
+            {/*            key={post.id}*/}
+            {/*            post={post}*/}
+            {/*        />*/}
+            {/*    )*/}
+            {/*)}*/}
         </div>
     )
 }

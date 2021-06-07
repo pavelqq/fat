@@ -1,8 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-
-// import axios from 'utils/axios';
-
 import {Header} from './components';
 import AddPost from "../../components/AddPost";
 import PostCard from "../../components/PostCard";
@@ -156,7 +153,7 @@ const SocialFeed = () => {
             title="Лента"
         >
             <Grid container xs={12}>
-                <Grid item xs={8}>
+                <Grid item xs={12}>
                     <Header className={classes.header}/>
                     <AddPost className={classes.newPost}/>
                     <div className={classes.posts}>
@@ -169,14 +166,14 @@ const SocialFeed = () => {
                         ))}
                     </div>
                 </Grid>
-                <Grid item xs={4} alignItems="flex-start" className={classes.timeline}>
-                    {posts.map(post => (
-                        <TimelinePosts
-                            key={post.id}
-                            post={post}
-                        />
-                    ))}
-                </Grid>
+                {/*<Grid item xs={4} alignItems="flex-start" className={classes.timeline}>*/}
+                {/*    {posts.map(post => (*/}
+                {/*        <TimelinePosts*/}
+                {/*            key={post.id}*/}
+                {/*            post={post}*/}
+                {/*        />*/}
+                {/*    ))}*/}
+                {/*</Grid>*/}
             </Grid>
         </Page>
     );
