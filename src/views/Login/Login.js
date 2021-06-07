@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import clsx from "clsx";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,6 +13,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {Redirect} from "react-router";
+import {login} from "../../redux/actions/auth";
+import {useDispatch, useSelector} from "react-redux";
 
 
 function Copyright() {
@@ -55,6 +58,62 @@ const Login = props => {
     const classes = useStyles();
     const { from } = props.location.state || { from: {pathname: '/' } }
 
+    const form = useRef();
+    // const checkBtn = useRef();
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const { isLoggedIn } = useSelector(state => state.auth);
+    const { message } = useSelector(state => state.message);
+
+    const dispatch = useDispatch();
+
+    const onChangeUsername = (e) => {
+        const username = e.target.value;
+        setUsername(username);
+    };
+
+    const onChangePassword = (e) => {
+        const password = e.target.value;
+        setPassword(password);
+    };
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+
+        setLoading(true);
+
+        dispatch(login(username, password))
+            .then(() => {
+                //props.history.push("/profile");
+                //window.location.reload();
+                console.log(username, password)
+            })
+
+        setLoading(false);
+
+        //form.current.validateAll();
+
+        // if (checkBtn.current.context._errors.length === 0) {
+        //     dispatch(login(username, password))
+        //         .then(() => {
+        //             props.history.push("/profile");
+        //             window.location.reload();
+        //         })
+        //         .catch(() => {
+        //             setLoading(false);
+        //         });
+        // } else {
+        //     setLoading(false);
+        // }
+    };
+
+    // if (isLoggedIn) {
+    //     return <Redirect to="/profile" />;
+    // }
+
     return(
         <div
             {...rest}
@@ -70,7 +129,7 @@ const Login = props => {
                         Авторизация
                     </Typography>
                     <Typography align="center">Чтобы посмотреть эту страничку: {from.pathname}, тебе надо авторизоваться</Typography>
-                    <form className={classes.form} noValidate>
+                    <form className={classes.form} noValidate onSubmit={handleLogin} ref={form}>
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -81,6 +140,7 @@ const Login = props => {
                             name="email"
                             autoComplete="email"
                             autoFocus
+                            onChange={onChangeUsername}
                         />
                         <TextField
                             variant="outlined"
@@ -92,6 +152,7 @@ const Login = props => {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            onChange={onChangePassword}
                         />
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
@@ -104,9 +165,18 @@ const Login = props => {
                             variant="contained"
                             color="primary"
                             className={classes.submit}
+                            disabled={loading}
                         >
+                            {loading && (
+                                "загрузка..."
+                            )}
                             Войти
                         </Button>
+                        {message && (
+                            <div>
+                                {message}
+                            </div>
+                        )}
                         <Grid container>
                             <Grid item xs>
                                 <Link href="#" variant="body2">

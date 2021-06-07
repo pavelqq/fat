@@ -1,9 +1,7 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {getPosts} from '../../../../../redux/store/actions/postAction'
 import PostCard from "../../../../../components/PostCard";
 //import {connect} from "react-redux";
-//import {getPosts as getPostsAction} from "../../../../../redux_old/modules/posts";
 import {makeStyles} from "@material-ui/core/styles";
 
 

@@ -27,6 +27,4 @@ const Auth = props => {
     );
 };
 
-debugger;
-
 export default Auth;
