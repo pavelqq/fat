@@ -16,6 +16,7 @@ import Container from '@material-ui/core/Container';
 import {Redirect} from "react-router";
 import {login} from "../../redux/actions/auth";
 import {useDispatch, useSelector} from "react-redux";
+import {clearMessage} from "../../redux/actions/messages";
 
 
 function Copyright() {
@@ -89,7 +90,7 @@ const Login = props => {
             .then(() => {
                 //props.history.push("/profile");
                 //window.location.reload();
-                console.log(username, password)
+                clearMessage();
             })
 
         setLoading(false);

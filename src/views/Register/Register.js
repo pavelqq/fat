@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import clsx from "clsx";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,6 +13,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {useDispatch, useSelector} from "react-redux";
+import {register} from "../../redux/actions/auth";
 
 
 function Copyright() {
@@ -55,6 +57,44 @@ const Register = props => {
     const {className, ...rest} = props;
     const classes = useStyles();
 
+    const form = useRef();
+
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [successful, setSuccessful] = useState(false);
+
+    const { message } = useSelector(state => state.message);
+    const dispatch = useDispatch();
+
+    const onChangeUsername = (e) => {
+        const username = e.target.value;
+        setUsername(username);
+    };
+
+    const onChangeEmail = (e) => {
+        const email = e.target.value;
+        setEmail(email);
+    };
+
+    const onChangePassword = (e) => {
+        const password = e.target.value;
+        setPassword(password);
+    };
+
+    const handleRegister = (e) => {
+        e.preventDefault();
+
+        setSuccessful(false);
+        dispatch(register(username, email, password))
+            .then(() => {
+                setSuccessful(true);
+            })
+            .catch(() => {
+                setSuccessful(false);
+            });
+    };
+
     return(
         <div
             {...rest}
@@ -69,7 +109,7 @@ const Register = props => {
                     <Typography component="h1" variant="h5">
                         Регистрация
                     </Typography>
-                    <form className={classes.form} noValidate>
+                    <form className={classes.form} noValidate onSubmit={handleRegister} ref={form}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={12}>
                                 <TextField
@@ -81,6 +121,8 @@ const Register = props => {
                                     id="username"
                                     label="Имя"
                                     autoFocus
+                                    value={username}
+                                    onChange={onChangeUsername}
                                 />
                             </Grid>
                             {/*<Grid item xs={12} sm={6}>*/}
@@ -103,6 +145,8 @@ const Register = props => {
                                     label="Эмейл"
                                     name="email"
                                     autoComplete="email"
+                                    value={email}
+                                    onChange={onChangeEmail}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -115,6 +159,8 @@ const Register = props => {
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
+                                    value={password}
+                                    onChange={onChangePassword}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -134,6 +180,11 @@ const Register = props => {
                         >
                             Зарегистрироваться
                         </Button>
+                        {!successful && (
+                            <div>
+                                {message}
+                            </div>
+                        )}
                         <Grid container justify="flex-end">
                             <Grid item>
                                 <Link href="/auth/login" variant="body2">
