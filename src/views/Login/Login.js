@@ -88,12 +88,12 @@ const Login = props => {
 
         dispatch(login(username, password))
             .then(() => {
-                //props.history.push("/profile");
-                //window.location.reload();
-                clearMessage();
+                props.history.push("/profile/1/wall");
             })
 
         setLoading(false);
+
+        dispatch(clearMessage());
 
         //form.current.validateAll();
 

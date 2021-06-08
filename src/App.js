@@ -47,7 +47,6 @@ function App() {
         if (currentUser) {
             // setShowModeratorBoard(currentUser.roles.includes("ROLE_MODERATOR"));
             // setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
-            console.log(currentUser)
         }
     }, [currentUser]);
 

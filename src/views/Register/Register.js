@@ -15,6 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {useDispatch, useSelector} from "react-redux";
 import {register} from "../../redux/actions/auth";
+import {clearMessage} from "../../redux/actions/messages";
 
 
 function Copyright() {
@@ -93,6 +94,7 @@ const Register = props => {
             .catch(() => {
                 setSuccessful(false);
             });
+        dispatch(clearMessage());
     };
 
     return(
