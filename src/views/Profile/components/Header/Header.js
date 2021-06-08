@@ -80,7 +80,8 @@ const useStyles = makeStyles(theme => ({
         position: 'absolute'
     },
     details: {
-        marginLeft: 150
+        marginLeft: 150,
+        flex: "auto"
     },
     actions: {
         marginLeft: 'auto',
@@ -107,7 +108,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Header = props => {
-    const {className, ...rest} = props;
+    const {currentUser, className, ...rest} = props;
 
     const classes = useStyles();
 
@@ -145,7 +146,7 @@ const Header = props => {
         >
             <div
                 className={classes.cover}
-                style={{backgroundImage: `url(${user.cover})`}}
+                style={{backgroundImage: `url(${currentUser.coverPicture})`}}
             >
                 <Button
                     className={classes.changeButton}
@@ -159,20 +160,21 @@ const Header = props => {
                 <Avatar
                     alt="Person"
                     className={classes.avatar}
-                    src={user.avatar}
+                    // src={user.avatar}
+                    src={currentUser.profilePicture}
                 />
                 <div className={classes.details}>
                     <Typography
                         component="h2"
                         variant="overline"
                     >
-                        {user.bio}
+                        {currentUser.bio}
                     </Typography>
                     <Typography
                         component="h1"
                         variant="h4"
                     >
-                        {user.name}
+                        {currentUser.username}
                     </Typography>
                 </div>
                 <Hidden smDown>
@@ -228,7 +230,7 @@ const Header = props => {
                         color="inherit"
                         variant="h6"
                     >
-                        Sent connection request
+                        Запрос отправлен
                     </Typography>
                 }
                 onClose={handleSnackbarClose}

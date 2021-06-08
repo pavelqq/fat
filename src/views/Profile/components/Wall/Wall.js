@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Wall = (props) => {
-    const {className, ...rest} = props;
+    const {currentUser, className, ...rest} = props;
 
     const classes = useStyles();
 

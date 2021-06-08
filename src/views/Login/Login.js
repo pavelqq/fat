@@ -86,10 +86,14 @@ const Login = props => {
 
         setLoading(true);
 
+        debugger;
+
         dispatch(login(username, password))
-            .then(() => {
-                props.history.push("/presentation");
+            .then((data) => {
+                props.history.push(`/profile/${data._id}/wall`);
             })
+
+        debugger
 
         setLoading(false);
 

@@ -21,6 +21,8 @@ const login = (email, password) => {
                 localStorage.setItem("user", JSON.stringify(response.data));
             }
 
+            debugger;
+
             return response.data;
         });
 };

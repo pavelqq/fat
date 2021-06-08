@@ -73,9 +73,9 @@ const NavBar = props => {
                     {/*{session.user.first_name} {session.user.last_name}*/}
                     {currentUser.username}
                 </Typography>
-                <Typography variant="body2">
+                <Typography variant="body2" align="center">
                     {/*{session.user.bio}*/}
-                    Лох какой-то
+                    {currentUser.bio}
                 </Typography>
             </div>
             <Divider className={classes.divider}/>

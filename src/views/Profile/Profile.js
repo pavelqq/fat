@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Profile = props => {
-    const {match, history} = props;
+    const {currentUser, match, history} = props;
     const classes = useStyles();
     const {id, tab} = match.params;
 
@@ -62,7 +62,7 @@ const Profile = props => {
             className={classes.root}
             title="Profile"
         >
-            <Header/>
+            <Header currentUser={currentUser}/>
             <div className={classes.inner}>
                 <Tabs
                     className={classes.tabs}
