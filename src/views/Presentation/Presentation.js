@@ -6,17 +6,26 @@ import SourceFiles from "./components/SourceFiles";
 import PresentationHeader from "./components/Header";
 import FAQ from "./components/FAQ";
 import Page from "./components/Page";
+import clsx from "clsx";
 
 const useStyles = makeStyles(() => ({
     root: {}
 }));
 
-const Presentation = () => {
+const Presentation = props => {
+
+    const {className, currentUser, ...rest} = props;
+
     const classes = useStyles();
 
+    debugger;
+
     return (
-        <Page className={classes.root}>
-            <PresentationHeader/>
+        <Page
+            {...rest}
+            className={clsx(classes.root, className)}
+        >
+            <PresentationHeader username={props.currentUser.username}/>
             <UserFlows/>
             <PluginsSupport/>
             <SourceFiles/>

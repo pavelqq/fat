@@ -32,7 +32,7 @@ moment.locale('ru');
 function App() {
 
     // const [showModeratorBoard, setShowModeratorBoard] = useState(false);
-// const [showAdminBoard, setShowAdminBoard] = useState(false);
+    // const [showAdminBoard, setShowAdminBoard] = useState(false);
 
     const { user: currentUser } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
@@ -43,12 +43,14 @@ function App() {
         });
     }, [dispatch]);
 
-    useEffect(() => {
-        if (currentUser) {
-            // setShowModeratorBoard(currentUser.roles.includes("ROLE_MODERATOR"));
-            // setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
-        }
-    }, [currentUser]);
+    // useEffect(() => {
+    //     if (currentUser) {
+    //         const userProps = currentUser
+    //         return userProps
+    //     } else {
+    //         return null
+    //     }
+    // }, [currentUser]);
 
     return (
         <>
@@ -56,7 +58,7 @@ function App() {
                 <MuiPickersUtilsProvider libInstance={moment} utils={MomentUtils}>
                     <Router history={history}>
                         <ScrollReset/>
-                        {renderRoutes(routes)}
+                        {renderRoutes(routes, {currentUser: currentUser})}
                     </Router>
                 </MuiPickersUtilsProvider>
             </ThemeProvider>

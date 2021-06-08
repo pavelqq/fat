@@ -38,9 +38,11 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Dashboard = props => {
-    const {route} = props;
-    const authed = false;
-    const authPath = '/auth/login';
+    const {route, currentUser} = props;
+    // const authed = false;
+    // const authPath = '/auth/login';
+
+    debugger;
 
     const classes = useStyles();
     const [openNavBarMobile, setOpenNavBarMobile] = useState(false);
@@ -58,18 +60,18 @@ const Dashboard = props => {
             <TopBar
                 className={classes.topBar}
                 onOpenNavBarMobile={handleNavBarMobileOpen}
+                currentUser={currentUser}
             />
             <div className={classes.container}>
                 <NavBar
                     className={classes.navBar}
                     onMobileClose={handleNavBarMobileClose}
                     openMobile={openNavBarMobile}
+                    currentUser={currentUser}
                 />
                 <main className={classes.content}>
                     <Suspense fallback={<LinearProgress/>}>
-                        {/*{renderRoutes(route.routes)}*/}
-                        {/*{renderRoutes(routes)}*/}
-                        {renderRoutes(route.routes)}
+                        {renderRoutes(route.routes, {currentUser: currentUser})}
                     </Suspense>
                 </main>
             </div>

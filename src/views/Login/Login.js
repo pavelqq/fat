@@ -88,7 +88,7 @@ const Login = props => {
 
         dispatch(login(username, password))
             .then(() => {
-                props.history.push("/profile/1/wall");
+                props.history.push("/presentation");
             })
 
         setLoading(false);

@@ -41,6 +41,8 @@ const Profile = props => {
         history.push(value);
     };
 
+    debugger;
+
     const tabs = [
         {value: 'wall', label: 'Фото и Записи'},
         {value: 'friends', label: '35 Друзей'},

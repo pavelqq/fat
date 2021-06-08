@@ -41,7 +41,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const NavBar = props => {
-    const {openMobile, onMobileClose, className, ...rest} = props;
+    const {currentUser, openMobile, onMobileClose, className, ...rest} = props;
+
+    debugger
 
     const classes = useStyles();
     const router = useRouter();
@@ -60,7 +62,8 @@ const NavBar = props => {
                     className={classes.avatar}
                     component={RouterLink}
                     // src={session.user.avatar}
-                    src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
+                    src={currentUser.profilePicture}
+                    // src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
                     to="/profile/1/wall"
                 />
                 <Typography
@@ -68,7 +71,7 @@ const NavBar = props => {
                     variant="h4"
                 >
                     {/*{session.user.first_name} {session.user.last_name}*/}
-                    Павел Буре
+                    {currentUser.username}
                 </Typography>
                 <Typography variant="body2">
                     {/*{session.user.bio}*/}

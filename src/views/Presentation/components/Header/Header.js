@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
 import {Typography, Grid, Button} from '@material-ui/core';
+import moment from "moment";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -43,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const PresentationHeader = props => {
-    const {className, ...rest} = props;
+    const {className, username, ...rest} = props;
 
     const classes = useStyles();
 
@@ -58,17 +59,16 @@ const PresentationHeader = props => {
                     gutterBottom
                     variant="h1"
                 >
-                    Привет жиртрест!
+                    Привет {username}
                 </Typography>
                 <Typography
                     align="center"
                     component="h2"
                     variant="subtitle1"
                 >
-                    Лорем поменьше лорем поменьше лорем поменьше ну типо заглушка для текста такая, только с
-                    маленьким текстом,
-                    описание лорема заголовка вот. Лорем поменьше лорем поменьше лорем поменьше ну типо заглушка для
-                    текста такая.
+                    На этой странице можно следить за новостями проекта, пролистай ниже и узнай о новых возможностях.<br/>
+                    Также можно посетить наши профили в социальных сетях:<br/>
+                    (Здесь список ссылок на всякие инстаграмы и т.д.)
                 </Typography>
                 <div className={classes.buttons}>
                     <Button

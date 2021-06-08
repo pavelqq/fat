@@ -100,7 +100,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TopBar = props => {
-    const {onOpenNavBarMobile, className, ...rest} = props;
+    const {currentUser, onOpenNavBarMobile, className, ...rest} = props;
 
     const classes = useStyles();
     const {history} = useRouter();
@@ -181,18 +181,13 @@ const TopBar = props => {
             className={classes.root}
         >
             <Toolbar>
-                {/*<RouterLink to="/">*/}
-                {/*  <Typography className={classes.title} component="h3" variant="h3">*/}
-                {/*    FAT*/}
-                {/*  </Typography>*/}
-                {/*</RouterLink>*/}
-                <AndroidOutlinedIcon fontSize="medium"/>
-                <Typography className={classes.title} component="h1" variant="h4">
+                <RouterLink to="/">
+                  <Typography className={classes.title} component="h3" variant="h3">
                     FAT
-                </Typography>
+                  </Typography>
+                </RouterLink>
                 <div className={classes.flexGrow}/>
-                <Hidden smDown>
-                    {/*<BreadcrumbsNav className={classes.breadcrumbsNav}/>*/}
+                <Hidden mdDown>
                     <div
                         className={classes.search}
                         ref={searchRef}
@@ -234,14 +229,6 @@ const TopBar = props => {
                             </Paper>
                         </ClickAwayListener>
                     </Popper>
-                    {/*<Button*/}
-                    {/*  className={classes.trialButton}*/}
-                    {/*  onClick={handlePricingOpen}*/}
-                    {/*  variant="contained"*/}
-                    {/*>*/}
-                    {/*  <LockIcon className={classes.trialIcon} />*/}
-                    {/*  Trial expired*/}
-                    {/*</Button>*/}
                 </Hidden>
                 <Hidden mdDown>
                     <IconButton
@@ -264,10 +251,32 @@ const TopBar = props => {
                         onClick={handleLogout}
                     >
                         <InputIcon className={classes.logoutIcon}/>
-                        Авторизироваться
+                        {currentUser
+                            ? <>
+                                Выйти
+                            </>
+                            : <>
+                                Авторизироваться
+                            </>
+                        }
                     </Button>
                 </Hidden>
                 <Hidden lgUp>
+                    <Button
+                        className={classes.logoutButton}
+                        color="inherit"
+                        onClick={handleLogout}
+                    >
+                        <InputIcon className={classes.logoutIcon}/>
+                        {currentUser
+                            ? <>
+                                Выйти
+                            </>
+                            : <>
+                                Авторизироваться
+                            </>
+                        }
+                    </Button>
                     <IconButton
                         color="inherit"
                         onClick={onOpenNavBarMobile}
