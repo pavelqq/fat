@@ -14,8 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {useDispatch, useSelector} from "react-redux";
-import {register} from "../../redux/actions/auth";
-import {clearMessage} from "../../redux/actions/messages";
+import {register} from "../../reduxOLD/actions/auth";
+import {clearMessage} from "../../reduxOLD/actions/messages";
 
 
 function Copyright() {

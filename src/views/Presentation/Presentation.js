@@ -25,7 +25,7 @@ const Presentation = props => {
             {...rest}
             className={clsx(classes.root, className)}
         >
-            <PresentationHeader username={props.currentUser.username}/>
+            <PresentationHeader/>
             <UserFlows/>
             <PluginsSupport/>
             <SourceFiles/>

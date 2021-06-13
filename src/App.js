@@ -22,8 +22,8 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import {createBrowserHistory} from 'history';
 
-import {logout} from "./redux/actions/auth";
-import {clearMessage} from "./redux/actions/messages";
+import {logout} from "./reduxOLD/actions/auth";
+import {clearMessage} from "./reduxOLD/actions/messages";
 
 const history = createBrowserHistory();
 moment.locale('ru');

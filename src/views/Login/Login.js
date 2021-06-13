@@ -14,9 +14,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {Redirect} from "react-router";
-import {login} from "../../redux/actions/auth";
+import {login} from "../../reduxOLD/actions/auth";
 import {useDispatch, useSelector} from "react-redux";
-import {clearMessage} from "../../redux/actions/messages";
+import {clearMessage} from "../../reduxOLD/actions/messages";
 
 
 function Copyright() {
@@ -86,14 +86,10 @@ const Login = props => {
 
         setLoading(true);
 
-        debugger;
-
         dispatch(login(username, password))
             .then((data) => {
                 props.history.push(`/profile/${data._id}/wall`);
             })
-
-        debugger
 
         setLoading(false);
 

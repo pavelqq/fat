@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const PresentationHeader = props => {
-    const {className, username, ...rest} = props;
+    const {className, ...rest} = props;
 
     const classes = useStyles();
 
@@ -59,7 +59,7 @@ const PresentationHeader = props => {
                     gutterBottom
                     variant="h1"
                 >
-                    Привет {username}
+                    Привет
                 </Typography>
                 <Typography
                     align="center"

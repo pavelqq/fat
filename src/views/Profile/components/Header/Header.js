@@ -139,6 +139,10 @@ const Header = props => {
         setOpenSnackbar(false);
     };
 
+    const handleChangeCover = () => {
+
+    };
+
     return (
         <div
             {...rest}
@@ -151,6 +155,7 @@ const Header = props => {
                 <Button
                     className={classes.changeButton}
                     variant="contained"
+                    onClick={handleChangeCover}
                 >
                     <AddPhotoIcon className={classes.addPhotoIcon}/>
                     Изменить фон

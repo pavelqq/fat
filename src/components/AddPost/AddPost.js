@@ -15,6 +15,9 @@ import SendIcon from '@material-ui/icons/Send';
 import AddPhotoIcon from '@material-ui/icons/AddPhotoAlternate';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 
+import {sendPost} from "../../reduxOLD/actions/profile";
+import {useSelector} from "react-redux";
+
 const useStyles = makeStyles(theme => ({
     root: {
         marginTop: theme.spacing(2),
@@ -46,16 +49,21 @@ const AddPost = props => {
     const fileInputRef = useRef(null);
     const [value, setValue] = useState('');
     // const session = useSelector(state => state.session);
+    const post = useSelector((state) => state.post);
 
     const handleChange = event => {
         event.persist();
-
         setValue(event.target.value);
     };
 
     const handleAttach = () => {
         fileInputRef.current.click();
     };
+
+    const handleSendPost = () => {
+        sendPost(post);
+        setValue('')
+    }
 
     return (
         <Card
@@ -77,7 +85,7 @@ const AddPost = props => {
                         }
                     />
                 </Paper>
-                <Tooltip title="Отправить">
+                <Tooltip onClick={handleSendPost} title="Отправить">
                     <IconButton color={value.length > 0 ? 'primary' : 'default'}>
                         <SendIcon/>
                     </IconButton>

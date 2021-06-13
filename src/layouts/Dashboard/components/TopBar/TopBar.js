@@ -32,7 +32,7 @@ import PricingModal from "../../../../components/PricingModal";
 import NotificationsPopover from "../../../../components/NotificationsPopover";
 import BreadcrumbsNav from "../../../../components/Breadcrumbs";
 import {useDispatch} from "react-redux";
-import {logout} from "../../../../redux/actions/auth";
+import {logout} from "../../../../reduxOLD/actions/auth";
 
 
 const useStyles = makeStyles(theme => ({
@@ -41,6 +41,9 @@ const useStyles = makeStyles(theme => ({
         boxShadow: 'none',
         color: 'white',
         padding: '0 3.5%',
+    },
+    title: {
+        color: "white"
     },
     flexGrow: {
         flexGrow: 1
@@ -178,11 +181,12 @@ const TopBar = props => {
 
     return (
         <AppBar
+            {...rest}
             className={classes.root}
         >
             <Toolbar>
                 <RouterLink to="/">
-                  <Typography className={classes.title} component="h3" variant="h3">
+                  <Typography className={classes.title} component="h1" variant="h1">
                     FAT
                   </Typography>
                 </RouterLink>

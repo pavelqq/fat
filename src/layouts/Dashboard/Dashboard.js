@@ -63,12 +63,12 @@ const Dashboard = props => {
                 currentUser={currentUser}
             />
             <div className={classes.container}>
-                <NavBar
+                {currentUser && <NavBar
                     className={classes.navBar}
                     onMobileClose={handleNavBarMobileClose}
                     openMobile={openNavBarMobile}
                     currentUser={currentUser}
-                />
+                />}
                 <main className={classes.content}>
                     <Suspense fallback={<LinearProgress/>}>
                         {renderRoutes(route.routes, {currentUser: currentUser})}

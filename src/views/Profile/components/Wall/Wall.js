@@ -7,6 +7,7 @@ import TimelinePosts from "../TimelinePosts";
 import Gallery from "../Gallery";
 import Posts from "./Components/Posts";
 import axios from "../../../../utils/axios";
+import {useDispatch, useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -19,6 +20,21 @@ const Wall = (props) => {
     const {currentUser, className, ...rest} = props;
 
     const classes = useStyles();
+
+    const posts = useSelector((state) => state.posts);
+    const dispatch = useDispatch();
+
+    // const onAddPost = (note) => {
+    //     dispatch(addNote(note));
+    // };
+    //
+    // const onSave = () => {
+    //     dispatch(saveNotes());
+    // };
+    //
+    // const onLoad = () => {
+    //     dispatch(loadNotes());
+    // };
 
     // const posts = [
     //     {
