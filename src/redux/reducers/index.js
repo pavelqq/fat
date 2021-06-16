@@ -5,8 +5,8 @@ import message from "./message";
 import profilePosts from "./profilePosts";
 
 export default combineReducers({
-    profilePosts,
-    authReducer,
-    //auth,
+    //profilePosts,
+    //authReducer,
+    auth,
     message,
 });

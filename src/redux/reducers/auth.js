@@ -5,8 +5,22 @@ import {
     LOGIN_FAIL,
     LOGOUT,
 } from "../actions/types";
+import {useSelector} from "react-redux";
 
 const user = JSON.parse(localStorage.getItem("user"));
+// const user = {
+//     _id: null,
+//     profilePicture: null,
+//     bio: null,
+//     coverPicture: null,
+//     followers: [],
+//     followings: [],
+//     isAdmin: false,
+//     username: null,
+//     email: null,
+//     createdAt: null,
+//     updatedAt: null,
+// }
 
 const initialState = user
     ? { isLoggedIn: true, user }

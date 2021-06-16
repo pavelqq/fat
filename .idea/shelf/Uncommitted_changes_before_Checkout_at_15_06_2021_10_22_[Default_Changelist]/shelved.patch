@@ -1,0 +1,525 @@
+Index: src/reduxOLD/reducers/authReducer.js
+===================================================================
+diff --git a/src/reduxOLD/reducers/authReducer.js b/src/reduxOLD/reducers/authReducer.js
+deleted file mode 100644
+--- a/src/reduxOLD/reducers/authReducer.js	(revision c1a9ad275a7281ce874932c9d7fc1b21c7cb851d)
++++ /dev/null	(revision c1a9ad275a7281ce874932c9d7fc1b21c7cb851d)
+@@ -1,74 +0,0 @@
+-import { authAPI } from "../../api/UsersAPI";
+-
+-const SET_AUTH_USER_DATA = 'SET_USER_DATA';
+-const TOGGLE_IS_FETCHING_AUTH = 'TOGGLE_IS_FETCHING_AUTH';
+-
+-let initialState = {
+-    userId: null,
+-    email: null,
+-    login: null,
+-    isAuth: false,
+-    isFetching: false
+-};
+-
+-const authReducer = (state = initialState, action) => {
+-    switch (action.type) {
+-        case SET_AUTH_USER_DATA:
+-            return {
+-                ...state,
+-                ...action.data
+-            }
+-        case TOGGLE_IS_FETCHING_AUTH:
+-            return {
+-                ...state,
+-                isFetching: action.isFetching
+-            }
+-        default:
+-            return state;
+-    }
+-
+-}
+-
+-export let setAuthUserData = (userId, email, login, isAuth) => ({
+-    type: SET_AUTH_USER_DATA,
+-    data: { userId, email, login, isAuth }
+-});
+-export let toggleIsFetchingAuth = (isFetching) => ({ type: TOGGLE_IS_FETCHING_AUTH, isFetching });
+-
+-// export const getAuthData = () => {
+-//     return async (dispatch) => {
+-//         dispatch(toggleIsFetchingAuth(true));
+-//         let response = await authAPI.getAuthData()
+-//         dispatch(toggleIsFetchingAuth(false))
+-//         if (response.resultCode === 0) {
+-//             let { id, email, login } = response.data;
+-//             dispatch(setAuthUserData(id, email, login, true))
+-//         }
+-//     }
+-// }
+-export const login = (email, password) => {
+-    return async (dispatch) => {
+-        dispatch(toggleIsFetchingAuth(true));
+-        let response = await authAPI.login(email, password);
+-        dispatch(toggleIsFetchingAuth(false))
+-        if (response.resultCode === 0) {
+-            // dispatch(getAuthData());
+-            setAuthUserData()
+-        } else {
+-            let message = response.messages.length > 0 ? response.messages[0] : "Какая-то ошибка";
+-            // dispatch(stopSubmit("login", { _error: message }))
+-        }
+-    }
+-}
+-export const logout = () => {
+-    return async (dispatch) => {
+-        dispatch(toggleIsFetchingAuth(true));
+-        let response = await authAPI.logout();
+-        dispatch(toggleIsFetchingAuth(false))
+-        if (response.resultCode === 0) {
+-            dispatch(setAuthUserData(null, null, null, false))
+-        }
+-    }
+-}
+-
+-export default authReducer;
+\ No newline at end of file
+Index: src/redux/authReducer.js
+===================================================================
+diff --git a/src/redux/authReducer.js b/src/redux/authReducer.js
+deleted file mode 100644
+--- a/src/redux/authReducer.js	(revision c1a9ad275a7281ce874932c9d7fc1b21c7cb851d)
++++ /dev/null	(revision c1a9ad275a7281ce874932c9d7fc1b21c7cb851d)
+@@ -1,77 +0,0 @@
+-import { authAPI } from "../../api/UsersAPI";
+-
+-const SET_AUTH_USER_DATA = 'SET_USER_DATA';
+-const TOGGLE_IS_FETCHING_AUTH = 'TOGGLE_IS_FETCHING_AUTH';
+-
+-let initialState = {
+-    userId: null,
+-    email: null,
+-    login: null,
+-    isAuth: false,
+-    isFetching: false
+-};
+-
+-const authReducer = (state = initialState, action) => {
+-    switch (action.type) {
+-        case SET_AUTH_USER_DATA:
+-            return {
+-                ...state,
+-                ...action.data
+-            }
+-        case TOGGLE_IS_FETCHING_AUTH:
+-            return {
+-                ...state,
+-                isFetching: action.isFetching
+-            }
+-        default:
+-            return state;
+-    }
+-
+-}
+-
+-export let setAuthUserData = (userId, email, login, isAuth) => ({
+-    type: SET_AUTH_USER_DATA,
+-    data: { userId, email, login, isAuth }
+-});
+-export let toggleIsFetchingAuth = (isFetching) => ({
+-    type: TOGGLE_IS_FETCHING_AUTH, isFetching
+-});
+-
+-// export const getAuthData = () => {
+-//     return async (dispatch) => {
+-//         dispatch(toggleIsFetchingAuth(true));
+-//         let response = await authAPI.getAuthData()
+-//         dispatch(toggleIsFetchingAuth(false))
+-//         if (response.resultCode === 0) {
+-//             let { id, email, login } = response.data;
+-//             dispatch(setAuthUserData(id, email, login, true))
+-//         }
+-//     }
+-// }
+-
+-export const login = (email, password) => {
+-    return async (dispatch) => {
+-        dispatch(toggleIsFetchingAuth(true));
+-        let response = await authAPI.login(email, password);
+-        dispatch(toggleIsFetchingAuth(false))
+-        if (response.resultCode === 0) {
+-            // dispatch(getAuthData());
+-            setAuthUserData()
+-        } else {
+-            let message = response.messages.length > 0 ? response.messages[0] : "Какая-то ошибка";
+-            // dispatch(stopSubmit("login", { _error: message }))
+-        }
+-    }
+-}
+-export const logout = () => {
+-    return async (dispatch) => {
+-        dispatch(toggleIsFetchingAuth(true));
+-        let response = await authAPI.logout();
+-        dispatch(toggleIsFetchingAuth(false))
+-        if (response.resultCode === 0) {
+-            dispatch(setAuthUserData(null, null, null, false))
+-        }
+-    }
+-}
+-
+-export default authReducer;
+\ No newline at end of file
+Index: src/reduxOLD2/reducers/messageReducer.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/reduxOLD2/reducers/messageReducer.js b/src/reduxOLD2/reducers/messageReducer.js
+new file mode 100644
+--- /dev/null	(date 1623570920324)
++++ b/src/reduxOLD2/reducers/messageReducer.js	(date 1623570920324)
+@@ -0,0 +1,18 @@
++import { SET_MESSAGE, CLEAR_MESSAGE } from "../actions/types";
++
++const initialState = {};
++
++export default function (state = initialState, action) {
++    const { type, payload } = action;
++
++    switch (type) {
++        case SET_MESSAGE:
++            return { message: payload };
++
++        case CLEAR_MESSAGE:
++            return { message: "" };
++
++        default:
++            return state;
++    }
++}
+\ No newline at end of file
+Index: src/reduxOLD2/store.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/reduxOLD2/store.js b/src/reduxOLD2/store.js
+new file mode 100644
+--- /dev/null	(date 1623570920355)
++++ b/src/reduxOLD2/store.js	(date 1623570920355)
+@@ -0,0 +1,13 @@
++import { createStore, applyMiddleware } from "redux";
++import { composeWithDevTools } from "redux-devtools-extension";
++import thunk from "redux-thunk";
++import rootReducer from "./index";
++
++const middleware = [thunk];
++
++const store = createStore(
++    rootReducer,
++    composeWithDevTools(applyMiddleware(...middleware))
++);
++
++export default store;
+Index: src/reduxOLD2/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/reduxOLD2/index.js b/src/reduxOLD2/index.js
+new file mode 100644
+--- /dev/null	(date 1623581685068)
++++ b/src/reduxOLD2/index.js	(date 1623581685068)
+@@ -0,0 +1,8 @@
++import { combineReducers } from "redux";
++import {authReducer} from "./reducers/authReducer";
++import messageReducer from "./reducers/messageReducer"
++
++export default combineReducers({
++    authReducer,
++    messageReducer,
++});
+Index: src/reduxOLD2/reducers/appReducer.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/reduxOLD2/reducers/appReducer.js b/src/reduxOLD2/reducers/appReducer.js
+new file mode 100644
+--- /dev/null	(date 1623587588051)
++++ b/src/reduxOLD2/reducers/appReducer.js	(date 1623587588051)
+@@ -0,0 +1,35 @@
++import { getAuthData } from './authReducer';
++
++const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
++
++let initialState = {
++    initialized: false
++};
++
++const appReducer = (state = initialState, action) => {
++    switch (action.type) {
++        case INITIALIZED_SUCCESS:
++            return {
++                ...state,
++                initialized: true
++            }
++        default:
++            return state;
++    }
++
++}
++
++export let initializedSuccess = () => ({ type: INITIALIZED_SUCCESS });
++
++export const initializeApp = () => {
++    return (dispatch) => {
++        let promise = dispatch(getAuthData());
++        Promise.all([promise])
++            .then(() => {
++                dispatch(initializedSuccess())
++            })
++
++    }
++}
++
++export default appReducer;
+\ No newline at end of file
+Index: src/reduxOLD2/actions/messages.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/reduxOLD2/actions/messages.js b/src/reduxOLD2/actions/messages.js
+new file mode 100644
+--- /dev/null	(date 1623562093299)
++++ b/src/reduxOLD2/actions/messages.js	(date 1623562093299)
+@@ -0,0 +1,10 @@
++import { SET_MESSAGE, CLEAR_MESSAGE } from "./types";
++
++export const setMessage = (message) => ({
++    type: SET_MESSAGE,
++    payload: message,
++});
++
++export const clearMessage = () => ({
++    type: CLEAR_MESSAGE,
++});
+Index: src/reduxOLD2/reducers/authReducer.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/reduxOLD2/reducers/authReducer.js b/src/reduxOLD2/reducers/authReducer.js
+new file mode 100644
+--- /dev/null	(date 1623588586788)
++++ b/src/reduxOLD2/reducers/authReducer.js	(date 1623588586788)
+@@ -0,0 +1,161 @@
++import {
++    REGISTER_SUCCESS,
++    REGISTER_FAIL,
++    LOGIN_SUCCESS,
++    LOGIN_FAIL,
++    LOGOUT,
++    TOGGLE_IS_FETCHING_AUTH,
++    SET_AUTH_USER_DATA,
++} from "../actions/types";
++import {authAPI} from "../../api/UsersAPI";
++
++//const user = JSON.parse(localStorage.getItem("user"));
++const user = {
++    _id: null,
++    username: null,
++    email: null,
++    isAuth: false,
++    profilePicture: '',
++    bio: '',
++    coverPicture: '',
++    followers: [],
++    followings: [],
++    isAdmin: false,
++    createdAt: '',
++    updatedAt: '',
++    isFetching: false,
++}
++
++const initialState = user
++    // ? { isLoggedIn: true, user }
++    // : { isLoggedIn: false, user: null };
++
++export const authReducer = (state = initialState, action) => {
++    switch (action.type) {
++        case SET_AUTH_USER_DATA:
++            return {
++                ...state,
++                ...action.data,
++                isLoggedIn: true,
++            }
++        case TOGGLE_IS_FETCHING_AUTH:
++            return {
++                ...state,
++                isFetching: action.isFetching
++            }
++        default:
++            return {
++                state,
++                isLoggedIn: false
++            };
++    }
++
++}
++
++// export default function (state = initialState, action) {
++//     const { type, payload } = action;
++//
++//     switch (type) {
++//         case REGISTER_SUCCESS:
++//             return {
++//                 ...state,
++//                 isLoggedIn: false,
++//             };
++//         case REGISTER_FAIL:
++//             return {
++//                 ...state,
++//                 isLoggedIn: false,
++//             };
++//         case LOGIN_SUCCESS:
++//             return {
++//                 ...state,
++//                 isLoggedIn: true,
++//                 user: payload.user,
++//             };
++//         case LOGIN_FAIL:
++//             return {
++//                 ...state,
++//                 isLoggedIn: false,
++//                 user: null,
++//             };
++//         case LOGOUT:
++//             return {
++//                 ...state,
++//                 isLoggedIn: false,
++//                 user: null,
++//             };
++//         default:
++//             return state;
++//     }
++// }
++
++export let toggleIsFetchingAuth = (isFetching) => ({ type: TOGGLE_IS_FETCHING_AUTH, isFetching });
++
++debugger;
++
++export let setAuthUserData = ( _id, username, email, isAuth, profilePicture, bio, coverPicture, followers, followings,
++                              isAdmin, createdAt, updatedAt ) => ({
++    type: SET_AUTH_USER_DATA,
++    data: { _id, username, email, isAuth, profilePicture, bio, coverPicture, followers, followings, isAdmin, createdAt,
++        updatedAt }
++});
++
++debugger;
++
++export const getAuthData = () => {
++    return async (dispatch, response) => {
++        dispatch(toggleIsFetchingAuth(true));
++        // let response = await authAPI.getAuthData()
++        if (response) {
++            dispatch(toggleIsFetchingAuth(false))
++            if (response.resultCode === 0) {
++                let { _id, username, email, profilePicture, bio, coverPicture, followers, followings, isAdmin,
++                    createdAt, updatedAt } = response.data;
++                dispatch(setAuthUserData( _id, username, email, true, profilePicture, bio, coverPicture,
++                    followers, followings, isAdmin, createdAt, updatedAt))
++            }
++        } else {
++            return console.log('response:', response)
++        }
++    }
++}
++
++export const login = (email, password) => {
++    return async (dispatch) => {
++        dispatch(toggleIsFetchingAuth(true));
++        let response = await authAPI.login(email, password);
++        dispatch(toggleIsFetchingAuth(false))
++        if (response.resultCode === 0) {
++            dispatch(getAuthData(response));
++        } else {
++            // let message = response.messages.length > 0 ? response.messages[0] : "Some error";
++            // dispatch(stopSubmit("login", { _error: message }))
++            return console.log(response.messages[0]);
++        }
++    }
++}
++
++export const logout = () => {
++    return async (dispatch) => {
++        dispatch(toggleIsFetchingAuth(true));
++        let response = await authAPI.logout();
++        dispatch(toggleIsFetchingAuth(false))
++        if (response.resultCode === 0) {
++            dispatch(setAuthUserData('', '', '', false, '', '', '',
++                [], [], false, '', ''))
++        }
++    }
++}
++
++// export const login = () => async (dispatch, getState) => {
++//     const notes = getState().notes;
++//     await fetch("http://localhost:4000/notes", {
++//         method: "POST",
++//         headers: {
++//             'Accept': 'application/json',
++//             'Content-type': 'application/json'
++//         },
++//         body: JSON.stringify(notes)
++//     })
++//     alert("Success")
++// }
+\ No newline at end of file
+Index: src/reduxOLD2/actions/types.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/reduxOLD2/actions/types.js b/src/reduxOLD2/actions/types.js
+new file mode 100644
+--- /dev/null	(date 1623581579531)
++++ b/src/reduxOLD2/actions/types.js	(date 1623581579531)
+@@ -0,0 +1,22 @@
++//auth
++export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
++export const REGISTER_FAIL = "REGISTER_FAIL";
++export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
++export const LOGIN_FAIL = "LOGIN_FAIL";
++export const LOGOUT = "LOGOUT";
++
++export const SET_MESSAGE = "SET_MESSAGE";
++export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
++
++export const TOGGLE_IS_FETCHING_AUTH = 'TOGGLE_IS_FETCHING_AUTH';
++export const SET_AUTH_USER_DATA = 'SET_USER_DATA';
++
++//profile
++export const SET_AVATAR = "SET_AVATAR"; // аватарка профиля
++export const SET_COVER = "SET_COVER"; // картинка на бекграунд верха страницы профиля
++
++//profile posts
++export const SET_POSTS = "SET_POSTS"; // загрузить посты на страницу
++export const SEND_POST = "SEND_POST"; // отправить пост
++export const ADD_FILES_TO_POST = "ADD_FILES_TO_POST" // прикрепить файлы к посту
++
+diff --git a/src/reduxOLD/reducers/profilePosts.js b/src/redux/reducers/profilePosts.js
+rename from src/reduxOLD/reducers/profilePosts.js
+rename to src/redux/reducers/profilePosts.js
+diff --git a/src/reduxOLD/reducers/message.js b/src/redux/reducers/message.js
+rename from src/reduxOLD/reducers/message.js
+rename to src/redux/reducers/message.js
+diff --git a/src/reduxOLD/services/auth-header.js b/src/redux/services/auth-header.js
+rename from src/reduxOLD/services/auth-header.js
+rename to src/redux/services/auth-header.js
+diff --git a/src/reduxOLD/actions/messages.js b/src/redux/actions/messages.js
+rename from src/reduxOLD/actions/messages.js
+rename to src/redux/actions/messages.js
+diff --git a/src/reduxOLD/actions/profile.js b/src/redux/actions/profile.js
+rename from src/reduxOLD/actions/profile.js
+rename to src/redux/actions/profile.js
+diff --git a/src/redux/profileReducer.js b/src/reduxOLD2/reducers/profileReducer.js
+rename from src/redux/profileReducer.js
+rename to src/reduxOLD2/reducers/profileReducer.js

@@ -13,7 +13,8 @@ export const SET_AVATAR = "SET_AVATAR"; // аватарка профиля
 export const SET_COVER = "SET_COVER"; // картинка на бекграунд верха страницы профиля
 
 //profile posts
-export const SET_POSTS = "SET_POSTS"; // загрузить посты на страницу
-export const SEND_POST = "SEND_POST"; // отправить пост
-export const ADD_FILES_TO_POST = "ADD_FILES_TO_POST" // прикрепить файлы к посту
+export const CREATE_POST = "CREATE_POST";
+export const RETRIEVE_POSTS = "RETRIEVE_POSTS";
+export const UPDATE_POST = "UPDATE_POST";
+export const DELETE_POST = "DELETE_POST";
 

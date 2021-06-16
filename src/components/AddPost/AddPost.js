@@ -15,7 +15,7 @@ import SendIcon from '@material-ui/icons/Send';
 import AddPhotoIcon from '@material-ui/icons/AddPhotoAlternate';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 
-import {sendPost} from "../../reduxOLD/actions/profile";
+import {sendPost} from "../../redux/actions/profilePosts";
 import {useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({

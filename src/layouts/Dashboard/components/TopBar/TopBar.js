@@ -32,7 +32,7 @@ import PricingModal from "../../../../components/PricingModal";
 import NotificationsPopover from "../../../../components/NotificationsPopover";
 import BreadcrumbsNav from "../../../../components/Breadcrumbs";
 import {useDispatch} from "react-redux";
-import {logout} from "../../../../reduxOLD/actions/auth";
+import {logout} from "../../../../redux/actions/auth";
 
 
 const useStyles = makeStyles(theme => ({
