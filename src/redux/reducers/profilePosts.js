@@ -7,7 +7,7 @@ import {
 
 const initialState = [];
 
-const tutorialReducer = (posts = initialState, action) => {
+export default function (posts = initialState, action) {
     const { type, payload } = action;
 
     switch (type) {
@@ -39,5 +39,3 @@ const tutorialReducer = (posts = initialState, action) => {
             return posts;
     }
 };
-
-export default tutorialReducer;

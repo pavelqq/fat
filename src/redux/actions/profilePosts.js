@@ -7,9 +7,9 @@ import {
 
 import PostsService from '../services/profilePosts.service';
 
-export const createPost = () => async (dispatch) => {
+export const createPost = (userId, username, title, description, profilePicture, images, files) => async (dispatch) => {
     try {
-        const res = await PostsService.createPost({author: {userId, username}, message});
+        const res = await PostsService.createPost(userId, username, title, description, profilePicture, images, files);
 
         dispatch({
             type: CREATE_POST,
@@ -22,9 +22,9 @@ export const createPost = () => async (dispatch) => {
     }
 }
 
-export const retrieveTutorials = () => async (dispatch) => {
+export const retrievePosts = (username) => async (dispatch) => {
     try {
-        const res = await TutorialDataService.getAll();
+        const res = await PostsService.retrieveUserPosts(username);
 
         dispatch({
             type: RETRIEVE_POSTS,
@@ -35,12 +35,12 @@ export const retrieveTutorials = () => async (dispatch) => {
     }
 };
 
-export const updateTutorial = (id, data) => async (dispatch) => {
+export const updatePost = (_id, data) => async (dispatch) => {
     try {
-        const res = await TutorialDataService.update(id, data);
+        const res = await PostsService.updatePost(_id, data);
 
         dispatch({
-            type: UPDATE_TUTORIAL,
+            type: UPDATE_POST,
             payload: data,
         });
 
@@ -50,40 +50,40 @@ export const updateTutorial = (id, data) => async (dispatch) => {
     }
 };
 
-export const deleteTutorial = (id) => async (dispatch) => {
+export const deletePost = (_id) => async (dispatch) => {
     try {
-        await TutorialDataService.remove(id);
+        await PostsService.deletePost(_id);
 
         dispatch({
-            type: DELETE_TUTORIAL,
-            payload: { id },
+            type: DELETE_POST,
+            payload: { _id },
         });
     } catch (err) {
         console.log(err);
     }
 };
 
-export const deleteAllTutorials = () => async (dispatch) => {
-    try {
-        const res = await TutorialDataService.removeAll();
-
-        dispatch({
-            type: DELETE_ALL_TUTORIALS,
-            payload: res.data,
-        });
-
-        return Promise.resolve(res.data);
-    } catch (err) {
-        return Promise.reject(err);
-    }
-};
+// export const deleteAllPosts = () => async (dispatch) => {
+//     try {
+//         const res = await PostsService.deleteAllPosts();
+//
+//         dispatch({
+//             type: DELETE_ALL_POSTS,
+//             payload: res.data,
+//         });
+//
+//         return Promise.resolve(res.data);
+//     } catch (err) {
+//         return Promise.reject(err);
+//     }
+// };
 
 export const findPostsByTitle = (title) => async (dispatch) => {
     try {
-        const res = await TutorialDataService.findByTitle(title);
+        const res = await PostsService.findByTitle(title);
 
         dispatch({
-            type: RETRIEVE_TUTORIALS,
+            type: RETRIEVE_POSTS,
             payload: res.data,
         });
     } catch (err) {

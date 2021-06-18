@@ -48,8 +48,8 @@ const AddPost = props => {
     const classes = useStyles();
     const fileInputRef = useRef(null);
     const [value, setValue] = useState('');
-    // const session = useSelector(state => state.session);
-    const post = useSelector((state) => state.post);
+    //const session = useSelector(state => state.session);
+    //const post = useSelector((state) => state.post);
 
     const handleChange = event => {
         event.persist();
@@ -60,10 +60,10 @@ const AddPost = props => {
         fileInputRef.current.click();
     };
 
-    const handleSendPost = () => {
-        sendPost(post);
-        setValue('')
-    }
+    // const handleSendPost = (post) => {
+    //     sendPost(post);
+    //     setValue('')
+    // }
 
     return (
         <Card
@@ -85,7 +85,9 @@ const AddPost = props => {
                         }
                     />
                 </Paper>
-                <Tooltip onClick={handleSendPost} title="Отправить">
+                <Tooltip
+                    // onClick={handleSendPost}
+                    title="Отправить">
                     <IconButton color={value.length > 0 ? 'primary' : 'default'}>
                         <SendIcon/>
                     </IconButton>

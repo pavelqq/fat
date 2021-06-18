@@ -21,21 +21,6 @@ const Wall = (props) => {
 
     const classes = useStyles();
 
-    const posts = useSelector((state) => state.posts);
-    const dispatch = useDispatch();
-
-    // const onAddPost = (note) => {
-    //     dispatch(addNote(note));
-    // };
-    //
-    // const onSave = () => {
-    //     dispatch(saveNotes());
-    // };
-    //
-    // const onLoad = () => {
-    //     dispatch(loadNotes());
-    // };
-
     // const posts = [
     //     {
     //         id: uuidv4(),
@@ -150,7 +135,7 @@ const Wall = (props) => {
         >
             {/*<Gallery/>*/}
             <AddPost/>
-            <Posts/>
+            <Posts currentUser={currentUser}/>
             {/*<Grid container spacing={1}>*/}
             {/*    <Grid item xs={12} sm={8}>*/}
             {/*        <div className={classes.posts}>*/}

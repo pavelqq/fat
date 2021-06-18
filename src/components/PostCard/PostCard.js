@@ -109,7 +109,7 @@ const PostCard = (props) => {
                         alt="Персона"
                         className={classes.avatar}
                         component={RouterLink}
-                        src={post.author.avatar}
+                        src={post.profilePicture}
                         to="/profile/1"
                     />
                 }
@@ -123,7 +123,7 @@ const PostCard = (props) => {
                     <div className={classes.subheader}>
                         <AccessTimeIcon className={classes.accessTimeIcon}/>
                         <Typography variant="body2">
-                            {moment(post.created_at).fromNow()}
+                            {moment(post.createdAt).fromNow()}
                         </Typography>
                     </div>
                 }
@@ -134,7 +134,7 @@ const PostCard = (props) => {
                         to="/profile/1/"
                         variant="h6"
                     >
-                        {post.author.name}
+                        {post.username}
                     </Link>
                 }
             />
@@ -143,9 +143,9 @@ const PostCard = (props) => {
                     className={classes.message}
                     variant="h6"
                 >
-                    {post.message}
+                    {post.description}
                 </Typography>
-                {post.media && (
+                {post.images && (
                     <div className={classes.mediaArea}>
                         <div
                             className={classes.media}
@@ -200,16 +200,16 @@ const PostCard = (props) => {
                 </div>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <Divider className={classes.divider}/>
-                    {post.comments && (
-                        <div className={classes.comments}>
-                            {post.comments.map(comment => (
-                                <CommentBubble
-                                    comment={comment}
-                                    key={comment.id}
-                                />
-                            ))}
-                        </div>
-                    )}
+                    {/*{post.comments && (*/}
+                    {/*    <div className={classes.comments}>*/}
+                    {/*        {post.comments.map(comment => (*/}
+                    {/*            <CommentBubble*/}
+                    {/*                comment={comment}*/}
+                    {/*                key={comment.id}*/}
+                    {/*            />*/}
+                    {/*        ))}*/}
+                    {/*    </div>*/}
+                    {/*)}*/}
                     <Divider className={classes.divider}/>
                     <CommentForm/>
                 </Collapse>

@@ -82,7 +82,7 @@ const Profile = props => {
                 <Divider className={classes.divider}/>
                 <div className={classes.content}>
                     <div className={classes.innerContent}>
-                    {tab === 'wall' && <Wall/>}
+                    {tab === 'wall' && <Wall currentUser={currentUser}/>}
                     {tab === 'friends' && <Friends/>}
                     {tab === 'plans' && <Plans/>}
                     </div>
