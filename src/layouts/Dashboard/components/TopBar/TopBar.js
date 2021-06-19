@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, {useState, useRef, useEffect} from 'react';
-import {Link as RouterLink} from 'react-router-dom';
+import {Link as RouterLink, useHistory} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
 import {
     AppBar,
@@ -31,8 +31,9 @@ import axios from "../../../../utils/axios";
 import PricingModal from "../../../../components/PricingModal";
 import NotificationsPopover from "../../../../components/NotificationsPopover";
 import BreadcrumbsNav from "../../../../components/Breadcrumbs";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../../../../redux/actions/auth";
+import {signOut} from "../../../../store/actions/authActions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -103,7 +104,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TopBar = props => {
-    const {currentUser, onOpenNavBarMobile, className, ...rest} = props;
+    const {onOpenNavBarMobile, className, ...rest} = props;
 
     const classes = useStyles();
     const {history} = useRouter();
@@ -179,6 +180,15 @@ const TopBar = props => {
         'Диета'
     ];
 
+    const state = useSelector((state) => state);
+    console.log(state);
+    const user = useSelector((state) => state.auth);
+
+    const handleSignOut = () => {
+        dispatch(signOut());
+        history.push("auth/login");
+    };
+
     return (
         <AppBar
             {...rest}
@@ -252,10 +262,10 @@ const TopBar = props => {
                     <Button
                         className={classes.logoutButton}
                         color="inherit"
-                        onClick={handleLogout}
+                        onClick={handleSignOut}
                     >
                         <InputIcon className={classes.logoutIcon}/>
-                        {currentUser
+                        {user
                             ? <>
                                 Выйти
                             </>
@@ -272,7 +282,7 @@ const TopBar = props => {
                         onClick={handleLogout}
                     >
                         <InputIcon className={classes.logoutIcon}/>
-                        {currentUser
+                        {user
                             ? <>
                                 Выйти
                             </>

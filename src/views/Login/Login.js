@@ -17,6 +17,7 @@ import {Redirect} from "react-router";
 import {login} from "../../redux/actions/auth";
 import {useDispatch, useSelector} from "react-redux";
 import {clearMessage} from "../../redux/actions/messages";
+import {signIn} from "../../store/actions/authActions";
 
 
 function Copyright() {
@@ -59,61 +60,20 @@ const Login = props => {
     const classes = useStyles();
     const { from } = props.location.state || { from: {pathname: '/' } }
 
-    const form = useRef();
-    // const checkBtn = useRef();
-
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
-
-    const { isLoggedIn } = useSelector(state => state.auth);
-    const { message } = useSelector(state => state.message);
-
+    const auth = useSelector((state) => state.auth);
     const dispatch = useDispatch();
+    const [creds, setCreds] = useState({
+        email: "",
+        password: "",
+    });
 
-    const onChangeUsername = (e) => {
-        const username = e.target.value;
-        setUsername(username);
-    };
-
-    const onChangePassword = (e) => {
-        const password = e.target.value;
-        setPassword(password);
-    };
-
-    const handleLogin = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-
-        setLoading(true);
-
-        dispatch(login(username, password))
-            .then((data) => {
-                props.history.push(`/profile/${data._id}/wall`);
-            })
-
-        setLoading(false);
-
-        dispatch(clearMessage());
-
-        //form.current.validateAll();
-
-        // if (checkBtn.current.context._errors.length === 0) {
-        //     dispatch(login(username, password))
-        //         .then(() => {
-        //             props.history.push("/profile");
-        //             window.location.reload();
-        //         })
-        //         .catch(() => {
-        //             setLoading(false);
-        //         });
-        // } else {
-        //     setLoading(false);
-        // }
+        dispatch(signIn(creds.email, creds.password));
+        setCreds({ email: "", password: "" });
     };
 
-    // if (isLoggedIn) {
-    //     return <Redirect to="/profile" />;
-    // }
+    if (auth._id) return props.history.push(`/profile/${auth._id}/wall`);
 
     return(
         <div
@@ -130,7 +90,7 @@ const Login = props => {
                         Авторизация
                     </Typography>
                     <Typography align="center">Чтобы посмотреть эту страничку: {from.pathname}, тебе надо авторизоваться</Typography>
-                    <form className={classes.form} noValidate onSubmit={handleLogin} ref={form}>
+                    <form className={classes.form} noValidate onSubmit={handleSubmit}>
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -141,7 +101,8 @@ const Login = props => {
                             name="email"
                             autoComplete="email"
                             autoFocus
-                            onChange={onChangeUsername}
+                            value={creds.email}
+                            onChange={(e) => setCreds({ ...creds, email: e.target.value })}
                         />
                         <TextField
                             variant="outlined"
@@ -153,7 +114,8 @@ const Login = props => {
                             type="password"
                             id="password"
                             autoComplete="current-password"
-                            onChange={onChangePassword}
+                            value={creds.password}
+                            onChange={(e) => setCreds({ ...creds, password: e.target.value })}
                         />
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
@@ -166,18 +128,9 @@ const Login = props => {
                             variant="contained"
                             color="primary"
                             className={classes.submit}
-                            disabled={loading}
                         >
-                            {loading && (
-                                "загрузка..."
-                            )}
                             Войти
                         </Button>
-                        {message && (
-                            <div>
-                                {message}
-                            </div>
-                        )}
                         <Grid container>
                             <Grid item xs>
                                 <Link href="#" variant="body2">

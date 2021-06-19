@@ -22,8 +22,12 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import {createBrowserHistory} from 'history';
 
-import {logout} from "./redux/actions/auth";
 import {clearMessage} from "./redux/actions/messages";
+
+import {loadUser} from "./store/actions/authActions";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const history = createBrowserHistory();
 moment.locale('ru');
@@ -31,17 +35,19 @@ moment.locale('ru');
 
 function App() {
 
-    // const [showModeratorBoard, setShowModeratorBoard] = useState(false);
-    // const [showAdminBoard, setShowAdminBoard] = useState(false);
-
-    const { user: currentUser } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        history.listen((location) => {
-            dispatch(clearMessage());
-        });
+        dispatch(loadUser());
     }, [dispatch]);
+
+    //const { user: currentUser } = useSelector((state) => state.auth);
+
+    // useEffect(() => {
+    //     history.listen((location) => {
+    //         dispatch(clearMessage());
+    //     });
+    // }, [dispatch]);
 
     // useEffect(() => {
     //     if (currentUser) {
@@ -57,8 +63,9 @@ function App() {
             <ThemeProvider theme={theme}>
                 <MuiPickersUtilsProvider libInstance={moment} utils={MomentUtils}>
                     <Router history={history}>
+                        <ToastContainer/>
                         <ScrollReset/>
-                        {renderRoutes(routes, {currentUser: currentUser})}
+                        {renderRoutes(routes)}
                     </Router>
                 </MuiPickersUtilsProvider>
             </ThemeProvider>

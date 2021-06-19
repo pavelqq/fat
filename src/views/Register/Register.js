@@ -14,8 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {useDispatch, useSelector} from "react-redux";
-import {register} from "../../redux/actions/auth";
-import {clearMessage} from "../../redux/actions/messages";
+import {signUp} from "../../store/actions/authActions";
 
 
 function Copyright() {
@@ -58,44 +57,21 @@ const Register = props => {
     const {className, ...rest} = props;
     const classes = useStyles();
 
-    const form = useRef();
-
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [successful, setSuccessful] = useState(false);
-
-    const { message } = useSelector(state => state.message);
+    const auth = useSelector((state) => state.auth);
     const dispatch = useDispatch();
+    const [user, setUser] = useState({
+        username: "",
+        email: "",
+        password: "",
+    });
 
-    const onChangeUsername = (e) => {
-        const username = e.target.value;
-        setUsername(username);
-    };
-
-    const onChangeEmail = (e) => {
-        const email = e.target.value;
-        setEmail(email);
-    };
-
-    const onChangePassword = (e) => {
-        const password = e.target.value;
-        setPassword(password);
-    };
-
-    const handleRegister = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-
-        setSuccessful(false);
-        dispatch(register(username, email, password))
-            .then(() => {
-                setSuccessful(true);
-            })
-            .catch(() => {
-                setSuccessful(false);
-            });
-        dispatch(clearMessage());
+        dispatch(signUp(user));
+        setUser({ name: "", email: "", password: "" });
     };
+
+    if (auth._id) return props.history.push(`/profile/1/wall`);
 
     return(
         <div
@@ -111,7 +87,7 @@ const Register = props => {
                     <Typography component="h1" variant="h5">
                         Регистрация
                     </Typography>
-                    <form className={classes.form} noValidate onSubmit={handleRegister} ref={form}>
+                    <form className={classes.form} noValidate onSubmit={handleSubmit}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={12}>
                                 <TextField
@@ -123,21 +99,10 @@ const Register = props => {
                                     id="username"
                                     label="Имя"
                                     autoFocus
-                                    value={username}
-                                    onChange={onChangeUsername}
+                                    value={user.username}
+                                    onChange={(e) => setUser({ ...user, username: e.target.value })}
                                 />
                             </Grid>
-                            {/*<Grid item xs={12} sm={6}>*/}
-                            {/*    <TextField*/}
-                            {/*        variant="outlined"*/}
-                            {/*        required*/}
-                            {/*        fullWidth*/}
-                            {/*        id="lastName"*/}
-                            {/*        label="Last Name"*/}
-                            {/*        name="lastName"*/}
-                            {/*        autoComplete="lname"*/}
-                            {/*    />*/}
-                            {/*</Grid>*/}
                             <Grid item xs={12}>
                                 <TextField
                                     variant="outlined"
@@ -147,8 +112,8 @@ const Register = props => {
                                     label="Эмейл"
                                     name="email"
                                     autoComplete="email"
-                                    value={email}
-                                    onChange={onChangeEmail}
+                                    value={user.email}
+                                    onChange={(e) => setUser({ ...user, email: e.target.value })}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -161,8 +126,8 @@ const Register = props => {
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
-                                    value={password}
-                                    onChange={onChangePassword}
+                                    value={user.password}
+                                    onChange={(e) => setUser({ ...user, password: e.target.value })}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -182,11 +147,6 @@ const Register = props => {
                         >
                             Зарегистрироваться
                         </Button>
-                        {!successful && (
-                            <div>
-                                {message}
-                            </div>
-                        )}
                         <Grid container justify="flex-end">
                             <Grid item>
                                 <Link href="/auth/login" variant="body2">
