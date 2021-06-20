@@ -60,18 +60,44 @@ const Register = props => {
     const auth = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const [user, setUser] = useState({
-        username: "",
+        name: "",
         email: "",
         password: "",
+        bio: "",
+        profilePicture: "",
+        coverPicture: "",
+        followers: "",
+        followings: "",
+        projects: "",
+        isAdmin: "",
+        city: "",
+        from: "",
+        role: "",
+        age: ""
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(signUp(user));
-        setUser({ name: "", email: "", password: "" });
+        setUser({
+            name: "",
+            email: "",
+            password: "",
+            bio: "",
+            profilePicture: "",
+            coverPicture: "",
+            followers: "",
+            followings: "",
+            projects: "",
+            isAdmin: "",
+            city: "",
+            from: "",
+            role: "",
+            age: ""
+        });
     };
 
-    if (auth._id) return props.history.push(`/profile/1/wall`);
+    if (auth._id) return props.history.push(`/profile/${auth._id}/wall`);
 
     return(
         <div
@@ -88,8 +114,8 @@ const Register = props => {
                         Регистрация
                     </Typography>
                     <form className={classes.form} noValidate onSubmit={handleSubmit}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} sm={12}>
+                        <Grid container spacing={1}>
+                            <Grid item xs={16} sm={9}>
                                 <TextField
                                     autoComplete="username"
                                     name="username"
@@ -99,10 +125,23 @@ const Register = props => {
                                     id="username"
                                     label="Имя"
                                     autoFocus
-                                    value={user.username}
-                                    onChange={(e) => setUser({ ...user, username: e.target.value })}
+                                    value={user.name}
+                                    onChange={(e) => setUser({ ...user, name: e.target.value })}
                                 />
                             </Grid>
+                            {/*<Grid item xs={16} sm={3}>*/}
+                            {/*    <TextField*/}
+                            {/*        name="age"*/}
+                            {/*        variant="outlined"*/}
+                            {/*        required*/}
+                            {/*        fullWidth*/}
+                            {/*        id="age"*/}
+                            {/*        label="Возраст"*/}
+                            {/*        autoFocus*/}
+                            {/*        value={user.age}*/}
+                            {/*        onChange={(e) => setUser({ ...user, age: e.target.value })}*/}
+                            {/*    />*/}
+                            {/*</Grid>*/}
                             <Grid item xs={12}>
                                 <TextField
                                     variant="outlined"
@@ -130,6 +169,30 @@ const Register = props => {
                                     onChange={(e) => setUser({ ...user, password: e.target.value })}
                                 />
                             </Grid>
+                            {/*<Grid item xs={12} sm={6}>*/}
+                            {/*    <TextField*/}
+                            {/*        variant="outlined"*/}
+                            {/*        required*/}
+                            {/*        fullWidth*/}
+                            {/*        id="from"*/}
+                            {/*        label="Страна"*/}
+                            {/*        name="from"*/}
+                            {/*        value={user.from}*/}
+                            {/*        onChange={(e) => setUser({ ...user, from: e.target.value })}*/}
+                            {/*    />*/}
+                            {/*</Grid>*/}
+                            {/*<Grid item xs={12} sm={6}>*/}
+                            {/*    <TextField*/}
+                            {/*        variant="outlined"*/}
+                            {/*        required*/}
+                            {/*        fullWidth*/}
+                            {/*        id="city"*/}
+                            {/*        label="Город"*/}
+                            {/*        name="city"*/}
+                            {/*        value={user.city}*/}
+                            {/*        onChange={(e) => setUser({ ...user, city: e.target.value })}*/}
+                            {/*    />*/}
+                            {/*</Grid>*/}
                             <Grid item xs={12}>
                                 <FormControlLabel
                                     control={<Checkbox value="allowExtraEmails" color="primary" />}

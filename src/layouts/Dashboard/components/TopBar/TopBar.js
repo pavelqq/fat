@@ -106,6 +106,8 @@ const useStyles = makeStyles(theme => ({
 const TopBar = props => {
     const {onOpenNavBarMobile, className, ...rest} = props;
 
+    const user = useSelector((state) => state.auth);
+
     const classes = useStyles();
     const {history} = useRouter();
     const searchRef = useRef(null);
@@ -136,8 +138,8 @@ const TopBar = props => {
     }, []);
 
     const handleLogout = () => {
-        history.push('/auth/login');
         dispatch(logout());
+        history.push('/auth/login');
     };
 
     const handlePricingOpen = () => {
@@ -179,10 +181,6 @@ const TopBar = props => {
         'Накачать банки',
         'Диета'
     ];
-
-    const state = useSelector((state) => state);
-    console.log(state);
-    const user = useSelector((state) => state.auth);
 
     const handleSignOut = () => {
         dispatch(signOut());
@@ -267,7 +265,7 @@ const TopBar = props => {
                         <InputIcon className={classes.logoutIcon}/>
                         {user
                             ? <>
-                                Выйти
+                                {user.name} Выйти
                             </>
                             : <>
                                 Авторизироваться
@@ -282,9 +280,9 @@ const TopBar = props => {
                         onClick={handleLogout}
                     >
                         <InputIcon className={classes.logoutIcon}/>
-                        {user
+                        {user.name
                             ? <>
-                                Выйти
+                                {user.name} Выйти
                             </>
                             : <>
                                 Авторизироваться

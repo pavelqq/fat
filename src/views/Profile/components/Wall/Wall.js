@@ -21,6 +21,8 @@ const Wall = (props) => {
 
     const classes = useStyles();
 
+    debugger
+
     // const posts = [
     //     {
     //         id: uuidv4(),

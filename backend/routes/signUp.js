@@ -10,6 +10,14 @@ router.post("/", async (req, res) => {
     name: Joi.string().min(3).max(30).required(),
     email: Joi.string().min(3).max(200).required().email(),
     password: Joi.string().min(6).max(200).required(),
+    bio: Joi.string().max(60),
+    profilePicture: Joi.string(),
+    coverPicture: Joi.string(),
+    isAdmin: Joi.boolean(),
+    city: Joi.string().min(3).max(30),
+    from: Joi.string().min(3).max(30),
+    role: Joi.string(),
+    age: Joi.date().raw(),
   });
 
   const { error } = schema.validate(req.body);
@@ -17,11 +25,11 @@ router.post("/", async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   let user = await User.findOne({ email: req.body.email });
-  if (user) return res.status(400).send("User already exists...");
+  if (user) return res.status(400).send("Пользователь уже существует...");
 
-  const { name, email, password } = req.body;
+  const { name, email, password, bio, profilePicture, coverPicture, city, from, role, age } = req.body;
 
-  user = new User({ name, email, password });
+  user = new User({ name, email, password, bio, profilePicture, coverPicture, city, from, role, age });
 
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
@@ -29,7 +37,19 @@ router.post("/", async (req, res) => {
   await user.save();
 
   const jwtSecretKey = process.env.JWT_SECRET_KEY;
-  const token = jwt.sign({ _id: user._id, name: user.name, email: user.email }, jwtSecretKey)
+  const token = jwt.sign({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    bio: user.bio,
+    profilePicture: user.profilePicture,
+    coverPicture: user.coverPicture,
+    isAdmin: user.isAdmin,
+    city: user.city,
+    from: user.from,
+    role: user.role,
+    age: user.age
+  }, jwtSecretKey)
 
   res.send(token);
 });

@@ -150,8 +150,7 @@ const Header = props => {
         >
             <div
                 className={classes.cover}
-                //style={{backgroundImage: `url(${currentUser.coverPicture})`}}
-                style={{backgroundImage: `url(https://sun9-9.userapi.com/impg/66sf9QM28QKH6LygEiELQFYZsKy5sn_g_wigLQ/LcRvXzMVA0o.jpg?size=1279x1920&quality=96&sign=e509acbea617fc117bb763cc32326f88&type=album)`}}
+                style={{backgroundImage: `url(${currentUser.coverPicture})`}}
             >
                 <Button
                     className={classes.changeButton}
@@ -167,22 +166,20 @@ const Header = props => {
                     alt="Person"
                     className={classes.avatar}
                     src={user.avatar}
-                    //src={currentUser.profilePicture}
+                    src={currentUser.profilePicture}
                 />
                 <div className={classes.details}>
                     <Typography
                         component="h2"
                         variant="overline"
                     >
-                        {user.bio}
-                        {/*{currentUser.bio}*/}
+                        {currentUser.bio}
                     </Typography>
                     <Typography
                         component="h1"
                         variant="h4"
                     >
-                        {user.name}
-                        {/*{currentUser.username}*/}
+                        {currentUser.username}
                     </Typography>
                 </div>
                 <Hidden smDown>

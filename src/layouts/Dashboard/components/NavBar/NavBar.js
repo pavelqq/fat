@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 import clsx from 'clsx';
-// import { useSelector } from 'react-redux_old';
 import {makeStyles} from '@material-ui/core/styles';
 import {Drawer, Divider, Paper, Avatar, Typography} from '@material-ui/core';
 import {Hidden} from '@material-ui/core';
@@ -9,6 +8,7 @@ import navigationConfig from './navigationConfig';
 import Navigation from "../../../../components/Navigation";
 import useRouter from "../../../../utils/useRouter";
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import {useSelector} from "react-redux";
 
 
 const useStyles = makeStyles(theme => ({
@@ -41,13 +41,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const NavBar = props => {
-    const {currentUser, openMobile, onMobileClose, className, ...rest} = props;
+    const {openMobile, onMobileClose, className, ...rest} = props;
 
     debugger
 
     const classes = useStyles();
     const router = useRouter();
-    // const session = useSelector(state => state.session);
+    const user = useSelector(state => state.auth);
+
     useEffect(() => {
         if (openMobile) {
             onMobileClose && onMobileClose();
@@ -62,8 +63,8 @@ const NavBar = props => {
                     className={classes.avatar}
                     component={RouterLink}
                     // src={session.user.avatar}
-                    src={currentUser.profilePicture}
-                    // src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
+                    //src={currentUser.profilePicture}
+                    src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png"
                     to="/profile/1/wall"
                 />
                 <Typography
@@ -71,11 +72,11 @@ const NavBar = props => {
                     variant="h4"
                 >
                     {/*{session.user.first_name} {session.user.last_name}*/}
-                    {currentUser.username}
+                    {user.username}
                 </Typography>
                 <Typography variant="body2" align="center">
                     {/*{session.user.bio}*/}
-                    {currentUser.bio}
+                    {/*{currentUser.bio}*/}
                 </Typography>
             </div>
             <Divider className={classes.divider}/>

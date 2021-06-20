@@ -23,7 +23,22 @@ router.post("/", async (req, res) => {
     return res.status(400).send("Неправильный пароль");
 
   const jwtSecretKey = process.env.JWT_SECRET_KEY;
-  const token = jwt.sign({ _id: user._id, name: user.name, email: user.email }, jwtSecretKey)
+  const token = jwt.sign({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    bio: user.bio,
+    profilePicture: user.profilePicture,
+    coverPicture: user.coverPicture,
+    followers: user.followers,
+    followings: user.followings,
+    projects: user.projects,
+    isAdmin: user.isAdmin,
+    city: user.city,
+    from: user.from,
+    role: user.role,
+    age: user.age
+  }, jwtSecretKey)
 
   res.send(token);
 });

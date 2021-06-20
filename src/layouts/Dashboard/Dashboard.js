@@ -1,11 +1,9 @@
 import React, {Suspense, useState} from 'react';
 import {renderRoutes} from 'react-router-config';
-//import renderRoutes from '../../renderRoutes';
 import {makeStyles} from '@material-ui/core/styles';
 import {LinearProgress} from '@material-ui/core';
-
-import {NavBar, TopBar} from './components';
-import ChatBar from "./components/ChatBar";
+import {NavBar, TopBar, ChatBar} from './components';
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -38,11 +36,9 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Dashboard = props => {
-    const {route, currentUser} = props;
-    // const authed = false;
-    // const authPath = '/auth/login';
+    const {route} = props;
 
-    debugger;
+    const user = useSelector(state => state.auth);
 
     const classes = useStyles();
     const [openNavBarMobile, setOpenNavBarMobile] = useState(false);
@@ -60,18 +56,16 @@ const Dashboard = props => {
             <TopBar
                 className={classes.topBar}
                 onOpenNavBarMobile={handleNavBarMobileOpen}
-                currentUser={currentUser}
             />
             <div className={classes.container}>
-                {currentUser && <NavBar
+                {user._id && <NavBar
                     className={classes.navBar}
                     onMobileClose={handleNavBarMobileClose}
                     openMobile={openNavBarMobile}
-                    currentUser={currentUser}
                 />}
                 <main className={classes.content}>
                     <Suspense fallback={<LinearProgress/>}>
-                        {renderRoutes(route.routes, {currentUser: currentUser})}
+                        {renderRoutes(route.routes)}
                     </Suspense>
                 </main>
             </div>

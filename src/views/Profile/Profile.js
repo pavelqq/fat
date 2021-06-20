@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Wall from "./components/Wall";
 import Friends from "./components/Friends";
 import Plans from "../Overview/components/Plans";
+import {useSelector} from "react-redux";
 
 
 const useStyles = makeStyles(theme => ({
@@ -33,13 +34,19 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Profile = props => {
-    const {currentUser, match, history} = props;
+    const {match, history} = props;
     const classes = useStyles();
     const {id, tab} = match.params;
 
     const handleTabsChange = (event, value) => {
         history.push(value);
     };
+
+    debugger;
+
+    const appState = useSelector((state) => state);
+    console.log(appState);
+    const currentUser = useSelector((state) => state.auth);
 
     debugger;
 
