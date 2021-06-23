@@ -1,46 +1,46 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { User } = require("../models/user");
+const {User} = require("../models/user");
 const Joi = require("joi");
 const express = require("express");
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-  const schema = Joi.object({
-    email: Joi.string().min(3).max(200).required().email(),
-    password: Joi.string().min(6).max(200).required(),
-  });
+    const schema = Joi.object({
+        email: Joi.string().min(3).max(200).required().email(),
+        password: Joi.string().min(6).max(200).required(),
+    });
 
-  const { error } = schema.validate(req.body);
+    const {error} = schema.validate(req.body);
 
-  if (error) return res.status(400).send(error.details[0].message);
+    if (error) return res.status(400).send(error.details[0].message);
 
-  let user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(400).send("Неправильный эмейл");
+    let user = await User.findOne({email: req.body.email});
+    if (!user) return res.status(400).send("Неправильный эмейл");
 
-  const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword)
-    return res.status(400).send("Неправильный пароль");
+    const validPassword = await bcrypt.compare(req.body.password, user.password);
+    if (!validPassword)
+        return res.status(400).send("Неправильный пароль");
 
-  const jwtSecretKey = process.env.JWT_SECRET_KEY;
-  const token = jwt.sign({
-    _id: user._id,
-    name: user.name,
-    email: user.email,
-    bio: user.bio,
-    profilePicture: user.profilePicture,
-    coverPicture: user.coverPicture,
-    followers: user.followers,
-    followings: user.followings,
-    projects: user.projects,
-    isAdmin: user.isAdmin,
-    city: user.city,
-    from: user.from,
-    role: user.role,
-    age: user.age
-  }, jwtSecretKey)
+    const jwtSecretKey = process.env.JWT_SECRET_KEY;
+    const token = jwt.sign({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        bio: user.bio,
+        profilePicture: user.profilePicture,
+        coverPicture: user.coverPicture,
+        followers: user.followers,
+        followings: user.followings,
+        projects: user.projects,
+        isAdmin: user.isAdmin,
+        city: user.city,
+        from: user.from,
+        role: user.role,
+        age: user.age
+    }, jwtSecretKey)
 
-  res.send(token);
+    res.send(token);
 });
 
 module.exports = router;

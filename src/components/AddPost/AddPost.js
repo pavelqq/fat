@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const AddPost = props => {
-    const {className, ...rest} = props;
+    const {currentUserName, className, ...rest} = props;
 
     const classes = useStyles();
     const fileInputRef = useRef(null);
@@ -80,8 +80,7 @@ const AddPost = props => {
                         disableUnderline
                         onChange={handleChange}
                         placeholder={
-                              //`Что вы думаете, ${session.user.first_name}`
-                            'Что вы думаете, Юзернейм'
+                              `Что вы думаете, ${currentUserName}`
                         }
                     />
                 </Paper>

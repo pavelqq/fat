@@ -1,9 +1,0 @@
-<changelist name="Uncommitted_changes_before_Checkout_at_15_06_2021_10_22_[Default_Changelist]" date="1623734534136" recycled="true" deleted="true">
-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_15_06_2021_10_22_[Default_Changelist]/shelved.patch" />
-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 15.06.2021 10:22 [Default Changelist]" />
-  <binary>
-    <option name="BEFORE_PATH" value="src/reduxOLD/reducers/profile" />
-    <option name="AFTER_PATH" />
-    <option name="SHELVED_PATH" />
-  </binary>
-</changelist>

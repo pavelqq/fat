@@ -16,6 +16,7 @@ import AddPhotoIcon from '@material-ui/icons/AddPhotoAlternate';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ChatIcon from '@material-ui/icons/ChatOutlined';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -120,7 +121,7 @@ const Header = props => {
         connectedStatus: 'not_connected'
     };
 
-    const [connectedStatus, setConnectedStatus] = useState(user.connectedStatus); // if rejected do not show the button
+    const [connectedStatus, setConnectedStatus] = useState(user.connectedStatus);
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
     useEffect(() => {
@@ -165,7 +166,6 @@ const Header = props => {
                 <Avatar
                     alt="Person"
                     className={classes.avatar}
-                    src={user.avatar}
                     src={currentUser.profilePicture}
                 />
                 <div className={classes.details}>
@@ -177,9 +177,9 @@ const Header = props => {
                     </Typography>
                     <Typography
                         component="h1"
-                        variant="h4"
+                        variant="h3"
                     >
-                        {currentUser.username}
+                        {currentUser.name}
                     </Typography>
                 </div>
                 <Hidden smDown>
@@ -196,7 +196,6 @@ const Header = props => {
                         </Button>
                         {connectedStatus === 'not_connected' && (
                             <Button
-                                disabled
                                 color="primary"
                                 onClick={handleConnectToggle}
                                 variant="contained"
@@ -207,16 +206,19 @@ const Header = props => {
                         )}
                         {connectedStatus === 'pending' && (
                             <Button
-                                disabled
                                 className={classes.pendingButton}
                                 onClick={handleConnectToggle}
                                 variant="contained"
                             >
                                 <PersonAddIcon className={classes.personAddIcon}/>
-                                Подписан
+                                Вы подписаны на обновления
                             </Button>
                         )}
-                        <Tooltip title="More options">
+                    </div>
+                </Hidden>
+                <Hidden lgUp>
+                    <div className={classes.actions}>
+                        <Tooltip title="Опции">
                             <IconButton>
                                 <MoreIcon/>
                             </IconButton>

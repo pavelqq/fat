@@ -21,8 +21,6 @@ const Wall = (props) => {
 
     const classes = useStyles();
 
-    debugger
-
     // const posts = [
     //     {
     //         id: uuidv4(),
@@ -136,7 +134,7 @@ const Wall = (props) => {
             className={clsx(classes.root, className)}
         >
             {/*<Gallery/>*/}
-            <AddPost/>
+            <AddPost currentUserName={currentUser.name}/>
             <Posts currentUser={currentUser}/>
             {/*<Grid container spacing={1}>*/}
             {/*    <Grid item xs={12} sm={8}>*/}

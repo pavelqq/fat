@@ -18,8 +18,6 @@ const Presentation = props => {
 
     const classes = useStyles();
 
-    debugger;
-
     return (
         <Page
             {...rest}

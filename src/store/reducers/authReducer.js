@@ -3,9 +3,20 @@ import jwtDecode from "jwt-decode";
 
 const initialState = {
   token: localStorage.getItem("token"),
+  _id: null,
   name: null,
   email: null,
-  _id: null,
+  bio: null,
+  profilePicture: null,
+  coverPicture: null,
+  followers: null,
+  followings: null,
+  projects: null,
+  isAdmin: null,
+  city: null,
+  from: null,
+  role: null,
+  age: null
 };
 
 const authReducer = (state = initialState, action) => {
@@ -20,9 +31,20 @@ const authReducer = (state = initialState, action) => {
       return {
         ...initialState,
         token: action.token,
+        _id: user._id,
         name: user.name,
         email: user.email,
-        _id: user._id,
+        bio: user.bio,
+        profilePicture: user.profilePicture,
+        coverPicture: user.coverPicture,
+        followers: user.followers,
+        followings: user.followings,
+        projects: user.projects,
+        isAdmin: user.isAdmin,
+        city: user.city,
+        from: user.from,
+        role: user.role,
+        age: user.age
       };
     case "SIGN_OUT":
       localStorage.removeItem("token");
@@ -31,9 +53,20 @@ const authReducer = (state = initialState, action) => {
       });
       return {
         token: null,
+        _id: null,
         name: null,
         email: null,
-        _id: null,
+        bio: null,
+        profilePicture: null,
+        coverPicture: null,
+        followers: null,
+        followings: null,
+        projects: null,
+        isAdmin: null,
+        city: null,
+        from: null,
+        role: null,
+        age: null
       };
     default:
       return state;

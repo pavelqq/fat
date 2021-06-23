@@ -263,12 +263,12 @@ const TopBar = props => {
                         onClick={handleSignOut}
                     >
                         <InputIcon className={classes.logoutIcon}/>
-                        {user
+                        {user.name
                             ? <>
                                 {user.name} Выйти
                             </>
                             : <>
-                                Авторизироваться
+                                Вход
                             </>
                         }
                     </Button>
@@ -285,7 +285,7 @@ const TopBar = props => {
                                 {user.name} Выйти
                             </>
                             : <>
-                                Авторизироваться
+                                Вход
                             </>
                         }
                     </Button>

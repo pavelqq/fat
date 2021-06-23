@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
 import {Tabs, Tab, Divider, colors } from '@material-ui/core';
@@ -8,7 +8,9 @@ import Header from "./components/Header";
 import Wall from "./components/Wall";
 import Friends from "./components/Friends";
 import Plans from "../Overview/components/Plans";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {getProfileById} from "../../store/actions/userActions";
+import {signIn} from "../../store/actions/authActions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -23,10 +25,9 @@ const useStyles = makeStyles(theme => ({
     },
     tabs: {},
     content: {
-        marginTop: theme.spacing(3),
-        marginBottom: theme.spacing(3),
-        marginLeft: theme.spacing(9),
-        marginRight: theme.spacing(9)
+        marginRight: theme.spacing(2),
+        marginLeft: theme.spacing(2),
+        marginBottom: theme.spacing(6)
     },
     innerContent: {
 
@@ -38,17 +39,21 @@ const Profile = props => {
     const classes = useStyles();
     const {id, tab} = match.params;
 
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getProfileById(id));
+    }, [id])
+
+    debugger
+
     const handleTabsChange = (event, value) => {
         history.push(value);
     };
 
-    debugger;
-
     const appState = useSelector((state) => state);
     console.log(appState);
     const currentUser = useSelector((state) => state.auth);
-
-    debugger;
 
     const tabs = [
         {value: 'wall', label: 'Фото и Записи'},

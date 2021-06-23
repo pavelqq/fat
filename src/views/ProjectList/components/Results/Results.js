@@ -99,8 +99,6 @@ const Projects = props => {
         setMode(value);
     };
 
-    debugger;
-
     return (
         <div
             {...rest}

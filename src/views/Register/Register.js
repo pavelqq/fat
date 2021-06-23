@@ -12,13 +12,10 @@ import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import {useDispatch, useSelector} from "react-redux";
 import {signUp} from "../../store/actions/authActions";
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
-import FilledInput from '@material-ui/core/FilledInput';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -33,7 +30,7 @@ import PanoramaIcon from '@material-ui/icons/Panorama';
 import PublicIcon from '@material-ui/icons/Public';
 import HomeIcon from '@material-ui/icons/Home';
 import {MenuItem, Paper} from '@material-ui/core'
-import {KeyboardDatePicker} from "@material-ui/pickers";
+
 
 function Copyright() {
     return (
@@ -138,11 +135,6 @@ const Register = props => {
             label: 'Пользователь',
         },
     ];
-
-    const [selectedDate, setSelectedDate] = useState(Date.now());
-    const handleDate = (date) => {
-        setSelectedDate(date);
-    };
 
     const auth = useSelector((state) => state.auth);
     const dispatch = useDispatch();

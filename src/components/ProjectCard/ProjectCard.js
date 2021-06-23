@@ -76,8 +76,6 @@ const ProjectCard = props => {
         setLiked(false);
     };
 
-    debugger;
-
     return (
         <Card
             {...rest}

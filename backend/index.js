@@ -3,6 +3,7 @@ const cors = require("cors");
 const todos = require("./routes/todos");
 const signUp = require("./routes/signUp");
 const signIn = require("./routes/signIn");
+const users = require("./routes/users");
 const express = require("express");
 const mongoose = require("mongoose");
 
@@ -27,6 +28,7 @@ app.use(cors());
 app.use("/api/todos", todos);
 app.use("/api/signup", signUp);
 app.use("/api/signin", signIn);
+app.use("/api/users", users);
 
 app.get("/", (req, res) => {
   res.send("добро пожаловать в API фэт...");
