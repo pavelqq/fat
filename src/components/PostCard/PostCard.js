@@ -110,7 +110,7 @@ const PostCard = (props) => {
                         className={classes.avatar}
                         component={RouterLink}
                         src={post.profilePicture}
-                        to="/profile/1"
+                        to={`profile/${post.uid}/wall`}
                     />
                 }
                 action={
@@ -123,7 +123,7 @@ const PostCard = (props) => {
                     <div className={classes.subheader}>
                         <AccessTimeIcon className={classes.accessTimeIcon}/>
                         <Typography variant="body2">
-                            {moment(post.createdAt).fromNow()}
+                            {moment(post.date).fromNow()}
                         </Typography>
                     </div>
                 }
@@ -131,17 +131,17 @@ const PostCard = (props) => {
                     <Link
                         color="textPrimary"
                         component={RouterLink}
-                        to="/profile/1/"
+                        to={`profile/${post.uid}/wall`}
                         variant="h6"
                     >
-                        {post.username}
+                        {post.author}
                     </Link>
                 }
             />
             <CardContent className={classes.content}>
                 <Typography
                     className={classes.message}
-                    variant="h6"
+                    variant="h5"
                 >
                     {post.description}
                 </Typography>

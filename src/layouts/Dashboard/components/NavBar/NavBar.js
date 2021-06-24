@@ -61,7 +61,7 @@ const NavBar = props => {
                     className={classes.avatar}
                     component={RouterLink}
                     src={currentUser.profilePicture}
-                    to="/profile/1/wall"
+                    to={`/profile/${currentUser._id}/wall`}
                 />
                 <Typography
                     className={classes.name}

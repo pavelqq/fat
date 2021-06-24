@@ -45,19 +45,17 @@ const Profile = props => {
         dispatch(getProfileById(id));
     }, [id])
 
-    debugger
-
     const handleTabsChange = (event, value) => {
         history.push(value);
     };
 
     const appState = useSelector((state) => state);
     console.log(appState);
-    const currentUser = useSelector((state) => state.auth);
+    const currentUser = useSelector((state) => state.userById);
 
     const tabs = [
         {value: 'wall', label: 'Фото и Записи'},
-        {value: 'friends', label: '35 Друзей'},
+        {value: 'friends', label: 'Друзья'},
         {value: 'plans', label: 'Планы'},
     ];
 

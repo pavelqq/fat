@@ -21,6 +21,8 @@ const Wall = (props) => {
 
     const classes = useStyles();
 
+    const auth = useSelector((state) => state.auth);
+
     // const posts = [
     //     {
     //         id: uuidv4(),
@@ -128,14 +130,27 @@ const Wall = (props) => {
     //   };
     // }, []);
 
+    const [post, setPost] = useState({
+        description: "",
+    });
+
     return (
         <div
             {...rest}
             className={clsx(classes.root, className)}
         >
             {/*<Gallery/>*/}
-            <AddPost currentUserName={currentUser.name}/>
-            <Posts currentUser={currentUser}/>
+            {currentUser._id === auth._id ? (
+                <>
+                    <AddPost post={post} setPost={setPost} currentUserName={currentUser.name}/>
+                    <Posts post={post} setPost={setPost} currentUser={currentUser}/>
+                </>
+            ) : (
+                <>
+                    <Posts post={post} setPost={setPost} currentUser={currentUser}/>
+                </>
+            )}
+            {/*<AddPost currentUserName={currentUser.name}/>*/}
             {/*<Grid container spacing={1}>*/}
             {/*    <Grid item xs={12} sm={8}>*/}
             {/*        <div className={classes.posts}>*/}

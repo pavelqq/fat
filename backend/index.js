@@ -1,11 +1,13 @@
 const winston = require("winston");
 const cors = require("cors");
+const express = require("express");
+const mongoose = require("mongoose");
+
 const todos = require("./routes/todos");
 const signUp = require("./routes/signUp");
 const signIn = require("./routes/signIn");
 const users = require("./routes/users");
-const express = require("express");
-const mongoose = require("mongoose");
+const posts = require("./routes/posts");
 
 winston.exceptions.handle(
   new winston.transports.Console({ colorize: true, prettyprint: true }),
@@ -29,6 +31,7 @@ app.use("/api/todos", todos);
 app.use("/api/signup", signUp);
 app.use("/api/signin", signIn);
 app.use("/api/users", users);
+app.use("/api/posts", posts);
 
 app.get("/", (req, res) => {
   res.send("добро пожаловать в API фэт...");

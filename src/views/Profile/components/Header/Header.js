@@ -85,13 +85,19 @@ const useStyles = makeStyles(theme => ({
         flex: "auto"
     },
     actions: {
-        marginLeft: 'auto',
+        // marginLeft: 'auto',
         [theme.breakpoints.down('sm')]: {
             marginTop: theme.spacing(1)
         },
-        '& > * + *': {
-            marginLeft: theme.spacing(1)
-        }
+        // '& > * + *': {
+        //     marginLeft: theme.spacing(1)
+        // }
+    },
+    actionButtons: {
+        margin: theme.spacing(1),
+    },
+    moreIcon: {
+        flex: "auto"
     },
     pendingButton: {
         color: theme.palette.white,
@@ -177,14 +183,30 @@ const Header = props => {
                     </Typography>
                     <Typography
                         component="h1"
-                        variant="h3"
+                        variant="h2"
                     >
                         {currentUser.name}
                     </Typography>
+                    <Typography
+                        component="h2"
+                        variant="body1"
+                    >
+                        {currentUser.from}, {currentUser.city}
+                    </Typography>
                 </div>
-                <Hidden smDown>
+                {/*<Hidden mdUp>*/}
+                {/*    <div className={clsx(classes.actions, classes.moreIcon)}>*/}
+                {/*        <Tooltip title="Опции">*/}
+                {/*            <IconButton>*/}
+                {/*                <MoreIcon/>*/}
+                {/*            </IconButton>*/}
+                {/*        </Tooltip>*/}
+                {/*    </div>*/}
+                {/*</Hidden>*/}
+                <Hidden>
                     <div className={classes.actions}>
                         <Button
+                            className={classes.actionButtons}
                             disabled
                             color="secondary"
                             component={RouterLink}
@@ -196,6 +218,7 @@ const Header = props => {
                         </Button>
                         {connectedStatus === 'not_connected' && (
                             <Button
+                                className={classes.actionButtons}
                                 color="primary"
                                 onClick={handleConnectToggle}
                                 variant="contained"
@@ -206,7 +229,7 @@ const Header = props => {
                         )}
                         {connectedStatus === 'pending' && (
                             <Button
-                                className={classes.pendingButton}
+                                className={clsx(classes.pendingButton, classes.actionButtons)}
                                 onClick={handleConnectToggle}
                                 variant="contained"
                             >
@@ -214,15 +237,6 @@ const Header = props => {
                                 Вы подписаны на обновления
                             </Button>
                         )}
-                    </div>
-                </Hidden>
-                <Hidden lgUp>
-                    <div className={classes.actions}>
-                        <Tooltip title="Опции">
-                            <IconButton>
-                                <MoreIcon/>
-                            </IconButton>
-                        </Tooltip>
                     </div>
                 </Hidden>
             </div>

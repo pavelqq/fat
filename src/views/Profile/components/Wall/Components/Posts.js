@@ -7,6 +7,8 @@ import {findPostsByTitle, retrievePosts} from "../../../../../redux/actions/prof
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 import clsx from "clsx";
+import {getProfileById} from "../../../../../store/actions/userActions";
+import {getPosts} from "../../../../../store/actions/postActions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -24,15 +26,31 @@ const useStyles = makeStyles(theme => ({
 
 
 const Posts = props => {
-    const {currentUser, className, ...rest} = props;
+    const {post, setPost, currentUser, className, ...rest} = props;
     const classes = useStyles();
+
+    const dispatch = useDispatch();
+
+    const posts = useSelector(state => state.posts)
+
+    useEffect(() => {
+        dispatch(getPosts());
+    }, [post._id, dispatch])
 
     return (
         <div
             {...rest}
             className={clsx(classes.root, className)}
         >
-            posts
+            <div className={classes.posts}>
+                {posts.length && posts.map(post => (
+                    <PostCard
+                        className={classes.post}
+                        key={post.id}
+                        post={post}
+                    />
+                ))}
+            </div>
         </div>
     )
 }
