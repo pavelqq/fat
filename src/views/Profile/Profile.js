@@ -10,7 +10,6 @@ import Friends from "./components/Friends";
 import Plans from "../Overview/components/Plans";
 import {useDispatch, useSelector} from "react-redux";
 import {getProfileById} from "../../store/actions/userActions";
-import {signIn} from "../../store/actions/authActions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -92,7 +91,7 @@ const Profile = props => {
                 <div className={classes.content}>
                     <div className={classes.innerContent}>
                     {tab === 'wall' && <Wall/>}
-                    {tab === 'friends' && <Friends/>}
+                    {tab === 'friends' && <Friends id={id}/>}
                     {tab === 'plans' && <Plans/>}
                     </div>
                 </div>

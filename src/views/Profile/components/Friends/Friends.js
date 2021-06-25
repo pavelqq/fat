@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 import clsx from 'clsx';
-// import _ from 'lodash';
-// import PerfectScrollbar from 'react-perfect-scrollbar';
 import {makeStyles} from '@material-ui/core/styles';
 import {
     Avatar,
@@ -16,21 +14,23 @@ import {
     ListItem,
     ListItemAvatar,
     ListItemText,
-    Snackbar,
-    Typography,
     colors
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import CheckIcon from '@material-ui/icons/Check';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import { v4 as uuidv4 } from 'uuid';
-import axios from '../../../../utils/axios';
 import ChatIcon from '@material-ui/icons/ChatOutlined';
+import DoneOutlineOutlinedIcon from "@material-ui/icons/DoneOutlineOutlined";
+import {useDispatch, useSelector} from "react-redux";
+import {followUser, unfollowUser} from "../../../../store/actions/userActions";
+import {getFriends} from "../../../../store/actions/friendsActions";
+import _ from "lodash";
+import match from "autosuggest-highlight/match";
+import parse from "autosuggest-highlight/parse";
 
 
 const useStyles = makeStyles(theme => ({
     root: {
-
+        marginTop: theme.spacing(2)
     },
     content: {
         paddingTop: 0
@@ -56,26 +56,14 @@ const useStyles = makeStyles(theme => ({
         flexWrap: 'wrap'
     },
     listItemText: {
-        marginLeft: theme.spacing(2)
+        marginLeft: theme.spacing(2),
+        marginTop: theme.spacing(1)
     },
     sendButton: {
         marginTop: theme.spacing(2),
         marginRight: theme.spacing(2)
     },
-    connectButton: {
-        marginTop: theme.spacing(2),
-        marginRight: theme.spacing(2)
-    },
-    pendingButton: {
-        marginTop: theme.spacing(2),
-        marginRight: theme.spacing(2),
-        color: theme.palette.white,
-        backgroundColor: colors.red[600],
-        '&:hover': {
-            backgroundColor: colors.red[900]
-        }
-    },
-    connectedButton: {
+    actionButtons: {
         marginTop: theme.spacing(2),
         marginRight: theme.spacing(2),
         color: theme.palette.white,
@@ -90,94 +78,51 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Friends = props => {
-    const {className, ...rest} = props;
+    const {id, className, ...rest} = props;
 
     const classes = useStyles();
-    const [openSnackbar, setOpenSnackbar] = useState(false);
 
-    const connections = [
-        {
-            id: uuidv4(),
-            name: 'Катя Танкова',
-            avatar: '/images/avatars/avatar_2.png',
-            common: 12,
-            status: 'connected'
-        },
-        {
-            id: uuidv4(),
-            name: 'Чао Мао',
-            avatar: '/images/avatars/avatar_3.png',
-            common: 10,
-            status: 'connected'
-        },
-        {
-            id: uuidv4(),
-            name: 'Алиса Ройзман',
-            avatar: '/images/avatars/avatar_4.png',
-            common: 8,
-            status: 'connected'
-        },
-        {
-            id: uuidv4(),
-            name: 'Адам Денисов',
-            avatar: '/images/avatars/avatar_7.png',
-            common: 5,
-            status: 'connected'
-        },
-        {
-            id: uuidv4(),
-            name: 'Анастас Грушев',
-            avatar: '/images/avatars/avatar_8.png',
-            common: 1,
-            status: 'connected'
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getFriends(id));
+    }, [id])
+
+    const currentUser = useSelector((state) => state.userById);
+    const AuthedUser = useSelector(state => state.auth)
+    const friendsList = useSelector(state => state.friendsList)
+
+    let followBool = Boolean(AuthedUser.followings.indexOf(currentUser?._id))
+    const [followed, setFollowed] = useState(
+        followBool
+    );
+
+    const handleFollowUser = async () => {
+        try {
+            if (followed) {
+                dispatch(unfollowUser(AuthedUser._id, currentUser._id))
+            } else {
+                dispatch(followUser(AuthedUser._id, currentUser._id))
+            }
+            setFollowed(!followed);
+        } catch (error) {
+            console.log(error)
         }
-    ];
+    }
 
-    // const [connections, setConnections] = useState([]);
-    //
-    // useEffect(() => {
-    //     let mounted = true;
-    //
-    //     const fetchConnections = () => {
-    //         axios.get('/api/users/1/connections').then(response => {
-    //             if (mounted) {
-    //                 setConnections(response.data.connections);
-    //             }
-    //         });
-    //     };
-    //
-    //     fetchConnections();
-    //
-    //     return () => {
-    //         mounted = false;
-    //     };
-    // }, []);
+    const [value, setValue] = useState("");
 
-    const handleConnectToggle = id => {
-      // setConnections(connections => {
-      //   const newConnections = _.map(connections, _.clone);
-      //
-      //   return newConnections.map(connection => {
-      //     if (connection.id === id) {
-      //       connection.status =
-      //       connection.status =
-      //         connection.status === 'connected' || connection.status === 'pending'
-      //           ? 'not_connected'
-      //           : 'pending';
-      //
-      //       if (connection.status === 'pending') {
-      //         setOpenSnackbar(true);
-      //       }
-      //     }
-      //
-      //     return connection;
-      //   });
-      // });
+    const onChangeHandler = (event) => {
+        const { target } = event;
+        const val = target.value;
+        setValue(val);
     };
 
-    const handleSnackbarClose = () => {
-        setOpenSnackbar(false);
-    };
+    const filterByNames = (friendsList, inputValue) => {
+        return friendsList.filter(user => user.name === inputValue);
+    }
+
+    const results = !value ? friendsList : filterByNames(friendsList, value);
 
     return (
         <Card
@@ -195,18 +140,21 @@ const Friends = props => {
                     className={classes.searchInput}
                     color="inherit"
                     disableUnderline
-                    placeholder="Искать людей и планы"
+                    placeholder="Искать среди друзей..."
+                    type="text"
+                    value={value}
+                    onChange={onChangeHandler}
                 />
             </div>
             <Divider/>
             <CardContent className={classes.content}>
                 <div>
                     <List disablePadding>
-                        {connections.map((connection, i) => (
+                        {results.map((friend, i) => (
                             <ListItem
                                 className={classes.listItem}
-                                divider={i < connections.length - 1}
-                                key={connection.id}
+                                divider={i < results.length - 1}
+                                key={friend._id}
                                 alignItems="flex-start"
                             >
                                 <ListItemAvatar>
@@ -214,14 +162,14 @@ const Friends = props => {
                                         alt="Аватарка"
                                         className={classes.avatar}
                                         component={RouterLink}
-                                        src={connection.avatar}
-                                        to="/profile/1/timeline"
+                                        src={friend.profilePicture}
+                                        to={`/profile/${friend._id}/timeline`}
                                     />
                                 </ListItemAvatar>
                                 <ListItemText
                                     className={classes.listItemText}
-                                    primary={connection.name}
-                                    secondary={`${connection.common} друзей`}
+                                    primary={friend.name}
+                                    secondary={`${friend.followers.length - 1} друзей`}
                                 />
                                 <Button
                                     color="secondary"
@@ -233,61 +181,21 @@ const Friends = props => {
                                     <ChatIcon className={classes.buttonIcon}/>
                                     Отправить сообщение
                                 </Button>
-                                {connection.status === 'not_connected' && (
-                                    <Button
-                                        className={classes.connectButton}
-                                        onClick={() => handleConnectToggle(connection.id)}
-                                        size="small"
-                                        variant="contained"
-                                    >
-                                        <PersonAddIcon className={classes.buttonIcon}/>
-                                        Добавить в друзья
-                                    </Button>
-                                )}
-                                {connection.status === 'pending' && (
-                                    <Button
-                                        className={classes.pendingButton}
-                                        onClick={() => handleConnectToggle(connection.id)}
-                                        size="small"
-                                        variant="contained"
-                                    >
-                                        <PersonAddIcon className={classes.buttonIcon}/>
-                                        Подписан
-                                    </Button>
-                                )}
-                                {connection.status === 'connected' && (
-                                    <Button
-                                        className={classes.connectedButton}
-                                        onClick={() => handleConnectToggle(connection.id)}
-                                        size="small"
-                                        variant="contained"
-                                    >
-                                        <CheckIcon className={classes.buttonIcon}/>
-                                        В друзьях
-                                    </Button>
-                                )}
+                                <Button
+                                    className={classes.actionButtons}
+                                    color="primary"
+                                    variant="contained"
+                                    onClick={handleFollowUser}
+                                >
+                                    {followed ? <DoneOutlineOutlinedIcon className={classes.buttonIcon}/>
+                                        : <PersonAddIcon className={classes.buttonIcon}/>}
+                                    {followed ? "Вы подписаны" : "Подписаться"}
+                                </Button>
                             </ListItem>
                         ))}
                     </List>
                 </div>
             </CardContent>
-            <Snackbar
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left'
-                }}
-                autoHideDuration={6000}
-                message={
-                    <Typography
-                        color="inherit"
-                        variant="h6"
-                    >
-                        Отправить запрос в друзья
-                    </Typography>
-                }
-                onClose={handleSnackbarClose}
-                open={openSnackbar}
-            />
         </Card>
     );
 };

@@ -10,7 +10,9 @@ import axios from "../../../../utils/axios";
 
 
 const useStyles = makeStyles(theme => ({
-    root: {},
+    root: {
+        margin: theme.spacing(2)
+    },
     header: {
         display: 'flex',
         alignItems: 'center',

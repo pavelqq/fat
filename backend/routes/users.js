@@ -94,4 +94,24 @@ router.put("/:id/unfollow", async (req, res) => {
     }
 });
 
+//получить друзей
+router.get("/friends/:userId", async (req, res) => {
+    try {
+        const user = await User.findById(req.params.userId);
+        const friends = await Promise.all(
+            user.followings.map((friendId) => {
+                return User.findById(friendId);
+            })
+        );
+        let friendsList = [];
+        friends.map((friend) => {
+            const { _id, name, profilePicture, followers} = friend;
+            friendsList.push({ _id, name, profilePicture, followers });
+        });
+        res.status(200).json(friendsList)
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router

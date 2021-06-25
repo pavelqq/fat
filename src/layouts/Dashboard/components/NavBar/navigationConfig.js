@@ -178,24 +178,16 @@ export default [
                 title: 'Настройки',
                 href: '/settings',
                 icon: SettingsIcon,
-                // children: [
-                //   {
-                //     title: 'General',
-                //     href: '/settings/general'
-                //   },
-                //   {
-                //     title: 'Subscription',
-                //     href: '/settings/subscription'
-                //   },
-                //   {
-                //     title: 'Notifications',
-                //     href: '/settings/notifications'
-                //   },
-                //   {
-                //     title: 'Security',
-                //     href: '/settings/security'
-                //   }
-                // ]
+                children: [
+                  {
+                    title: 'Редактировать профиль',
+                    href: '/settings/general'
+                  },
+                  {
+                    title: 'Безопасность',
+                    href: '/settings/security'
+                  }
+                ]
             },
             // {
             //   title: 'Authentication',

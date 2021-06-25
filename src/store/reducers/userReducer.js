@@ -1,4 +1,3 @@
-import {toast} from "react-toastify";
 
 const initialState = {
     _id: null,
@@ -14,7 +13,7 @@ const initialState = {
     city: null,
     from: null,
     role: null,
-    age: null
+    age: null,
 };
 
 const userReducer = (state = initialState, action) => {
