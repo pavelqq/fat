@@ -2,10 +2,10 @@ import axios from "axios";
 import { url, setHeaders } from "../../api";
 import { toast } from "react-toastify";
 
-export const getPosts = () => {
+export const getPosts = (currentUserId) => {
     return (dispatch) => {
         axios
-            .get(`${url}/posts`, setHeaders())
+            .get(`${url}/posts/${currentUserId}`, setHeaders())
             .then((posts) => {
                 dispatch({
                     type: "GET_POSTS",

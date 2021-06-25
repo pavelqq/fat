@@ -9,6 +9,7 @@ import {Link} from "react-router-dom";
 import clsx from "clsx";
 import {getProfileById} from "../../../../../store/actions/userActions";
 import {getPosts} from "../../../../../store/actions/postActions";
+import TimelinePosts from "../../TimelinePosts";
 
 
 const useStyles = makeStyles(theme => ({
@@ -34,8 +35,8 @@ const Posts = props => {
     const posts = useSelector(state => state.posts)
 
     useEffect(() => {
-        dispatch(getPosts());
-    }, [post._id, dispatch])
+        dispatch(getPosts(currentUser._id));
+    }, [post._id, dispatch, currentUser._id])
 
     return (
         <div
@@ -43,11 +44,13 @@ const Posts = props => {
             className={clsx(classes.root, className)}
         >
             <div className={classes.posts}>
-                {posts.length && posts.map(post => (
+                {posts.length && posts.map((post) => (
                     <PostCard
                         className={classes.post}
                         key={post.id}
                         post={post}
+                        setPost={setPost}
+                        posts={posts}
                     />
                 ))}
             </div>

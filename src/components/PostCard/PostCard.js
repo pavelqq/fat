@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 import clsx from 'clsx';
 import moment from 'moment';
@@ -14,11 +14,11 @@ import {
     Typography,
     Divider,
     Tooltip,
-    colors
+    colors, MenuItem, Menu
 } from '@material-ui/core';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
-import {Reactions, CommentBubble, CommentForm} from './components';
+import {Reactions, CommentBubble, CommentForm, OptionsPopover} from './components';
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CardActions from "@material-ui/core/CardActions";
@@ -79,10 +79,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const PostCard = (props) => {
-    const {post, className, ...rest} = props;
+    const {posts, post, setPost, className, ...rest} = props;
     const classes = useStyles();
 
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = useState(false);
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
@@ -98,23 +98,41 @@ const PostCard = (props) => {
         setLikes(likes => likes - 1);
     };
 
+    const [closedOptions, setOpenOptions] = useState(false);
+    const handleOpenOptions = () => { setOpenOptions(true); };
+    const handleCloseOptions = () => { setOpenOptions(false); };
+    const optionsRef = useRef(null);
+
     return (
         <Card
             {...rest}
             className={clsx(classes.root, className)}
         >
+            <OptionsPopover
+                anchorEl={optionsRef.current}
+                onClose={handleCloseOptions}
+                open={closedOptions}
+                handleCloseOptions={handleCloseOptions}
+                closedOptions={closedOptions}
+                post={post}
+                setPost={setPost}
+                posts={posts}
+            />
             <CardHeader
                 avatar={
                     <Avatar
                         alt="Персона"
-                        className={classes.avatar}
                         component={RouterLink}
                         src={post.profilePicture}
                         to={`profile/${post.uid}/wall`}
                     />
                 }
                 action={
-                    <IconButton aria-label="settings">
+                    <IconButton
+                        aria-haspopup="true"
+                        onClick={handleOpenOptions}
+                        ref={optionsRef}
+                    >
                         <MoreVertIcon/>
                     </IconButton>
                 }

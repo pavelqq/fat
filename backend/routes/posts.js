@@ -5,10 +5,10 @@ const Joi = require("joi");
 const express = require("express");
 const router = express.Router();
 
-router.get("/", auth, async (req, res, next) => {
+router.get("/:currentUserId", auth, async (req, res, next) => {
     try {
         const posts = await Post.find().sort({ date: -1 });
-        const filteredPosts = posts.filter(post => post.uid === req.user._id);
+        const filteredPosts = posts.filter(post => post.uid === req.params.currentUserId); //req.user._id
         res.send(filteredPosts);
     } catch (error) {
         res.status(500).send("Ошибка: " + error.message);

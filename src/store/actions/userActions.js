@@ -3,7 +3,6 @@ import {setHeaders, url} from "../../api";
 import {toast} from "react-toastify";
 
 export const getProfileById = (id) => {
-    //dispatch({type: 'CLEAR_USER_BY_ID'});
     return (dispatch) => {
         axios
             .get(`${url}/users/${id}`, setHeaders())
