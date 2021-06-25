@@ -16,7 +16,10 @@ import AddPhotoIcon from '@material-ui/icons/AddPhotoAlternate';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ChatIcon from '@material-ui/icons/ChatOutlined';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import {useSelector} from "react-redux";
+import DoneOutlineOutlinedIcon from '@material-ui/icons/DoneOutlineOutlined';
+import {useDispatch, useSelector} from "react-redux";
+import {followUser, unfollowUser} from "../../../../store/actions/userActions";
+
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -115,40 +118,67 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Header = props => {
-    const {currentUser, className, ...rest} = props;
+    const {className, ...rest} = props;
+
+    const currentUser = useSelector((state) => state.userById);
+    const AuthedUser = useSelector(state => state.auth)
+
+    let followBool = Boolean(AuthedUser.followings.indexOf(currentUser?._id))
+
+    const [followed, setFollowed] = useState(
+        followBool
+    );
+
+    const dispatch = useDispatch();
+
+    const handleFollowUser = async () => {
+        try {
+            if (followed) {
+                dispatch(unfollowUser(AuthedUser._id, currentUser._id))
+            } else {
+                dispatch(followUser(AuthedUser._id, currentUser._id))
+            }
+            setFollowed(!followed);
+        } catch (err) {
+        }
+    }
+
+    // useEffect(() => {
+    //     if(followed) {
+    //         dispatch(followUser(currentUser._id))
+    //     } else {
+    //         dispatch(unfollowUser(currentUser._id))
+    //     }
+    // }, [currentUser._id])
 
     const classes = useStyles();
 
-    const user = {
-        name: 'Павел Буре',
-        bio: 'Лох какой-то',
-        avatar: 'https://sun9-46.userapi.com/impf/c830408/v830408400/1121ca/C9t_7tL35pk.jpg?size=960x719&quality=96&sign=0835df69212f360830dfa1f7d204df31&type=album',
-        cover: 'https://sun9-9.userapi.com/impg/66sf9QM28QKH6LygEiELQFYZsKy5sn_g_wigLQ/LcRvXzMVA0o.jpg?size=1279x1920&quality=96&sign=e509acbea617fc117bb763cc32326f88&type=album',
-        connectedStatus: 'not_connected'
-    };
-
-    const [connectedStatus, setConnectedStatus] = useState(user.connectedStatus);
-    const [openSnackbar, setOpenSnackbar] = useState(false);
-
-    useEffect(() => {
-        if (connectedStatus === 'pending') {
-            setOpenSnackbar(true);
-        }
-    }, [connectedStatus]);
-
-    const handleConnectToggle = () => {
-        setConnectedStatus(connectedStatus =>
-            connectedStatus === 'not_connected' ? 'pending' : 'not_connected'
-        );
-    };
-
-    const handleSnackbarClose = () => {
-        setOpenSnackbar(false);
-    };
+    // const user = {
+    //     name: 'Павел Буре',
+    //     bio: 'Лох какой-то',
+    //     avatar: 'https://sun9-46.userapi.com/impf/c830408/v830408400/1121ca/C9t_7tL35pk.jpg?size=960x719&quality=96&sign=0835df69212f360830dfa1f7d204df31&type=album',
+    //     cover: 'https://sun9-9.userapi.com/impg/66sf9QM28QKH6LygEiELQFYZsKy5sn_g_wigLQ/LcRvXzMVA0o.jpg?size=1279x1920&quality=96&sign=e509acbea617fc117bb763cc32326f88&type=album',
+    //     connectedStatus: 'not_connected'
+    // };
+    //const [connectedStatus, setConnectedStatus] = useState(user.connectedStatus);
+    //const [openSnackbar, setOpenSnackbar] = useState(false);
+    // useEffect(() => {
+    //     if (connectedStatus === 'pending') {
+    //         setOpenSnackbar(true);
+    //     }
+    // }, [connectedStatus]);
+    // const handleConnectToggle = () => {
+    //     setConnectedStatus(connectedStatus =>
+    //         connectedStatus === 'not_connected' ? 'pending' : 'not_connected'
+    //     );
+    // };
+    // const handleSnackbarClose = () => {
+    //     setOpenSnackbar(false);
+    // };
 
     const handleChangeCover = () => {
-
     };
+
 
     return (
         <div
@@ -194,69 +224,44 @@ const Header = props => {
                         {currentUser.from}, {currentUser.city}
                     </Typography>
                 </div>
-                {/*<Hidden mdUp>*/}
-                {/*    <div className={clsx(classes.actions, classes.moreIcon)}>*/}
-                {/*        <Tooltip title="Опции">*/}
-                {/*            <IconButton>*/}
-                {/*                <MoreIcon/>*/}
-                {/*            </IconButton>*/}
-                {/*        </Tooltip>*/}
-                {/*    </div>*/}
-                {/*</Hidden>*/}
-                <Hidden>
-                    <div className={classes.actions}>
-                        <Button
-                            className={classes.actionButtons}
-                            disabled
-                            color="secondary"
-                            component={RouterLink}
-                            to="/chat"
-                            variant="contained"
-                        >
-                            <ChatIcon className={classes.mailIcon}/>
-                            Отправить сообщение
-                        </Button>
-                        {connectedStatus === 'not_connected' && (
+                {AuthedUser._id !== currentUser._id && (
+                    <Hidden>
+                        <div className={classes.actions}>
+                            <Button
+                                className={classes.actionButtons}
+                                color="secondary"
+                                component={RouterLink}
+                                to="/chat"
+                                variant="contained"
+                            >
+                                <ChatIcon className={classes.mailIcon}/>
+                                Отправить сообщение
+                            </Button>
                             <Button
                                 className={classes.actionButtons}
                                 color="primary"
-                                onClick={handleConnectToggle}
                                 variant="contained"
+                                onClick={handleFollowUser}
                             >
-                                <PersonAddIcon className={classes.personAddIcon}/>
-                                Добавить в друзья
+                                {followed ? <DoneOutlineOutlinedIcon className={classes.personAddIcon}/>
+                                    : <PersonAddIcon className={classes.personAddIcon}/>}
+                                {followed ? "Вы подписаны" : "Подписаться"}
                             </Button>
-                        )}
-                        {connectedStatus === 'pending' && (
-                            <Button
-                                className={clsx(classes.pendingButton, classes.actionButtons)}
-                                onClick={handleConnectToggle}
-                                variant="contained"
-                            >
-                                <PersonAddIcon className={classes.personAddIcon}/>
-                                Вы подписаны на обновления
-                            </Button>
-                        )}
-                    </div>
-                </Hidden>
+                        </div>
+                    </Hidden>
+                )}
+                {AuthedUser._id !== currentUser._id && (
+                    <Hidden mdUp>
+                        <div className={clsx(classes.actions, classes.moreIcon)}>
+                            <Tooltip title="Опции">
+                                <IconButton>
+                                    <MoreIcon/>
+                                </IconButton>
+                            </Tooltip>
+                        </div>
+                    </Hidden>
+                )}
             </div>
-            <Snackbar
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left'
-                }}
-                autoHideDuration={6000}
-                message={
-                    <Typography
-                        color="inherit"
-                        variant="h6"
-                    >
-                        Запрос отправлен
-                    </Typography>
-                }
-                onClose={handleSnackbarClose}
-                open={openSnackbar}
-            />
         </div>
     );
 };

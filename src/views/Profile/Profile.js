@@ -51,7 +51,6 @@ const Profile = props => {
 
     const appState = useSelector((state) => state);
     console.log(appState);
-    const currentUser = useSelector((state) => state.userById);
 
     const tabs = [
         {value: 'wall', label: 'Фото и Записи'},
@@ -72,7 +71,7 @@ const Profile = props => {
             className={classes.root}
             title="Profile"
         >
-            <Header currentUser={currentUser}/>
+            <Header />
             <div className={classes.inner}>
                 <Tabs
                     className={classes.tabs}
@@ -92,7 +91,7 @@ const Profile = props => {
                 <Divider className={classes.divider}/>
                 <div className={classes.content}>
                     <div className={classes.innerContent}>
-                    {tab === 'wall' && <Wall currentUser={currentUser}/>}
+                    {tab === 'wall' && <Wall/>}
                     {tab === 'friends' && <Friends/>}
                     {tab === 'plans' && <Plans/>}
                     </div>

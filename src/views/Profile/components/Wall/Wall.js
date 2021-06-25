@@ -17,10 +17,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Wall = (props) => {
-    const {currentUser, className, ...rest} = props;
+    const {className, ...rest} = props;
 
     const classes = useStyles();
 
+    const currentUser = useSelector((state) => state.userById);
     const auth = useSelector((state) => state.auth);
 
     // const posts = [

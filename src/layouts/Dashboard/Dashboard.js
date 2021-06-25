@@ -38,7 +38,7 @@ const useStyles = makeStyles(() => ({
 const Dashboard = props => {
     const {route} = props;
 
-    const user = useSelector(state => state.auth);
+    const authedUser = useSelector((state) => state.auth);
 
     const classes = useStyles();
     const [openNavBarMobile, setOpenNavBarMobile] = useState(false);
@@ -58,7 +58,7 @@ const Dashboard = props => {
                 onOpenNavBarMobile={handleNavBarMobileOpen}
             />
             <div className={classes.container}>
-                {user._id && <NavBar
+                {authedUser._id && <NavBar
                     className={classes.navBar}
                     onMobileClose={handleNavBarMobileClose}
                     openMobile={openNavBarMobile}

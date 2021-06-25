@@ -3,7 +3,7 @@ import {setHeaders, url} from "../../api";
 import {toast} from "react-toastify";
 
 export const getProfileById = (id) => {
-    // dispatch({type: 'CLEAR_USER_BY_ID'});
+    //dispatch({type: 'CLEAR_USER_BY_ID'});
     return (dispatch) => {
         axios
             .get(`${url}/users/${id}`, setHeaders())
@@ -24,33 +24,64 @@ export const getProfileById = (id) => {
     };
 };
 
-// export const getProfileById = id => async dispatch => {
-//     // dispatch({type: 'CLEAR_USER'});
-//     axios
-//         .get(`${url}/users/${id}`, setHeaders())
-//         .then((userById) => {
-//
-//             dispatch({
-//                 type: 'GET_USER',
-//                 userById: userById.data
-//             });
-//         })
-//         .catch((error) => {
-//             console.log(error.response);
-//
-//             toast.error(error.response?.data, {
-//                 position: toast.POSITION.BOTTOM_RIGHT,
-//             });
-//         });
-// }
+export function unfollowUser(authedUser, currentUser) {
+    return async dispatch => {
+        function onSuccess(success) {
+            dispatch({type: "UNFOLLOW_USER", payload: success});
+            return success;
+        }
 
-// export const getUser = ({id}) => {
+        function onError(error) {
+            console.log(error.response);
+
+            toast.error(error.response?.data, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
+        }
+
+        try {
+            const success = await axios.put(`${url}/users/${currentUser}/unfollow`,
+                {userId: authedUser}, setHeaders());
+            return onSuccess(success);
+        } catch (error) {
+            return onError(error);
+        }
+    }
+};
+
+export function followUser(authedUser, currentUser) {
+    return async dispatch => {
+        function onSuccess(success) {
+            dispatch({type: "FOLLOW_USER", payload: success});
+            return success;
+        }
+
+        function onError(error) {
+            console.log(error.response);
+
+            toast.error(error.response?.data, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
+        }
+
+        try {
+            const success = await axios.put(`${url}/users/${currentUser}/follow`,
+                {userId: authedUser}, setHeaders());
+            return onSuccess(success);
+        } catch (error) {
+            return onError(error);
+        }
+    }
+};
+
+
+// export const followUser = (id) => {
 //     return (dispatch) => {
 //         axios
-//             .get(`${url}/users/${id}`, setHeaders())
+//             .put(`${url}/users/${id}/follow`, {userId: id}, setHeaders())
 //             .then((user) => {
 //                 dispatch({
-//                     type: "GET_USER",
+//                     type: "FOLLOW_USER",
 //                     user,
 //                 });
 //             })
@@ -63,24 +94,21 @@ export const getProfileById = (id) => {
 //     };
 // };
 
-// export const signUp = (user) => {
+// export const unfollowUser = (id) => {
 //     return (dispatch) => {
 //         axios
-//             .post(`${url}/signup`, user)
-//             .then((token) => {
-//                 localStorage.setItem("token", token.data);
-//
+//             .put(`${url}/users/${id}/follow`, {userId: id}, setHeaders())
+//             .then((user) => {
 //                 dispatch({
-//                     type: "SIGN_UP",
-//                     token: token.data,
+//                     type: "UPDATE_TODO",
+//                     user,
 //                 });
 //             })
 //             .catch((error) => {
-//                 console.log(error.response);
-//
+//                 console.log(error);
 //                 toast.error(error.response?.data, {
 //                     position: toast.POSITION.BOTTOM_RIGHT,
 //                 });
 //             });
 //     };
-// };
+// }
