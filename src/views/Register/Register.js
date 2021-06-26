@@ -173,7 +173,11 @@ const Register = props => {
     if (auth._id) return props.history.push(`/profile/${auth._id}/wall`);
 
     return (
-        <Grid container component="main" className={classes.root}>
+        <Grid
+            {...rest}
+            container
+            className={clsx(classes.root, className)}
+        >
             <CssBaseline/>
             <Grid item xs={false} sm={4} md={7} className={classes.image}/>
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -358,21 +362,6 @@ const Register = props => {
                                         ...user, age: e.target.value })
                                     }
                                 />
-                                {/*<KeyboardDatePicker*/}
-                                {/*    disableToolbar*/}
-                                {/*    format="MM/DD/YYYY"*/}
-                                {/*    id="age"*/}
-                                {/*    label="Дата рождения"*/}
-                                {/*    helperText="Када родилося"*/}
-                                {/*    className={clsx(classes.margin, classes.textField)}*/}
-                                {/*    KeyboardButtonProps={{*/}
-                                {/*        'aria-label': 'change date',*/}
-                                {/*    }}*/}
-                                {/*    value={user.age}*/}
-                                {/*    onChange={(e) => setUser({*/}
-                                {/*        ...user, age: e.target.value })*/}
-                                {/*    }*/}
-                                {/*/>*/}
                             </Grid>
                             <Grid xs={12} sm={6} spacing={2}>
                                 <TextField
@@ -441,215 +430,7 @@ const Register = props => {
                 </div>
             </Grid>
         </Grid>
-        // <div
-        //     {...rest}
-        //     className={clsx(classes.root, className)}
-        // >
-        //     <Container>
-        //         <CssBaseline />
-        //         <div className={classes.paper}>
-        //             <Avatar className={classes.avatar}>
-        //                 <LockOutlinedIcon />
-        //             </Avatar>
-        //             <Typography component="h1" variant="h5">
-        //                 Регистрация
-        //             </Typography>
-        //             <form className={classes.form} noValidate onSubmit={handleSubmit}>
-        //                 <div className={classes.root}>
-        //                     <div>
-        //                         <Typography className={classes.title} variant="subtitle2">
-        //                             Обязательно заполни:
-        //                         </Typography>
-        //                         <TextField
-        //                             label="Имя"
-        //                             id="name"
-        //                             helperText="от 3 до 30 символов"
-        //                             className={clsx(classes.margin, classes.textField)}
-        //                             InputProps={{
-        //                                 startAdornment: <InputAdornment position="start">
-        //                                     <AccountCircleIcon/>
-        //                                 </InputAdornment>,
-        //                             }}
-        //                         />
-        //                         <TextField
-        //                             label="Почта"
-        //                             id="email"
-        //                             helperText="от 3 до 200 символов"
-        //                             className={clsx(classes.margin, classes.textField)}
-        //                             InputProps={{
-        //                                 startAdornment: <InputAdornment position="start">
-        //                                     <EmailIcon/>
-        //                                 </InputAdornment>,
-        //                             }}
-        //                         />
-        //                         <FormControl className={clsx(classes.margin, classes.textField)}>
-        //                             <InputLabel htmlFor="password">Пароль</InputLabel>
-        //                             <Input
-        //                                 id="password"
-        //                                 type={values.showPassword ? 'text' : 'password'}
-        //                                 value={values.password}
-        //                                 onChange={handleChange('password')}
-        //                                 endAdornment={
-        //                                     <InputAdornment position="end">
-        //                                         <IconButton
-        //                                             onClick={handleClickShowPassword}
-        //                                             onMouseDown={handleMouseDownPassword}
-        //                                         >
-        //                                             {values.showPassword ? <Visibility /> : <VisibilityOff />}
-        //                                         </IconButton>
-        //                                     </InputAdornment>
-        //                                 }
-        //                             />
-        //                             <FormHelperText id="helperText">от 6 до 200 символов</FormHelperText>
-        //                         </FormControl>
-        //                     </div>
-        //                     <div>
-        //                         <Typography className={classes.title} variant="subtitle2">
-        //                             Можно заполнить позже:
-        //                         </Typography>
-        //                         <TextField
-        //                             label="Био..."
-        //                             id="bio"
-        //                             multiline
-        //                             rows={7}
-        //                             className={clsx(classes.margin, classes.textField)}
-        //                             InputProps={{
-        //                                 startAdornment: <InputAdornment position="start">
-        //                                     <FingerprintIcon/>
-        //                                 </InputAdornment>,
-        //                             }}
-        //                             variant="filled"
-        //                             helperText="До 50 символов"
-        //                         />
-        //                     </div>
-        //                     <div>
-        //                         <TextField
-        //                             label="Аватарка"
-        //                             id="profilePicture"
-        //                             className={clsx(classes.margin, classes.textField)}
-        //                             InputProps={{
-        //                                 startAdornment: <InputAdornment position="start">
-        //                                     <FaceIcon/>
-        //                                 </InputAdornment>,
-        //                             }}
-        //                             variant="filled"
-        //                             helperText="Пока что ссылка на фотку"
-        //                         />
-        //                         <TextField
-        //                             label="Кавер профиля"
-        //                             id="coverPicture"
-        //                             className={clsx(classes.margin, classes.textField)}
-        //                             InputProps={{
-        //                                 startAdornment: <InputAdornment position="start">
-        //                                     <PanoramaIcon/>
-        //                                 </InputAdornment>,
-        //                             }}
-        //                             variant="filled"
-        //                             helperText="Тоже ссылочка"
-        //                         />
-        //                     </div>
-        //                 </div>
-        //             </form>
-        //         </div>
-        //         <Box mt={5}>
-        //             <Copyright />
-        //         </Box>
-        //     </Container>
-        // </div>
     )
 }
 
 export default Register;
-
-// <Grid container spacing={1}>
-//     <Typography className={classes.title}>Обязательно:</Typography>
-//     <Grid item xs={6}>
-//         <TextField
-//             name="username"
-//             variant="outlined"
-//             required
-//             fullWidth
-//             id="username"
-//             label="Имя"
-//             required
-//             autoFocus
-//             autoComplete="username"
-//             value={user.name}
-//             onChange={(e) => setUser({ ...user, name: e.target.value })}
-//         />
-//     </Grid>
-//     <Grid item xs={6}>
-//         <TextField
-//             variant="outlined"
-//             required
-//             fullWidth
-//             id="email"
-//             label="Эмейл"
-//             name="email"
-//             autoComplete="email"
-//             value={user.email}
-//             onChange={(e) => setUser({ ...user, email: e.target.value })}
-//         />
-//     </Grid>
-//     <Grid item xs={6}>
-//         <TextField
-//             variant="outlined"
-//             required
-//             fullWidth
-//             name="password"
-//             label="Пароль"
-//             type="password"
-//             id="password"
-//             autoComplete="current-password"
-//             value={user.password}
-//             onChange={(e) => setUser({ ...user, password: e.target.value })}
-//         />
-//     </Grid>
-//     {/*<Grid item xs={12} sm={6}>*/}
-//     {/*    <TextField*/}
-//     {/*        variant="outlined"*/}
-//     {/*        required*/}
-//     {/*        fullWidth*/}
-//     {/*        id="from"*/}
-//     {/*        label="Страна"*/}
-//     {/*        name="from"*/}
-//     {/*        value={user.from}*/}
-//     {/*        onChange={(e) => setUser({ ...user, from: e.target.value })}*/}
-//     {/*    />*/}
-//     {/*</Grid>*/}
-//     {/*<Grid item xs={12} sm={6}>*/}
-//     {/*    <TextField*/}
-//     {/*        variant="outlined"*/}
-//     {/*        required*/}
-//     {/*        fullWidth*/}
-//     {/*        id="city"*/}
-//     {/*        label="Город"*/}
-//     {/*        name="city"*/}
-//     {/*        value={user.city}*/}
-//     {/*        onChange={(e) => setUser({ ...user, city: e.target.value })}*/}
-//     {/*    />*/}
-//     {/*</Grid>*/}
-//     <Grid item xs={12}>
-//         <FormControlLabel
-//             control={<Checkbox value="allowExtraEmails" color="primary" />}
-//             label="Я хочу получать новости проекта и уведомления на почту"
-//             disabled
-//         />
-//     </Grid>
-// </Grid>
-// <Button
-//     type="submit"
-//     fullWidth
-//     variant="contained"
-//     color="primary"
-//     className={classes.submit}
-// >
-//     Зарегистрироваться
-// </Button>
-// <Grid container justify="flex-end">
-//     <Grid item>
-//         <Link href="/auth/login" variant="body2">
-//             Уже есть аккаунт? Авторизуйтесь
-//         </Link>
-//     </Grid>
-// </Grid>

@@ -182,16 +182,16 @@ const routes = [
                 exact: true,
                 component: lazy(() => import('./views/ProjectList'))
             },
-            // {
-            //     path: '/settings',
-            //     exact: true,
-            //     component: lazy(() => import('views/Settings'))
-            // },
-            // {
-            //     path: '/settings/:tab',
-            //     exact: true,
-            //     component: lazy(() => import('views/Settings'))
-            // },
+            {
+                path: '/settings',
+                exact: true,
+                component: lazy(() => import('./views/Settings'))
+            },
+            {
+                path: '/settings/:tab',
+                exact: true,
+                component: lazy(() => import('./views/Settings'))
+            },
             {
                 path: '/social-feed',
                 restricted: true,

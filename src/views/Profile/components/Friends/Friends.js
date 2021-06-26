@@ -140,7 +140,7 @@ const Friends = props => {
                     className={classes.searchInput}
                     color="inherit"
                     disableUnderline
-                    placeholder="Искать среди друзей..."
+                    placeholder="Введите полное имя друга"
                     type="text"
                     value={value}
                     onChange={onChangeHandler}
@@ -163,7 +163,7 @@ const Friends = props => {
                                         className={classes.avatar}
                                         component={RouterLink}
                                         src={friend.profilePicture}
-                                        to={`/profile/${friend._id}/timeline`}
+                                        to={`/profile/${friend._id}/wall`}
                                     />
                                 </ListItemAvatar>
                                 <ListItemText

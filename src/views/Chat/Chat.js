@@ -71,8 +71,6 @@ const Chat = () => {
         };
     }, []);
 
-    debugger;
-
     let selectedConversation;
 
     if (router.match.params.id) {
@@ -80,8 +78,6 @@ const Chat = () => {
             c => c.id === router.match.params.id
         );
     }
-
-    debugger;
 
     return (
         <Page
