@@ -47,13 +47,7 @@ const NavBar = props => {
     const classes = useStyles();
     const router = useRouter();
 
-    const currentUser = useSelector(state => state.userById);
-
-    // const dispatch = useDispatch();
-    //
-    // useEffect(() => {
-    //     dispatch(getProfileById(currentUser._id));
-    // }, [currentUser._id])
+    const currentUser = useSelector(state => state.auth);
 
     useEffect(() => {
         if (openMobile) {

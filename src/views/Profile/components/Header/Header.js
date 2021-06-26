@@ -21,6 +21,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import {useDispatch, useSelector} from "react-redux";
 import {followUser, unfollowUser} from "../../../../store/actions/userActions";
+import moment from "moment";
 
 
 const useStyles = makeStyles(theme => ({
@@ -146,7 +147,7 @@ const Header = props => {
         }
     }
 
-    const handleChangeCover = () => {};
+    //const handleChangeCover = () => {};
 
     return (
         <div
@@ -189,7 +190,7 @@ const Header = props => {
                         component="h2"
                         variant="body1"
                     >
-                        {currentUser.from}, {currentUser.city}
+                        {currentUser.from}, {currentUser.city}, {moment(currentUser.age).format("LL")}
                     </Typography>
                 </div>
                 {AuthedUser._id !== currentUser._id && (

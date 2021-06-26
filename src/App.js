@@ -18,11 +18,10 @@ import MomentUtils from "@date-io/moment";
 import moment from "moment";
 import 'moment/locale/ru';
 
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 import {createBrowserHistory} from 'history';
 
-import {clearMessage} from "./redux/actions/messages";
 
 import {loadUser} from "./store/actions/authActions";
 
@@ -40,23 +39,6 @@ function App() {
     useEffect(() => {
         dispatch(loadUser());
     }, [dispatch]);
-
-    //const { user: currentUser } = useSelector((state) => state.auth);
-
-    // useEffect(() => {
-    //     history.listen((location) => {
-    //         dispatch(clearMessage());
-    //     });
-    // }, [dispatch]);
-
-    // useEffect(() => {
-    //     if (currentUser) {
-    //         const userProps = currentUser
-    //         return userProps
-    //     } else {
-    //         return null
-    //     }
-    // }, [currentUser]);
 
     return (
         <>

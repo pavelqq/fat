@@ -106,7 +106,7 @@ const useStyles = makeStyles(theme => ({
 const TopBar = props => {
     const {onOpenNavBarMobile, className, ...rest} = props;
 
-    const user = useSelector((state) => state.auth);
+    const currentUser = useSelector((state) => state.auth);
 
     const classes = useStyles();
     const {history} = useRouter();
@@ -263,9 +263,9 @@ const TopBar = props => {
                         onClick={handleSignOut}
                     >
                         <InputIcon className={classes.logoutIcon}/>
-                        {user.name
+                        {currentUser.name
                             ? <>
-                                {user.name} Выйти
+                                {currentUser.name} Выйти
                             </>
                             : <>
                                 Вход
@@ -280,9 +280,9 @@ const TopBar = props => {
                         onClick={handleLogout}
                     >
                         <InputIcon className={classes.logoutIcon}/>
-                        {user.name
+                        {currentUser.name
                             ? <>
-                                {user.name} Выйти
+                                {currentUser.name} Выйти
                             </>
                             : <>
                                 Вход

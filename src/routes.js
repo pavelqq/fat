@@ -11,23 +11,19 @@ const routes = [
     {
         path: '/',
         exact: true,
-        restricted: false,
         component: () => <Redirect to="./presentation" />,
     },
     {
         path: '/auth',
-        restricted: false,
         component: AuthLayout,
         routes: [
             {
                 path: '/auth/register',
-                restricted: false,
                 exact: true,
                 component: lazy(() => import('./views/Register'))
             },
             {
                 path: '/auth/login',
-                restricted: false,
                 exact: true,
                 component: lazy(() => import('./views/Login'))
             },
@@ -38,12 +34,10 @@ const routes = [
     },
     {
         path: '/errors',
-        restricted: false,
         component: ErrorLayout,
         routes: [
             {
                 path: '/errors/Error404',
-                restricted: false,
                 exact: true,
                 component: lazy(() => import('./views/Error404'))
             },
@@ -54,7 +48,6 @@ const routes = [
     },
     {
         route: '*',
-        restricted: true,
         component: DashboardLayout,
         routes: [
             // {
@@ -69,13 +62,11 @@ const routes = [
             // },
             {
                 path: '/chat',
-                restricted: true,
                 exact: true,
                 component: lazy(() => import('./views/Chat'))
             },
             {
                 path: '/chat/:id',
-                restricted: true,
                 exact: true,
                 component: lazy(() => import('./views/Chat'))
             },
@@ -136,49 +127,41 @@ const routes = [
             // },
             {
                 path: '/overview',
-                restricted: true,
                 exact: true,
                 component: OverviewView
             },
             {
                 path: '/presentation',
-                restricted: false,
                 exact: true,
                 component: PresentationView
             },
             {
                 path: '/profile/:id',
-                restricted: true,
                 exact: true,
                 component: lazy(() => import('./views/Profile'))
             },
             {
                 path: '/profile/:id/:tab',
-                restricted: true,
                 exact: true,
                 component: lazy(() => import('./views/Profile'))
             },
             {
                 path: '/projects/create',
-                restricted: true,
                 exact: true,
                 component: lazy(() => import('./views/ProjectCreate'))
             },
             {
                 path: '/projects/:id',
-                restricted: true,
                 exact: true,
                 component: lazy(() => import('./views/ProjectDetails'))
             },
             {
                 path: '/projects/:id/:tab',
-                restricted: true,
                 exact: true,
                 component: lazy(() => import('./views/ProjectDetails'))
             },
             {
                 path: '/projects',
-                restricted: true,
                 exact: true,
                 component: lazy(() => import('./views/ProjectList'))
             },
@@ -194,7 +177,6 @@ const routes = [
             },
             {
                 path: '/social-feed',
-                restricted: true,
                 exact: true,
                 component: lazy(() => import('./views/SocialFeed'))
             },
@@ -203,9 +185,6 @@ const routes = [
             //     exact: true,
             //     component: lazy(() => import('views/GettingStarted'))
             // },
-            // {
-            //     component: () => <Redirect to="/errors/error-404" />
-            // }
             {
                 component: () => <Redirect to="./errors/error-404" />
             }
