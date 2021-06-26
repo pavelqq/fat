@@ -1,13 +1,37 @@
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const Joi = require("joi");
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcrypt");
 const { User } = require("../models/user");
 
 
 //обновить пользовательскую информацию
+// router.put("/:id", async (req, res) => {
+//     if (req.body.userId === req.params.id || req.body.isAdmin) {
+//         if (req.body.password !== "") {
+//             try {
+//                 const salt = await bcrypt.genSalt(10);
+//                 req.body.password = await bcrypt.hash(req.body.password, salt);
+//             } catch (e) {
+//                 return res.status(500).json(e);
+//             }
+//         }
+//         try {
+//             const user = await User.findByIdAndUpdate(req.params.id, {
+//                 $set: req.body,
+//             });
+//             res.status(200).json("Информация обновлена");
+//         } catch (e) {
+//             return res.status(500).json(e);
+//         }
+//     } else {
+//         return res.status(403).json("Вы можете обновить информацию только на своем аккаунте!");
+//     }
+// });
 router.put("/:id", async (req, res) => {
     if (req.body.userId === req.params.id || req.body.isAdmin) {
-        if (req.body.password) {
+        if (req.body.password !== "") {
             try {
                 const salt = await bcrypt.genSalt(10);
                 req.body.password = await bcrypt.hash(req.body.password, salt);
@@ -15,14 +39,32 @@ router.put("/:id", async (req, res) => {
                 return res.status(500).json(e);
             }
         }
-        try {
-            const user = await User.findByIdAndUpdate(req.params.id, {
-                $set: req.body,
-            });
-            res.status(200).json("Информация обновлена");
-        } catch (e) {
-            return res.status(500).json(e);
-        }
+        const schema = Joi.object({
+            userId: Joi.string(),
+            name: Joi.string().min(3).max(30).required(),
+            email: Joi.string().min(3).max(200).required().email(),
+            password: Joi.string().min(6).max(200).required(),
+            bio: Joi.string().max(60),
+            profilePicture: Joi.string(),
+            coverPicture: Joi.string(),
+            isAdmin: Joi.boolean(),
+            city: Joi.string().min(3).max(30),
+            from: Joi.string().min(3).max(30),
+            role: Joi.number(),
+            age: Joi.date().raw(),
+        });
+
+        const { error } = schema.validate(req.body);
+
+        if (error) return res.status(400).send(error.details[0].message);
+
+        const { name, email, password, bio, profilePicture, coverPicture, city, from, role, age } = req.body;
+
+        const user = await User.findByIdAndUpdate(req.params.id, {
+            $set: req.body,
+        });
+
+        res.status(200).json("Информация обновлена");
     } else {
         return res.status(403).json("Вы можете обновить информацию только на своем аккаунте!");
     }

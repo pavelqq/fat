@@ -12,7 +12,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ChatIcon from '@material-ui/icons/ChatOutlined';
 import EditIcon from '@material-ui/icons/Edit';
 
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getProfileById} from "../../../store/actions/userActions";
 
 
@@ -100,11 +100,15 @@ const ProfileExample = props => {
 
     const classes = useStyles();
 
-    const authedUser = useSelector(state => state.auth)
+    const dispatch = useDispatch();
+
+    const authUser = useSelector(state => state.auth)
 
     useEffect(() => {
-        getProfileById(authedUser)
-    }, [authedUser])
+        dispatch(getProfileById(authUser._id))
+    }, [authUser._id, dispatch])
+
+    const currentUser = useSelector(state => state.userById)
 
     return (
         <div
@@ -113,33 +117,33 @@ const ProfileExample = props => {
         >
             <div
                 className={classes.cover}
-                style={{backgroundImage: `url(${authedUser.coverPicture})`}}
+                style={{backgroundImage: `url(${currentUser.coverPicture})`}}
             />
             <Hidden smDown>
                 <div className={classes.container}>
                     <Avatar
                         alt="Person"
                         className={classes.avatar}
-                        src={authedUser.profilePicture}
+                        src={currentUser.profilePicture}
                     />
                     <div className={classes.details}>
                         <Typography
                             component="h2"
                             variant="overline"
                         >
-                            {authedUser.bio}
+                            {currentUser.bio}
                         </Typography>
                         <Typography
                             component="h1"
                             variant="h2"
                         >
-                            {authedUser.name}
+                            {currentUser.name}
                         </Typography>
                         <Typography
                             component="h2"
                             variant="body1"
                         >
-                            {authedUser.from}, {authedUser.city}
+                            {currentUser.from}, {currentUser.city}
                         </Typography>
                     </div>
                 </div>
@@ -149,26 +153,26 @@ const ProfileExample = props => {
                     <Avatar
                         alt="Person"
                         className={classes.avatarSmall}
-                        src={authedUser.profilePicture}
+                        src={currentUser.profilePicture}
                     />
                     <div className={classes.detailsSmall}>
                         <Typography
                             component="h2"
                             variant="overline"
                         >
-                            {authedUser.bio}
+                            {currentUser.bio}
                         </Typography>
                         <Typography
                             component="h1"
                             variant="h2"
                         >
-                            {authedUser.name}
+                            {currentUser.name}
                         </Typography>
                         <Typography
                             component="h2"
                             variant="body1"
                         >
-                            {authedUser.from}, {authedUser.city}
+                            {currentUser.from}, {currentUser.city}
                         </Typography>
                     </div>
                 </div>

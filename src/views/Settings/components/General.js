@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import clsx from "clsx";
 import {makeStyles} from "@material-ui/core/styles";
 import {useDispatch, useSelector} from "react-redux";
-import {signUp} from "../../../store/actions/authActions";
+import {signIn, signUp} from "../../../store/actions/authActions";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
-import {Hidden, MenuItem, Paper} from "@material-ui/core";
+import {Divider, Hidden, MenuItem, Paper} from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
@@ -27,6 +27,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import PublicIcon from "@material-ui/icons/Public";
 import Button from "@material-ui/core/Button";
 import ProfileExample from "./ProfileExample";
+import {updateUser} from "../../../store/actions/userActions";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -38,25 +39,35 @@ const useStyles = makeStyles(theme => ({
     },
     form: {
         width: '82%',
-        margin: theme.spacing(3, '9%', 5),
+        margin: theme.spacing(1, '9%', 5),
     },
     profileExample: {
         marginTop: theme.spacing(3)
     },
     submit: {
-        margin: theme.spacing(3, '25%', 2),
-        width: '40%',
+        margin: theme.spacing(3, '25%', 3),
+        width: '50%',
     },
     textField: {
         width: '100%'
     },
+    acceptNewProfile: {
+        marginTop: theme.spacing(2),
+    },
+    margin: {
+        marginTop: theme.spacing(1)
+    },
+    password: {}
 }));
 
 
 const General = props => {
-    const {className, ...rest} = props;
+    const {id, className, ...rest} = props;
 
     const classes = useStyles();
+
+    const dispatch = useDispatch();
+    const authUser = useSelector(state => state.auth)
 
     const [pass, setPass] = useState({
         password: '',
@@ -102,35 +113,38 @@ const General = props => {
     ];
 
     const [user, setUser] = useState({
-        name: "",
-        email: "",
-        password: "",
-        bio: "",
-        profilePicture: "",
-        coverPicture: "",
-        isAdmin: "",
-        city: "",
-        from: "",
-        role: "",
-        age: ""
+        userId: authUser._id,
+        name: authUser.name,
+        email: authUser.email,
+        password: authUser.password,
+        bio: authUser.bio,
+        profilePicture: authUser.profilePicture,
+        coverPicture: authUser.coverPicture,
+        isAdmin: authUser.isAdmin,
+        city: authUser.city,
+        from: authUser.from,
+        role: authUser.role,
+        age: authUser.age
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        //dispatch(signUp(user));
-        setUser({
-            name: "",
-            email: "",
-            password: "",
-            bio: "",
-            profilePicture: "",
-            coverPicture: "",
-            isAdmin: "",
-            city: "",
-            from: "",
-            role: "",
-            age: ""
-        });
+        dispatch(updateUser(user, authUser._id));
+        dispatch(signIn(user.email, user.password))
+        // setUser({
+        //     userId: "",
+        //     name: "",
+        //     email: "",
+        //     password: "",
+        //     bio: "",
+        //     profilePicture: "",
+        //     coverPicture: "",
+        //     isAdmin: "",
+        //     city: "",
+        //     from: "",
+        //     role: "",
+        //     age: ""
+        // });
     };
 
     return (
@@ -140,19 +154,20 @@ const General = props => {
             className={clsx(classes.root, className)}
         >
             <Grid item xs={12} sm={5} md={7} className={classes.profileExample}>
-                <ProfileExample/>
+                <ProfileExample />
+                <Typography variant="subtitle1" align={"center"}>
+                    Чтобы изменить информацию в профиле, введите "пароль" и нажмите сохранить.
+                </Typography>
             </Grid>
             <Grid item xs={12} sm={7} md={5}>
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <TextField
-                        label="Имя"
                         id="name"
-                        required
                         autoFocus
                         autoComplete="name"
                         value={user.name}
                         onChange={(e) => setUser({...user, name: e.target.value})}
-                        helperText="от 3 до 30 символов"
+                        helperText="Имя: от 3 до 30 символов"
                         className={clsx(classes.margin, classes.textField)}
                         InputProps={{
                             startAdornment: <InputAdornment position="start">
@@ -160,49 +175,6 @@ const General = props => {
                             </InputAdornment>,
                         }}
                     />
-                    <TextField
-                        label="Почта"
-                        id="email"
-                        helperText="от 3 до 200 символов"
-                        className={clsx(classes.margin, classes.textField)}
-                        required
-                        autoFocus
-                        autoComplete="email"
-                        value={user.email}
-                        onChange={(e) => setUser({...user, email: e.target.value})}
-                        InputProps={{
-                            startAdornment: <InputAdornment position="start">
-                                <EmailIcon/>
-                            </InputAdornment>,
-                        }}
-                    />
-                    <FormControl className={clsx(classes.margin, classes.textField)}>
-                        <InputLabel htmlFor="password">Пароль</InputLabel>
-                        <Input
-                            id="password"
-                            type={pass.showPassword ? 'text' : 'password'}
-                            required
-                            autoFocus
-                            autoComplete="username"
-                            value={user.password}
-                            onChange={(e) => setUser({
-                                    ...user, password: e.target.value
-                                })
-                                && handleChange('password')
-                            }
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                    >
-                                        {pass.showPassword ? <Visibility/> : <VisibilityOff/>}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                        />
-                        <FormHelperText id="helperText">от 6 до 200 символов</FormHelperText>
-                    </FormControl>
                     <TextField
                         label="Био..."
                         id="bio"
@@ -358,7 +330,47 @@ const General = props => {
                             />
                         </Grid>
                     </Grid>
-                    <Grid container>
+                    <Grid container className={classes.acceptNewProfile}>
+                        <TextField
+                            id="email"
+                            helperText="Email: от 3 до 200 символов"
+                            className={clsx(classes.margin, classes.textField)}
+                            autoFocus
+                            autoComplete="email"
+                            value={user.email}
+                            onChange={(e) => setUser({...user, email: e.target.value})}
+                            InputProps={{
+                                startAdornment: <InputAdornment position="start">
+                                    <EmailIcon/>
+                                </InputAdornment>,
+                            }}
+                        />
+                        <FormControl className={clsx(classes.margin, classes.textField, classes.password)}>
+                            <InputLabel htmlFor="password">Пароль</InputLabel>
+                            <Input
+                                id="password"
+                                type={pass.showPassword ? 'text' : 'password'}
+                                autoFocus
+                                autoComplete="username"
+                                value={user.password}
+                                onChange={(e) => setUser({
+                                        ...user, password: e.target.value
+                                    })
+                                    && handleChange('password')
+                                }
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                        >
+                                            {pass.showPassword ? <Visibility/> : <VisibilityOff/>}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                            />
+                            <FormHelperText id="helperText">от 6 до 200 символов</FormHelperText>
+                        </FormControl>
                         <Button
                             type="submit"
                             fullWidth

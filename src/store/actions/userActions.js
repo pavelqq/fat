@@ -72,3 +72,22 @@ export function followUser(authedUser, currentUser) {
         }
     }
 };
+
+export const updateUser = (updatedUser, id) => {
+    return (dispatch) => {
+        axios
+            .put(`${url}/users/${id}`, updatedUser, setHeaders())
+            .then((user) => {
+                dispatch({
+                    type: "UPDATE_USER",
+                    user: user.data,
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+                toast.error(error.response?.data, {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                });
+            });
+    };
+};

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
-import {Tabs, Tab, Divider, colors } from '@material-ui/core';
+import {Tabs, Tab, Divider, colors} from '@material-ui/core';
 
 import Page from "../../components/Page";
 import Header from "./components/Header";
@@ -28,9 +28,7 @@ const useStyles = makeStyles(theme => ({
         marginLeft: theme.spacing(2),
         marginBottom: theme.spacing(6)
     },
-    innerContent: {
-
-    }
+    innerContent: {}
 }));
 
 const Profile = props => {
@@ -70,7 +68,7 @@ const Profile = props => {
             className={classes.root}
             title="Profile"
         >
-            <Header />
+            <Header/>
             <div className={classes.inner}>
                 <Tabs
                     className={classes.tabs}
@@ -90,9 +88,9 @@ const Profile = props => {
                 <Divider className={classes.divider}/>
                 <div className={classes.content}>
                     <div className={classes.innerContent}>
-                    {tab === 'wall' && <Wall/>}
-                    {tab === 'friends' && <Friends id={id}/>}
-                    {tab === 'plans' && <Plans/>}
+                        {tab === 'wall' && <Wall/>}
+                        {tab === 'friends' && <Friends id={id}/>}
+                        {tab === 'plans' && <Plans/>}
                     </div>
                 </div>
             </div>

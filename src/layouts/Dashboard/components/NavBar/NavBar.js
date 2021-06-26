@@ -8,7 +8,8 @@ import navigationConfig from './navigationConfig';
 import Navigation from "../../../../components/Navigation";
 import useRouter from "../../../../utils/useRouter";
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {getProfileById} from "../../../../store/actions/userActions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -45,7 +46,14 @@ const NavBar = props => {
 
     const classes = useStyles();
     const router = useRouter();
-    const currentUser = useSelector(state => state.auth);
+
+    const currentUser = useSelector(state => state.userById);
+
+    // const dispatch = useDispatch();
+    //
+    // useEffect(() => {
+    //     dispatch(getProfileById(currentUser._id));
+    // }, [currentUser._id])
 
     useEffect(() => {
         if (openMobile) {

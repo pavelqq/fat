@@ -157,14 +157,14 @@ const Header = props => {
                 className={classes.cover}
                 style={{backgroundImage: `url(${currentUser.coverPicture})`}}
             >
-                <Button
-                    className={classes.changeButton}
-                    variant="contained"
-                    onClick={handleChangeCover}
-                >
-                    <AddPhotoIcon className={classes.addPhotoIcon}/>
-                    Изменить фон
-                </Button>
+                {/*<Button*/}
+                {/*    className={classes.changeButton}*/}
+                {/*    variant="contained"*/}
+                {/*    onClick={handleChangeCover}*/}
+                {/*>*/}
+                {/*    <AddPhotoIcon className={classes.addPhotoIcon}/>*/}
+                {/*    Изменить фон*/}
+                {/*</Button>*/}
             </div>
             <div className={classes.container}>
                 <Avatar
@@ -235,7 +235,7 @@ const Header = props => {
                             className={classes.actionButtons}
                             color="primary"
                             component={RouterLink}
-                            to="/settings"
+                            to="/settings/general"
                             variant="outlined"
                         >
                             <EditIcon className={classes.mailIcon}/>

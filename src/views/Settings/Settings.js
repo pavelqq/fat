@@ -35,7 +35,9 @@ const useStyles = makeStyles(theme => ({
 const Settings = props => {
     const {match, history} = props;
     const classes = useStyles();
-    const {id, tab} = match.params;
+    const {tab} = match.params;
+
+    const id = useSelector(state => state.auth._id)
 
     const dispatch = useDispatch();
 
@@ -83,7 +85,7 @@ const Settings = props => {
                 <Divider className={classes.divider}/>
                 <div className={classes.content}>
                     <div className={classes.innerContent}>
-                    {tab === 'general' && <General/>}
+                    {tab === 'general' && <General id={id}/>}
                     {tab === 'access' && <Access/>}
                     </div>
                 </div>
