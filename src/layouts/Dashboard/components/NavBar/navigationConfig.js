@@ -132,7 +132,7 @@ export default [
             //     href: '/management/customers/1/summary'
             //   },
             //   {
-            //     title: 'Plans',
+            //     title: 'Projects',
             //     href: '/management/projects'
             //   },
             //   {

@@ -4,12 +4,14 @@ import authReducer from './authReducer';
 import userReducer from "./userReducer";
 import postReducer from "./postReducer";
 import friendsReducer from "./friendsReducer";
+import projectReducer from "./projectReducer";
 
 const rootReducer = combineReducers({ 
     todos: todoReducer,
     auth: authReducer,
     userById: userReducer,
     posts: postReducer,
+    projects: projectReducer,
     friendsList: friendsReducer,
 })
 

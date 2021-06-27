@@ -9,7 +9,7 @@ const postSchema = new mongoose.Schema({
         author: {type: String, required: true},
         liked: {type: Boolean},
         likes: {type: Array, default: []},
-        uid: String,
+        uid: {type: String},
         date: {type: Date, default: new Date()},
     },
 );

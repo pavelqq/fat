@@ -7,6 +7,8 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import ProjectCard from "../../../../components/ProjectCard";
 
 import axios from "../../../../utils/axios";
+import {useDispatch, useSelector} from "react-redux";
+import {getProjects} from "../../../../store/actions/projectActions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -40,29 +42,37 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const Plans = props => {
+const Projects = props => {
     const {className, ...rest} = props;
 
     const classes = useStyles();
-    const [projects, setProjects] = useState([]);
+    //const [projects, setProjects] = useState([]);
+
+    const dispatch = useDispatch();
+    const currentUser = useSelector((state) => state.userById);
+    const projects = useSelector(state => state.projects)
 
     useEffect(() => {
-        let mounted = true;
+        getProjects(currentUser._id)
+    }, [dispatch, currentUser._id])
 
-        const fetchProjects = () => {
-            axios.get('/api/projects').then(response => {
-                if (mounted) {
-                    setProjects(response.data.projects);
-                }
-            });
-        };
-
-        fetchProjects();
-
-        return () => {
-            mounted = false;
-        };
-    }, []);
+    // useEffect(() => {
+    //     let mounted = true;
+    //
+    //     const fetchProjects = () => {
+    //         axios.get('/api/projects').then(response => {
+    //             if (mounted) {
+    //                 setProjects(response.data.projects);
+    //             }
+    //         });
+    //     };
+    //
+    //     fetchProjects();
+    //
+    //     return () => {
+    //         mounted = false;
+    //     };
+    // }, []);
 
     return (
         <div
@@ -74,13 +84,13 @@ const Plans = props => {
                     className={classes.title}
                     variant="h5"
                 >
-                    Активные планы
+                    Проекты пользователя
                 </Typography>
                 <Button
                     component={RouterLink}
-                    to="/profile/user/projects"
+                    to={`/projects`}
                 >
-                    Посмотреть все
+                    Все проекты
                     <KeyboardArrowRightIcon className={classes.arrowIcon}/>
                 </Button>
             </div>
@@ -95,4 +105,4 @@ const Plans = props => {
     );
 };
 
-export default Plans;
+export default Projects;

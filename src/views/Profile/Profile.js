@@ -7,7 +7,7 @@ import Page from "../../components/Page";
 import Header from "./components/Header";
 import Wall from "./components/Wall";
 import Friends from "./components/Friends";
-import Plans from "../Overview/components/Plans";
+import Projects from "../Overview/components/Projects";
 import {useDispatch, useSelector} from "react-redux";
 import {getProfileById} from "../../store/actions/userActions";
 
@@ -50,9 +50,9 @@ const Profile = props => {
     console.log(appState);
 
     const tabs = [
-        {value: 'wall', label: 'Фото и Записи'},
+        {value: 'wall', label: 'Записи'},
         {value: 'friends', label: 'Друзья'},
-        {value: 'plans', label: 'Планы'},
+        {value: 'projects', label: 'Проекты'},
     ];
 
     if (!tab) {
@@ -90,7 +90,7 @@ const Profile = props => {
                     <div className={classes.innerContent}>
                         {tab === 'wall' && <Wall/>}
                         {tab === 'friends' && <Friends id={id}/>}
-                        {tab === 'plans' && <Plans/>}
+                        {tab === 'projects' && <Projects/>}
                     </div>
                 </div>
             </div>

@@ -38,6 +38,7 @@ export const signIn = (email, password) => {
             })
             .catch((error) => {
                 console.log(error.response);
+
                 toast.error(error.response?.data, {
                     position: toast.POSITION.BOTTOM_RIGHT,
                 });
@@ -47,9 +48,9 @@ export const signIn = (email, password) => {
 
 export const signOut = () => {
     return (dispatch) => {
-        // dispatch({
-        //   type: "CLEAR_TODOS",
-        // });
+        dispatch({
+          type: "CLEAR_TODOS",
+        });
         dispatch({
             type: "SIGN_OUT",
         });

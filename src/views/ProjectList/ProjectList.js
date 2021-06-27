@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 
 import Page from "../../components/Page";
@@ -25,10 +25,14 @@ const useStyles = makeStyles(theme => ({
 const ProjectList = () => {
     const classes = useStyles();
 
+    // const [projects, setProjects] = useState({
+    //     description: "",
+    // });
+
     return (
         <Page
             className={classes.root}
-            title="Projects List"
+            title="Список проектов"
         >
             <Header className={classes.header}/>
             <Filter className={classes.filter}/>

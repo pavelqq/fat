@@ -15,6 +15,8 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import axios from "../../../../utils/axios";
 import Paginate from "../../../../components/Paginate";
 import ProjectCard from "../../../../components/ProjectCard";
+import {useDispatch} from "react-redux";
+import {getProjects} from "../../../../store/actions/projectActions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -62,6 +64,13 @@ const Projects = props => {
     const [openSort, setOpenSort] = useState(false);
     const [selectedSort, setSelectedSort] = useState('Популярное');
     const [mode, setMode] = useState('grid');
+
+    // const dispatch = useDispatch();
+    //
+    // useEffect(() => {
+    //     getProjects()
+    // }, [])
+
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
