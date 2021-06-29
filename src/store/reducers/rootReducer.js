@@ -10,8 +10,8 @@ const rootReducer = combineReducers({
     todos: todoReducer,
     auth: authReducer,
     userById: userReducer,
-    posts: postReducer,
-    projects: projectReducer,
+    postsList: postReducer,
+    projectsList: projectReducer,
     friendsList: friendsReducer,
 })
 

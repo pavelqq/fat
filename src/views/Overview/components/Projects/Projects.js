@@ -43,17 +43,17 @@ const useStyles = makeStyles(theme => ({
 
 
 const Projects = props => {
-    const {className, ...rest} = props;
+    const {id, className, ...rest} = props;
 
     const classes = useStyles();
 
     const dispatch = useDispatch();
-    const currentUser = useSelector((state) => state.userById);
-    const projects = useSelector(state => state.projects)
 
     useEffect(() => {
-        getProjects(currentUser._id)
-    }, [dispatch, currentUser._id])
+        dispatch(getProjects(id))
+    }, [dispatch, id])
+
+    const projects = useSelector(state => state.projectsList)
 
     return (
         <div

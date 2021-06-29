@@ -1,11 +1,22 @@
 export const url = "http://localhost:5000/api";
 
 export const setHeaders = () => {
-  const headers = {
-    headers: {
-      "x-auth-token": localStorage.getItem("token"),
-    },
-  };
+    const headers = {
+        headers: {
+            "x-auth-token": localStorage.getItem("token"),
+        },
+    };
 
-  return headers;
+    return headers;
 };
+
+export const setProjectHeaders = () => {
+    const headers = {
+      headers: {
+        "x-auth-token": localStorage.getItem("token"),
+        "Content-Type": 'application/json'
+      },
+    };
+
+    return headers;
+}

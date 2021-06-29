@@ -94,26 +94,26 @@ const BLOCK_TYPES = [
         tooltip: 'Блок кода',
         icon: CodeIcon
     },
-    {
-        blockType: 'left',
-        tooltip: 'Выровнять по левому краю',
-        icon: FormatAlignLeftIcon
-    },
-    {
-        blockType: 'center',
-        tooltip: 'Выровнять по центру',
-        icon: FormatAlignCenterIcon
-    },
-    {
-        blockType: 'right',
-        tooltip: 'Выровнять по правому краю',
-        icon: FormatAlignRightIcon
-    },
-    {
-        blockType: 'justify',
-        tooltip: 'Выровнять по ширине',
-        icon: FormatAlignJustifyIcon
-    }
+    // {
+    //     blockType: 'left',
+    //     tooltip: 'Выровнять по левому краю',
+    //     icon: FormatAlignLeftIcon
+    // },
+    // {
+    //     blockType: 'center',
+    //     tooltip: 'Выровнять по центру',
+    //     icon: FormatAlignCenterIcon
+    // },
+    // {
+    //     blockType: 'right',
+    //     tooltip: 'Выровнять по правому краю',
+    //     icon: FormatAlignRightIcon
+    // },
+    // {
+    //     blockType: 'justify',
+    //     tooltip: 'Выровнять по ширине',
+    //     icon: FormatAlignJustifyIcon
+    // }
 ];
 
 const INLINE_STYLES = [

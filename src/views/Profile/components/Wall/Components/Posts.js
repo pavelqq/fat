@@ -32,11 +32,11 @@ const Posts = props => {
 
     const dispatch = useDispatch();
 
-    const posts = useSelector(state => state.posts)
+    const posts = useSelector(state => state.postsList)
 
     useEffect(() => {
         dispatch(getPosts(currentUser._id));
-    }, [post._id, dispatch, currentUser._id])
+    }, [dispatch, currentUser._id])
 
     return (
         <div

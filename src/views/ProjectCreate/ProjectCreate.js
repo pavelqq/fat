@@ -244,42 +244,13 @@ const ProjectCreate = () => {
     }
 
     //about project
-    const initialValues = {
-        tag: '',
-        tags: [],
-    };
 
+    // const initialValues = {
+    //     tag: '',
+    //     tags: [],
+    // };
     // const [values, setValues] = useState({...initialValues});
     //const [calendarTrigger, setCalendarTrigger] = useState(null);
-
-    const handleFieldChange = (event, field, value) => {
-        event.persist && event.persist();
-        setProject(project => ({
-            ...project,
-            [field]: value
-        }));
-    };
-
-    const handleTagAdd = () => {
-        setProject(project => {
-            const newValues = {...project};
-            if (newValues.tag && !newValues.tags.includes(newValues.tag)) {
-                newValues.tags = [...newValues.tags];
-                newValues.tags.push(newValues.tag);
-            }
-            newValues.tag = '';
-            return newValues;
-        });
-    };
-
-    const handleTagDelete = tag => {
-        setProject(project => {
-            const newValues = {...project};
-            newValues.tags = newValues.tags.filter(t => t !== tag);
-            return newValues;
-        });
-    };
-
     // const [selectedStartDate, setSelectedStartDate] = useState(moment.now());
     // const handleStartDateChange = (date) => {
     //     setSelectedStartDate(date);
@@ -289,14 +260,11 @@ const ProjectCreate = () => {
     // const handleEndDateChange = (date) => {
     //     setSelectedEndDate(date);
     // };
-
     // const handleCalendarOpen = trigger => {
     //     setCalendarTrigger(trigger);
     // };
-
     // const handleCalendarChange = () => {
     // };
-
     // const handleCalendarAccept = date => {
     //     setValues(values => ({
     //         ...values,
@@ -314,11 +282,37 @@ const ProjectCreate = () => {
     //         ? moment()
     //         : moment(values.startDate).add(1, 'day');
     // const calendarValue = values[calendarTrigger];
-
     //Заворачиваем все в newProject и отправляем в аддПроджект и дальше на сервак
-
     // const contentState = editorState.getCurrentContent();
     // console.log('content state', convertToRaw(contentState));
+
+    const handleFieldChange = (event, field, value) => {
+        event.persist && event.persist();
+        setProject(project => ({
+            ...project,
+            [field]: value
+        }));
+    };
+
+    const handleTagAdd = () => {
+        setProject(project => {
+            const newValues = {...project};
+            if (newValues.tag && !newValues.tags.text.includes(newValues.tag)) {
+                newValues.tags.text = [...newValues.tags.text];
+                newValues.tags.text.push(newValues.tag);
+            }
+            newValues.tag = '';
+            return newValues;
+        });
+    };
+
+    const handleTagDelete = tag => {
+        setProject(project => {
+            const newValues = {...project};
+            newValues.tags.text = newValues.tags.text.filter(t => t !== tag);
+            return newValues;
+        });
+    };
 
     const [slider, setSlider] = useState([1]);
     const handleChange = (event, newValue) => {
@@ -328,10 +322,14 @@ const ProjectCreate = () => {
     const [project, setProject] = useState({
         title: '',
         tag: '',
-        tags: ['Тренировка', 'Диета'],
+        tags: {
+            text: ['Тренировка', 'Диета'],
+        },
         startDate: '',
         endDate: ''
     });
+
+
 
     const dispatch = useDispatch();
 
@@ -340,7 +338,7 @@ const ProjectCreate = () => {
         const newProject = {
             ...project,
             difficult: _.toNumber(slider),
-            description: convertToRaw(editorState.getCurrentContent()),
+            description: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
             date: new Date()
         }
         delete newProject.tag
@@ -399,14 +397,17 @@ const ProjectCreate = () => {
                                     Теги для поиска:
                                 </Typography>
                                 <div className={classes.tags}>
-                                    {project.tags.map(tag => (
-                                        <Chip
-                                            deleteIcon={<CloseIcon/>}
-                                            key={tag}
-                                            label={tag}
-                                            onDelete={() => handleTagDelete(tag)}
-                                        />
-                                    ))}
+                                    {project.tags.text.forEach( function (el) {
+                                        console.log(el)
+                                    })}
+                                    {/*{project.tags.text.map(tag => (*/}
+                                    {/*    <Chip*/}
+                                    {/*        deleteIcon={<CloseIcon/>}*/}
+                                    {/*        key={tag}*/}
+                                    {/*        label={tag}*/}
+                                    {/*        onDelete={() => handleTagDelete(tag)}*/}
+                                    {/*    />*/}
+                                    {/*))}*/}
                                 </div>
                             </div>
                             <div className={classes.formGroup}>
@@ -470,40 +471,6 @@ const ProjectCreate = () => {
                                     min={1}
                                     max={10}
                                 />
-                                {/*<Grid container spacing={1}>*/}
-                                {/*    <Grid item>*/}
-                                {/*        <WhatshotIcon className={classes.hot} />*/}
-                                {/*    </Grid>*/}
-                                {/*    <Grid item xs>*/}
-                                {/*        <Slider*/}
-                                {/*            value={slider}*/}
-                                {/*            onChange={handleChange}*/}
-                                {/*            aria-labelledby="slider"*/}
-                                {/*            step={1}*/}
-                                {/*            marks*/}
-                                {/*            min={1}*/}
-                                {/*            max={10}*/}
-                                {/*        />*/}
-                                {/*    </Grid>*/}
-                                {/*</Grid>*/}
-                                {/*<Slider*/}
-                                {/*    defaultValue={1}*/}
-                                {/*    valueLabelDisplay="auto"*/}
-                                {/*    getAriaValueText={project.difficult}*/}
-                                {/*    step={1}*/}
-                                {/*    marks*/}
-                                {/*    min={1}*/}
-                                {/*    max={10}*/}
-                                {/*    helperText="Придумайте название для проекта"*/}
-                                {/*    // name="difficult"*/}
-                                {/*    // onChange={event =>*/}
-                                {/*    //     handleFieldChange(event, 'difficult', event.target.getAriaValueText)*/}
-                                {/*    // }*/}
-                                {/*    value={project.difficult}*/}
-                                {/*    onChange={(e) => setProject({*/}
-                                {/*        ...project, difficult: e.target.value })*/}
-                                {/*    }*/}
-                                {/*/>*/}
                             </div>
                         </CardContent>
                         {/*<DatePicker*/}
@@ -543,11 +510,6 @@ const ProjectCreate = () => {
                                         placeholder="Опишите детали проекта..."
                                         ref={editorRef}
                                         spellCheck
-                                        //name="description"
-                                        // onChange={event =>
-                                        //     handleFieldChange(event, 'description', event.target.value)
-                                        // }
-                                        // value={values.description}
                                     />
                                 </div>
                             </Paper>

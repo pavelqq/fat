@@ -20,9 +20,12 @@ import ShareIcon from '@material-ui/icons/Share';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
+import { Editor, EditorState, convertFromRaw } from "draft-js";
+
 import getInitials from "../../utils/getInitials";
 import Label from "../Label";
 import moment from 'moment';
+import {generateRandomColor} from "../../utils/generateRandomColor";
 
 
 const useStyles = makeStyles(theme => ({
@@ -37,13 +40,16 @@ const useStyles = makeStyles(theme => ({
         }
     },
     description: {
-        padding: theme.spacing(2, 3, 1, 3)
+        padding: theme.spacing(2, 3, 1, 6),
     },
     tags: {
-        padding: theme.spacing(0, 3, 1, 3),
+        padding: theme.spacing(1, 3, 1, 3),
         '& > * + *': {
             marginLeft: theme.spacing(1)
         }
+    },
+    tagsText: {
+        color: "#FFFFFF",
     },
     learnMoreButton: {
         marginLeft: theme.spacing(2)
@@ -59,14 +65,27 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const getBlockStyle = (block) => {
+    switch (block.getType()) {
+        case 'left':
+            return 'align-left';
+        case 'center':
+            return 'align-center';
+        case 'right':
+            return 'align-right';
+        default:
+            return null;
+    }
+}
+
 const ProjectCard = props => {
     const {project, className, ...rest} = props;
 
-    const id = props.project.id;
+    const id = props.project._id;
 
     const classes = useStyles();
 
-    const [liked, setLiked] = useState(project.liked);
+    const [liked, setLiked] = useState(true);
 
     const handleLike = () => {
         setLiked(true);
@@ -75,6 +94,19 @@ const ProjectCard = props => {
     const handleUnlike = () => {
         setLiked(false);
     };
+
+    function generateTagsWithId() {
+        let tagsWithId = [];
+
+        for (let i = 0; i < project.tags.text.length; i++) {
+            tagsWithId[i] = {
+                text: project.tags.text[i],
+                id: i,
+            }
+        }
+
+        return tagsWithId;
+    }
 
     return (
         <Card
@@ -85,7 +117,7 @@ const ProjectCard = props => {
                 avatar={
                     <Avatar
                         alt="Author"
-                        src={project.author.avatar}
+                        src={project.author.profilePicture}
                     >
                         {getInitials(project.author.name)}
                     </Avatar>
@@ -98,12 +130,12 @@ const ProjectCard = props => {
                         <Link
                             color="textPrimary"
                             component={RouterLink}
-                            to="/profile/1/timeline"
+                            to={`/profile/${project.author.uid}/wall`}
                             variant="h6"
                         >
                             {project.author.name}
                         </Link>{' '}
-                        | Обновлен: {moment(project.updated_at).fromNow()}
+                        | Обновлен: {moment(project.date).fromNow()}
                     </Typography>
                 }
                 title={
@@ -119,18 +151,17 @@ const ProjectCard = props => {
             />
             <CardContent className={classes.content}>
                 <div className={classes.description}>
-                    <Typography
-                        colo="textSecondary"
-                        variant="subtitle2"
-                    >
-                        {project.description}
-                    </Typography>
+                    <Editor
+                        blockStyleFn={getBlockStyle}
+                        editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(project.description)))}
+                        readOnly={true}
+                    />
                 </div>
                 <div className={classes.tags}>
-                    {project.tags.map(tag => (
+                    {generateTagsWithId().map(tag => (
                         <Label
-                            color={tag.color}
-                            key={tag.text}
+                            color={generateRandomColor()}
+                            key={tag.id}
                         >
                             {tag.text}
                         </Label>
@@ -142,19 +173,24 @@ const ProjectCard = props => {
                         alignItems="center"
                         container
                         justify="space-between"
-                        spacing={3}
+                        spacing={1}
                     >
                         <Grid item>
-                            <Typography variant="h5">{project.duration} месяцев</Typography>
-                            <Typography variant="body2">Длительность плана</Typography>
-                        </Grid>
-                        <Grid item>
-                            <Typography variant="h5">{project.difficult}</Typography>
+                            <Typography variant="h5">{project.difficult} баллов</Typography>
                             <Typography variant="body2">Сложность</Typography>
                         </Grid>
                         <Grid item>
-                            <Typography variant="h5">{project.type}</Typography>
-                            <Typography variant="body2">Тип плана</Typography>
+                            <Typography variant="h5">6</Typography>
+                            {/*{project.members.length}*/}
+                            <Typography variant="body2">Участники проекта</Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography variant="h5">{moment(`${project.startDate}`).format("Do MMM YY")}</Typography>
+                            <Typography variant="body2">Начало проекта</Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography variant="h5">{moment(`${project.endDate}`).format("Do MMM YY")}</Typography>
+                            <Typography variant="body2">Конец проекта</Typography>
                         </Grid>
                         <Grid item>
                             {liked ? (
@@ -201,5 +237,6 @@ const ProjectCard = props => {
         </Card>
     );
 };
+
 
 export default ProjectCard;

@@ -90,7 +90,7 @@ const Profile = props => {
                     <div className={classes.innerContent}>
                         {tab === 'wall' && <Wall/>}
                         {tab === 'friends' && <Friends id={id}/>}
-                        {tab === 'projects' && <Projects/>}
+                        {tab === 'projects' && <Projects id={id}/>}
                     </div>
                 </div>
             </div>

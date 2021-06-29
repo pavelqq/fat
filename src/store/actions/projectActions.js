@@ -1,15 +1,15 @@
 import axios from "axios";
-import {setHeaders, url} from "../../api";
+import {url, setHeaders, setProjectHeaders} from "../../api";
 import {toast} from "react-toastify";
 
 export const getProjects = (currentUserId) => {
     return (dispatch) => {
         axios
-            .get(`${url}/projects/${currentUserId}`)
-            .then((projects) => {
+            .get(`${url}/projects/${currentUserId}`, setProjectHeaders())
+            .then((projectsList) => {
                 dispatch({
                     type: "GET_PROJECTS",
-                    projects,
+                    projectsList,
                 });
             })
             .catch((error) => {
@@ -24,7 +24,7 @@ export const addProject = (newProject) => {
         const name = getState().auth.name;
         const uid = getState().auth._id;
         axios
-            .post(`${url}/projects`, { ...newProject, author:{uid, name, profilePicture} }, setHeaders())
+            .post(`${url}/projects`, { ...newProject, author:{uid, name, profilePicture} }, setProjectHeaders())
             .then((project) => {
                 dispatch({
                     type: "ADD_PROJECT",

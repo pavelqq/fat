@@ -1,30 +1,30 @@
 import { toast } from "react-toastify";
 
-const postReducer = (posts = [], action) => {
+const postReducer = (postsList = [], action) => {
     switch (action.type) {
         case "GET_POSTS":
-            return action.posts.data;
+            return action.postsList.data;
         case "ADD_POST":
             toast.success("Пост добавлен...", {
                 position: toast.POSITION.BOTTOM_RIGHT,
             });
-            return [action.post.data, ...posts];
+            return [action.postsList.data, ...postsList];
         case "UPDATE_POST":
             toast.success("Пост обновлен...", {
                 position: toast.POSITION.BOTTOM_RIGHT,
             });
-            return posts.map((post) =>
-                post._id === action.post.data._id ? action.post.data : post
+            return postsList.map((post) =>
+                post._id === action.postsList.data._id ? action.postsList.data : post
             );
         case "DELETE_POST":
             toast.success("Пост удален...", {
                 position: toast.POSITION.BOTTOM_RIGHT,
             });
-            return posts.filter((post) => post._id !== action.id);
+            return postsList.filter((post) => post._id !== action.id);
         case "CLEAR_POSTS":
             return [];
         default:
-            return posts;
+            return postsList;
     }
 };
 

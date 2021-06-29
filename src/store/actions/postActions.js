@@ -6,10 +6,10 @@ export const getPosts = (currentUserId) => {
     return (dispatch) => {
         axios
             .get(`${url}/posts/${currentUserId}`, setHeaders())
-            .then((posts) => {
+            .then((postsList) => {
                 dispatch({
                     type: "GET_POSTS",
-                    posts,
+                    postsList,
                 });
             })
             .catch((error) => {

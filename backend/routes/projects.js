@@ -6,7 +6,7 @@ const express = require("express");
 const router = express.Router();
 
 //получить проекты пользователя
-router.get("/:currentUserId", async (req, res, next) => {
+router.get("/:currentUserId", auth, async (req, res, next) => {
     try {
         const projects = await Project.find().sort({date: -1});
         const filteredProjects = projects.filter(project => project.author.uid === req.params.currentUserId);
@@ -22,15 +22,17 @@ router.get("/:currentUserId", async (req, res, next) => {
 router.post("/", auth, async (req, res) => {
     const schema = Joi.object({
         title: Joi.string().required(),
-        description: Joi.object().required(),
-        tags: Joi.array(),
+        description: Joi.string().required(),
+        tags: {
+            text: Joi.array(),
+        },
         author: {
             uid: Joi.string().required(),
             name: Joi.string().required(),
             profilePicture: Joi.string(),
         },
         //membership: Joi.boolean(),
-        difficult: Joi.number().min(1).max(2),
+        difficult: Joi.number().min(1).max(10),
         //duration: Joi.number(),
         startDate: Joi.date(),
         endDate: Joi.date(),
