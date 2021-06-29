@@ -23,11 +23,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ProjectList = () => {
-    const classes = useStyles();
 
-    // const [projects, setProjects] = useState({
-    //     description: "",
-    // });
+    const classes = useStyles();
 
     return (
         <Page

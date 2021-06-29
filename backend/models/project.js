@@ -3,7 +3,7 @@ const Schema = require("mongoose");
 
 const projectSchema = new mongoose.Schema({
         title: {type: String, required: true},
-        description: {type: String, required: true},
+        description: {type: Object, required: true},
         //images: {type: Array}, файлы с картинками прикрепленные к посту, надо будет заняться этим
         //files: {type: Array},
         tags: {type: Array, default: []},
@@ -12,15 +12,15 @@ const projectSchema = new mongoose.Schema({
             name: {type: String, required: true},
             profilePicture: {type: String},
         },
-        membership: {type: Boolean},
-        members: {type: Array, default: []},
+        // membership: {type: Boolean},
+        // members: {type: Array, default: []},
         difficult: {type: Number},
-        duration: {type: Number},
+        // duration: {type: Number},
         startDate: {type: Date},
         endDate: {type: Date},
         date: {type: Date, default: new Date()},
-        diet: [{ type: Schema.Types.ObjectId, ref: 'Diet' }],
-        trainings: [{ type: Schema.Types.ObjectId, ref: 'Trainings' }]
+        // diet: [{ type: Schema.Types.ObjectId, ref: 'Diet' }],
+        // trainings: [{ type: Schema.Types.ObjectId, ref: 'Trainings' }]
     },
 );
 

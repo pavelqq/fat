@@ -46,23 +46,6 @@ const AddPost = props => {
     const {post, setPost, currentUserName, className, ...rest} = props;
 
     const classes = useStyles();
-    // const fileInputRef = useRef(null);
-    // const [value, setValue] = useState('');
-    //
-    //
-    // const handleChange = event => {
-    //     event.persist();
-    //     setValue(event.target.value);
-    // };
-    //
-    // const handleAttach = () => {
-    //     fileInputRef.current.click();
-    // };
-    //
-    // const handleSendPost = (post) => {
-    //     sendPost(post);
-    //     setValue('')
-    // }
 
     const dispatch = useDispatch()
 

@@ -22,7 +22,7 @@ router.get("/:currentUserId", async (req, res, next) => {
 router.post("/", auth, async (req, res) => {
     const schema = Joi.object({
         title: Joi.string().required(),
-        description: Joi.string().required(),
+        description: Joi.object().required(),
         tags: Joi.array(),
         author: {
             uid: Joi.string().required(),
@@ -30,25 +30,25 @@ router.post("/", auth, async (req, res) => {
             profilePicture: Joi.string(),
         },
         //membership: Joi.boolean(),
-        difficult: Joi.string().min(1).max(10),
-        duration: Joi.number(),
+        difficult: Joi.number().min(1).max(2),
+        //duration: Joi.number(),
         startDate: Joi.date(),
         endDate: Joi.date(),
         date: Joi.date(),
-        diet: [
-            {
-                date: Joi.date().required(),
-                title: Joi.string().required(),
-                description: Joi.string().required(),
-            }
-        ],
-        trainings: [
-            {
-                date: Joi.date().required(),
-                title: Joi.string().required(),
-                description: Joi.string().required(),
-            }
-        ]
+        // diet: [
+        //     {
+        //         date: Joi.date().required(),
+        //         title: Joi.string().required(),
+        //         description: Joi.string().required(),
+        //     }
+        // ],
+        // trainings: [
+        //     {
+        //         date: Joi.date().required(),
+        //         title: Joi.string().required(),
+        //         description: Joi.string().required(),
+        //     }
+        // ]
     });
 
     const {error} = schema.validate(req.body);
@@ -56,10 +56,10 @@ router.post("/", auth, async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
 
     const {title, description, tags, author: {uid, name, profilePicture},
-        difficult, duration, startDate, endDate, date} = req.body;
+        difficult, startDate, endDate, date} = req.body;
 
     let project = new Project({title, description, tags, author: {uid, name, profilePicture},
-        difficult, duration, startDate, endDate, date});
+        difficult, startDate, endDate, date});
 
     project = await project.save();
     res.send(project);

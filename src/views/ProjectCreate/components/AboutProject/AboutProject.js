@@ -10,7 +10,7 @@ import {
     TextField,
     Button,
     Chip,
-    Typography
+    Typography, Slider
 } from '@material-ui/core';
 import {MuiPickersUtilsProvider, KeyboardDatePicker, DatePicker} from '@material-ui/pickers';
 import AddIcon from '@material-ui/icons/Add';
@@ -24,7 +24,10 @@ const useStyles = makeStyles(theme => ({
         marginBottom: theme.spacing(3)
     },
     formGroup: {
-        marginBottom: theme.spacing(3)
+        marginBottom: theme.spacing(3),
+    },
+    formSlider: {
+        width: '220px'
     },
     fieldGroup: {
         display: 'flex',
@@ -46,6 +49,10 @@ const useStyles = makeStyles(theme => ({
         '& + &': {
             marginLeft: theme.spacing(2)
         }
+    },
+    addButton: {
+        marginBottom: theme.spacing(3),
+        marginLeft: theme.spacing(1)
     }
 }));
 
@@ -57,10 +64,11 @@ const AboutProject = props => {
 
     const initialValues = {
         name: '',
+        difficult: '',
         tag: '',
         tags: ['Диета', 'Тренировка'],
-        startDate: moment(),
-        endDate: moment().add(1, 'day')
+        startDate: Date.now(),
+        endDate: Date.now()
     };
 
     const [values, setValues] = useState({...initialValues});
@@ -139,7 +147,8 @@ const AboutProject = props => {
                     <div className={classes.formGroup}>
                         <TextField
                             fullWidth
-                            label="Придумайте название для проекта"
+                            label="Название"
+                            helperText="Придумайте название для проекта"
                             name="name"
                             onChange={event =>
                                 handleFieldChange(event, 'name', event.target.value)
@@ -152,7 +161,8 @@ const AboutProject = props => {
                         <div className={classes.fieldGroup}>
                             <TextField
                                 className={classes.flexGrow}
-                                label="Придумайте теги для проекта по которым люди будут искать ваше творение"
+                                label="Теги"
+                                helperText="Придумайте теги для поиска"
                                 name="tag"
                                 onChange={event =>
                                     handleFieldChange(event, 'tag', event.target.value)
@@ -166,7 +176,7 @@ const AboutProject = props => {
                                 size="small"
                             >
                                 <AddIcon className={classes.addIcon}/>
-                                Добавить тег
+                                Добавить
                             </Button>
                         </div>
                         <Typography
@@ -193,7 +203,7 @@ const AboutProject = props => {
                                 label="Начало проекта"
                                 name="startDate"
                                 onClick={() => handleCalendarOpen('startDate')}
-                                value={moment(values.startDate).format('дд/мм/гггг')}
+                                value={moment(values.startDate).format('DD/MM/yyyy')}
                                 variant="outlined"
                             />
                             <TextField
@@ -201,10 +211,30 @@ const AboutProject = props => {
                                 label="Конец проекта"
                                 name="endDate"
                                 onClick={() => handleCalendarOpen('endDate')}
-                                value={moment(values.endDate).format('дд/мм/гггг')}
+                                value={moment(values.endDate).format('DD/MM/yyyy')}
                                 variant="outlined"
                             />
                         </div>
+                    </div>
+                    <div className={classes.formSlider}>
+                        <Typography id="discrete-slider" gutterBottom>
+                            Сложность
+                        </Typography>
+                        <Slider
+                            defaultValue={1}
+                            aria-labelledby="discrete-slider"
+                            valueLabelDisplay="auto"
+                            getAriaValueText={values.difficult}
+                            step={1}
+                            marks
+                            min={1}
+                            max={10}
+                            helperText="Придумайте название для проекта"
+                            onChange={event =>
+                                handleFieldChange(event, 'difficult', event.target.value)
+                            }
+                            // value={values.difficult}
+                        />
                     </div>
                 </form>
             </CardContent>
@@ -215,35 +245,10 @@ const AboutProject = props => {
                 onChange={handleCalendarChange}
                 onClose={handleCalendarClose}
                 open={calendarOpen}
-                style={{display: 'none'}} // Temporal fix to hide the input element
+                style={{display: 'none'}}
                 value={calendarValue}
                 variant="dialog"
             />
-            {/*<KeyboardDatePicker*/}
-            {/*    minDate={calendarMinDate}*/}
-            {/*    margin="normal"*/}
-            {/*    id="date-picker-dialog"*/}
-            {/*    onAccept={handleCalendarAccept}*/}
-            {/*    onChange={handleCalendarChange}*/}
-            {/*    onClose={handleCalendarClose}*/}
-            {/*    open={calendarOpen}*/}
-            {/*    style={{ display: 'none' }}*/}
-            {/*    value={calendarValue}*/}
-            {/*    variant="dialog"*/}
-            {/*    KeyboardButtonProps={{*/}
-            {/*        'aria-label': 'change date',*/}
-            {/*    }}*/}
-            {/*/>*/}
-            {/*<DatePicker*/}
-            {/*    minDate={calendarMinDate}*/}
-            {/*    onAccept={handleCalendarAccept}*/}
-            {/*    onChange={handleCalendarChange}*/}
-            {/*    onClose={handleCalendarClose}*/}
-            {/*    open={calendarOpen}*/}
-            {/*    style={{display: 'none'}} // Temporal fix to hide the input element*/}
-            {/*    value={calendarValue}*/}
-            {/*    variant="dialog"*/}
-            {/*/>*/}
         </Card>
     );
 };

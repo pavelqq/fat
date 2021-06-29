@@ -46,7 +46,6 @@ const Projects = props => {
     const {className, ...rest} = props;
 
     const classes = useStyles();
-    //const [projects, setProjects] = useState([]);
 
     const dispatch = useDispatch();
     const currentUser = useSelector((state) => state.userById);
@@ -55,24 +54,6 @@ const Projects = props => {
     useEffect(() => {
         getProjects(currentUser._id)
     }, [dispatch, currentUser._id])
-
-    // useEffect(() => {
-    //     let mounted = true;
-    //
-    //     const fetchProjects = () => {
-    //         axios.get('/api/projects').then(response => {
-    //             if (mounted) {
-    //                 setProjects(response.data.projects);
-    //             }
-    //         });
-    //     };
-    //
-    //     fetchProjects();
-    //
-    //     return () => {
-    //         mounted = false;
-    //     };
-    // }, []);
 
     return (
         <div
