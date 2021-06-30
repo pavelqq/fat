@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
-import {Card, CardContent, Divider, IconButton, Paper, Tooltip} from '@material-ui/core';
+import {Button, Card, CardContent, Divider, Hidden, IconButton, Paper, Tooltip, Typography} from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import AddPhotoIcon from '@material-ui/icons/AddPhotoAlternate';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
@@ -18,8 +18,13 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(2),
     },
     content: {
-        display: 'flex',
+        [theme.breakpoints.up('sm')]: {
+            display: 'flex',
+        },
         alignItems: 'center'
+    },
+    sendButton: {
+        width: '130',
     },
     paper: {
         flexGrow: 1,
@@ -29,8 +34,10 @@ const useStyles = makeStyles(theme => ({
     //     width: '100%'
     // },
     divider: {
-        width: 1,
-        height: 24
+        [theme.breakpoints.up('sm')]: {
+            width: 1,
+            height: 24
+        },
     },
     fileInput: {
         display: 'none'
@@ -248,15 +255,20 @@ const AddPost = props => {
                         {/*/>*/}
                     </Paper>
                     <Tooltip
-                        //onClick={handleSendPost}
                         title="Отправить"
                         type="submit"
                     >
                         <IconButton
-                            //color={value.length > 0 ? 'primary' : 'default'}
-                            color={'primary'}
+                            color={post.description.length > 0 ? 'primary' : 'default'}
                         >
-                            <SendIcon/>
+                            <Hidden smUp>
+                                <Button variant="outlined" color="primary" className={classes.sendButton}>
+                                    Отправить сообщение
+                                </Button>
+                            </Hidden>
+                            <Hidden smDown>
+                                <SendIcon/>
+                            </Hidden>
                         </IconButton>
                     </Tooltip>
                     <Divider className={classes.divider}/>

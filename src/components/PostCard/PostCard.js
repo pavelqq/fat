@@ -107,25 +107,20 @@ const PostCard = (props) => {
 
     const likeHandler = () => {
         try {
-            debugger
             dispatch(likeDislikePost(post._id, authUserId))
-        } catch (err) {}
+        } catch (err) {
+        }
         setLike(isLiked ? like - 1 : like + 1);
         setIsLiked(!isLiked);
     };
 
-    // const handleLike = () => {
-    //     setLiked(true);
-    //     setLikes(likes => likes + 1);
-    // };
-    // const handleUnlike = () => {
-    //     setLiked(false);
-    //     setLikes(likes => likes - 1);
-    // };
-
     const [closedOptions, setOpenOptions] = useState(false);
-    const handleOpenOptions = () => { setOpenOptions(true); };
-    const handleCloseOptions = () => { setOpenOptions(false); };
+    const handleOpenOptions = () => {
+        setOpenOptions(true);
+    };
+    const handleCloseOptions = () => {
+        setOpenOptions(false);
+    };
     const optionsRef = useRef(null);
 
     return (
@@ -183,10 +178,10 @@ const PostCard = (props) => {
             />
             <CardContent className={classes.content}>
                 <div className={classes.editorField}>
-                <Editor
-                    editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(post.description)))}
-                    readOnly={true}
-                />
+                    <Editor
+                        editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(post.description)))}
+                        readOnly={true}
+                    />
                 </div>
                 {/*<Typography*/}
                 {/*    className={classes.message}*/}
