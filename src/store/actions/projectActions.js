@@ -1,5 +1,5 @@
 import axios from "axios";
-import {url, setHeaders, setProjectHeaders} from "../../api";
+import {url, setProjectHeaders} from "../../api";
 import {toast} from "react-toastify";
 
 export const getProjects = (currentUserId) => {

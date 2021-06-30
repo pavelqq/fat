@@ -12,10 +12,11 @@ export const setHeaders = () => {
 
 export const setProjectHeaders = () => {
     const headers = {
-      headers: {
-        "x-auth-token": localStorage.getItem("token"),
-        "Content-Type": 'application/json'
-      },
+        headers: {
+            "x-auth-token": localStorage.getItem("token"),
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
     };
 
     return headers;

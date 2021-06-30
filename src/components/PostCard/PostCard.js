@@ -28,6 +28,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Gallery from "../../views/Profile/components/Gallery";
+import {convertFromRaw, Editor, EditorState} from "draft-js";
 
 
 const useStyles = makeStyles(theme => ({
@@ -44,8 +45,10 @@ const useStyles = makeStyles(theme => ({
         marginRight: 6
     },
     content: {
-        paddingTop: 0
-
+        paddingTop: 0,
+    },
+    editorField: {
+        marginBottom: theme.spacing(1)
     },
     message: {
         marginBottom: theme.spacing(2)
@@ -157,21 +160,27 @@ const PostCard = (props) => {
                 }
             />
             <CardContent className={classes.content}>
-                <Typography
-                    className={classes.message}
-                    variant="h5"
-                >
-                    {post.description}
-                </Typography>
-                {post.images && (
-                    <div className={classes.mediaArea}>
-                        <div
-                            className={classes.media}
-                        >
-                            <Gallery/>
-                        </div>
-                    </div>
-                )}
+                <div className={classes.editorField}>
+                <Editor
+                    editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(post.description)))}
+                    readOnly={true}
+                />
+                </div>
+                {/*<Typography*/}
+                {/*    className={classes.message}*/}
+                {/*    variant="h5"*/}
+                {/*>*/}
+                {/*    {post.description}*/}
+                {/*</Typography>*/}
+                {/*{post.images && (*/}
+                {/*    <div className={classes.mediaArea}>*/}
+                {/*        <div*/}
+                {/*            className={classes.media}*/}
+                {/*        >*/}
+                {/*            <Gallery/>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*)}*/}
                 <div className={classes.actions}>
                     {liked ? (
                         <IconButton

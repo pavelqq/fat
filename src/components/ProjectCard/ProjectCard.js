@@ -65,19 +65,6 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const getBlockStyle = (block) => {
-    switch (block.getType()) {
-        case 'left':
-            return 'align-left';
-        case 'center':
-            return 'align-center';
-        case 'right':
-            return 'align-right';
-        default:
-            return null;
-    }
-}
-
 const ProjectCard = props => {
     const {project, className, ...rest} = props;
 
@@ -152,7 +139,6 @@ const ProjectCard = props => {
             <CardContent className={classes.content}>
                 <div className={classes.description}>
                     <Editor
-                        blockStyleFn={getBlockStyle}
                         editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(project.description)))}
                         readOnly={true}
                     />

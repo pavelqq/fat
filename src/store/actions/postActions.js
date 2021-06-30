@@ -1,5 +1,5 @@
 import axios from "axios";
-import { url, setHeaders } from "../../api";
+import {url, setHeaders, setProjectHeaders} from "../../api";
 import { toast } from "react-toastify";
 
 export const getPosts = (currentUserId) => {
@@ -24,7 +24,7 @@ export const addPost = (newPost) => {
         const author = getState().auth.name;
         const uid = getState().auth._id;
         axios
-            .post(`${url}/posts`, { ...newPost, author, profilePicture, uid }, setHeaders())
+            .post(`${url}/posts`, { ...newPost, author, profilePicture, uid }, setProjectHeaders())
             .then((post) => {
                 dispatch({
                     type: "ADD_POST",
@@ -44,7 +44,7 @@ export const addPost = (newPost) => {
 export const updatePost = (updatedPost, id) => {
     return (dispatch) => {
         axios
-            .put(`${url}/posts/${id}`, updatedPost, setHeaders())
+            .put(`${url}/posts/${id}`, updatedPost, setProjectHeaders())
             .then((post) => {
                 dispatch({
                     type: "UPDATE_POST",

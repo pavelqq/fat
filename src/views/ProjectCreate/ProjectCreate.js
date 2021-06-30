@@ -397,17 +397,14 @@ const ProjectCreate = () => {
                                     Теги для поиска:
                                 </Typography>
                                 <div className={classes.tags}>
-                                    {project.tags.text.forEach( function (el) {
-                                        console.log(el)
-                                    })}
-                                    {/*{project.tags.text.map(tag => (*/}
-                                    {/*    <Chip*/}
-                                    {/*        deleteIcon={<CloseIcon/>}*/}
-                                    {/*        key={tag}*/}
-                                    {/*        label={tag}*/}
-                                    {/*        onDelete={() => handleTagDelete(tag)}*/}
-                                    {/*    />*/}
-                                    {/*))}*/}
+                                    {project.tags.text.map(tag => (
+                                        <Chip
+                                            deleteIcon={<CloseIcon/>}
+                                            key={tag}
+                                            label={tag}
+                                            onDelete={() => handleTagDelete(tag)}
+                                        />
+                                    ))}
                                 </div>
                             </div>
                             <div className={classes.formGroup}>
