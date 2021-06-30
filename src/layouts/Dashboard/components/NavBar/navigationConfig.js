@@ -24,38 +24,38 @@ import Label from "../../../../components/Label";
 
 export default [
     {
-        // title: 'Страницы',
+        title: 'Страницы',
         pages: [
             {
                 title: 'Домашняя страница',
                 href: '/overview',
                 icon: HomeIcon
             },
+            // {
+            //     title: 'Мой Профиль',
+            //     href: '/profile/:id',
+            //     icon: PersonIcon,
+            //     children: [
+            //         {
+            //             title: 'Стена',
+            //             href: '/profile/:id/wall'
+            //         },
+            //         {
+            //             title: 'Друзья',
+            //             href: '/profile/:id/friends'
+            //         },
+            //         {
+            //             title: 'Планы',
+            //             href: '/profile/:id/plans'
+            //         },
+            //         // {
+            //         //   title: 'Reviews',
+            //         //   href: '/profile/1/reviews'
+            //         // }
+            //     ]
+            // },
             {
-                title: 'Мой Профиль',
-                href: '/profile/1',
-                icon: PersonIcon,
-                children: [
-                    {
-                        title: 'Стена',
-                        href: '/profile/1/wall'
-                    },
-                    {
-                        title: 'Друзья',
-                        href: '/profile/1/friends'
-                    },
-                    {
-                        title: 'Планы',
-                        href: '/profile/1/plans'
-                    },
-                    // {
-                    //   title: 'Reviews',
-                    //   href: '/profile/1/reviews'
-                    // }
-                ]
-            },
-            {
-                title: 'Мои Чаты',
+                title: 'Мессенджер',
                 href: '/chat',
                 icon: ChatIcon,
                 label: () => (
@@ -184,8 +184,8 @@ export default [
                     href: '/settings/general'
                   },
                   {
-                    title: 'Безопасность',
-                    href: '/settings/security'
+                    title: 'Приватность',
+                    href: '/settings/access'
                   }
                 ]
             },

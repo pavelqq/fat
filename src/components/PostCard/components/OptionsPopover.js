@@ -70,7 +70,8 @@ const NotificationsPopover = props => {
                             <ListItemIcon>
                                 <EditIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Редактировать пост" />
+                            <ListItemText primary="Редактировать пост
+                            (Напишете новый текст в поле создания поста и нажмите отправить)" />
                         </ListItem>
                         <ListItem button onClick={() => handleDelete(post._id)}>
                             <ListItemIcon>

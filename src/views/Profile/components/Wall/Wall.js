@@ -46,7 +46,7 @@ const Wall = (props) => {
             )}
         </div>
     );
-};
+}
 
 
 export default Wall;

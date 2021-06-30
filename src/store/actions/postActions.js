@@ -60,6 +60,22 @@ export const updatePost = (updatedPost, id) => {
     };
 };
 
+export const likeDislikePost = (postId, authUserId) => {
+    return (dispatch) => {
+        axios
+            .put(`${url}/posts/${postId}/like`, {userId: authUserId}, setHeaders())
+            .then((post) => {
+                dispatch({
+                    type: "LIKE_DISLIKE_POST",
+                    post,
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+};
+
 export const deletePost = (id) => {
     return (dispatch) => {
         axios

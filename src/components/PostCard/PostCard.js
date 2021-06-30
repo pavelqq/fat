@@ -29,6 +29,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Gallery from "../../views/Profile/components/Gallery";
 import {convertFromRaw, Editor, EditorState} from "draft-js";
+import {likeDislikePost} from "../../store/actions/postActions";
+import {useDispatch, useSelector} from "react-redux";
 
 
 const useStyles = makeStyles(theme => ({
@@ -90,16 +92,36 @@ const PostCard = (props) => {
         setExpanded(!expanded);
     };
 
-    const [liked, setLiked] = useState(post.liked);
-    const [likes, setLikes] = useState(post.likes);
-    const handleLike = () => {
-        setLiked(true);
-        setLikes(likes => likes + 1);
+    // const [liked, setLiked] = useState(post.liked);
+    // const [likes, setLikes] = useState(post.likes);
+
+    const dispatch = useDispatch();
+    const authUserId = useSelector(state => state.auth._id)
+
+    function likedByUser(userId) {
+        return userId === authUserId;
+    }
+
+    const [like, setLike] = useState(post.likes.length);
+    const [isLiked, setIsLiked] = useState(post.likes.some(likedByUser));
+
+    const likeHandler = () => {
+        try {
+            debugger
+            dispatch(likeDislikePost(post._id, authUserId))
+        } catch (err) {}
+        setLike(isLiked ? like - 1 : like + 1);
+        setIsLiked(!isLiked);
     };
-    const handleUnlike = () => {
-        setLiked(false);
-        setLikes(likes => likes - 1);
-    };
+
+    // const handleLike = () => {
+    //     setLiked(true);
+    //     setLikes(likes => likes + 1);
+    // };
+    // const handleUnlike = () => {
+    //     setLiked(false);
+    //     setLikes(likes => likes - 1);
+    // };
 
     const [closedOptions, setOpenOptions] = useState(false);
     const handleOpenOptions = () => { setOpenOptions(true); };
@@ -182,10 +204,10 @@ const PostCard = (props) => {
                 {/*    </div>*/}
                 {/*)}*/}
                 <div className={classes.actions}>
-                    {liked ? (
+                    {isLiked ? (
                         <IconButton
                             className={classes.likedButton}
-                            onClick={handleUnlike}
+                            onClick={likeHandler}
                             size="small"
                         >
                             <FavoriteIcon/>
@@ -194,7 +216,7 @@ const PostCard = (props) => {
                         <Tooltip title="Нравится">
                             <IconButton
                                 className={classes.likeButton}
-                                onClick={handleLike}
+                                onClick={likeHandler}
                                 size="small"
                             >
                                 <FavoriteBorderIcon/>
@@ -205,7 +227,7 @@ const PostCard = (props) => {
                         color="textSecondary"
                         variant="subtitle1"
                     >
-                        {likes}
+                        {like}
                     </Typography>
                     <IconButton
                         size="small"

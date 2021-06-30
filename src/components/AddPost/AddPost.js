@@ -23,11 +23,11 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
         flexGrow: 1,
-        padding: theme.spacing(0.5, 2)
+        padding: theme.spacing(0.5, 1)
     },
-    input: {
-        width: '100%'
-    },
+    // input: {
+    //     width: '100%'
+    // },
     divider: {
         width: 1,
         height: 24
@@ -260,27 +260,27 @@ const AddPost = props => {
                         </IconButton>
                     </Tooltip>
                     <Divider className={classes.divider}/>
-                    <Tooltip title="Прикрепить изображение">
-                        <IconButton
-                            edge="end"
-                            //onClick={handleAttach}
-                        >
-                            <AddPhotoIcon/>
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Прикрепить файл">
-                        <IconButton
-                            edge="end"
-                            //onClick={handleAttach}
-                        >
-                            <AttachFileIcon/>
-                        </IconButton>
-                    </Tooltip>
-                    <input
-                        className={classes.fileInput}
-                        //ref={fileInputRef}
-                        type="file"
-                    />
+                    {/*<Tooltip title="Прикрепить изображение">*/}
+                    {/*    <IconButton*/}
+                    {/*        edge="end"*/}
+                    {/*        //onClick={handleAttach}*/}
+                    {/*    >*/}
+                    {/*        <AddPhotoIcon/>*/}
+                    {/*    </IconButton>*/}
+                    {/*</Tooltip>*/}
+                    {/*<Tooltip title="Прикрепить файл">*/}
+                    {/*    <IconButton*/}
+                    {/*        edge="end"*/}
+                    {/*        //onClick={handleAttach}*/}
+                    {/*    >*/}
+                    {/*        <AttachFileIcon/>*/}
+                    {/*    </IconButton>*/}
+                    {/*</Tooltip>*/}
+                    {/*<input*/}
+                    {/*    className={classes.fileInput}*/}
+                    {/*    //ref={fileInputRef}*/}
+                    {/*    type="file"*/}
+                    {/*/>*/}
                 </CardContent>
             </form>
         </Card>

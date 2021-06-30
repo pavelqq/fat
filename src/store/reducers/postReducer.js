@@ -21,6 +21,10 @@ const postReducer = (postsList = [], action) => {
                 position: toast.POSITION.BOTTOM_RIGHT,
             });
             return postsList.filter((post) => post._id !== action.id);
+        case "LIKE_DISLIKE_POST":
+            return postsList.map((post) =>
+                post._id === action.postsList.data._id ? action.postsList.data : post
+            );
         case "CLEAR_POSTS":
             return [];
         default:

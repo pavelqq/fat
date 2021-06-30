@@ -82,4 +82,19 @@ router.delete("/:id", auth, async (req, res) => {
     res.send(deletedPost);
 });
 
+router.put("/:id/like", async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        if (!post.likes.includes(req.body.userId)) {
+            await post.updateOne({ $push: { likes: req.body.userId } });
+            res.status(200).json("Пост лайкнут");
+        } else {
+            await post.updateOne({ $pull: { likes: req.body.userId } });
+            res.status(200).json("Пост дизлайкнут");
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;
