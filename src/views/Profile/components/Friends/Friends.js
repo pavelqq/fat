@@ -22,7 +22,7 @@ import ChatIcon from '@material-ui/icons/ChatOutlined';
 import DoneOutlineOutlinedIcon from "@material-ui/icons/DoneOutlineOutlined";
 import {useDispatch, useSelector} from "react-redux";
 import {followUser, unfollowUser} from "../../../../store/actions/userActions";
-import {getFriends} from "../../../../store/actions/friendsActions";
+import {getFriends} from "../../../../store/actions/usersListActions";
 import _ from "lodash";
 import match from "autosuggest-highlight/match";
 import parse from "autosuggest-highlight/parse";

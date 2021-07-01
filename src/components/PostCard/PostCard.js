@@ -92,9 +92,6 @@ const PostCard = (props) => {
         setExpanded(!expanded);
     };
 
-    // const [liked, setLiked] = useState(post.liked);
-    // const [likes, setLikes] = useState(post.likes);
-
     const dispatch = useDispatch();
     const authUserId = useSelector(state => state.auth._id)
 

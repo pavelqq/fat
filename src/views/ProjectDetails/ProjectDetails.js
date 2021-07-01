@@ -8,6 +8,7 @@ import {Header, Overview, Files, Activities, Tasks} from './components';
 import {useDispatch, useSelector} from "react-redux";
 import {getProjectById} from "../../store/actions/projectActions";
 import {getProfileById} from "../../store/actions/userActions";
+import {getMembers} from "../../store/actions/usersListActions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -35,21 +36,25 @@ const useStyles = makeStyles(theme => ({
 const ProjectDetails = props => {
     const {match, history} = props;
     const classes = useStyles();
-    const {id, tab} = match.params;
-
-    debugger
+    const {projectId, userId, tab} = match.params;
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getProjectById(id));
-    }, [id])
-    const project = useSelector(state => state.projectById)
+        dispatch(getProjectById(projectId));
+    }, [projectId])
 
     useEffect(() => {
-        dispatch(getProfileById(project.uid));
-    }, [project.uid])
-    const author = useSelector(state => state.profileById)
+        dispatch(getProfileById(userId));
+    }, [userId])
+
+    useEffect(() => {
+        dispatch(getMembers(projectId))
+    }, [projectId])
+
+    const project = useSelector(state => state.projectById);
+    const author = useSelector(state => state.userById);
+    const members = useSelector(state => state.usersList);
 
     const appState = useSelector((state) => state);
     console.log(appState);
@@ -66,7 +71,7 @@ const ProjectDetails = props => {
     ];
 
     if (!tab) {
-        return <Redirect to={`/projects/${id}/overview`}/>;
+        return <Redirect to={`/projects/${projectId}/author/${userId}/overview`}/>;
     }
 
     if (!tabs.find(t => t.value === tab)) {
@@ -82,7 +87,7 @@ const ProjectDetails = props => {
             className={classes.root}
             title="Детали проекта"
         >
-            <Header title={project.title} author={author}/>
+            <Header projectTitle={project.title} author={author}/>
             <Tabs
                 className={classes.tabs}
                 onChange={handleTabsChange}
@@ -100,10 +105,10 @@ const ProjectDetails = props => {
             </Tabs>
             <Divider className={classes.divider}/>
             <div className={classes.content}>
-                {tab === 'overview' && <Overview project={project} author={author} />}
-                {tab === 'tasks' && <Tasks tasks={project.tasks}/>}
-                {tab === 'files' && <Files files={project.files}/>}
-                {tab === 'activity' && <Activities activities={project.activities}/>}
+                {tab === 'overview' && <Overview projectId={projectId} userId={userId} members={members} description={project.description}/>}
+                {/*{tab === 'tasks' && <Tasks tasks={project.tasks}/>}*/}
+                {/*{tab === 'files' && <Files files={project.files}/>}*/}
+                {/*{tab === 'activity' && <Activities activities={project.activities}/>}*/}
             </div>
         </Page>
     );

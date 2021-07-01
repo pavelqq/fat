@@ -8,7 +8,7 @@ import ProjectCard from "../../../../components/ProjectCard";
 
 import axios from "../../../../utils/axios";
 import {useDispatch, useSelector} from "react-redux";
-import {getProjects, getUsersProjects} from "../../../../store/actions/projectActions";
+import {getUsersProjects} from "../../../../store/actions/projectActions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -51,7 +51,7 @@ const Projects = props => {
 
     useEffect(() => {
         dispatch(getUsersProjects(id))
-    }, [dispatch, id])
+    }, [id])
 
     const projects = useSelector(state => state.projectsList)
 

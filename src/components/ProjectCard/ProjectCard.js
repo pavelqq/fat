@@ -29,6 +29,7 @@ import {generateRandomColor} from "../../utils/generateRandomColor";
 import {useDispatch, useSelector} from "react-redux";
 import {likeDislikePost} from "../../store/actions/postActions";
 import {memberingProject} from "../../store/actions/projectActions";
+import {generateTagsWithId} from "../../utils/generateTagsWithId";
 
 
 const useStyles = makeStyles(theme => ({
@@ -48,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     tags: {
         padding: theme.spacing(1, 3, 1, 3),
         '& > * + *': {
-            marginLeft: theme.spacing(1)
+            marginLeft: theme.spacing(0.5)
         }
     },
     tagsText: {
@@ -74,7 +75,8 @@ const useStyles = makeStyles(theme => ({
 const ProjectCard = props => {
     const {project, className, ...rest} = props;
 
-    const id = props.project._id;
+    const projectId = props.project._id;
+    const userId = props.project.author.uid
 
     const classes = useStyles();
 
@@ -96,19 +98,6 @@ const ProjectCard = props => {
         setMembering(isMembering ? membering - 1 : membering + 1);
         setIsMembering(!isMembering);
     };
-
-    function generateTagsWithId() {
-        let tagsWithId = [];
-
-        for (let i = 0; i < project.tags.text.length; i++) {
-            tagsWithId[i] = {
-                text: project.tags.text[i],
-                id: i,
-            }
-        }
-
-        return tagsWithId;
-    }
 
     return (
         <Card
@@ -144,7 +133,7 @@ const ProjectCard = props => {
                     <Link
                         color="textPrimary"
                         component={RouterLink}
-                        to={`/projects/${id}/overview`}
+                        to={`/projects/${projectId}/author/${userId}/overview`}
                         variant="h5"
                     >
                         {project.title}
@@ -159,7 +148,7 @@ const ProjectCard = props => {
                     />
                 </div>
                 <div className={classes.tags}>
-                    {generateTagsWithId().map(tag => (
+                    {generateTagsWithId(project.tags.text).map(tag => (
                         <Label
                             color={generateRandomColor()}
                             key={tag.id}
@@ -228,7 +217,7 @@ const ProjectCard = props => {
                                 className={classes.learnMoreButton}
                                 component={RouterLink}
                                 size="small"
-                                to={`/projects/${id}/overview`}
+                                to={`/projects/${projectId}/author/${userId}/overview`}
                             >
                                 Подробнее
                             </Button>

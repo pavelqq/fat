@@ -151,12 +151,17 @@ const routes = [
                 component: lazy(() => import('./views/ProjectCreate'))
             },
             {
-                path: '/projects/:id',
+                path: '/projects/:projectId',
                 exact: true,
                 component: lazy(() => import('./views/ProjectDetails'))
             },
+            // {
+            //     path: '/projects/:projectId/:tab/',
+            //     exact: true,
+            //     component: lazy(() => import('./views/ProjectDetails'))
+            // },
             {
-                path: '/projects/:id/:tab',
+                path: '/projects/:projectId/author/:userId/:tab',
                 exact: true,
                 component: lazy(() => import('./views/ProjectDetails'))
             },

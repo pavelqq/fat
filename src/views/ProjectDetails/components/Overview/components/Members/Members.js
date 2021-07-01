@@ -17,6 +17,7 @@ import {
 
 import getInitials from "../../../../../../utils/getInitials";
 
+
 const useStyles = makeStyles(() => ({
     root: {},
     header: {
@@ -38,8 +39,6 @@ const Members = props => {
 
     const classes = useStyles();
 
-    
-
     return (
         <Card
             {...rest}
@@ -57,13 +56,13 @@ const Members = props => {
                     {members && members.map(member => (
                         <ListItem
                             disableGutters
-                            key={member.id}
+                            key={member._id}
                         >
                             <ListItemAvatar>
                                 <Avatar
                                     alt="Author"
                                     className={classes.avatar}
-                                    src={member.avatar}
+                                    src={member.profilePicture}
                                 >
                                     {getInitials(member.name)}
                                 </Avatar>
@@ -71,14 +70,16 @@ const Members = props => {
                             <ListItemText
                                 primary={member.name}
                                 primaryTypographyProps={{variant: 'h6'}}
-                                secondary={member.bio}
+                                secondary={`${member.followers.length - 1} подписчиков`}
+                                // не знаю нужна ли эта информация здесь про подписчиков, в будущем может удалю,
+                                // щас пусть пространство хоть занимает
                             />
                         </ListItem>
                     ))}
                 </List>
             </CardContent>
             <CardActions className={classes.actions}>
-                <Button className={classes.manageButton}>Посмотреть всех</Button>
+                <Button disabled className={classes.manageButton}>Посмотреть всех</Button>
             </CardActions>
         </Card>
     );

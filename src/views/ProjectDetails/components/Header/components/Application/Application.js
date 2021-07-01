@@ -112,13 +112,19 @@ const Application = props => {
                         <Avatar
                             alt="Author"
                             className={classes.avatar}
-                            src={author.profilePicture}
+                            // src={author.profilePicture}
                         >
-                            {getInitials(author.name)}
+                            {/*{getInitials(author.name)}*/}A
                         </Avatar>
                         <div>
-                            <Typography variant="h3">{author.name}</Typography>
-                            <Typography variant="subtitle2">{author.bio}</Typography>
+                            <Typography variant="h3">
+                                {/*{author.name}*/}
+                                name
+                            </Typography>
+                            <Typography variant="subtitle2">
+                                {/*{author.bio}*/}
+                                bio
+                            </Typography>
                         </div>
                     </div>
                 </div>

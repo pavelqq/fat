@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
-import {Grid} from '@material-ui/core';
+import {Grid, Card, CardContent} from '@material-ui/core';
 
 import {Brief, Deliverables, Holder, Members} from './components';
+import {getProjectById} from "../../../../store/actions/projectActions";
+import {getProfileById} from "../../../../store/actions/userActions";
+import {useDispatch, useSelector} from "react-redux";
+import {convertFromRaw, Editor, EditorState} from "draft-js";
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -12,12 +16,15 @@ const useStyles = makeStyles(theme => ({
     },
     members: {
         marginTop: theme.spacing(3)
-    }
+    },
+    description: {
+        padding: theme.spacing(2, 2, 1, 3),
+    },
 }));
 
 
 const Overview = props => {
-    const {author, project, className, ...rest} = props;
+    const {members, projectId, userId, description, className, ...rest} = props;
 
     const classes = useStyles();
 
@@ -33,8 +40,17 @@ const Overview = props => {
                 lg={8}
                 xl={9}
                 xs={12}
+                className={classes.description}
             >
-                <Brief brief={project.brief}/>
+                <Card>
+                    <CardContent>
+                        <Editor
+                            editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(props.description)))}
+                            readOnly={true}
+                        />
+                    </CardContent>
+                </Card>
+                {/*<Brief brief={props.description}/>*/}
                 <Deliverables className={classes.deliverables}/>
             </Grid>
             <Grid
@@ -43,10 +59,13 @@ const Overview = props => {
                 xl={3}
                 xs={12}
             >
-                <Holder project={project} author={author}/>
+                <Holder
+                    projectId={projectId}
+                    userId={userId}
+                />
                 <Members
                     className={classes.members}
-                    members={project.members}
+                    members={props.members}
                 />
             </Grid>
         </Grid>

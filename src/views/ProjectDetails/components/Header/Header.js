@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
 import {Typography, Grid, Button, colors} from '@material-ui/core';
@@ -6,6 +6,8 @@ import ShareIcon from '@material-ui/icons/Share';
 
 import Label from "../../../../components/Label";
 import {Application} from './components';
+import {getProfileById} from "../../../../store/actions/userActions";
+import {useDispatch, useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -28,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Header = props => {
-    const {title, project, author, className, ...rest} = props;
+    const { projectTitle, author, className, ...rest} = props;
 
     const classes = useStyles();
 
@@ -66,14 +68,14 @@ const Header = props => {
                         gutterBottom
                         variant="h3"
                     >
-                        {title}
+                        {props.projectTitle}
                     </Typography>
                     <Label
                         className={classes.label}
                         color={colors.green[600]}
                         variant="outlined"
                     >
-                        Активный проект
+                        Популярно
                     </Label>
                 </Grid>
                 <Grid item>
