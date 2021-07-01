@@ -27,7 +27,8 @@ const useStyles = makeStyles(theme => ({
 
 
 const Posts = props => {
-    const {post, setPost, currentUser, className, ...rest} = props;
+    const { scrollRef, post, setPost, currentUser, className, ...rest } = props;
+
     const classes = useStyles();
 
     const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const Posts = props => {
             <div className={classes.posts}>
                 {posts.length && posts.map((post) => (
                     <PostCard
+                        scrollRef={scrollRef}
                         className={classes.post}
                         key={post.id}
                         post={post}

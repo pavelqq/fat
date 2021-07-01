@@ -26,6 +26,9 @@ import getInitials from "../../utils/getInitials";
 import Label from "../Label";
 import moment from 'moment';
 import {generateRandomColor} from "../../utils/generateRandomColor";
+import {useDispatch, useSelector} from "react-redux";
+import {likeDislikePost} from "../../store/actions/postActions";
+import {memberingProject} from "../../store/actions/projectActions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -40,7 +43,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     description: {
-        padding: theme.spacing(2, 3, 1, 6),
+        padding: theme.spacing(2, 2, 1, 3),
     },
     tags: {
         padding: theme.spacing(1, 3, 1, 3),
@@ -55,7 +58,10 @@ const useStyles = makeStyles(theme => ({
         marginLeft: theme.spacing(2)
     },
     likedButton: {
-        color: colors.red[600]
+        color: colors.red[900]
+    },
+    dislikedButton: {
+        color: colors.red[200]
     },
     shareButton: {
         marginLeft: theme.spacing(1)
@@ -72,14 +78,33 @@ const ProjectCard = props => {
 
     const classes = useStyles();
 
-    const [liked, setLiked] = useState(true);
+    // const [liked, setLiked] = useState(true);
+    //
+    // const handleLike = () => {
+    //     setLiked(true);
+    // };
+    //
+    // const handleUnlike = () => {
+    //     setLiked(false);
+    // };
 
-    const handleLike = () => {
-        setLiked(true);
-    };
+    const dispatch = useDispatch();
+    const authUserId = useSelector(state => state.auth._id)
 
-    const handleUnlike = () => {
-        setLiked(false);
+    function likedByUser(userId) {
+        return userId === authUserId;
+    }
+
+    const [membering, setMembering] = useState(project.members.length);
+    const [isMembering, setIsMembering] = useState(project.members.some(likedByUser));
+
+    const memberingHandler = () => {
+        try {
+            dispatch(memberingProject(project._id, authUserId))
+        } catch (err) {
+        }
+        setMembering(isMembering ? membering - 1 : membering + 1);
+        setIsMembering(!isMembering);
     };
 
     function generateTagsWithId() {
@@ -166,8 +191,7 @@ const ProjectCard = props => {
                             <Typography variant="body2">Сложность</Typography>
                         </Grid>
                         <Grid item>
-                            <Typography variant="h5">6</Typography>
-                            {/*{project.members.length}*/}
+                            <Typography variant="h5">{project.members.length}</Typography>
                             <Typography variant="body2">Участники проекта</Typography>
                         </Grid>
                         <Grid item>
@@ -179,28 +203,30 @@ const ProjectCard = props => {
                             <Typography variant="body2">Конец проекта</Typography>
                         </Grid>
                         <Grid item>
-                            {liked ? (
-                                <Tooltip title="Дизлайк">
+                            {isMembering ? (
+                                <Tooltip title="Покинуть проект">
                                     <IconButton
                                         className={classes.likedButton}
-                                        onClick={handleUnlike}
+                                        onClick={memberingHandler}
                                         size="small"
                                     >
+                                        Вы участвуете!
                                         <FavoriteIcon/>
                                     </IconButton>
                                 </Tooltip>
                             ) : (
-                                <Tooltip title="Лайк">
+                                <Tooltip title="Участвовать в проекте">
                                     <IconButton
-                                        className={classes.likeButton}
-                                        onClick={handleLike}
+                                        className={classes.dislikedButton}
+                                        onClick={memberingHandler}
                                         size="small"
                                     >
+                                        Принять участие?
                                         <FavoriteBorderIcon/>
                                     </IconButton>
                                 </Tooltip>
                             )}
-                            <Tooltip title="Отправить">
+                            <Tooltip title="Поделится">
                                 <IconButton
                                     className={classes.shareButton}
                                     size="small"

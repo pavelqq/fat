@@ -19,7 +19,8 @@ const useStyles = makeStyles(theme => ({
         height: 25,
         minWidth: 20,
         whiteSpace: 'nowrap',
-        padding: theme.spacing(0.5, 1)
+        padding: theme.spacing(0.5, 1),
+        margin: theme.spacing(0.5)
     },
     rounded: {
         borderRadius: 10,

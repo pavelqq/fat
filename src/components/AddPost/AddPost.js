@@ -266,7 +266,7 @@ const AddPost = props => {
                                     Отправить сообщение
                                 </Button>
                             </Hidden>
-                            <Hidden smDown>
+                            <Hidden xsDown>
                                 <SendIcon/>
                             </Hidden>
                         </IconButton>

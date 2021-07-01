@@ -11,6 +11,7 @@ import TimelineContent from "@material-ui/lab/TimelineContent/TimelineContent";
 import TimelineOppositeContent from "@material-ui/lab/TimelineOppositeContent";
 import Typography from "@material-ui/core/Typography";
 
+
 const useStyles = makeStyles(theme => ({
     root: {},
     timelineItem: {},
@@ -19,7 +20,9 @@ const useStyles = makeStyles(theme => ({
 
 
 const TimelinePosts = props => {
-    const { post, className, ...rest } = props;
+    const { scrollRef, posts, post, setPost, className, ...rest} = props;
+
+    const executeScroll = () => scrollRef.current.scrollIntoView()
 
     const classes = useStyles();
 
@@ -28,19 +31,20 @@ const TimelinePosts = props => {
             align="alternate"
             {...rest}
             className={clsx(classes.root, className)}
+            onClick={executeScroll}
         >
             <TimelineItem className={classes.timelineItem}>
                 <TimelineOppositeContent>
-                    <Typography color="textSecondary">{moment(post.created_at).fromNow()}</Typography>
+                    <Typography color="textSecondary">{moment(post.date).fromNow()}</Typography>
                 </TimelineOppositeContent>
                 <TimelineSeparator>
-                    <TimelineDot />
-                    <TimelineConnector />
+                    <TimelineDot/>
+                    <TimelineConnector/>
                 </TimelineSeparator>
                 <TimelineContent>
                     <Typography color="textSecondary">Пост от</Typography>
-                    <Typography variant="subtitle1">{post.author.name}</Typography>
-                    <Typography className={classes.message} variant="subtitle2" color="textSecondary">{post.comments.length} комментария</Typography>
+                    <Typography variant="subtitle1">{post.author}</Typography>
+                    {/*<Typography className={classes.message} variant="subtitle2" color="textSecondary">{post.comments.length} комментария</Typography>*/}
                 </TimelineContent>
             </TimelineItem>
         </Timeline>

@@ -78,7 +78,7 @@ const Projects = props => {
             {projects.map(project => (
                 <ProjectCard
                     className={classes.projectCard}
-                    key={project.id}
+                    key={project._id}
                     project={project}
                 />
             ))}

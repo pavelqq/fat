@@ -84,7 +84,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const PostCard = (props) => {
-    const {posts, post, setPost, className, ...rest} = props;
+    const { scrollRef, posts, post, setPost, className, ...rest } = props;
     const classes = useStyles();
 
     const [expanded, setExpanded] = useState(false);
@@ -123,10 +123,12 @@ const PostCard = (props) => {
     };
     const optionsRef = useRef(null);
 
+
     return (
         <Card
             {...rest}
             className={clsx(classes.root, className)}
+            ref={scrollRef}
         >
             <OptionsPopover
                 anchorEl={optionsRef.current}

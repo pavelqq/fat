@@ -9,6 +9,24 @@ const projectReducer = (projectsList = [], action) => {
                 position: toast.POSITION.BOTTOM_RIGHT,
             });
             return [action.projectsList.data, ...projectsList];
+        case "UPDATE_PROJECT":
+            toast.success("Проект обновлен...", {
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
+            return projectsList.map((project) =>
+                project._id === action.projectsList.data._id ? action.projectsList.data : project
+            );
+        case "DELETE_PROJECT":
+            toast.success("Проект удален...", {
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
+            return projectsList.filter((project) => project._id !== action.id);
+        case "MEMBERING_PROJECT":
+            return projectsList.map((project) =>
+                project._id === action.projectsList.data._id ? action.projectsList.data : project
+            );
+        case "CLEAR_PROJECTS":
+            return [];
         default:
             return projectsList;
     }

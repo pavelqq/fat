@@ -1,13 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
 import AddPost from "../../../../components/AddPost";
 import PostCard from "../../../../components/PostCard";
-import TimelinePosts from "../TimelinePosts";
+import TimelinePosts, {Timeline} from "../TimelinePosts";
 import Gallery from "../Gallery";
 import Posts from "./Components/Posts";
 import axios from "../../../../utils/axios";
 import {useDispatch, useSelector} from "react-redux";
+import {Grid, Hidden} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -28,6 +29,8 @@ const Wall = (props) => {
         description: "",
     });
 
+    const scrollRef = useRef(null)
+
     return (
         <div
             {...rest}
@@ -37,11 +40,31 @@ const Wall = (props) => {
             {currentUser._id === auth._id ? (
                 <>
                     <AddPost post={post} setPost={setPost} currentUserName={currentUser.name}/>
-                    <Posts post={post} setPost={setPost} currentUser={currentUser}/>
+                    <Grid container>
+                        <Grid item xs={12} sm={9} md={8}>
+                            <Posts scrollRef={scrollRef} post={post} setPost={setPost} currentUser={currentUser}/>
+                        </Grid>
+                        <Hidden xsDown>
+                            <Grid item sm={3} md={4}>
+                                <Timeline scrollRef={scrollRef} post={post} setPost={setPost}
+                                          currentUser={currentUser}/>
+                            </Grid>
+                        </Hidden>
+                    </Grid>
                 </>
             ) : (
                 <>
-                    <Posts post={post} setPost={setPost} currentUser={currentUser}/>
+                    <Grid container>
+                        <Grid item xs={12} sm={9} md={8}>
+                            <Posts scrollRef={scrollRef} post={post} setPost={setPost} currentUser={currentUser}/>
+                        </Grid>
+                        <Hidden xsDown>
+                            <Grid item sm={3} md={4}>
+                                <Timeline scrollRef={scrollRef} post={post} setPost={setPost}
+                                          currentUser={currentUser}/>
+                            </Grid>
+                        </Hidden>
+                    </Grid>
                 </>
             )}
         </div>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {url, setProjectHeaders} from "../../api";
+import {url, setProjectHeaders, setHeaders} from "../../api";
 import {toast} from "react-toastify";
 
 export const getProjects = (currentUserId) => {
@@ -34,6 +34,60 @@ export const addProject = (newProject) => {
             .catch((error) => {
                 console.log(error.response);
 
+                toast.error(error.response?.data, {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                });
+            });
+    };
+};
+
+export const updateProject = (updatedProject, id) => {
+    return (dispatch) => {
+        axios
+            .put(`${url}/projects/${id}`, updatedProject, setProjectHeaders())
+            .then((project) => {
+                dispatch({
+                    type: "UPDATE_PROJECT",
+                    project,
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+                toast.error(error.response?.data, {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                });
+            });
+    };
+};
+
+export const memberingProject = (projectId, authUserId) => {
+    return (dispatch) => {
+        axios
+            .put(`${url}/projects/${projectId}/membering`, {userId: authUserId}, setHeaders())
+            .then((project) => {
+                dispatch({
+                    type: "MEMBERING_PROJECT",
+                    project,
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+};
+
+export const deleteProject = (id) => {
+    return (dispatch) => {
+        axios
+            .delete(`${url}/projects/${id}`, setHeaders())
+            .then(() => {
+                dispatch({
+                    type: "DELETE_PROJECT",
+                    id,
+                });
+            })
+            .catch((error) => {
+                console.log(error);
                 toast.error(error.response?.data, {
                     position: toast.POSITION.BOTTOM_RIGHT,
                 });
