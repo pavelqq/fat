@@ -128,9 +128,6 @@ const AddPost = props => {
             }
 
             dispatch(updatePost(updatedPost, id));
-            window.location.reload()
-
-            //заглушка с перезагрузкой, почему-то не обновляются посты в стейте, с перезагрузкой загружается новый стейт
 
         } else {
             const newPost = {
@@ -140,7 +137,6 @@ const AddPost = props => {
             }
 
             dispatch(addPost(newPost));
-            window.location.reload()
         }
         setPost({ description: EditorState.createEmpty() });
     }

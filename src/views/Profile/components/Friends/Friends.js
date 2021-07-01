@@ -90,7 +90,7 @@ const Friends = props => {
 
     const currentUser = useSelector((state) => state.userById);
     const AuthedUser = useSelector(state => state.auth)
-    const friendsList = useSelector(state => state.friendsList)
+    const friendsList = useSelector(state => state.usersList)
 
     let followBool = Boolean(AuthedUser.followings.indexOf(currentUser?._id))
     const [followed, setFollowed] = useState(

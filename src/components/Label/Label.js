@@ -2,8 +2,6 @@ import React from 'react';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
 import {Typography, colors} from '@material-ui/core';
-import {generateRandomColor} from "../../utils/generateRandomColor";
-
 
 
 const useStyles = makeStyles(theme => ({

@@ -15,6 +15,7 @@ import {
 
 import getInitials from "../../../../../../utils/getInitials";
 import Label from "../../../../../../components/Label";
+import {generateRandomColor} from "../../../../../../utils/generateRandomColor";
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -31,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Holder = props => {
-    const {project, className, ...rest} = props;
+    const {project, author, className, ...rest} = props;
 
     const classes = useStyles();
 
@@ -46,10 +47,10 @@ const Holder = props => {
                         alt="Автор"
                         className={classes.avatar}
                         component={RouterLink}
-                        src={project.author.avatar}
+                        src={author.profilePicture}
                         to="/profile/1/timeline"
                     >
-                        {getInitials(project.author.name)}
+                        {getInitials(author.name)}
                     </Avatar>
                 }
                 className={classes.header}
@@ -60,7 +61,7 @@ const Holder = props => {
                         to="/profile/1/timeline"
                         variant="h5"
                     >
-                        {project.author.name}
+                        {author.name}
                     </Typography>
                 }
                 title={
@@ -81,7 +82,7 @@ const Holder = props => {
                     >
                         <Typography variant="subtitle2">Дата окончания проекта</Typography>
                         <Typography variant="h6">
-                            {moment(project.deadline).format('DD MMM YYYY')}
+                            {moment(project.endDate).format('DD MMM YYYY')}
                         </Typography>
                     </ListItem>
                     <ListItem
@@ -91,7 +92,7 @@ const Holder = props => {
                     >
                         <Typography variant="subtitle2">Участников</Typography>
                         <Typography variant="h6">
-                            {project.price} {project.currency}
+                            {project.members.length}
                         </Typography>
                     </ListItem>
                     <ListItem
@@ -100,7 +101,7 @@ const Holder = props => {
                         divider
                     >
                         <Typography variant="subtitle2">Теги</Typography>
-                        <Label color={project.tags[0].color}>{project.tags[0].text}</Label>
+                        <Label color={generateRandomColor()}>{project.text[0]}</Label>
                     </ListItem>
                     <ListItem
                         className={classes.listItem}
@@ -109,7 +110,7 @@ const Holder = props => {
                     >
                         <Typography variant="subtitle2">Последнее обновление</Typography>
                         <Typography variant="h6">
-                            {moment(project.updated_at).format('DD MMM YYYY')}
+                            {moment(project.date).format('DD MMM YYYY')}
                         </Typography>
                     </ListItem>
                 </List>

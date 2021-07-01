@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Header = props => {
-    const {project, className, ...rest} = props;
+    const {title, project, author, className, ...rest} = props;
 
     const classes = useStyles();
 
@@ -66,7 +66,7 @@ const Header = props => {
                         gutterBottom
                         variant="h3"
                     >
-                        {project.title}
+                        {title}
                     </Typography>
                     <Label
                         className={classes.label}
@@ -94,7 +94,7 @@ const Header = props => {
                 </Grid>
             </Grid>
             <Application
-                author={project.author}
+                author={author}
                 onApply={handleApplicationClose}
                 onClose={handleApplicationClose}
                 open={openApplication}

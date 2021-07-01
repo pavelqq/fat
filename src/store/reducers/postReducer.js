@@ -5,25 +5,25 @@ const postReducer = (postsList = [], action) => {
         case "GET_POSTS":
             return action.postsList.data;
         case "ADD_POST":
-            toast.success("Пост добавлен...", {
+            toast.info("Пост добавлен...", {
                 position: toast.POSITION.BOTTOM_RIGHT,
             });
-            return [action.postsList.data, ...postsList];
+            return [action.post.data, ...postsList];
         case "UPDATE_POST":
-            toast.success("Пост обновлен...", {
+            toast.info("Пост обновлен...", {
                 position: toast.POSITION.BOTTOM_RIGHT,
             });
             return postsList.map((post) =>
-                post._id === action.postsList.data._id ? action.postsList.data : post
+                post._id === action.post.data._id ? action.post.data : post
             );
         case "DELETE_POST":
-            toast.success("Пост удален...", {
+            toast.info("Пост удален...", {
                 position: toast.POSITION.BOTTOM_RIGHT,
             });
             return postsList.filter((post) => post._id !== action.id);
         case "LIKE_DISLIKE_POST":
             return postsList.map((post) =>
-                post._id === action.postsList.data._id ? action.postsList.data : post
+                post._id === action.post.data._id ? action.post.data : post
             );
         case "CLEAR_POSTS":
             return [];

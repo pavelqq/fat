@@ -3,9 +3,11 @@ import {Redirect} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
 import {Tabs, Tab, Divider, colors} from '@material-ui/core';
 
-import axios from '../../utils/axios';
 import Page from "../../components/Page";
 import {Header, Overview, Files, Activities, Tasks} from './components';
+import {useDispatch, useSelector} from "react-redux";
+import {getProjectById} from "../../store/actions/projectActions";
+import {getProfileById} from "../../store/actions/userActions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -34,25 +36,23 @@ const ProjectDetails = props => {
     const {match, history} = props;
     const classes = useStyles();
     const {id, tab} = match.params;
-    const [project, setProjects] = useState(null);
+
+    debugger
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        let mounted = true;
+        dispatch(getProjectById(id));
+    }, [id])
+    const project = useSelector(state => state.projectById)
 
-        const fetchProject = () => {
-            axios.get(`api/?project=${id}`).then(response => {
-                if(mounted) {
-                    setProjects(response.data.project);
-                }
-            })
-        };
+    useEffect(() => {
+        dispatch(getProfileById(project.uid));
+    }, [project.uid])
+    const author = useSelector(state => state.profileById)
 
-        fetchProject();
-
-        return () => {
-            mounted = false;
-        };
-    }, []);
+    const appState = useSelector((state) => state);
+    console.log(appState);
 
     const handleTabsChange = (event, value) => {
         history.push(value);
@@ -82,7 +82,7 @@ const ProjectDetails = props => {
             className={classes.root}
             title="Детали проекта"
         >
-            <Header project={project}/>
+            <Header title={project.title} author={author}/>
             <Tabs
                 className={classes.tabs}
                 onChange={handleTabsChange}
@@ -100,7 +100,7 @@ const ProjectDetails = props => {
             </Tabs>
             <Divider className={classes.divider}/>
             <div className={classes.content}>
-                {tab === 'overview' && <Overview project={project}/>}
+                {tab === 'overview' && <Overview project={project} author={author} />}
                 {tab === 'tasks' && <Tasks tasks={project.tasks}/>}
                 {tab === 'files' && <Files files={project.files}/>}
                 {tab === 'activity' && <Activities activities={project.activities}/>}

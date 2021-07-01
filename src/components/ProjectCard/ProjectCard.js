@@ -78,16 +78,6 @@ const ProjectCard = props => {
 
     const classes = useStyles();
 
-    // const [liked, setLiked] = useState(true);
-    //
-    // const handleLike = () => {
-    //     setLiked(true);
-    // };
-    //
-    // const handleUnlike = () => {
-    //     setLiked(false);
-    // };
-
     const dispatch = useDispatch();
     const authUserId = useSelector(state => state.auth._id)
 
@@ -95,7 +85,7 @@ const ProjectCard = props => {
         return userId === authUserId;
     }
 
-    const [membering, setMembering] = useState(project.members.length);
+    const [membering, setMembering] = useState(project.members.length); // если переходишь на /projects, то length от undefined
     const [isMembering, setIsMembering] = useState(project.members.some(likedByUser));
 
     const memberingHandler = () => {

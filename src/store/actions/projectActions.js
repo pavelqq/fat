@@ -2,13 +2,29 @@ import axios from "axios";
 import {url, setProjectHeaders, setHeaders} from "../../api";
 import {toast} from "react-toastify";
 
-export const getProjects = (currentUserId) => {
+export const getUsersProjects = (currentUserId) => {
     return (dispatch) => {
         axios
             .get(`${url}/projects/${currentUserId}`, setProjectHeaders())
             .then((projectsList) => {
                 dispatch({
                     type: "GET_PROJECTS",
+                    projectsList,
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+};
+
+export const getAllProjects = () => {
+    return (dispatch) => {
+        axios
+            .get(`${url}/projects/allProjects/all`)
+            .then((projectsList) => {
+                dispatch({
+                    type: "GET_ALL_PROJECTS",
                     projectsList,
                 });
             })
@@ -45,10 +61,10 @@ export const updateProject = (updatedProject, id) => {
     return (dispatch) => {
         axios
             .put(`${url}/projects/${id}`, updatedProject, setProjectHeaders())
-            .then((project) => {
+            .then((updatedProject) => {
                 dispatch({
                     type: "UPDATE_PROJECT",
-                    project,
+                    updatedProject,
                 });
             })
             .catch((error) => {
@@ -91,6 +107,22 @@ export const deleteProject = (id) => {
                 toast.error(error.response?.data, {
                     position: toast.POSITION.BOTTOM_RIGHT,
                 });
+            });
+    };
+};
+
+export const getProjectById = (projectId) => {
+    return (dispatch) => {
+        axios
+            .get(`${url}/projects/current/${projectId}`, setProjectHeaders())
+            .then((projectById) => {
+                dispatch({
+                    type: "GET_PROJECT_BY_ID",
+                    projectById,
+                });
+            })
+            .catch((error) => {
+                console.log(error);
             });
     };
 };

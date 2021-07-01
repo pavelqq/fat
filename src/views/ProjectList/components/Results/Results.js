@@ -15,8 +15,8 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import axios from "../../../../utils/axios";
 import Paginate from "../../../../components/Paginate";
 import ProjectCard from "../../../../components/ProjectCard";
-import {useDispatch} from "react-redux";
-import {getProjects} from "../../../../store/actions/projectActions";
+import {useDispatch, useSelector} from "react-redux";
+import {getAllProjects, getProjects} from "../../../../store/actions/projectActions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -57,39 +57,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Projects = props => {
-    const {className, ...rest} = props;
+    const {projects, className, ...rest} = props;
 
     const classes = useStyles();
     const sortRef = useRef(null);
     const [openSort, setOpenSort] = useState(false);
     const [selectedSort, setSelectedSort] = useState('Популярное');
     const [mode, setMode] = useState('grid');
-
-    // const dispatch = useDispatch();
-    //
-    // useEffect(() => {
-    //     getProjects()
-    // }, [])
-
-    const [projects, setProjects] = useState([]);
-
-    useEffect(() => {
-        let mounted = true;
-
-        const fetchProjects = () => {
-            axios.get('/api/?projects=all').then(response => {
-                if (mounted) {
-                    setProjects(response.data.projects);
-                }
-            });
-        };
-
-        fetchProjects();
-
-        return () => {
-            mounted = false;
-        };
-    }, []);
 
     const handleSortOpen = () => {
         setOpenSort(true);
@@ -153,7 +127,10 @@ const Projects = props => {
                         sm={mode === 'grid' ? 6 : 12}
                         xs={12}
                     >
-                        <ProjectCard project={project}/>
+                        <ProjectCard
+                            key={project._id}
+                            project={project}
+                        />
                     </Grid>
                 ))}
             </Grid>

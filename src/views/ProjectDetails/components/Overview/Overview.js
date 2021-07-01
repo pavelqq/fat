@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 
 const Overview = props => {
-    const {project, className, ...rest} = props;
+    const {author, project, className, ...rest} = props;
 
     const classes = useStyles();
 
@@ -43,7 +43,7 @@ const Overview = props => {
                 xl={3}
                 xs={12}
             >
-                <Holder project={project}/>
+                <Holder project={project} author={author}/>
                 <Members
                     className={classes.members}
                     members={project.members}

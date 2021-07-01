@@ -18,6 +18,8 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import {useDispatch, useSelector} from "react-redux";
 import {deletePost} from "../../../store/actions/postActions";
 
+import {toast} from "react-toastify";
+
 const useStyles = makeStyles(() => ({
     root: {
         width: 200,
@@ -46,6 +48,9 @@ const NotificationsPopover = props => {
             top: 0,
             left: 0,
             behavior: 'smooth'
+        });
+        toast.info("В поле создания поста, перепишете пост и нажмите отправить...", {
+            position: toast.POSITION.BOTTOM_RIGHT,
         });
     };
 

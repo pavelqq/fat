@@ -12,9 +12,6 @@ import {Grid, Hidden} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     root: {},
-    // timeline: {
-    //     paddingTop: theme.spacing(3),
-    // }
 }));
 
 const Wall = (props) => {

@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 
 import Page from "../../components/Page";
 import {Header, Filter, Results} from './components';
+import {useDispatch, useSelector} from "react-redux";
+import {getAllProjects} from "../../store/actions/projectActions";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -26,6 +28,17 @@ const ProjectList = () => {
 
     const classes = useStyles();
 
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllProjects())
+    }, [dispatch])
+
+    const projects = useSelector(state => state.projectsList)
+
+    const appState = useSelector((state) => state);
+    console.log(appState);
+
     return (
         <Page
             className={classes.root}
@@ -33,7 +46,7 @@ const ProjectList = () => {
         >
             <Header className={classes.header}/>
             <Filter className={classes.filter}/>
-            <Results className={classes.results}/>
+            <Results className={classes.results} projects={projects}/>
         </Page>
     );
 };

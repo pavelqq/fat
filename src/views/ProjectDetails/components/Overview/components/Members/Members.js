@@ -38,6 +38,8 @@ const Members = props => {
 
     const classes = useStyles();
 
+    
+
     return (
         <Card
             {...rest}
@@ -52,7 +54,7 @@ const Members = props => {
             />
             <CardContent className={classes.content}>
                 <List>
-                    {members.map(member => (
+                    {members && members.map(member => (
                         <ListItem
                             disableGutters
                             key={member.id}

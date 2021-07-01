@@ -3,6 +3,7 @@ const auth = require("../middleware/auth");
 const {Project} = require("../models/project");
 const Joi = require("joi");
 const express = require("express");
+const {User} = require("../models/user");
 const router = express.Router();
 
 //получить проекты пользователя
@@ -13,6 +14,30 @@ router.get("/:currentUserId", auth, async (req, res, next) => {
         res.send(filteredProjects);
     } catch (error) {
         res.status(500).send("Ошибка: " + error.message);
+
+        winston.error(error.message);
+    }
+});
+
+//получить все проекты
+router.get("/allProjects/all", async (req, res, next) => {
+    try {
+        const allProjects = await Project.find().sort({date: -1});
+        res.send(allProjects);
+    } catch (error) {
+        res.status(500).send("Ошибка: " + error.message);
+
+        winston.error(error.message);
+    }
+});
+
+//получить проект по id
+router.get("/current/:id", async (req, res) => {
+    try {
+        const projectById = await Project.findById(req.params.id);
+        res.status(200).json(projectById);
+    } catch (error) {
+        res.status(500).send('Ошибка: ' + error.message);
 
         winston.error(error.message);
     }
@@ -67,6 +92,7 @@ router.post("/", auth, async (req, res) => {
     res.send(project);
 });
 
+//изменить проект
 router.put("/:id", auth, async (req, res) => {
     const schema = Joi.object({
         description: Joi.string().required(),
@@ -98,6 +124,7 @@ router.put("/:id", auth, async (req, res) => {
     res.send(updatedPost);
 });
 
+//удалить проект
 router.delete("/:id", auth, async (req, res) => {
     const project = await Project.findById(req.params.id);
 
@@ -111,6 +138,7 @@ router.delete("/:id", auth, async (req, res) => {
     res.send(deletedProject);
 });
 
+// принять участие/покинуть проект
 router.put("/:id/membering", async (req, res) => {
     try {
         const project = await Project.findById(req.params.id);
@@ -121,6 +149,26 @@ router.put("/:id/membering", async (req, res) => {
             await project.updateOne({ $pull: { members: req.body.userId } });
             res.status(200).json("Вы покинули проект");
         }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+//получить список участников проекта
+router.get("/members/list/:id", async (req, res) => {
+    try {
+        const project = await Project.findById(req.params.id);
+        const members = await Promise.all(
+            project.members.map((memberId) => {
+                return User.findById(memberId);
+            })
+        );
+        let membersList = [];
+        members.map((member) => {
+            const { _id, name, profilePicture, followers} = member;
+            membersList.push({ _id, name, profilePicture, followers });
+        });
+        res.status(200).json(membersList)
     } catch (err) {
         res.status(500).json(err);
     }

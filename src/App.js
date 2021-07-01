@@ -45,7 +45,7 @@ function App() {
             <ThemeProvider theme={theme}>
                 <MuiPickersUtilsProvider libInstance={moment} utils={MomentUtils}>
                     <Router history={history}>
-                        <ToastContainer/>
+                        <ToastContainer autoClose={7000}/>
                         <ScrollReset/>
                         {renderRoutes(routes)}
                     </Router>

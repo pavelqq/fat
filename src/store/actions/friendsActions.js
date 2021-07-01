@@ -18,3 +18,21 @@ export const getFriends = (id) => {
             });
     };
 };
+
+export const getMembers = (projectId) => {
+    return (dispatch) => {
+        axios
+            .get(`${url}/projects/members/list/${projectId}`)
+            .then((membersList) => {
+
+                dispatch({
+                    type: "GET_MEMBERS",
+                    membersList
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+};
+

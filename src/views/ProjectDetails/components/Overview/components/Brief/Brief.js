@@ -14,8 +14,6 @@ const Brief = props => {
 
   const classes = useStyles();
 
-  debugger;
-
   return (
     <Card
       {...rest}
