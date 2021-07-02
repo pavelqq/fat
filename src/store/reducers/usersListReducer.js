@@ -6,6 +6,8 @@ const usersListReducer = (usersList = [], action) => {
             return action.friendsList.data;
         case "GET_MEMBERS":
             return action.membersList.data;
+        case "CLEAR_USERSLIST":
+            return []
         default:
             return usersList;
     }

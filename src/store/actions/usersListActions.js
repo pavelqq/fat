@@ -7,7 +7,9 @@ export const getFriends = (id) => {
         axios
             .get(`${url}/users/friends/${id}`)
             .then((friendsList) => {
-
+                dispatch({
+                    type: "CLEAR_USERSLIST"
+                })
                 dispatch({
                     type: "GET_FRIENDS",
                     friendsList
@@ -24,7 +26,9 @@ export const getMembers = (projectId) => {
         axios
             .get(`${url}/projects/members/list/${projectId}`)
             .then((membersList) => {
-
+                dispatch({
+                    type: "CLEAR_USERSLIST"
+                })
                 dispatch({
                     type: "GET_MEMBERS",
                     membersList

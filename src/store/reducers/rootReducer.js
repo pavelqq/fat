@@ -6,6 +6,7 @@ import postReducer from "./postReducer";
 import usersListReducer from "./usersListReducer";
 import projectReducer from "./projectReducer";
 import currentProjectReducer from "./currentProjectReducer";
+import chatListReducer from "./chatLIstReducer";
 
 const rootReducer = combineReducers({ 
     todos: todoReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     postsList: postReducer,
     projectsList: projectReducer,
     usersList: usersListReducer,
+    chatList: chatListReducer,
 })
 
 export default rootReducer;

@@ -8,6 +8,9 @@ export const getUsersProjects = (currentUserId) => {
             .get(`${url}/projects/${currentUserId}`, setProjectHeaders())
             .then((projectsList) => {
                 dispatch({
+                    type: "CLEAR_PROJECTS"
+                })
+                dispatch({
                     type: "GET_PROJECTS",
                     projectsList,
                 });
@@ -23,6 +26,9 @@ export const getAllProjects = () => {
         axios
             .get(`${url}/projects/allProjects/all`)
             .then((projectsList) => {
+                dispatch({
+                    type: "CLEAR_PROJECTS"
+                })
                 dispatch({
                     type: "GET_ALL_PROJECTS",
                     projectsList,

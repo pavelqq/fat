@@ -8,8 +8,7 @@ import navigationConfig from './navigationConfig';
 import Navigation from "../../../../components/Navigation";
 import useRouter from "../../../../utils/useRouter";
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import {useDispatch, useSelector} from "react-redux";
-import {getProfileById} from "../../../../store/actions/userActions";
+import {useSelector} from "react-redux";
 
 
 const useStyles = makeStyles(theme => ({

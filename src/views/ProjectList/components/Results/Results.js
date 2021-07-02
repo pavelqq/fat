@@ -148,7 +148,6 @@ const Projects = props => {
                 {['Популярное', 'Сначала из новых', 'Сначала из старых'].map(
                     option => (
                         <MenuItem
-                            className={classes.menuItem}
                             key={option}
                             onClick={() => handleSortSelect(option)}
                         >

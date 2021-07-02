@@ -65,8 +65,10 @@ const ProjectDetails = props => {
 
     const tabs = [
         {value: 'overview', label: 'Подробнее про проект'},
-        {value: 'tasks', label: 'Задачи проекта'},
-        {value: 'files', label: 'Прикрепленные файлы'},
+        {value: 'trainings', label: 'Тренировки'},
+        {value: 'diet', label: 'Диета'},
+        // {value: 'tasks', label: 'Задачи проекта'},
+        // {value: 'files', label: 'Прикрепленные файлы'},
         {value: 'activity', label: 'Активность проекта'},
     ];
 
@@ -78,16 +80,17 @@ const ProjectDetails = props => {
         return <Redirect to="/errors/error-404"/>;
     }
 
-    if (!project) {
-        return null;
-    }
-
     return (
         <Page
             className={classes.root}
             title="Детали проекта"
         >
-            <Header projectTitle={project.title} author={author}/>
+            {project.title && author.name ? (
+                <Header project={project} author={author}/>
+            ) : (
+                <div>загрузка...</div>
+            )
+            }
             <Tabs
                 className={classes.tabs}
                 onChange={handleTabsChange}
@@ -104,12 +107,23 @@ const ProjectDetails = props => {
                 ))}
             </Tabs>
             <Divider className={classes.divider}/>
-            <div className={classes.content}>
-                {tab === 'overview' && <Overview projectId={projectId} userId={userId} members={members} description={project.description}/>}
-                {/*{tab === 'tasks' && <Tasks tasks={project.tasks}/>}*/}
-                {/*{tab === 'files' && <Files files={project.files}/>}*/}
-                {/*{tab === 'activity' && <Activities activities={project.activities}/>}*/}
-            </div>
+            {project.title ? (
+                <div className={classes.content}>
+                    {tab === 'overview' && <Overview
+                        projectId={projectId}
+                        userId={userId} members={members}
+                        description={project.description}
+                    />}
+                    {tab === 'trainings' && <div>trainings</div>}
+                    {tab === 'diet' && <div>diet</div>}
+                    {/*{tab === 'tasks' && <Tasks tasks={project.tasks}/>}*/}
+                    {/*{tab === 'files' && <Files files={project.files}/>}*/}
+                    {tab === 'activity' && <Activities activities={project.activities}/>}
+                </div>
+            ) : (
+                <div>загрузка...</div>
+            )
+            }
         </Page>
     );
 };

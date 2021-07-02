@@ -25,12 +25,12 @@ const Tasks = props => {
             container
             spacing={3}
         >
-            {tasks.diet &&
-            <Diet diet={tasks.diet}/>
-            }
-            {tasks.train &&
-            <Trainings train={tasks.train}/>
-            }
+            {/*{tasks.diet &&*/}
+            {/*<Diet diet={tasks.diet}/>*/}
+            {/*}*/}
+            {/*{tasks.train &&*/}
+            {/*<Trainings train={tasks.train}/>*/}
+            {/*}*/}
         </Grid>
     );
 };

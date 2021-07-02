@@ -62,7 +62,7 @@ const Diet = props => {
                     <Typography variant="subtitle2" className={classes.desc}>
                         Выберете дату в форме справа для начала.
                     </Typography>
-                    <ItemsTable selectedDate={selectedDate} diet={diet}/>
+                    {/*<ItemsTable selectedDate={selectedDate} diet={diet}/>*/}
                 </Grid>
                 <Grid
                     className={classes.dates}

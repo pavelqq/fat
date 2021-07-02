@@ -82,10 +82,10 @@ const Trainings = props => {
                     <Typography variant="subtitle2" className={classes.desc}>
                         Выберете дату в форме справа для начала.
                     </Typography>
-                    <TrainingsTable
-                        selectedDate={selectedDate}
-                        train={currentTrain ? currentTrain : null}
-                    />
+                    {/*<TrainingsTable*/}
+                    {/*    selectedDate={selectedDate}*/}
+                    {/*    train={currentTrain ? currentTrain : null}*/}
+                    {/*/>*/}
                 </Grid>
                 <Grid
                     className={classes.dates}

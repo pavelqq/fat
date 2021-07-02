@@ -3,10 +3,7 @@ import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
 import {Grid, Card, CardContent} from '@material-ui/core';
 
-import {Brief, Deliverables, Holder, Members} from './components';
-import {getProjectById} from "../../../../store/actions/projectActions";
-import {getProfileById} from "../../../../store/actions/userActions";
-import {useDispatch, useSelector} from "react-redux";
+import {Brief, Deliverables, Holder, Members} from './components'
 import {convertFromRaw, Editor, EditorState} from "draft-js";
 
 const useStyles = makeStyles(theme => ({
