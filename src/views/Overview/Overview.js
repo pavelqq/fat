@@ -10,6 +10,8 @@ import {
     Todos
 } from './components';
 import Page from "../../components/Page";
+import RadarChart from "../Profile/components/Header/components/RadarChart";
+import {useDispatch, useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -39,18 +41,22 @@ const useStyles = makeStyles(theme => ({
 const Overview = () => {
     const classes = useStyles();
 
+    // const dispatch = useDispatch();
+
+    const authUserId = useSelector(state => state.auth._id)
+
     return (
         <Page
             className={classes.root}
             title="Home"
         >
-          <div className={classes.overview}>
-            <Header/>
-            <Plans className={classes.projects}/>
-            <Todos className={classes.todos}/>
-            <Statistics className={classes.statistics}/>
-            <Notifications className={classes.notifications} />
-          </div>
+            <div className={classes.overview}>
+                <Header/>
+                <Plans className={classes.projects} id={authUserId}/>
+                <Todos className={classes.todos}/>
+                <Statistics className={classes.statistics}/>
+                <Notifications className={classes.notifications}/>
+            </div>
         </Page>
     );
 };

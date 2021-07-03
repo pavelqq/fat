@@ -119,7 +119,7 @@ const Projects = props => {
                 container
                 spacing={3}
             >
-                {projects.map(project => (
+                {projects.length > 0 && projects.map(project => (
                     <Grid
                         item
                         key={project.id}

@@ -8,7 +8,6 @@ import {
     Button,
     Hidden,
     IconButton,
-    Snackbar,
     Tooltip,
     colors
 } from '@material-ui/core';
@@ -22,6 +21,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import {useDispatch, useSelector} from "react-redux";
 import {followUser, unfollowUser} from "../../../../store/actions/userActions";
 import moment from "moment";
+import RadarChart from "./components/RadarChart";
 
 
 const useStyles = makeStyles(theme => ({
@@ -67,8 +67,6 @@ const useStyles = makeStyles(theme => ({
         marginRight: theme.spacing(1)
     },
     container: {
-        width: theme.breakpoints.values.lg,
-        maxWidth: '100%',
         padding: theme.spacing(2, 3),
         margin: '0 auto',
         position: 'relative',

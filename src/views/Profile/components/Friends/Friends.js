@@ -118,8 +118,8 @@ const Friends = props => {
         setValue(val);
     };
 
-    const filterByNames = (friendsList, inputValue) => {
-        return friendsList.filter(user => user.name === inputValue);
+    const filterByNames = (friendsList, current) => {
+        return friendsList.filter(user => user.name === current);
     }
 
     const results = !value ? friendsList : filterByNames(friendsList, value);

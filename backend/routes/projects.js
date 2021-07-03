@@ -141,8 +141,26 @@ router.delete("/:id", auth, async (req, res) => {
 // принять участие/покинуть проект
 router.put("/:id/membering", async (req, res) => {
     try {
+
+        // const allProjects = await Project.find();
+        // allProjects.filter(
+        //     (project => project.members.includes(req.body.userId))
+        //         .map( (projectIncludesUserId) =>
+        //             projectIncludesUserId.updateOne(
+        //                 { $pull: { members: req.body.userId } }
+        //             )
+        //     )
+        // );
+
         const project = await Project.findById(req.params.id);
+        const allProjects = await Project.find();
+
         if (!project.members.includes(req.body.userId)) {
+            await Promise.all(
+                allProjects.map((p) => {
+                    return p.updateOne({ $pull: { members: req.body.userId } })
+                })
+            );
             await project.updateOne({ $push: { members: req.body.userId } });
             res.status(200).json("Вы вступили в проект");
         } else {

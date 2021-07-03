@@ -8,7 +8,7 @@ import {
     FormControlLabel,
     Input,
     Card,
-    colors
+    colors, Button
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import SearchIcon from '@material-ui/icons/Search';
@@ -45,6 +45,15 @@ const useStyles = makeStyles(theme => ({
     },
     inNetwork: {
         marginLeft: 'auto'
+    },
+    submit: {
+        width: 150,
+        marginLeft: 'auto',
+        color: theme.palette.black,
+        backgroundColor: colors.orange[300],
+        '&:hover': {
+            backgroundColor: colors.deepOrange[600]
+        }
     }
 }));
 
@@ -55,7 +64,7 @@ const selects = [
     },
     {
         label: 'Уровень сложности',
-        options: ['Легко', 'Чуть сложнее', 'Сложно', 'Пот']
+        options: ['1', '2', '3', '4']
     },
     {
         label: 'Состояние здоровья',
@@ -140,15 +149,18 @@ const Filter = props => {
                         value={chips}
                     />
                 ))}
-                <FormControlLabel
-                    className={classes.inNetwork}
-                    control={
-                        <Checkbox
-                            color="primary"
-                        />
-                    }
-                    label="Включить приватные проекты в поиск"
-                />
+                {/*<FormControlLabel*/}
+                {/*    className={classes.inNetwork}*/}
+                {/*    control={*/}
+                {/*        <Checkbox*/}
+                {/*            color="primary"*/}
+                {/*        />*/}
+                {/*    }*/}
+                {/*    label="Включить приватные проекты в поиск"*/}
+                {/*/>*/}
+                <Button type="submit" className={classes.submit} variant="outlined">
+                    Поиск
+                </Button>
             </div>
         </Card>
     );

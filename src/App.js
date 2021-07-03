@@ -10,7 +10,6 @@ import {MuiPickersUtilsProvider} from "@material-ui/pickers";
 
 import theme from './theme';
 import './mixins/moment';
-import './mixins/prismjs';
 import './mock';
 import './assets/scss/index.scss';
 

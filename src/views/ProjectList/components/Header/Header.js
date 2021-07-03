@@ -2,13 +2,19 @@ import React from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
-import {Typography, Grid, Button} from '@material-ui/core';
+import {Typography, Grid, Button, colors} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles(theme => ({
     root: {},
     addIcon: {
-        marginRight: theme.spacing(1)
+        marginRight: theme.spacing(1),
+    },
+    addButton: {
+        backgroundColor: colors.deepOrange[300],
+        '&:hover': {
+            backgroundColor: colors.red[300]
+        }
     }
 }));
 
@@ -49,6 +55,7 @@ const Header = props => {
                         component={RouterLink}
                         to="/projects/create"
                         variant="contained"
+                        className={classes.addButton}
                     >
                         <AddIcon className={classes.addIcon}/>
                         Создать новый проект

@@ -59,7 +59,8 @@ const Header = props => {
         return userId === authUserId;
     }
 
-    const [membering, setMembering] = useState(props.project.members.length); // если переходишь на /projects, то length от undefined
+    const [membering, setMembering] = useState(props.project.members.length);
+    // если переходишь на /projects, то length от undefined
     const [isMembering, setIsMembering] = useState(props.project.members.some(likedByUser));
 
     const memberingHandler = () => {

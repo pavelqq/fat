@@ -13,7 +13,7 @@ import {
     ListSubheader,
     Typography,
     Fab,
-    Badge
+    Badge, colors
 } from '@material-ui/core';
 import PeopleIcon from '@material-ui/icons/PeopleOutline';
 import StatusBullet from "../../../../components/StatusBullet";
@@ -27,10 +27,10 @@ const useStyles = makeStyles(theme => ({
         width: 275
     },
     root: {
-        backgroundColor: theme.palette.white
+        backgroundColor: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
     },
     list: {
-        padding: theme.spacing(1, 3)
+        padding: theme.spacing(1, 3),
     },
     listItemText: {
         marginRight: theme.spacing(1)
@@ -40,9 +40,19 @@ const useStyles = makeStyles(theme => ({
     },
     fab: {
         position: 'fixed',
-        bottom: 36,
-        right: 36,
+        bottom: 35,
+        right: 40,
+        [theme.breakpoints.down('sm')]: {
+            bottom: 20,
+            right: 20,
+        },
         zIndex: theme.zIndex.drawer - 100
+    },
+    badge: {
+        backgroundColor: colors.orange[400],
+        '&:hover': {
+            backgroundColor: colors.pink[400]
+        }
     }
 }));
 
@@ -248,9 +258,13 @@ const ChatBar = props => {
         <Badge
             badgeContent={users.length}
             color="error"
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+            }}
         >
           <Fab
-              color="secondary"
+              className={classes.badge}
               onClick={handleOpen}
           >
             <PeopleIcon />

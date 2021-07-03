@@ -25,7 +25,7 @@ const projectReducer = (projectsList = [], action) => {
             return projectsList.filter((project) => project._id !== action.id);
         case "MEMBERING_PROJECT":
             return projectsList.map((project) =>
-                project._id === action.projectsList.data._id ? action.projectsList.data : project
+                project._id === action.project.data._id ? action.project.data : project
             );
         case "CLEAR_PROJECTS":
             return [];
