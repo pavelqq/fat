@@ -74,7 +74,7 @@ const Holder = props => {
                                     className={classes.avatar}
                                     component={RouterLink}
                                     src={author.profilePicture}
-                                    to="/profile/1/timeline"
+                                    to={`/profile/${author._id}/wall`}
                                 >
                                     {getInitials(author.name)}
                                 </Avatar>
@@ -84,7 +84,7 @@ const Holder = props => {
                             subheader={
                                 <Typography
                                     component={RouterLink}
-                                    to="/profile/1/timeline"
+                                    to={`/profile/${author._id}/wall`}
                                     variant="h5"
                                 >
                                     {author.name}

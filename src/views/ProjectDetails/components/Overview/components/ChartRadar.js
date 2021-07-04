@@ -4,20 +4,6 @@ import {Card, CardContent, CardHeader, Divider} from "@material-ui/core";
 import GenericMoreButton from "../../../../../components/GenericMoreButton/GenericMoreButton";
 import {makeStyles} from "@material-ui/core/styles";
 
-const data = {
-    labels: ['Шея', 'Плечи', 'Грудь', 'Талия', 'Таз', 'Правый бицепс', 'Левый бицепс',
-        'Правое предплечье', 'Левое предплечье', 'Правая кисть', 'Левая кисть',
-        'Правое бедро', 'Левое бедро', 'Правая икра', 'Левая икра'],
-    datasets: [
-        {
-            label: 'Антропометрия',
-            data: [41, 125, 110, 90, 100, 40, 39, 34, 33, 19, 19, 61, 63, 40, 39],
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1,
-        },
-    ],
-};
 
 const options = {
     scale: {
@@ -43,13 +29,9 @@ const useStyles = makeStyles(theme => ({
         }
     },
     chartContainer: {
-        padding: theme.spacing(3),
-        height: 400,
-        width: 400,
+        padding: theme.spacing(2),
+        height: '100%',
     },
-    // chart: {
-    //     height: 350
-    // },
     statsContainer: {
         display: 'flex'
     },
@@ -66,9 +48,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const RadarChart = props => {
+const ChartRadar = props => {
 
-    const {...rest} = props;
+    const {title, desc, projectId, userId, data, ...rest} = props;
 
     const classes = useStyles();
 
@@ -78,16 +60,17 @@ const RadarChart = props => {
         >
             <CardHeader
                 action={<GenericMoreButton/>}
-                title={`Антропометрия`}
+                title={props.title}
+                subheader={props.desc}
             />
             <Divider/>
             <CardContent className={classes.content}>
                 <div className={classes.chartContainer}>
-                    <Radar data={data} options={options}/>
+                    <Radar data={props.data} options={options}/>
                 </div>
             </CardContent>
         </Card>
     );
 };
 
-export default RadarChart;
+export default ChartRadar;

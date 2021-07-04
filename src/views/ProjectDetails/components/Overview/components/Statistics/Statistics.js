@@ -1,10 +1,16 @@
 import React from 'react';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
-import {Card, CardContent, Typography} from '@material-ui/core';
+import {Card, CardContent} from '@material-ui/core';
 
-const useStyles = makeStyles(() => ({
-    root: {}
+
+const useStyles = makeStyles(theme => ({
+    root: {},
+    charts: {
+        [theme.breakpoints.up('md')]: {
+            display: 'flex',
+        }
+    }
 }));
 
 const Statistics = props => {
@@ -18,12 +24,7 @@ const Statistics = props => {
             className={clsx(classes.root, className)}
         >
             <CardContent>
-                <Typography variant="h4">
-                    Практические результаты:
-                </Typography>
-                <Typography variant="body1">
-                    Статистика и график какой-нить
-                </Typography>
+
             </CardContent>
         </Card>
     );

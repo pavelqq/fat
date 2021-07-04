@@ -21,7 +21,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import {useDispatch, useSelector} from "react-redux";
 import {followUser, unfollowUser} from "../../../../store/actions/userActions";
 import moment from "moment";
-import RadarChart from "./components/RadarChart";
 
 
 const useStyles = makeStyles(theme => ({

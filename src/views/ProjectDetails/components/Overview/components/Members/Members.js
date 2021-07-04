@@ -12,13 +12,13 @@ import {
     ListItem,
     ListItemAvatar,
     ListItemText,
-    colors
+    colors, Typography
 } from '@material-ui/core';
 
 import getInitials from "../../../../../../utils/getInitials";
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
     root: {},
     header: {
         paddingBottom: 0
@@ -26,6 +26,7 @@ const useStyles = makeStyles(() => ({
     content: {
         paddingTop: 0
     },
+    nothing: {},
     actions: {
         backgroundColor: colors.grey[50]
     },
@@ -53,7 +54,7 @@ const Members = props => {
             />
             <CardContent className={classes.content}>
                 <List>
-                    {members && members.map(member => (
+                    {members.length > 0 ? members.map(member => (
                         <ListItem
                             disableGutters
                             key={member._id}
@@ -75,7 +76,11 @@ const Members = props => {
                                 // щас пусть пространство хоть занимает
                             />
                         </ListItem>
-                    ))}
+                    )) : (
+                        <div className={classes.nothing}>
+                            <Typography variant="body1">Пока нет участников...</Typography>
+                        </div>
+                    )}
                 </List>
             </CardContent>
             <CardActions className={classes.actions}>

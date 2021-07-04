@@ -10,7 +10,6 @@ import {
     Todos
 } from './components';
 import Page from "../../components/Page";
-import RadarChart from "../Profile/components/Header/components/RadarChart";
 import {useDispatch, useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
