@@ -115,8 +115,8 @@ const ProjectDetails = props => {
                         userId={userId} members={members}
                         description={project.description}
                     />}
-                    {tab === 'workouts' && <Workouts/>}
-                    {tab === 'diet' && <Diet/>}
+                    {tab === 'workouts' && <Workouts projectId={project._id}/>}
+                    {tab === 'diet' && <Diet projectId={project._id}/>}
                     {/*{tab === 'tasks' && <Tasks tasks={project.tasks}/>}*/}
                     {/*{tab === 'files' && <Files files={project.files}/>}*/}
                     {tab === 'activity' && <Activities activities={project.activities}/>}

@@ -9,6 +9,7 @@ const signIn = require("./routes/signIn");
 const users = require("./routes/users");
 const posts = require("./routes/posts");
 const projects = require("./routes/projects");
+const events = require("./routes/events");
 
 winston.exceptions.handle(
     new winston.transports.Console({colorize: true, prettyprint: true}),
@@ -34,6 +35,7 @@ app.use("/api/signin", signIn);
 app.use("/api/users", users);
 app.use("/api/posts", posts);
 app.use("/api/projects", projects);
+app.use("/api/events", events);
 
 app.get("/", (req, res) => {
     res.send("добро пожаловать в API фэт...");

@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
 
 
 const Workouts = props => {
-    const {className, ...rest} = props;
+    const {className, projectId, ...rest} = props;
 
     const classes = useStyles();
 
@@ -19,7 +19,12 @@ const Workouts = props => {
             {...rest}
             className={clsx(classes.root, className)}
         >
-            <ProjectCalendar titlePage={'Тренировки'} editMode={true} />
+            <ProjectCalendar
+                titlePage={'Тренировки'}
+                type={'trainings'}
+                projectId={projectId}
+                editMode={true}
+            />
         </div>
     )
 }

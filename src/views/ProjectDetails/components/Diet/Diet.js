@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Diet = props => {
-    const {className, ...rest} = props;
+    const {className, projectId, ...rest} = props;
 
     const classes = useStyles();
 
@@ -25,7 +25,12 @@ const Diet = props => {
             {...rest}
             className={clsx(classes.root, className)}
         >
-            <ProjectCalendar titlePage={'Диета'} editMode={false}/>
+            <ProjectCalendar
+                titlePage={'Диета'}
+                type={'diet'}
+                editMode={true}
+                projectId={projectId}
+            />
         </div>
     );
 };

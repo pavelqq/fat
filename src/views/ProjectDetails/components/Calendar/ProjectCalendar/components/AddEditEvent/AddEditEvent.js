@@ -19,6 +19,9 @@ import {
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/DeleteOutlined';
 import EventTable from "../EventTable";
+import {generateRandomColor} from "../../../../../../../utils/generateRandomColor";
+import {useDispatch} from "react-redux";
+import {addEvent} from "../../../../../../../store/actions/eventActions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -66,6 +69,8 @@ const AddEditEvent = forwardRef((props, ref) => {
         onAdd,
         onEdit,
         editMode,
+        type,
+        projectId,
         className,
         ...rest
     } = props;
@@ -73,8 +78,11 @@ const AddEditEvent = forwardRef((props, ref) => {
     const classes = useStyles();
 
     const defaultEvent = {
+        type: type,
+        projectId: projectId,
         title: 'Задание',
         desc: 'Описание задания',
+        color: generateRandomColor(),
         allDay: true,
         start: moment().toDate(),
         end: moment().toDate()
@@ -93,6 +101,8 @@ const AddEditEvent = forwardRef((props, ref) => {
         }));
     };
 
+    const dispatch = useDispatch();
+
     const handleDelete = () => {
         onDelete && onDelete(event);
     };
@@ -101,7 +111,7 @@ const AddEditEvent = forwardRef((props, ref) => {
         if (!values.title || !values.desc) {
             return;
         }
-
+        dispatch(addEvent({...values, id: uuidv4()}))
         onAdd({...values, id: uuidv4()});
     };
 

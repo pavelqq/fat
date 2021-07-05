@@ -24,6 +24,8 @@ import {AddEditEvent, Toolbar} from './components';
 
 import {v4 as uuidv4} from 'uuid';
 import {generateRandomColor} from "../../../../../utils/generateRandomColor";
+import {useDispatch, useSelector} from "react-redux";
+import {getProjectDietEvents, getProjectTrainingsEvents} from "../../../../../store/actions/eventActions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -92,84 +94,29 @@ const useStyles = makeStyles(theme => ({
 
 
 const ProjectCalendar = props => {
-    const {editMode, titlePage} = props
+    const {editMode, titlePage, type, projectId} = props
     const classes = useStyles();
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(type === 'trainings') {
+            dispatch(getProjectTrainingsEvents(projectId))
+        } else {
+            dispatch(getProjectDietEvents(projectId))
+        }
+    }, [projectId])
+
+    const eventsList = useSelector(state => state.eventsList)
+
     const calendarRef = useRef(null);
     const theme = useTheme();
     const mobileDevice = useMediaQuery(theme.breakpoints.down('sm'));
     const [view, setView] = useState(mobileDevice ? 'listWeek' : 'dayGridMonth');
     const [date, setDate] = useState(moment().format('DD-MM-YYYY'));
-    const [events, setEvents] = useState([
-        {
-            id: uuidv4(),
-            title: 'Задание',
-            desc: 'Описание задания',
-            allDay: true,
-            color: colors.green['700'], //generateRandomColor() рандомный цвет? можно как опцию
-            start: moment('2021-07-01').toDate(),
-        },
-        {
-            id: uuidv4(),
-            title: 'Call Samantha',
-            desc: 'Inform about new contract',
-            allDay: false,
-            color: colors.green['700'],
-            start: moment('2021-07-01 16:55:00').toDate(),
-            end: moment('2021-07-01 17:02:00').toDate()
-        },
-        {
-            id: uuidv4(),
-            title: 'Meet with IBM',
-            desc: 'Discuss about new partnership',
-            allDay: false,
-            color: colors.amber['700'],
-            start: moment('2021-07-03 08:55:00').toDate(),
-            end: moment('2021-07-04 15:02:00').toDate()
-        },
-        {
-            id: uuidv4(),
-            title: 'SCRUM Planning',
-            desc: 'Prepare documentation',
-            allDay: true,
-            color: colors.orange['700'],
-            start: moment('2021-07-14 16:55:00').toDate()
-        },
-        {
-            id: uuidv4(),
-            title: 'Beign SEM',
-            desc: 'Meet with team to discuss',
-            allDay: true,
-            color: colors.yellow['700'],
-            start: moment('2021-07-18 07:00:00').toDate()
-        },
-        {
-            id: uuidv4(),
-            title: 'Fire John',
-            desc: 'Sorry, John',
-            allDay: false,
-            color: colors.blue['700'],
-            start: moment('2021-07-20 08:55:00').toDate(),
-            end: moment('2021-07-20 09:30:00').toDate()
-        },
-        {
-            id: uuidv4(),
-            title: 'Call Alex',
-            desc: 'Discuss about the new project',
-            allDay: true,
-            color: colors.purple['700'],
-            start: moment('2021-07-03 08:00:00').toDate(),
-            end: moment('2021-07-07 08:00:00').toDate()
-        },
-        {
-            id: uuidv4(),
-            title: 'Visit Samantha',
-            desc: 'Get a new quote for the payment processor',
-            allDay: false,
-            color: colors.red['700'],
-            start: moment('2021-07-05 08:00:00').toDate(),
-            end: moment('2021-07-06 09:00:00').toDate()
-        }
-    ]);
+    const [events, setEvents] = useState([]);
+
+    debugger
 
     const [eventModal, setEventModal] = useState({
         open: false,
@@ -193,64 +140,6 @@ const ProjectCalendar = props => {
     //         mounted = false;
     //     };
     // }, []);
-
-    const mock = {
-        draft: [],
-        events: [
-            {
-                id: uuidv4(),
-                title: 'Call Samantha',
-                desc: 'Inform about new contract',
-                color: colors.green['700'],
-                start: moment('2019-07-01 16:55:00'),
-                end: moment('2019-07-01 17:02:00')
-            },
-            {
-                id: uuidv4(),
-                title: 'Meet with IBM',
-                desc: 'Discuss about new partnership',
-                start: moment('2019-07-03 08:55:00'),
-                end: moment('2019-07-04 15:02:00')
-            },
-            {
-                id: uuidv4(),
-                title: 'SCRUM Planning',
-                desc: 'Prepare documentation',
-                allDay: true,
-                start: moment('2019-07-14 16:55:00')
-            },
-            {
-                id: uuidv4(),
-                title: 'Beign SEM',
-                desc: 'Meet with team to discuss',
-                allDay: true,
-                start: moment('2019-07-18 07:00:00')
-            },
-            {
-                id: uuidv4(),
-                title: 'Fire John',
-                desc: 'Sorry, John',
-                color: colors.green['700'],
-                start: moment('2019-07-20 08:55:00'),
-                end: moment('2019-07-20 09:30:00')
-            },
-            {
-                id: uuidv4(),
-                title: 'Call Alex',
-                desc: 'Discuss about the new project',
-                allDay: true,
-                start: moment('2019-07-30 08:00:00')
-            },
-            {
-                id: uuidv4(),
-                title: 'Visit Samantha',
-                color: colors.green['700'],
-                desc: 'Get a new quote for the payment processor',
-                start: moment('2019-07-30 08:00:00'),
-                end: moment('2019-07-30 09:00:00')
-            }
-        ]
-    }
 
     useEffect(() => {
         const calendarApi = calendarRef.current.getApi();
@@ -366,7 +255,7 @@ const ProjectCalendar = props => {
                     editable
                     eventClick={handleEventClick}
                     eventResizableFromStart
-                    events={events}
+                    events={eventsList}
                     header={false}
                     headerToolbar={false}
                     height={800}
@@ -394,6 +283,8 @@ const ProjectCalendar = props => {
                     onDelete={handleEventDelete}
                     onEdit={handleEventEdit}
                     editMode={editMode}
+                    type={type}
+                    projectId={projectId}
                 />
             </Modal>
         </div>
@@ -402,3 +293,98 @@ const ProjectCalendar = props => {
 
 
 export default ProjectCalendar;
+
+
+//{
+//             id: uuidv4(),
+//             type: 'trainings',
+//             projectId: 'projectId',
+//             authorId: 'userId',
+//             title: 'Баллон гавна',
+//             desc: 'Описание задания',
+//             allDay: true,
+//             color: colors.green['700'], //generateRandomColor() рандомный цвет? можно как опцию
+//             start: moment('2021-07-01').toDate(),
+//         },
+//         {
+//             id: uuidv4(),
+//             type: 'trainings',
+//             projectId: 'projectId',
+//             authorId: 'userId',
+//             title: 'Моча съела гавно',
+//             desc: 'Inform about new contract',
+//             allDay: false,
+//             color: colors.green['700'],
+//             start: moment('2021-07-01 16:55:00').toDate(),
+//             end: moment('2021-07-01 17:02:00').toDate()
+//         },
+//         {
+//             id: uuidv4(),
+//             type: 'trainings',
+//             projectId: 'projectId',
+//             authorId: 'userId',
+//             title: 'Дрисня',
+//             desc: 'Discuss about new partnership',
+//             allDay: false,
+//             color: colors.amber['700'],
+//             start: moment('2021-07-03 08:55:00').toDate(),
+//             end: moment('2021-07-04 15:02:00').toDate()
+//         },
+//         {
+//             id: uuidv4(),
+//             type: 'trainings',
+//             projectId: 'projectId',
+//             authorId: 'userId',
+//             title: 'Хочу пиццы',
+//             desc: 'Prepare documentation',
+//             allDay: true,
+//             color: colors.orange['700'],
+//             start: moment('2021-07-14 16:55:00').toDate()
+//         },
+//         {
+//             id: uuidv4(),
+//             type: 'trainings',
+//             projectId: 'projectId',
+//             authorId: 'userId',
+//             title: 'Тест1',
+//             desc: 'Meet with team to discuss',
+//             allDay: true,
+//             color: colors.yellow['700'],
+//             start: moment('2021-07-18 07:00:00').toDate()
+//         },
+//         {
+//             id: uuidv4(),
+//             type: 'trainings',
+//             projectId: 'projectId',
+//             authorId: 'userId',
+//             title: 'Тест2',
+//             desc: 'Sorry, John',
+//             allDay: false,
+//             color: colors.blue['700'],
+//             start: moment('2021-07-20 08:55:00').toDate(),
+//             end: moment('2021-07-20 09:30:00').toDate()
+//         },
+//         {
+//             id: uuidv4(),
+//             type: 'trainings',
+//             projectId: 'projectId',
+//             authorId: 'userId',
+//             title: 'Саня',
+//             desc: 'Discuss about the new project',
+//             allDay: true,
+//             color: colors.purple['700'],
+//             start: moment('2021-07-03 08:00:00').toDate(),
+//             end: moment('2021-07-07 08:00:00').toDate()
+//         },
+//         {
+//             id: uuidv4(),
+//             type: 'trainings',
+//             projectId: 'projectId',
+//             userId: 'userId',
+//             title: 'Лоликс',
+//             desc: 'Get a new quote for the payment processor',
+//             allDay: false,
+//             color: colors.red['700'],
+//             start: moment('2021-07-05 08:00:00').toDate(),
+//             end: moment('2021-07-06 09:00:00').toDate()
+//         }
