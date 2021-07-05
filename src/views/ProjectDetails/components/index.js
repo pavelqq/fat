@@ -3,3 +3,4 @@ export { default as Files } from './Files';
 export { default as Header } from './Header';
 export { default as Overview } from './Overview';
 export { default as Tasks } from './Tasks';
+export { default as Workouts } from './Workouts';

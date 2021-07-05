@@ -103,7 +103,7 @@ const Overview = props => {
                 borderWidth: 1,
             },
             {
-                label: 'Средняя прибавка по окончанию проекта',
+                label: 'Средняя прибавка по завершению',
                 data: [41, 125, 110, 90, 100, 40, 39, 34, 33, 19, 19, 61, 63, 40, 39],
                 backgroundColor: 'rgb(255,99,130)',
                 borderColor: 'rgba(255,99,99,0.15)',
@@ -116,7 +116,7 @@ const Overview = props => {
         labels: ['1 ', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
         datasets: [
             {
-                label: 'Средняя прибавка по весу в течении проекта',
+                label: 'Средняя прибавка по весу',
                 data: [70, 72, 72.4, 73.3, 74, 73.8, 76, 78, 80.5, 81, 80, 80],
                 backgroundColor: 'rgb(255,99,130)',
                 borderColor: 'rgba(255,99,99,0.15)',
@@ -129,14 +129,14 @@ const Overview = props => {
         labels: ['1 ', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
         datasets: [
             {
-                label: 'Число закончивших проект за неделю',
+                label: 'Число закончивших проект',
                 data: [53, 46, 42, 40, 33, 32, 31, 24, 20, 12, 10, 10],
                 backgroundColor: 'rgba(99,138,255,0.91)',
                 borderColor: 'rgba(99,120,255,0.15)',
                 borderWidth: 1,
             },
             {
-                label: 'Число подписавшихся на проект за неделю',
+                label: 'Число подписавшихся на проект',
                 data: [10, 22, 43, 48, 62, 63, 70, 72, 73, 81, 80, 82],
                 backgroundColor: 'rgb(255,99,130)',
                 borderColor: 'rgba(255,99,99,0.15)',
@@ -197,7 +197,7 @@ const Overview = props => {
                         <Grid
                             item
                             lg={12}
-                            xl={6}
+                            xl={12}
                             xs={12}
                         >
                             <ChartLine
@@ -212,7 +212,7 @@ const Overview = props => {
                         <Grid
                             item
                             lg={12}
-                            xl={6}
+                            xl={12}
                             xs={12}
                         >
                             <ChartLine

@@ -18,7 +18,10 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(1)
     },
     shareButton: {
-        marginRight: theme.spacing(2)
+        marginRight: theme.spacing(2),
+        [theme.breakpoints.down('xs')]: {
+            marginBottom: theme.spacing(1)
+        }
     },
     shareIcon: {
         marginRight: theme.spacing(1)

@@ -1,4 +1,3 @@
-import {v4 from uuidv4} from 'uuid';
 import moment from 'moment';
 
 import mock from '../utils/mock';

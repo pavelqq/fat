@@ -44,10 +44,8 @@ const Trainings = props => {
     //     setSelectedDate(date);
     // };
 
-    debugger;
-    let first = train[0].date;
-    let last = train[train.length - 1].date
-    debugger;
+    // let first = train[0].date;
+    // let last = train[train.length - 1].date
 
     const onDateChange = (date, value) => {
         setDate(date);
@@ -58,7 +56,7 @@ const Trainings = props => {
         return str;
     };
 
-    let currentTrain = train.find(e => e.date === inputValue);
+    // let currentTrain = train.find(e => e.date === inputValue);
 
     return (
         <div
@@ -100,8 +98,8 @@ const Trainings = props => {
                         inputValue={inputValue}
                         onChange={onDateChange}
                         rifmFormatter={dateFormatter}
-                        minDate={first.toString()}
-                        maxDate={last.toString()}
+                        // minDate={first.toString()}
+                        // maxDate={last.toString()}
                     />
                     <General className={classes.intensity} />
                 </Grid>

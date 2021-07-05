@@ -4,11 +4,12 @@ import {makeStyles} from '@material-ui/core/styles';
 import {Tabs, Tab, Divider, colors} from '@material-ui/core';
 
 import Page from "../../components/Page";
-import {Header, Overview, Files, Activities, Tasks} from './components';
+import {Header, Overview, Files, Activities, Tasks, Workouts} from './components';
 import {useDispatch, useSelector} from "react-redux";
 import {getProjectById} from "../../store/actions/projectActions";
 import {getProfileById} from "../../store/actions/userActions";
 import {getMembers} from "../../store/actions/usersListActions";
+import Diet from "./components/Diet";
 
 
 const useStyles = makeStyles(theme => ({
@@ -65,7 +66,7 @@ const ProjectDetails = props => {
 
     const tabs = [
         {value: 'overview', label: 'Подробнее про проект'},
-        {value: 'trainings', label: 'Тренировки'},
+        {value: 'workouts', label: 'Тренировки'},
         {value: 'diet', label: 'Диета'},
         // {value: 'tasks', label: 'Задачи проекта'},
         // {value: 'files', label: 'Прикрепленные файлы'},
@@ -114,15 +115,13 @@ const ProjectDetails = props => {
                         userId={userId} members={members}
                         description={project.description}
                     />}
-                    {tab === 'trainings' && <div>trainings</div>}
-                    {tab === 'diet' && <div>diet</div>}
+                    {tab === 'workouts' && <Workouts/>}
+                    {tab === 'diet' && <Diet/>}
                     {/*{tab === 'tasks' && <Tasks tasks={project.tasks}/>}*/}
                     {/*{tab === 'files' && <Files files={project.files}/>}*/}
                     {tab === 'activity' && <Activities activities={project.activities}/>}
-                </div>
-            ) : (
-                <div>загрузка...</div>
-            )
+                </div>)
+                : (<div>загрузка...</div>)
             }
         </Page>
     );
