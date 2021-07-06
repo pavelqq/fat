@@ -28,7 +28,7 @@ const Diet = props => {
             <ProjectCalendar
                 titlePage={'Диета'}
                 type={'diet'}
-                editMode={true}
+                editMode={false}
                 projectId={projectId}
             />
         </div>

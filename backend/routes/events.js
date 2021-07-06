@@ -78,31 +78,96 @@ router.post("/createEvent", auth, async (req, res) => {
     }
 });
 
-module.exports = router;
+//изменить задание
+router.put("/:id/:type", auth, async (req, res) => {
+    const schema = Joi.object({
+        __v: Joi.number().required(),
+        _id: Joi.string().required(),
+        id: Joi.string().required(),
+        type: Joi.string().required(),
+        projectId: Joi.string().required(),
+        authorId: Joi.string().required(),
+        title: Joi.string().required(),
+        desc: Joi.string().required(),
+        allDay: Joi.boolean().required(),
+        color: Joi.string().required(),
+        start: Joi.date().required(),
+        end: Joi.date().required(),
+    });
 
-//создать новое задание по диете
-// router.post("/:currentProjectId/createEvent/diet", auth, async (req, res) => {
-//     const schema = Joi.object({
-//         type: Joi.string().required(),
-//         projectId: Joi.string().required(),
-//         authorId: Joi.string().required(),
-//         title: Joi.string().required(),
-//         desc: Joi.string().required(),
-//         allDay: Joi.boolean().required(),
-//         color: Joi.string().required(),
-//         start: Joi.date().required(),
-//         end: Joi.date().required(),
-//     });
-//
-//     const {error} = schema.validate(req.body);
-//
-//     if (error) return res.status(400).send(error.details[0].message);
-//
-//     const {type, projectId, authorId, title, desc, allDay, color, start, end} = req.body;
-//
-//     let dietEvent = new DietEvent({type, projectId, authorId, title, desc, allDay, color, start, end});
-//
-//     dietEvent = await dietEvent.save();
-//     res.send(dietEvent);
-// });
+    const {error} = schema.validate(req.body);
+
+    if (error) return res.status(400).send(error.details[0].message);
+
+    try {
+        if (req.params.type === 'trainings') {
+            const event = await Trainings.findById(req.params.id);
+            if (!event) return res.status(404).send("Trainings. Задание не найдено...");
+            if (event.authorId !== req.user._id)
+                return res.status(401).send("Trainings. Задание не обновлено. Нет авторизации...");
+
+            const {id, type, projectId, authorId, title, desc, allDay, color, start, end} = req.body;
+
+            const updatedTrainingsEvent = await Trainings.findByIdAndUpdate(
+                req.params.id,
+                {id, type, projectId, authorId, title, desc, allDay, color, start, end},
+                {new: true}
+            );
+            res.send(updatedTrainingsEvent);
+        }
+        if (req.params.type === 'diet') {
+            const event = await Diet.findById(req.params.id);
+            if (!event) return res.status(404).send("Diet. Задание не найдено...");
+            if (event.authorId !== req.user._id)
+                return res.status(401).send("Diet. Задание не обновлено. Нет авторизации...");
+
+            const {id, type, projectId, authorId, title, desc, allDay, color, start, end} = req.body;
+
+            const updatedDietEvent = await Diet.findByIdAndUpdate(
+                req.params.id,
+                {id, type, projectId, authorId, title, desc, allDay, color, start, end},
+                {new: true}
+            );
+            res.send(updatedDietEvent);
+        }
+    } catch (err) {
+        res.status(500).send("Ошибка: " + err.message);
+        winston.error(err.message);
+    }
+});
+
+//удалить задание
+router.delete("/:id/:type", auth, async (req, res) => {
+    try {
+        if (req.params.type === 'trainings') {
+
+            const event = await Trainings.findById(req.params.id);
+
+            if (!event) return res.status(404).send("Trainings. Задача не найдена...");
+
+            if (event.authorId !== req.user._id)
+                return res.status(401).send("Trainings. Удаление задачи невозможнно. Нет авторизации...");
+
+            const deletedTrainingsEvent = await Trainings.findByIdAndDelete(req.params.id);
+            res.send(deletedTrainingsEvent);
+        }
+        if (req.params.type === 'diet') {
+
+            const event = await Diet.findById(req.params.id);
+
+            if (!event) return res.status(404).send("Diet. Задача не найдена...");
+
+            if (event.authorId !== req.user._id)
+                return res.status(401).send("Diet. Удаление задачи невозможнно. Нет авторизации...");
+
+            const deletedDietEvent = await Diet.findByIdAndDelete(req.params.id);
+            res.send(deletedDietEvent);
+        }
+    } catch (err) {
+        res.status(500).send("Ошибка: " + err.message);
+        winston.error(err.message);
+    }
+});
+
+module.exports = router;
 

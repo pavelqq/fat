@@ -21,7 +21,7 @@ import DeleteIcon from '@material-ui/icons/DeleteOutlined';
 import EventTable from "../EventTable";
 import {generateRandomColor} from "../../../../../../../utils/generateRandomColor";
 import {useDispatch} from "react-redux";
-import {addEvent} from "../../../../../../../store/actions/eventActions";
+import {addEvent, deleteEvent, updateEvent} from "../../../../../../../store/actions/eventActions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -105,6 +105,7 @@ const AddEditEvent = forwardRef((props, ref) => {
 
     const handleDelete = () => {
         onDelete && onDelete(event);
+        dispatch(deleteEvent(event._id, type))
     };
 
     const handleAdd = () => {
@@ -119,7 +120,7 @@ const AddEditEvent = forwardRef((props, ref) => {
         if (!values.title || !values.desc) {
             return;
         }
-
+        dispatch(updateEvent({...values, id: uuidv4()}, event._id, type))
         onEdit(values);
     };
 
@@ -169,6 +170,7 @@ const AddEditEvent = forwardRef((props, ref) => {
                     {/*<EventTable*/}
                     {/*    className={classes.table}*/}
                     {/*/>*/}
+                    {editMode && (
                     <FormControlLabel
                         className={classes.field}
                         control={
@@ -180,6 +182,7 @@ const AddEditEvent = forwardRef((props, ref) => {
                         }
                         label="Весь день"
                     />
+                    )}
                     <TextField
                         className={classes.field}
                         defaultValue={moment(values.start).format('YYYY-MM-DDThh:mm:ss')}

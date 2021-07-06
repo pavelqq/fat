@@ -114,9 +114,11 @@ const ProjectCalendar = props => {
     const mobileDevice = useMediaQuery(theme.breakpoints.down('sm'));
     const [view, setView] = useState(mobileDevice ? 'listWeek' : 'dayGridMonth');
     const [date, setDate] = useState(moment().format('DD-MM-YYYY'));
-    const [events, setEvents] = useState([]);
+    const [events, setEvents] = useState([...eventsList]);
 
-    debugger
+    useEffect(() => {
+        setEvents(eventsList)
+    }, [eventsList])
 
     const [eventModal, setEventModal] = useState({
         open: false,
@@ -255,7 +257,7 @@ const ProjectCalendar = props => {
                     editable
                     eventClick={handleEventClick}
                     eventResizableFromStart
-                    events={eventsList}
+                    events={events}
                     header={false}
                     headerToolbar={false}
                     height={800}

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {setProjectHeaders, url} from "../../api";
+import {setHeaders, setProjectHeaders, url} from "../../api";
 import {toast} from "react-toastify";
 
 export const getProjectTrainingsEvents = (currentProjectId) => {
@@ -54,6 +54,44 @@ export const addEvent = (newEvent) => {
             .catch((error) => {
                 console.log(error.response);
 
+                toast.error(error.response?.data, {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                });
+            });
+    };
+};
+
+export const updateEvent = (updatedEvent, id, type) => {
+    return (dispatch) => {
+        axios
+            .put(`${url}/events/${id}/${type}`, updatedEvent, setProjectHeaders())
+            .then((updatedEvent) => {
+                dispatch({
+                    type: "UPDATE_EVENT",
+                    updatedEvent,
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+                toast.error(error.response?.data, {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                });
+            });
+    };
+};
+
+export const deleteEvent = (id, type) => {
+    return (dispatch) => {
+        axios
+            .delete(`${url}/events/${id}/${type}`, setHeaders())
+            .then(() => {
+                dispatch({
+                    type: "DELETE_EVENT",
+                    id,
+                });
+            })
+            .catch((error) => {
+                console.log(error);
                 toast.error(error.response?.data, {
                     position: toast.POSITION.BOTTOM_RIGHT,
                 });
