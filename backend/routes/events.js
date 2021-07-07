@@ -6,6 +6,8 @@ const router = express.Router();
 const {Trainings} = require("../models/trainings");
 const {Diet} = require("../models/diet");
 
+const moment = require('moment')
+
 //получить тренировочные задания проекта
 router.get("/:currentProjectId/trainingsEvents", auth, async (req, res, next) => {
     try {
@@ -29,6 +31,31 @@ router.get("/:currentProjectId/dietEvents", auth, async (req, res, next) => {
             dEvent => dEvent.projectId === req.params.currentProjectId
         );
         res.send(filteredDietEvents);
+    } catch (error) {
+        res.status(500).send("Ошибка: " + error.message);
+
+        winston.error(error.message);
+    }
+});
+
+//получить все задания на сегодня
+router.get("/date/:date/projectId/:projectId", async (req, res, next) => {
+    try {
+        const trainingsEvents = await Trainings.find();
+        const dietEvents = await Diet.find();
+
+        const today = moment().startOf('day').format('YYYY-MM-DDThh:mm:ss')
+
+        const filteredTrainingsEvents = trainingsEvents.filter(
+            (tEvent) => (tEvent.start === today.toDate())
+        );
+        const filteredDietEvents = dietEvents.filter(
+            (dEvent) => (dEvent.start === today.toDate())
+        );
+
+        let todayEvents = [...filteredTrainingsEvents, ...filteredDietEvents]
+
+        res.send(todayEvents);
     } catch (error) {
         res.status(500).send("Ошибка: " + error.message);
 

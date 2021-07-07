@@ -1,19 +1,21 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
-import {Typography, Button, colors} from '@material-ui/core';
+import {Typography, Button} from '@material-ui/core';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import ProjectCard from "../../../../components/ProjectCard";
 
-import axios from "../../../../utils/axios";
+import _ from 'lodash'
+
 import {useDispatch, useSelector} from "react-redux";
-import {getUsersProjects} from "../../../../store/actions/projectActions";
+import {getAllProjects, getUsersProjects} from "../../../../store/actions/projectActions";
+import ProjectCard from "../../../../components/ProjectCard";
 
 
 const useStyles = makeStyles(theme => ({
     root: {
-        margin: theme.spacing(2)
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2)
     },
     header: {
         display: 'flex',
@@ -43,17 +45,25 @@ const useStyles = makeStyles(theme => ({
 
 
 const Projects = props => {
-    const {id, className, ...rest} = props;
+    const {authUserId, className, fromOverviewPage, fromProfilePage, ...rest} = props;
 
     const classes = useStyles();
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getUsersProjects(id))
-    }, [id])
+        {fromOverviewPage && dispatch(getAllProjects())}
+        {fromProfilePage && dispatch(getUsersProjects(authUserId))}
+    }, [authUserId])
 
-    const projects = useSelector(state => state.projectsList)
+
+    const allProjects = useSelector(state => state.projectsList)
+
+    const currentProject = _.filter(allProjects, function (project) {
+        return project.members.includes(authUserId)
+    })
+
+    console.log(currentProject)
 
     return (
         <div
@@ -65,7 +75,7 @@ const Projects = props => {
                     className={classes.title}
                     variant="h5"
                 >
-                    Проекты пользователя
+                    Текущий проект
                 </Typography>
                 <Button
                     component={RouterLink}
@@ -75,13 +85,30 @@ const Projects = props => {
                     <KeyboardArrowRightIcon className={classes.arrowIcon}/>
                 </Button>
             </div>
-            {projects.map(project => (
-                <ProjectCard
-                    className={classes.projectCard}
-                    key={project._id}
-                    project={project}
-                />
-            ))}
+            {fromOverviewPage &&
+            <>
+                {currentProject.map(project => (
+                    <ProjectCard
+                        className={classes.projectCard}
+                        key={project._id}
+                        project={project}
+                        disabledMembering={true}
+                    />
+                ))}
+            </>
+            }
+            {fromProfilePage &&
+            <>
+                {allProjects.map(project => (
+                    <ProjectCard
+                        className={classes.projectCard}
+                        key={project._id}
+                        project={project}
+                        disabledMembering={false}
+                    />
+                ))}
+            </>
+            }
         </div>
     );
 };

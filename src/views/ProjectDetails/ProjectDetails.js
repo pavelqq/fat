@@ -56,6 +56,7 @@ const ProjectDetails = props => {
     const project = useSelector(state => state.projectById);
     const author = useSelector(state => state.userById);
     const members = useSelector(state => state.usersList);
+    const authUserId = useSelector(state => state.auth._id)
 
     const appState = useSelector((state) => state);
     console.log(appState);
@@ -115,8 +116,16 @@ const ProjectDetails = props => {
                         userId={userId} members={members}
                         description={project.description}
                     />}
-                    {tab === 'workouts' && <Workouts projectId={project._id}/>}
-                    {tab === 'diet' && <Diet projectId={project._id}/>}
+                    {tab === 'workouts' && <Workouts
+                        projectId={project._id}
+                        projectAuthorId={project.author.uid}
+                        authUserId={authUserId}
+                    />}
+                    {tab === 'diet' && <Diet
+                        projectId={project._id}
+                        projectAuthorId={project.author.uid}
+                        authUserId={authUserId}
+                    />}
                     {/*{tab === 'tasks' && <Tasks tasks={project.tasks}/>}*/}
                     {/*{tab === 'files' && <Files files={project.files}/>}*/}
                     {tab === 'activity' && <Activities activities={project.activities}/>}

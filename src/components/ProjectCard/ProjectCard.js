@@ -20,7 +20,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
-import { Editor, EditorState, convertFromRaw } from "draft-js";
+import {Editor, EditorState, convertFromRaw} from "draft-js";
 
 import getInitials from "../../utils/getInitials";
 import Label from "../Label";
@@ -73,7 +73,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ProjectCard = props => {
-    const {project, className, ...rest} = props;
+    const {project, className, disabledMembering, ...rest} = props;
 
     const projectId = props.project._id;
     const userId = props.project.author.uid
@@ -182,29 +182,33 @@ const ProjectCard = props => {
                             <Typography variant="body2">Конец проекта</Typography>
                         </Grid>
                         <Grid item>
-                            {isMembering ? (
-                                <Tooltip title="Покинуть проект">
-                                    <IconButton
-                                        className={classes.likedButton}
-                                        onClick={memberingHandler}
-                                        size="small"
-                                    >
-                                        Вы участвуете!
-                                        <FavoriteIcon/>
-                                    </IconButton>
-                                </Tooltip>
-                            ) : (
-                                <Tooltip title="Участвовать в проекте">
-                                    <IconButton
-                                        className={classes.dislikedButton}
-                                        onClick={memberingHandler}
-                                        size="small"
-                                    >
-                                        Принять участие?
-                                        <FavoriteBorderIcon/>
-                                    </IconButton>
-                                </Tooltip>
-                            )}
+                            {!disabledMembering &&
+                            <>
+                                {isMembering ? (
+                                    <Tooltip title="Покинуть проект">
+                                        <IconButton
+                                            className={classes.likedButton}
+                                            onClick={memberingHandler}
+                                            size="small"
+                                        >
+                                            Вы участвуете!
+                                            <FavoriteIcon/>
+                                        </IconButton>
+                                    </Tooltip>
+                                ) : (
+                                    <Tooltip title="Участвовать в проекте">
+                                        <IconButton
+                                            className={classes.dislikedButton}
+                                            onClick={memberingHandler}
+                                            size="small"
+                                        >
+                                            Принять участие?
+                                            <FavoriteBorderIcon/>
+                                        </IconButton>
+                                    </Tooltip>
+                                )}
+                            </>
+                            }
                             <Tooltip title="Поделится">
                                 <IconButton
                                     className={classes.shareButton}

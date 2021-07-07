@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
         display: 'none'
     },
     editorContainer: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(1),
         minHeight: 60,
         '& .public-DraftEditorPlaceholder-root': {
             ...theme.typography.body2
@@ -116,7 +116,7 @@ const AddPost = props => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(post._id){
+        if (post._id) {
             const id = post._id;
             const updatedPost = {
                 //description: post.description,
@@ -138,7 +138,7 @@ const AddPost = props => {
 
             dispatch(addPost(newPost));
         }
-        setPost({ description: EditorState.createEmpty() });
+        setPost({description: EditorState.createEmpty()});
     }
 
     const capitalize = string => string.charAt(0).toUpperCase() + string.slice(1);
@@ -214,42 +214,31 @@ const AddPost = props => {
             className={clsx(classes.root, className)}
         >
             <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-                <CardContent className={classes.content}>
-                    <Paper
-                        className={classes.paper}
-                        elevation={1}
+                <Paper
+                    className={classes.paper}
+                    elevation={1}
+                >
+                    <EditorToolbar
+                        editorState={editorState}
+                        onToggle={handleToolbarToggle}
+                    />
+                    <Divider/>
+                    <div
+                        className={classes.editorContainer}
+                        onClick={handleContainerClick}
                     >
-                        <EditorToolbar
+                        <Editor
+                            blockRenderMap={blockRenderMap}
+                            blockStyleFn={blockStyleFn}
                             editorState={editorState}
-                            onToggle={handleToolbarToggle}
+                            handleKeyCommand={handleKeyCommand}
+                            keyBindingFn={mapKeyToEditorCommand}
+                            onChange={handleEditorChange}
+                            placeholder={`Что нового? ${currentUserName}`}
+                            ref={editorRef}
+                            spellCheck
                         />
-                        <Divider/>
-                        <div
-                            className={classes.editorContainer}
-                            onClick={handleContainerClick}
-                        >
-                            <Editor
-                                blockRenderMap={blockRenderMap}
-                                blockStyleFn={blockStyleFn}
-                                editorState={editorState}
-                                handleKeyCommand={handleKeyCommand}
-                                keyBindingFn={mapKeyToEditorCommand}
-                                onChange={handleEditorChange}
-                                placeholder={`Что нового? ${currentUserName}`}
-                                ref={editorRef}
-                                spellCheck
-                            />
-                        </div>
-                        {/*<Input*/}
-                        {/*    className={classes.input}*/}
-                        {/*    disableUnderline*/}
-                        {/*    value = {post.description}*/}
-                        {/*    onChange = {(e) => setPost({...post, description: e.target.value})}*/}
-                        {/*    placeholder={*/}
-                        {/*        `Что вы думаете, ${currentUserName}`*/}
-                        {/*    }*/}
-                        {/*/>*/}
-                    </Paper>
+                    </div>
                     <Tooltip
                         title="Отправить"
                         type="submit"
@@ -257,43 +246,76 @@ const AddPost = props => {
                         <IconButton
                             color={post.description.length > 0 ? 'primary' : 'default'}
                         >
-                            <Hidden smUp>
-                                <Button variant="outlined" color="primary" className={classes.sendButton}>
-                                    Отправить сообщение
-                                </Button>
-                            </Hidden>
-                            <Hidden xsDown>
-                                <SendIcon/>
-                            </Hidden>
+                            <SendIcon/>
                         </IconButton>
                     </Tooltip>
-                    <Divider className={classes.divider}/>
-                    {/*<Tooltip title="Прикрепить изображение">*/}
-                    {/*    <IconButton*/}
-                    {/*        edge="end"*/}
-                    {/*        //onClick={handleAttach}*/}
-                    {/*    >*/}
-                    {/*        <AddPhotoIcon/>*/}
-                    {/*    </IconButton>*/}
-                    {/*</Tooltip>*/}
-                    {/*<Tooltip title="Прикрепить файл">*/}
-                    {/*    <IconButton*/}
-                    {/*        edge="end"*/}
-                    {/*        //onClick={handleAttach}*/}
-                    {/*    >*/}
-                    {/*        <AttachFileIcon/>*/}
-                    {/*    </IconButton>*/}
-                    {/*</Tooltip>*/}
-                    {/*<input*/}
-                    {/*    className={classes.fileInput}*/}
-                    {/*    //ref={fileInputRef}*/}
-                    {/*    type="file"*/}
-                    {/*/>*/}
-                </CardContent>
+                </Paper>
             </form>
         </Card>
     );
 };
 
+{/*<Input*/
+}
+{/*    className={classes.input}*/
+}
+{/*    disableUnderline*/
+}
+{/*    value = {post.description}*/
+}
+{/*    onChange = {(e) => setPost({...post, description: e.target.value})}*/
+}
+{/*    placeholder={*/
+}
+{/*        `Что вы думаете, ${currentUserName}`*/
+}
+{/*    }*/
+}
+{/*/>*/
+}
+{/*<Divider className={classes.divider}/>*/
+}
+{/*<Tooltip title="Прикрепить изображение">*/
+}
+{/*    <IconButton*/
+}
+{/*        edge="end"*/
+}
+{/*        //onClick={handleAttach}*/
+}
+{/*    >*/
+}
+{/*        <AddPhotoIcon/>*/
+}
+{/*    </IconButton>*/
+}
+{/*</Tooltip>*/
+}
+{/*<Tooltip title="Прикрепить файл">*/
+}
+{/*    <IconButton*/
+}
+{/*        edge="end"*/
+}
+{/*        //onClick={handleAttach}*/
+}
+{/*    >*/
+}
+{/*        <AttachFileIcon/>*/
+}
+{/*    </IconButton>*/
+}
+{/*</Tooltip>*/
+}
+{/*<input*/
+}
+{/*    className={classes.fileInput}*/
+}
+{/*    //ref={fileInputRef}*/
+}
+{/*    type="file"*/
+}
+{/*/>*/
+}
 
 export default AddPost;

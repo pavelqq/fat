@@ -138,7 +138,7 @@ mock.onGet('/api/account/todos').reply(200, {
         {
             id: uuidv4(),
             title: 'Тренировка спины',
-            deadline: moment().subtract(1, 'days'),
+            deadline: moment().add('1', 'hour').format('LT'),
             done: false
         },
         {
@@ -171,7 +171,7 @@ mock.onGet('/api/account/todos').reply(200, {
             title:
                 'Сделать замеры',
             deadline: moment().add(20, 'days'),
-            done: true
+            done: false
         }
     ]
 });

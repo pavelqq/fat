@@ -31,6 +31,7 @@ router.get("/allProjects/all", async (req, res, next) => {
     }
 });
 
+
 //получить проект по id
 router.get("/current/:id", async (req, res) => {
     try {
@@ -62,20 +63,6 @@ router.post("/", auth, async (req, res) => {
         startDate: Joi.date(),
         endDate: Joi.date(),
         date: Joi.date(),
-        // diet: [
-        //     {
-        //         date: Joi.date().required(),
-        //         title: Joi.string().required(),
-        //         description: Joi.string().required(),
-        //     }
-        // ],
-        // trainings: [
-        //     {
-        //         date: Joi.date().required(),
-        //         title: Joi.string().required(),
-        //         description: Joi.string().required(),
-        //     }
-        // ]
     });
 
     const {error} = schema.validate(req.body);
@@ -141,16 +128,6 @@ router.delete("/:id", auth, async (req, res) => {
 // принять участие/покинуть проект
 router.put("/:id/membering", async (req, res) => {
     try {
-
-        // const allProjects = await Project.find();
-        // allProjects.filter(
-        //     (project => project.members.includes(req.body.userId))
-        //         .map( (projectIncludesUserId) =>
-        //             projectIncludesUserId.updateOne(
-        //                 { $pull: { members: req.body.userId } }
-        //             )
-        //     )
-        // );
 
         const project = await Project.findById(req.params.id);
         const allProjects = await Project.find();

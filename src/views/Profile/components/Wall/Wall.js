@@ -36,31 +36,31 @@ const Wall = (props) => {
             {/*<Gallery/>*/}
             {currentUser._id === auth._id ? (
                 <>
-                    <AddPost post={post} setPost={setPost} currentUserName={currentUser.name}/>
                     <Grid container>
-                        <Grid item xs={12} sm={9} md={8}>
+                        {/*<Hidden xsDown>*/}
+                        {/*    <Grid item sm={3} md={4}>*/}
+                        {/*        /!*<Timeline scrollRef={scrollRef} post={post} setPost={setPost}*!/*/}
+                        {/*        /!*          currentUser={currentUser}/>*!/*/}
+                        {/*    </Grid>*/}
+                        {/*</Hidden>*/}
+                        <Grid item xs={12} sm={12} md={12}>
+                            <AddPost post={post} setPost={setPost} currentUserName={currentUser.name}/>
                             <Posts scrollRef={scrollRef} post={post} setPost={setPost} currentUser={currentUser}/>
                         </Grid>
-                        <Hidden xsDown>
-                            <Grid item sm={3} md={4}>
-                                <Timeline scrollRef={scrollRef} post={post} setPost={setPost}
-                                          currentUser={currentUser}/>
-                            </Grid>
-                        </Hidden>
                     </Grid>
                 </>
             ) : (
                 <>
                     <Grid container>
-                        <Grid item xs={12} sm={9} md={8}>
+                        <Grid item xs={12} sm={12} md={12}>
                             <Posts scrollRef={scrollRef} post={post} setPost={setPost} currentUser={currentUser}/>
                         </Grid>
-                        <Hidden xsDown>
-                            <Grid item sm={3} md={4}>
-                                <Timeline scrollRef={scrollRef} post={post} setPost={setPost}
-                                          currentUser={currentUser}/>
-                            </Grid>
-                        </Hidden>
+                        {/*<Hidden xsDown>*/}
+                        {/*    <Grid item sm={3} md={4}>*/}
+                        {/*        /!*<Timeline scrollRef={scrollRef} post={post} setPost={setPost}*!/*/}
+                        {/*        /!*          currentUser={currentUser}/>*!/*/}
+                        {/*    </Grid>*/}
+                        {/*</Hidden>*/}
                     </Grid>
                 </>
             )}

@@ -49,9 +49,6 @@ export const signIn = (email, password) => {
 export const signOut = () => {
     return (dispatch) => {
         dispatch({
-          type: "CLEAR_TODOS",
-        });
-        dispatch({
             type: "SIGN_OUT",
         });
     };

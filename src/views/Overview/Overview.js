@@ -1,16 +1,14 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-
-
 import {
     Header,
     Statistics,
     Notifications,
-    Plans,
+    Projects,
     Todos
 } from './components';
 import Page from "../../components/Page";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -19,8 +17,11 @@ const useStyles = makeStyles(theme => ({
         margin: '0 auto',
     },
     overview: {
-        marginRight: theme.spacing(6),
-        marginLeft: theme.spacing(6),
+        [theme.breakpoints.down('sm')]: {
+            marginTop: theme.spacing(2),
+        },
+        marginRight: theme.spacing(3),
+        marginLeft: theme.spacing(3),
         marginBottom: theme.spacing(6),
     },
     statistics: {
@@ -33,28 +34,31 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(6)
     },
     todos: {
-        marginTop: theme.spacing(6)
+        marginTop: theme.spacing(3)
     }
 }));
 
 const Overview = () => {
     const classes = useStyles();
 
-    // const dispatch = useDispatch();
-
     const authUserId = useSelector(state => state.auth._id)
 
     return (
         <Page
             className={classes.root}
-            title="Home"
+            title="Домашняя страница"
         >
             <div className={classes.overview}>
                 <Header/>
-                <Plans className={classes.projects} id={authUserId}/>
+                <Projects
+                    className={classes.projects}
+                    authUserId={authUserId}
+                    fromProfilePage={false}
+                    fromOverviewPage={true}
+                />
                 <Todos className={classes.todos}/>
-                <Statistics className={classes.statistics}/>
-                <Notifications className={classes.notifications}/>
+                {/*<Statistics className={classes.statistics}/>*/}
+                {/*<Notifications className={classes.notifications}/>*/}
             </div>
         </Page>
     );

@@ -90,7 +90,11 @@ const Profile = props => {
                     <div className={classes.innerContent}>
                         {tab === 'wall' && <Wall/>}
                         {tab === 'friends' && <Friends id={id}/>}
-                        {tab === 'projects' && <Projects id={id}/>}
+                        {tab === 'projects' && <Projects
+                            authUserId={id}
+                            fromProfilePage={true}
+                            fromOverviewPage={false}
+                        />}
                     </div>
                 </div>
             </div>

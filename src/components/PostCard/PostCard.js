@@ -80,6 +80,11 @@ const useStyles = makeStyles(theme => ({
     actions: {
         display: 'flex',
         alignItems: 'center'
+    },
+    actionsGroup: {
+        marginRight: theme.spacing(2),
+        marginLeft: theme.spacing(2),
+        marginBottom: theme.spacing(2)
     }
 }));
 
@@ -197,6 +202,8 @@ const PostCard = (props) => {
                 {/*        </div>*/}
                 {/*    </div>*/}
                 {/*)}*/}
+            </CardContent>
+            <div className={classes.actionsGroup}>
                 <div className={classes.actions}>
                     {isLiked ? (
                         <IconButton
@@ -221,7 +228,7 @@ const PostCard = (props) => {
                         color="textSecondary"
                         variant="subtitle1"
                     >
-                        {like}
+                        Понравилось {like} людям
                     </Typography>
                     <IconButton
                         size="small"
@@ -256,7 +263,7 @@ const PostCard = (props) => {
                     <Divider className={classes.divider}/>
                     <CommentForm/>
                 </Collapse>
-            </CardContent>
+            </div>
         </Card>
     );
 };

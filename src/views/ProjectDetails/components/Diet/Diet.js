@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Diet = props => {
-    const {className, projectId, ...rest} = props;
+    const {className, projectId, projectAuthorId, authUserId, ...rest} = props;
 
     const classes = useStyles();
 
@@ -28,7 +28,7 @@ const Diet = props => {
             <ProjectCalendar
                 titlePage={'Диета'}
                 type={'diet'}
-                editMode={false}
+                editMode={(projectAuthorId === authUserId)}
                 projectId={projectId}
             />
         </div>

@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
 import React, {useState, useRef, useEffect} from 'react';
-import {Link as RouterLink, useHistory} from 'react-router-dom';
+import {Link as RouterLink} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
 import {
     AppBar,
@@ -19,21 +18,18 @@ import {
     ListItemText,
     ClickAwayListener
 } from '@material-ui/core';
-import LockIcon from '@material-ui/icons/LockOutlined';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import useRouter from "../../../../utils/useRouter";
 import Typography from "@material-ui/core/Typography";
-import AndroidOutlinedIcon from '@material-ui/icons/AndroidOutlined';
 import axios from "../../../../utils/axios";
 import PricingModal from "../../../../components/PricingModal";
 import NotificationsPopover from "../../../../components/NotificationsPopover";
-import BreadcrumbsNav from "../../../../components/Breadcrumbs";
 import {useDispatch, useSelector} from "react-redux";
-import {logout} from "../../../../redux/actions/auth";
 import {signOut} from "../../../../store/actions/authActions";
+import {Redirect, useHistory} from "react-router";
 
 
 const useStyles = makeStyles(theme => ({
@@ -109,7 +105,7 @@ const TopBar = props => {
     const currentUser = useSelector((state) => state.auth);
 
     const classes = useStyles();
-    const {history} = useRouter();
+    let history = useHistory();
     const searchRef = useRef(null);
     const dispatch = useDispatch();
     const notificationsRef = useRef(null);
@@ -138,7 +134,7 @@ const TopBar = props => {
     }, []);
 
     const handleLogout = () => {
-        dispatch(logout());
+        dispatch(signOut());
         history.push('/auth/login');
     };
 
@@ -184,7 +180,11 @@ const TopBar = props => {
 
     const handleSignOut = () => {
         dispatch(signOut());
-        history.push("auth/login");
+        if(!currentUser._id) {
+            return (
+                <Redirect to="/auth/login"/> && history.push("auth/login")
+            )
+        }
     };
 
     return (

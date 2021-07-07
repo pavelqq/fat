@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
 
 
 const Workouts = props => {
-    const {className, projectId, ...rest} = props;
+    const {className, projectId, projectAuthorId, authUserId, ...rest} = props;
 
     const classes = useStyles();
 
@@ -23,7 +23,7 @@ const Workouts = props => {
                 titlePage={'Тренировки'}
                 type={'trainings'}
                 projectId={projectId}
-                editMode={true}
+                editMode={(projectAuthorId === authUserId)}
             />
         </div>
     )

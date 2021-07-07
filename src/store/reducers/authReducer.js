@@ -24,9 +24,9 @@ const authReducer = (state = initialState, action) => {
         case "SIGN_IN":
         case "SIGN_UP":
         case "USER_LOADED":
-            // toast("Добро пожаловать...", {
-            //     position: toast.POSITION.BOTTOM_RIGHT,
-            // });
+            toast("Добро пожаловать...", {
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
             let user;
             user = jwtDecode(action.token);
             return {
@@ -47,11 +47,27 @@ const authReducer = (state = initialState, action) => {
                 role: user.role,
                 age: user.age
             };
+        case "UPDATE_USER":
+            user = action.user;
+            return {
+                ...initialState,
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                bio: user.bio,
+                profilePicture: user.profilePicture,
+                coverPicture: user.coverPicture,
+                isAdmin: user.isAdmin,
+                city: user.city,
+                from: user.from,
+                role: user.role,
+                age: user.age
+            }
         case "SIGN_OUT":
             localStorage.removeItem("token");
-            // toast("До свидания...", {
-            //     position: toast.POSITION.BOTTOM_RIGHT,
-            // });
+            toast("До свидания...", {
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
             return {
                 token: null,
                 _id: null,
@@ -69,22 +85,6 @@ const authReducer = (state = initialState, action) => {
                 role: null,
                 age: null
             };
-        case "UPDATE_USER":
-            user = action.user;
-            return {
-                ...initialState,
-                _id: user._id,
-                name: user.name,
-                email: user.email,
-                bio: user.bio,
-                profilePicture: user.profilePicture,
-                coverPicture: user.coverPicture,
-                isAdmin: user.isAdmin,
-                city: user.city,
-                from: user.from,
-                role: user.role,
-                age: user.age
-            }
         default:
             return state;
     }

@@ -13,7 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {Redirect} from "react-router";
+import {Redirect, useHistory} from "react-router";
 import {login} from "../../redux/actions/auth";
 import {useDispatch, useSelector} from "react-redux";
 import {clearMessage} from "../../redux/actions/messages";
@@ -58,6 +58,8 @@ const Login = props => {
 
     const {className, ...rest} = props;
     const classes = useStyles();
+
+    const history = useHistory();
     const { from } = props.location.state || { from: {pathname: '/' } }
 
     const auth = useSelector((state) => state.auth);
@@ -71,9 +73,8 @@ const Login = props => {
         e.preventDefault();
         dispatch(signIn(creds.email, creds.password));
         setCreds({ email: "", password: "" });
+        history.push('/');
     };
-
-    if (auth._id) return props.history.push(`/profile/${auth._id}/wall`);
 
     return(
         <div
