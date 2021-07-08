@@ -1,6 +1,7 @@
 const winston = require("winston");
 const cors = require("cors");
 const express = require("express");
+const favicon = require('express-favicon');
 const mongoose = require("mongoose");
 
 const todos = require("./routes/todos");
@@ -25,6 +26,8 @@ winston.add(new winston.transports.File({filename: "logfile.log"}));
 require("dotenv").config();
 
 const app = express();
+
+app.use(favicon(__dirname + '/build/favicon.png'));
 
 app.use(express.json());
 app.use(cors());
