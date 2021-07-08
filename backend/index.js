@@ -51,7 +51,7 @@ app.get("/", (req, res) => {
 const uri = process.env.ATLAS_URI;
 const PORT = process.env.PORT || 5000;
 
-app.listen(port, () => {
+app.listen(PORT, () => {
     console.log(`Сервер запущен на порту: ${PORT}...`);
 });
 
