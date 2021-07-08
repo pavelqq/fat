@@ -28,10 +28,10 @@ require("dotenv").config();
 
 const app = express();
 
-// app.use(express.static(path.resolve(__dirname, "../build")));
-// app.get("*", function (request, response) {
-//     response.sendFile(path.resolve(__dirname, "../build", "index.html"));
-// });
+app.use(express.static(path.resolve(__dirname, "../build")));
+app.get("*", function (request, response) {
+    response.sendFile(path.resolve(__dirname, "../build", "index.html"));
+});
 
 app.use(express.json());
 app.use(cors());
