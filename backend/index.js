@@ -1,7 +1,8 @@
 const winston = require("winston");
 const cors = require("cors");
 const express = require("express");
-const favicon = require('express-favicon');
+//const favicon = require('express-favicon');
+const path = require("path");
 const mongoose = require("mongoose");
 
 const todos = require("./routes/todos");
@@ -27,7 +28,10 @@ require("dotenv").config();
 
 const app = express();
 
-app.use(favicon(__dirname + '/build/favicon.png'));
+// app.use(express.static(path.resolve(__dirname, "../build")));
+// app.get("*", function (request, response) {
+//     response.sendFile(path.resolve(__dirname, "../build", "index.html"));
+// });
 
 app.use(express.json());
 app.use(cors());
@@ -45,10 +49,10 @@ app.get("/", (req, res) => {
 });
 
 const uri = process.env.ATLAS_URI;
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(port, () => {
-    console.log(`Сервер запущен на порту: ${port}...`);
+    console.log(`Сервер запущен на порту: ${PORT}...`);
 });
 
 mongoose
@@ -60,3 +64,4 @@ mongoose
     })
     .then(() => console.log("MongoDB соединение установлено..."))
     .catch((error) => console.error("MongoDB соединение потеряно:", error.message));
+

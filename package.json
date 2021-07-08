@@ -22,6 +22,7 @@
     "axios-mock-adapter": "^1.19.0",
     "chart.js": "^3.2.1",
     "clsx": "latest",
+    "concurrently": "^6.2.0",
     "date-fns": "^2.21.1",
     "dayjs": "^1.10.4",
     "history": "latest",
@@ -57,12 +58,13 @@
     "yup": "0.29.3"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start:server": "node ./server.js",
-    "dev": "concurrently --kill-others \"npm run start:server\" \"npm run start\""
+    "intall-client": "npm install",
+    "intall-backend": "cd backend && npm install",
+    "heroku-postbuild": "npm run intall-client && npm run intall-backend && npm run build",
+    "server": "cd backend && node index.js",
+    "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\"",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\""
   },
   "eslintConfig": {
     "extends": [
