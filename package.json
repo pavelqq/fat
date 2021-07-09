@@ -78,6 +78,7 @@
     "develop": "concurrently --kill-others-on-fail \"npm run start-server\" \"npm run start-client\"",
     "start": "concurrently --kill-others-on-fail \"npm run start-server\" \"npm run start-client\""
   },
+  "proxy": "http://localhost:8080",
   "eslintConfig": {
     "extends": [
       "react-app",
