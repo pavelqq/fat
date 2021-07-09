@@ -29,7 +29,7 @@ require("dotenv").config();
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, "../build")));
-app.get("*", function (request, response) {
+app.get(/^\/(?!api).*/, function (request, response) {
     response.sendFile(path.resolve(__dirname, "../build", "index.html"));
 });
 
@@ -44,7 +44,7 @@ app.use("/api/posts", posts);
 app.use("/api/projects", projects);
 app.use("/api/events", events);
 
-app.get("/", (req, res) => {
+app.get("/fat/", (req, res) => {
     res.send("добро пожаловать в API фэт...");
 });
 
