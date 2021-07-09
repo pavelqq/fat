@@ -44,7 +44,7 @@ app.use("/api/posts", posts);
 app.use("/api/projects", projects);
 app.use("/api/events", events);
 
-app.get("/fat/", (req, res) => {
+app.get("/", (req, res) => {
     res.send("добро пожаловать в API фэт...");
 });
 

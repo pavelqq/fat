@@ -1,4 +1,4 @@
-export const url = "http://mernfatapptest.herokuapp.com/fat/api";
+export const url = "http://localhost:5000/api";
 
 export const setHeaders = () => {
     const headers = {
