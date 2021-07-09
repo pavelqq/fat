@@ -73,15 +73,10 @@
     "intall-client": "npm install",
     "intall-backend": "cd backend && npm install",
     "heroku-postbuild": "npm run intall-client && npm run intall-backend && npm run build",
-    "start-server": "cd backend && node ./index.js",
+    "start-server": "cd backend && node index.js",
     "start-client": "react-scripts start",
     "develop": "concurrently --kill-others-on-fail \"npm run start-server\" \"npm run start-client\"",
     "start": "concurrently --kill-others-on-fail \"npm run start-server\" \"npm run start-client\""
-  },
-  "proxy": {
-    "/api": {
-      "target": "http://localhost:5000"
-    }
   },
   "eslintConfig": {
     "extends": [
