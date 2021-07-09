@@ -29,7 +29,7 @@ require("dotenv").config();
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, "../build")));
-app.get(/^\/(?!api).*/, function (request, response) {
+app.get("*", function (request, response) {
     response.sendFile(path.resolve(__dirname, "../build", "index.html"));
 });
 
