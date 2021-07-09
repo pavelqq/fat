@@ -1,4 +1,4 @@
-export const url = "http://mernfatapptest.herokuapp.com/fat/api";
+export const url = "https://mernfatapptest.herokuapp.com/fat/api";
 
 export const setHeaders = () => {
     const headers = {
