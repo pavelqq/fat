@@ -76,7 +76,6 @@
     "dev": "npm run start-client",
     "start": "npm run start-client"
   },
-
   "eslintConfig": {
     "extends": [
       "react-app",
