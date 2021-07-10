@@ -69,12 +69,11 @@
     "yup": "0.29.3"
   },
   "scripts": {
-    "start-client": "react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "intall-client": "npm install",
     "heroku-postbuild": "npm run intall-client && npm run build",
-    "dev": "npm run start-client",
-    "start": "npm run start-client"
+    "dev": "npm run start",
   },
   "eslintConfig": {
     "extends": [
