@@ -64,7 +64,7 @@
     "build": "react-scripts build",
     "intall-client": "npm install",
     "heroku-postbuild": "npm run intall-client && npm run build",
-    "dev": "npm run start",
+    "dev": "npm run start"
   },
   "eslintConfig": {
     "extends": [
