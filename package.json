@@ -26,6 +26,7 @@
     "concurrently": "^6.2.0",
     "date-fns": "^2.21.1",
     "dayjs": "^1.10.4",
+    "express": "^4.17.1",
     "history": "latest",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
@@ -62,8 +63,10 @@
   "scripts": {
     "build": "react-scripts build",
     "install-client": "npm install",
+    "client": "react-scripts start",
+    "server": "node server.js.js",
     "heroku-postbuild": "npm run install-client && npm run build",
-    "start": "react-scripts start"
+    "start": "node server.js && npm run client"
   },
   "eslintConfig": {
     "extends": [
