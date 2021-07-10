@@ -71,10 +71,12 @@
   "scripts": {
     "build": "react-scripts build",
     "intall-client": "npm install",
-    "heroku-postbuild": "npm run intall-client && npm run build",
-    "start-client": "react-scripts start",
-    "dev": "npm run start-client",
-    "start": "npm run start-client"
+    "intall-backend": "cd backend && npm install",
+    "heroku-postbuild": "npm run intall-client && npm run intall-backend && npm run build",
+    "start-server": "cd backend && node index.js",
+    "start-client": "set PORT=3000 && react-scripts start",
+    "dev": "concurrently --kill-others-on-fail \"npm run start-server\" \"npm run start-client\"",
+    "start": "concurrently --kill-others-on-fail \"npm run start-server\" \"npm run start-client\""
   },
 
   "eslintConfig": {
