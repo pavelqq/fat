@@ -73,8 +73,8 @@
     "build": "react-scripts build",
     "intall-client": "npm install",
     "heroku-postbuild": "npm run intall-client && npm run build",
-    "dev": "concurrently --kill-others-on-fail \"npm run start-client\"",
-    "start": "concurrently --kill-others-on-fail \"npm run start-client\""
+    "dev": "npm run start-client",
+    "start": "npm run start-client"
   },
 
   "eslintConfig": {
