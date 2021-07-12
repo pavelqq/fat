@@ -1,9 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
-import {Typography, Grid, Button} from '@material-ui/core';
+import {Typography, Grid, Button, Divider, Link} from '@material-ui/core';
 import {CheckCircleOutlined} from "@material-ui/icons";
-import {green} from "@material-ui/core/colors";
+import {green, orange} from "@material-ui/core/colors";
 
 
 const useStyles = makeStyles(theme => ({
@@ -15,17 +15,15 @@ const useStyles = makeStyles(theme => ({
         width: theme.breakpoints.values.lg,
         maxWidth: '100%',
         margin: '0 auto',
-        padding: '40px 24px',
+        padding: '24px 24px',
         [theme.breakpoints.up('md')]: {
-            paddingTop: '60px'
+            paddingTop: '48px'
         },
     },
-    buttons: {
+    test: {
         animation: `$myEffect 1000ms ${theme.transitions.easing.easeIn}`,
-        marginTop: theme.spacing(2),
-        marginBottom: theme.spacing(4),
-        display: 'flex',
-        justifyContent: 'center'
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(2),
     },
     mediaContainer: {
         margin: '0 auto',
@@ -55,6 +53,13 @@ const useStyles = makeStyles(theme => ({
     },
     stack: {
         animation: `$myEffect 1000ms ${theme.transitions.easing.easeIn}`,
+    },
+    divider: {
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1)
+    },
+    mainDivider: {
+        height: '15px',
     },
     "@keyframes myEffect": {
         "0%": {
@@ -103,17 +108,34 @@ const PresentationHeader = props => {
                         Это проект, позволяющий людям достичь спортивных целей через подбор подходящего плана
                         тренировок и диеты, начиная от офисных работяг, заканчивая профессиональными спортсменами.
                     </Typography>
-                    <div className={classes.buttons}>
-                        <Button
-                            color="primary"
-                            component="a"
-                            href="*"
-                            target="_blank"
-                            variant="contained"
-                        >
-                            Начать
-                        </Button>
-                    </div>
+                    <Divider className={classes.divider} />
+                    <Typography
+                        align="center"
+                        variant="overline"
+                        component="h2"
+                    >
+                        Чтобы потестировать приложение нажмите на кнопку начать. Вы войдете под тестовым аккаунтом.
+                    </Typography>
+                    <Divider orientation={"vertical"} />
+                    <Typography
+                        align="center"
+                        variant="overline"
+                        component="h2"
+                    >
+                        Вы также можете <Link href="https://fatclient.herokuapp.com/auth/register">зарегистрироваться</Link>
+                    </Typography>
+                    <Divider className={classes.divider} />
+                    <Grid container justifyContent="center" direction="column"
+                          alignItems="center" className={classes.test}>
+                        <Grid item>
+                            <Typography>Тестовый Логин:</Typography>
+                            <code>test@gmail.com</code>
+                        </Grid>
+                        <Grid item>
+                            <Typography>Тестовый Пароль:</Typography>
+                            <code>12345test</code>
+                        </Grid>
+                    </Grid>
                     <Typography
                         align="center"
                         variant="overline"
@@ -193,6 +215,7 @@ const PresentationHeader = props => {
                     src="/images/presentation/header.jpg"
                 />
             </div>
+            <Divider variant="fullWidth" light={true} className={classes.mainDivider} />
         </div>
     );
 };
