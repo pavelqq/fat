@@ -5,22 +5,26 @@ import {
     List,
     ListItem,
     ListItemIcon,
-    ListItemText
+    ListItemText, Grid
 } from '@material-ui/core';
 import ContactSupportIcon from '@material-ui/icons/ContactSupportOutlined';
 
 const useStyles = makeStyles(theme => ({
     root: {},
     inner: {
-        padding: theme.spacing(6, 5),
+        paddingTop: theme.spacing(6),
         maxWidth: '90%',
         margin: '0 auto'
     },
     content: {
-        marginTop: theme.spacing(6),
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(12),
         marginLeft: 'auto',
         marginRight: 'auto',
-        width: '50em'
+        width: '70%',
+        [theme.breakpoints.down('sm')]: {
+            width: '90%'
+        },
     }
 }));
 
@@ -52,30 +56,40 @@ const FAQ = () => {
 
     return (
         <div>
-            <div className={classes.inner}>
+            <div
+                className={classes.inner}
+            >
                 <Typography
                     align="center"
                     variant="h4"
                 >
                     Ответы на частые вопросы
                 </Typography>
-                <div className={classes.content}>
+                <Grid
+                    container
+                    direction="column"
+                    justifyContent="flex-start"
+                    alignItems="center"
+                    className={classes.content}
+                >
                     <List disablePadding>
                         {faqs.map(faq => (
-                            <ListItem>
-                                <ListItemIcon>
-                                    <ContactSupportIcon/>
-                                </ListItemIcon>
-                                <ListItemText
-                                    primary={faq.title}
-                                    primaryTypographyProps={{variant: 'h5'}}
-                                    secondary={faq.description}
-                                    secondaryTypographyProps={{variant: 'subtitle2'}}
-                                />
-                            </ListItem>
+                            <Grid item>
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <ContactSupportIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText
+                                        primary={faq.title}
+                                        primaryTypographyProps={{variant: 'h5'}}
+                                        secondary={faq.description}
+                                        secondaryTypographyProps={{variant: 'subtitle2'}}
+                                    />
+                                </ListItem>
+                            </Grid>
                         ))}
                     </List>
-                </div>
+                </Grid>
             </div>
         </div>
     );

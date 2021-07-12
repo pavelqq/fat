@@ -1,13 +1,12 @@
 import React from "react";
 import {makeStyles} from '@material-ui/core/styles';
 import {Grid, Paper} from "@material-ui/core";
-import Image from './components/404.png'
 
 
 const useStyles = makeStyles(theme => ({
     image: {
         width: '100vh',
-        backgroundImage: `url(${Image})`
+        backgroundImage: `url(/images/404/404.png)`
     }
 }));
 

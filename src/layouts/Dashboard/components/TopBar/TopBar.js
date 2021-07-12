@@ -199,7 +199,8 @@ const TopBar = props => {
                   </Typography>
                 </RouterLink>
                 <div className={classes.flexGrow}/>
-                <Hidden mdDown>
+                {currentUser.name &&
+                    <Hidden mdDown>
                     <div
                         className={classes.search}
                         ref={searchRef}
@@ -242,7 +243,9 @@ const TopBar = props => {
                         </ClickAwayListener>
                     </Popper>
                 </Hidden>
+                }
                 <Hidden mdDown>
+                    {currentUser.name &&
                     <IconButton
                         className={classes.notificationsButton}
                         color="inherit"
@@ -257,6 +260,7 @@ const TopBar = props => {
                             <NotificationsIcon/>
                         </Badge>
                     </IconButton>
+                    }
                     <Button
                         className={classes.logoutButton}
                         color="inherit"
@@ -289,12 +293,14 @@ const TopBar = props => {
                             </>
                         }
                     </Button>
+                    {currentUser.name &&
                     <IconButton
                         color="inherit"
                         onClick={onOpenNavBarMobile}
                     >
                         <MenuIcon/>
                     </IconButton>
+                    }
                 </Hidden>
             </Toolbar>
             <PricingModal

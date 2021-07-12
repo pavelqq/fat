@@ -24,6 +24,7 @@ const Presentation = props => {
             className={clsx(classes.root, className)}
         >
             <PresentationHeader/>
+            {/*<Concept />*/}
             <UserFlows/>
             <PluginsSupport/>
             <SourceFiles/>

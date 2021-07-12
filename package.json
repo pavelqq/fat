@@ -64,9 +64,10 @@
     "build": "react-scripts build",
     "install-client": "npm install",
     "client": "react-scripts start",
-    "server": "node server.js.js",
+    "server": "node server.js",
     "heroku-postbuild": "npm run install-client && npm run build",
-    "start": "node server.js && npm run client"
+    "start": "node server.js && npm run client",
+    "dev": "npm run client"
   },
   "eslintConfig": {
     "extends": [

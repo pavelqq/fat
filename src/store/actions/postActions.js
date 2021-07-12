@@ -53,6 +53,7 @@ export const updatePost = (updatedPost, id) => {
             })
             .catch((error) => {
                 console.log(error);
+
                 toast.error(error.response?.data, {
                     position: toast.POSITION.BOTTOM_RIGHT,
                 });

@@ -51,3 +51,19 @@ a {
     font-size: 14px;
 }
 
+.presentationText{
+    animation: flashing-border 0.75s step-end infinite;
+}
+
+@keyframes flashing-border {
+    0%{
+        border-color: orange;
+    }
+    50%{
+        border-color: transparent;
+    }
+    100%{
+        border-color: orange;
+    }
+}
+
