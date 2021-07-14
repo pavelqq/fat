@@ -10,7 +10,7 @@ import axios from "../../../../utils/axios";
 import {useDispatch, useSelector} from "react-redux";
 import {Grid, Hidden} from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     root: {},
 }));
 

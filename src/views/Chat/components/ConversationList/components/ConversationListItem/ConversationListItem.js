@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core';
 
 import Label from "../../../../../../components/Label";
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
     active: {
@@ -41,7 +42,16 @@ const ConversationListItem = props => {
     const {active, conversation, className, ...rest} = props;
 
     const classes = useStyles();
-    const lastMessage = conversation.messages[conversation.messages.length - 1];
+    //const lastMessage = conversation.messages[conversation.messages.length - 1];
+
+    const authId = useSelector(state => state.auth._id);
+
+    let selectedConversation = {};
+    if(conversation.firstUser.uid === authId) {
+        selectedConversation = {...conversation.secondUser}
+    } else {
+        selectedConversation = {...conversation.firstUser}
+    }
 
     return (
         <ListItem
@@ -54,22 +64,23 @@ const ConversationListItem = props => {
                 className
             )}
             component={RouterLink}
-            to={`/chat/${conversation.id}`}
+            to={`/chat/${conversation.conversationId}`}
         >
             <ListItemAvatar>
                 <Avatar
                     alt="Ава"
                     className={classes.avatar}
-                    src={conversation.otherUser.avatar}
+                    src={selectedConversation.profilePicture}
                 />
             </ListItemAvatar>
             <ListItemText
-                primary={conversation.otherUser.name}
+                primary={selectedConversation.name}
                 primaryTypographyProps={{
                     noWrap: true,
                     variant: 'h6'
                 }}
-                secondary={`${lastMessage.sender.name}: ${lastMessage.content}`}
+                //secondary={`${lastMessage.sender.name}: ${lastMessage.content}`}
+                secondary={`ID диалога: ${conversation.conversationId}`}
                 secondaryTypographyProps={{
                     noWrap: true,
                     variant: 'body1'
@@ -80,19 +91,19 @@ const ConversationListItem = props => {
                     noWrap
                     variant="body2"
                 >
-                    {moment(lastMessage.created_at).isSame(moment(), 'day')
-                        ? moment(lastMessage.created_at).format('LT')
-                        : moment(lastMessage.created_at).fromNow()}
+                    {/*{moment(lastMessage.created_at).isSame(moment(), 'day')*/}
+                    {/*    ? moment(lastMessage.created_at).format('LT')*/}
+                    {/*    : moment(lastMessage.created_at).fromNow()}*/}
                 </Typography>
-                {conversation.unread > 0 && (
-                    <Label
-                        className={classes.unread}
-                        color={colors.red[500]}
-                        shape="rounded"
-                    >
-                        {conversation.unread}
-                    </Label>
-                )}
+                {/*{conversation.unread > 0 && (*/}
+                {/*    <Label*/}
+                {/*        className={classes.unread}*/}
+                {/*        color={colors.red[500]}*/}
+                {/*        shape="rounded"*/}
+                {/*    >*/}
+                {/*        {conversation.unread}*/}
+                {/*    </Label>*/}
+                {/*)}*/}
             </div>
         </ListItem>
     );

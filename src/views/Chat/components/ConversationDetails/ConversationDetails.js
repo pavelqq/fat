@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ConversationDetails = props => {
-    const {conversation, className, ...rest} = props;
+    const {conversation, authUser, messages, className, ...rest} = props;
 
     const classes = useStyles();
 
@@ -29,9 +29,9 @@ const ConversationDetails = props => {
         >
             <ConversationToolbar conversation={conversation}/>
             <Divider/>
-            <ConversationMessages messages={conversation.messages}/>
+            <ConversationMessages messages={messages}/>
             <Divider/>
-            <ConversationForm/>
+            <ConversationForm cId={conversation.conversationId} authUser={authUser}/>
         </div>
     );
 };

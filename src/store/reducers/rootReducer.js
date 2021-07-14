@@ -8,6 +8,8 @@ import projectReducer from "./projectReducer";
 import currentProjectReducer from "./currentProjectReducer";
 import chatListReducer from "./chatLIstReducer";
 import eventReducer from "./eventReducer";
+import conversationReducer from "./conversationReducer";
+import messageReducer from "./messageReducer";
 
 const rootReducer = combineReducers({ 
     todos: todoReducer,
@@ -19,6 +21,8 @@ const rootReducer = combineReducers({
     usersList: usersListReducer,
     chatList: chatListReducer,
     eventsList: eventReducer,
+    conversationsList: conversationReducer,
+    messagesList: messageReducer,
 })
 
 export default rootReducer;

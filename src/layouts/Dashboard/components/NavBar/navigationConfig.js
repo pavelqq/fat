@@ -19,24 +19,24 @@ export default [
                 href: '/overview',
                 icon: HomeIcon
             },
-            // {
-            //     title: 'Мессенджер',
-            //     href: '/chat',
-            //     icon: ChatIcon,
-            //     // label: () => (
-            //     //     <Label
-            //     //         color={colors.red[500]}
-            //     //         shape="rounded"
-            //     //     >
-            //     //         4
-            //     //     </Label>
-            //     // )
-            // },
-            // {
-            //     title: 'Лента',
-            //     href: '/social-feed',
-            //     icon: PeopleIcon
-            // },
+            {
+                title: 'Мессенджер',
+                href: '/chat',
+                icon: ChatIcon,
+                // label: () => (
+                //     <Label
+                //         color={colors.red[500]}
+                //         shape="rounded"
+                //     >
+                //         4
+                //     </Label>
+                // )
+            },
+            {
+                title: 'Лента',
+                href: '/social-feed',
+                icon: PeopleIcon
+            },
             {
                 title: 'Проекты',
                 href: '/projects',

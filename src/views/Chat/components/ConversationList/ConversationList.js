@@ -39,7 +39,7 @@ const ConversationList = props => {
                 <Input
                     className={classes.searchInput}
                     disableUnderline
-                    placeholder="Поисков контактов"
+                    placeholder="Найти диалог"
                 />
                 <Tooltip title="Поиск">
                     <IconButton edge="end">

@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import moment from 'moment';
 import {makeStyles} from '@material-ui/core/styles';
 import {Typography, Link, Avatar, colors} from '@material-ui/core';
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -13,8 +14,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'flex-end',
         '& $body': {
-            backgroundColor: theme.palette.primary.main,
-            color: theme.palette.primary.contrastText
+            background: colors.blueGrey[100]
         }
     },
     inner: {
@@ -28,10 +28,10 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: colors.grey[200],
         color: theme.palette.text.primary,
         borderRadius: theme.shape.borderRadius,
-        padding: theme.spacing(1, 2)
+        padding: theme.spacing(1, 1.5)
     },
     content: {
-        marginTop: theme.spacing(1)
+        marginTop: theme.spacing(0.3)
     },
     image: {
         marginTop: theme.spacing(2),
@@ -51,13 +51,19 @@ const ConversationMessage = props => {
 
     const classes = useStyles();
 
+    const authId = useSelector(state => state.auth._id);
+
+    const authUser = (uid, authId) => {
+        return uid === authId;
+    }
+
     return (
         <div
             {...rest}
             className={clsx(
                 classes.root,
                 {
-                    [classes.authUser]: message.sender.authUser
+                    [classes.authUser]: authUser(message.sender.uid, authId)
                 },
                 className
             )}
@@ -66,21 +72,21 @@ const ConversationMessage = props => {
                 <Avatar
                     className={classes.avatar}
                     component={RouterLink}
-                    src={message.sender.avatar}
-                    to="/profile/1/timeline"
+                    src={message.sender.profilePicture}
+                    to={`/profile/${message.sender.uid}/wall`}
                 />
                 <div>
                     <div className={classes.body}>
-                        <div>
+                        <Typography variant="body2" color="secondary">
                             <Link
                                 color="inherit"
                                 component={RouterLink}
-                                to="/profile/1/timeline"
+                                to={`/profile/${message.sender.uid}/wall`}
                                 variant="h6"
                             >
-                                {message.sender.authUser ? message.sender.name : message.sender.name}
+                                {authUser(message.sender.uid, authId) ? message.sender.name : message.sender.name}
                             </Link>
-                        </div>
+                        </Typography>
                         <div className={classes.content}>
                             {message.contentType === 'image' ? (
                                 <img
@@ -91,7 +97,7 @@ const ConversationMessage = props => {
                             ) : (
                                 <Typography
                                     color="inherit"
-                                    variant="body1"
+                                    variant="subtitle1"
                                 >
                                     {message.content}
                                 </Typography>
@@ -103,7 +109,7 @@ const ConversationMessage = props => {
                             className={classes.time}
                             variant="body2"
                         >
-                            {moment(message.created_at).fromNow()}
+                            {moment(message.date).fromNow()}
                         </Typography>
                     </div>
                 </div>

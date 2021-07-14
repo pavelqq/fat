@@ -12,6 +12,10 @@ import {
 import SendIcon from '@material-ui/icons/Send';
 import AddPhotoIcon from '@material-ui/icons/AddPhotoAlternate';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
+import {useDispatch, useSelector} from "react-redux";
+import {v4 as uuidv4} from 'uuid';
+import {addMessage} from "../../../../../../store/actions/messageActions";
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -34,40 +38,63 @@ const useStyles = makeStyles(theme => ({
     },
     fileInput: {
         display: 'none'
+    },
+    form: {
+        width: '100%'
     }
 }));
 
 const ConversationForm = props => {
-    const {className, ...rest} = props;
+    let {className, authUser, cId, ...rest} = props;
 
     const classes = useStyles();
 
-    const fileInputRef = useRef(null);
+    // const fileInputRef = useRef(null);
 
-    const [value, setValue] = useState('');
+    if (!cId) (
+        cId = uuidv4()
+    )
 
-    const sender = {
-        avatar: '/images/avatars/avatar_11.png'
-    };
+    const [message, setMessage] = useState({
+        conversationId: cId,
+        content: '',
+    });
 
-    const handleChange = event => {
-        event.persist();
+    const dispatch = useDispatch();
 
-        setValue(event.target.value);
-    };
+    const handleSubmit = (e) => {
+        e.persist();
 
-    const handleAttach = () => {
-        fileInputRef.current.click();
-    };
+        const newMessage = {
+            ...message,
+            date: new Date()
+        }
+
+        dispatch(addMessage(newMessage));
+        setMessage({ content: '' });
+
+        debugger
+    }
+
+    // const handleChange = event => {
+    //     event.persist();
+    //
+    //     setMessage(event.target.message);
+    // };
+
+    // const handleAttach = () => {
+    //     fileInputRef.current.click();
+    // };
 
     return (
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
         <div
             {...rest}
             className={clsx(classes.root, className)}
         >
             <Avatar
                 alt="Person"
-                src={sender.avatar}
+                src={authUser.profilePicture}
             />
             <Paper
                 className={classes.paper}
@@ -76,38 +103,46 @@ const ConversationForm = props => {
                 <Input
                     className={classes.input}
                     disableUnderline
-                    onChange={handleChange}
+                    // onChange={handleChange}
                     placeholder="Напишите что-нибудь..."
+                    value={message.content}
+                    onChange={(e) => setMessage({
+                        ...message, content: e.target.value,
+                    })}
                 />
             </Paper>
-            <Tooltip title="Отправить">
-                <IconButton color={value.length > 0 ? 'primary' : 'default'}>
+            <Tooltip
+                title="Отправить"
+                type="submit"
+            >
+                <IconButton color='primary'>
                     <SendIcon/>
                 </IconButton>
             </Tooltip>
             <Divider className={classes.divider}/>
-            <Tooltip title="Сохранить фото">
-                <IconButton
-                    edge="end"
-                    onClick={handleAttach}
-                >
-                    <AddPhotoIcon/>
-                </IconButton>
-            </Tooltip>
-            <Tooltip title="Загрузить файл">
-                <IconButton
-                    edge="end"
-                    onClick={handleAttach}
-                >
-                    <AttachFileIcon/>
-                </IconButton>
-            </Tooltip>
-            <input
-                className={classes.fileInput}
-                ref={fileInputRef}
-                type="file"
-            />
+            {/*<Tooltip title="Сохранить фото">*/}
+            {/*    <IconButton*/}
+            {/*        edge="end"*/}
+            {/*        onClick={handleAttach}*/}
+            {/*    >*/}
+            {/*        <AddPhotoIcon/>*/}
+            {/*    </IconButton>*/}
+            {/*</Tooltip>*/}
+            {/*<Tooltip title="Загрузить файл">*/}
+            {/*    <IconButton*/}
+            {/*        edge="end"*/}
+            {/*        onClick={handleAttach}*/}
+            {/*    >*/}
+            {/*        <AttachFileIcon/>*/}
+            {/*    </IconButton>*/}
+            {/*</Tooltip>*/}
+            {/*<input*/}
+            {/*    className={classes.fileInput}*/}
+            {/*    ref={fileInputRef}*/}
+            {/*    type="file"*/}
+            {/*/>*/}
         </div>
+        </form>
     );
 };
 

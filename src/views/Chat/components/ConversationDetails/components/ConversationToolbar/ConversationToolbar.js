@@ -23,6 +23,7 @@ import ArchiveIcon from '@material-ui/icons/ArchiveOutlined';
 import NotificationsOffIcon from '@material-ui/icons/NotificationsOffOutlined';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import StatusBullet from "../../../../../../components/StatusBullet";
+import {useSelector} from "react-redux";
 
 
 const useStyles = makeStyles(theme => ({
@@ -81,6 +82,15 @@ const ConversationToolbar = props => {
         setOpenMenu(false);
     };
 
+    const authId = useSelector(state => state.auth._id);
+
+    let selectedConversation = {};
+    if(conversation.firstUser.uid === authId) {
+        selectedConversation = {...conversation.secondUser}
+    } else {
+        selectedConversation = {...conversation.firstUser}
+    }
+
     return (
         <Toolbar
             {...rest}
@@ -97,23 +107,24 @@ const ConversationToolbar = props => {
                 </IconButton>
             </Tooltip>
             <div className={classes.user}>
-                <Typography variant="h6">{conversation.otherUser.name}</Typography>
-                <div className={classes.activity}>
-                    {conversation.otherUser.active ? (
-                        <>
-                            <StatusBullet
-                                className={classes.statusBullet}
-                                color="success"
-                                size="small"
-                            />
-                            <Typography variant="body2">Сейчас онлайн</Typography>
-                        </>
-                    ) : (
-                        <Typography variant="body2">
-                            Active {moment(conversation.otherUser.lastActivity).fromNow()}
-                        </Typography>
-                    )}
-                </div>
+                <Typography variant="h6">{selectedConversation.name}</Typography>
+                <Typography variant="body2">ID диалога: {conversation.conversationId}</Typography>
+                {/*<div className={classes.activity}>*/}
+                {/*    {conversation.otherUser.active ? (*/}
+                {/*        <>*/}
+                {/*            <StatusBullet*/}
+                {/*                className={classes.statusBullet}*/}
+                {/*                color="success"*/}
+                {/*                size="small"*/}
+                {/*            />*/}
+                {/*            <Typography variant="body2">Сейчас онлайн</Typography>*/}
+                {/*        </>*/}
+                {/*    ) : (*/}
+                {/*        <Typography variant="body2">*/}
+                {/*            Active {moment(conversation.otherUser.lastActivity).fromNow()}*/}
+                {/*        </Typography>*/}
+                {/*    )}*/}
+                {/*</div>*/}
             </div>
             <Paper
                 className={classes.search}

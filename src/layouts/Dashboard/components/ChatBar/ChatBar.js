@@ -24,7 +24,7 @@ import {getAllUsers} from "../../../../store/actions/chatListActions";
 
 const useStyles = makeStyles(theme => ({
     drawer: {
-        width: 275
+        width: 250
     },
     root: {
         backgroundColor: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -40,10 +40,10 @@ const useStyles = makeStyles(theme => ({
     },
     fab: {
         position: 'fixed',
-        bottom: 35,
-        right: 40,
+        bottom: 55,
+        right: 50,
         [theme.breakpoints.down('sm')]: {
-            bottom: 20,
+            bottom: 50,
             right: 20,
         },
         zIndex: theme.zIndex.drawer - 100

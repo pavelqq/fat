@@ -10,6 +10,10 @@ import {
     ConversationDetails,
     ConversationPlaceholder
 } from './components';
+import {useDispatch, useSelector} from "react-redux";
+import {getAllProjects} from "../../store/actions/projectActions";
+import {getUsersConversations} from "../../store/actions/conversationActions";
+import {getConversationMessages} from "../../store/actions/messageActions";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -51,32 +55,42 @@ const useStyles = makeStyles(theme => ({
 const Chat = () => {
     const classes = useStyles();
     const router = useRouter();
-    const [conversations, setConversations] = useState([]);
+
+    const dispatch = useDispatch();
+
+    const authUser = useSelector(state => state.auth)
 
     useEffect(() => {
-        let mounted = true;
+        dispatch(getUsersConversations(authUser._id))
+    }, [dispatch])
 
-        const fetchConversations = () => {
-            axios.get('/api/chat/conversations').then(response => {
-                if (mounted) {
-                    setConversations(response.data.conversations);
-                }
-            });
-        };
+    const conversations = useSelector(state => state.conversationsList)
 
-        fetchConversations();
+    useEffect(() => {
+        dispatch(getConversationMessages(router.match.params.id))
+    }, [dispatch, router.match.params.id])
 
-        return () => {
-            mounted = false;
-        };
-    }, []);
+    const messages = useSelector(state => state.messagesList)
+
+    // conversations.forEach(function (conversation) {
+    //     conversation.messages = "false";
+    // });
+
+    const appState = useSelector((state) => state);
+    console.log(appState);
+
+    // const [conversations, setConversations] = useState([]);
 
     let selectedConversation;
+    let selectedConversationMessages;
 
     if (router.match.params.id) {
         selectedConversation = conversations.find(
-            c => c.id === router.match.params.id
+            c => c.conversationId === router.match.params.id
         );
+        selectedConversationMessages = messages.filter(
+            m => m.conversationId === router.match.params.id
+        )
     }
 
     return (
@@ -91,10 +105,12 @@ const Chat = () => {
                 className={classes.conversationList}
                 conversations={conversations}
             />
-            {selectedConversation ? (
+            {(selectedConversation && selectedConversationMessages) ? (
                 <ConversationDetails
                     className={classes.conversationDetails}
                     conversation={selectedConversation}
+                    messages={selectedConversationMessages}
+                    authUser={authUser}
                 />
             ) : (
                 <ConversationPlaceholder className={classes.conversationPlaceholder}/>
