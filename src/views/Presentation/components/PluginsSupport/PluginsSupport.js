@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
         margin: '0 auto'
     },
     media: {
-        '& video': {
+        '& img': {
             width: '100%',
             height: 'auto'
         }
@@ -33,8 +33,9 @@ const PluginsSupport = () => {
                 >
                     <Grid
                         item
-                        lg={4}
-                        md={4}
+                        lg={3}
+                        md={3}
+                        sm={3}
                         xs={12}
                     >
                         <Typography
@@ -51,21 +52,12 @@ const PluginsSupport = () => {
                     <Grid
                         className={classes.media}
                         item
-                        lg={6}
-                        md={6}
+                        lg={8}
+                        md={8}
+                        sm={8}
                         xs={12}
                     >
-                        <video
-                            autoPlay
-                            loop
-                            muted
-                            alt="загрузка..."
-                        >
-                            <source
-                                src="/videos/functions.mp4"
-                                type="video/mp4"
-                            />
-                        </video>
+                        <img src="/images/presentation/find.png" />
                     </Grid>
                 </Grid>
             </div>

@@ -113,7 +113,7 @@ const ProjectCalendar = props => {
     const theme = useTheme();
     const mobileDevice = useMediaQuery(theme.breakpoints.down('sm'));
     const [view, setView] = useState(mobileDevice ? 'listWeek' : 'dayGridMonth');
-    const [date, setDate] = useState(moment().format('DD-MM-YYYY'));
+    const [date, setDate] = useState(moment().format('DD.MM.YYYY'));
     const [events, setEvents] = useState([...eventsList]);
 
     useEffect(() => {

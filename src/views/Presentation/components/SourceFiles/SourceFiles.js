@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
         margin: '0 auto'
     },
     media: {
-        '& video': {
+        '& img': {
             width: '100%',
             height: 'auto'
         }
@@ -52,21 +52,12 @@ const SourceFiles = () => {
                     <Grid
                         className={classes.media}
                         item
-                        lg={6}
-                        md={6}
+                        lg={8}
+                        md={8}
+                        sm={8}
                         xs={12}
                     >
-                        <video
-                            autoPlay
-                            loop
-                            muted
-                            alt="загрузка..."
-                        >
-                            <source
-                                src="/videos/plan.mp4"
-                                type="video/mp4"
-                            />
-                        </video>
+                        <img src="/images/presentation/details.png" />
                     </Grid>
                 </Grid>
             </div>

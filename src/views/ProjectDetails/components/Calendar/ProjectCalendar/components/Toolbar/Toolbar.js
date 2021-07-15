@@ -47,16 +47,16 @@ const Toolbar = props => {
             value: 'dayGridMonth',
             icon: ViewConfigIcon
         },
-        {
-            label: 'Неделя',
-            value: 'timeGridWeek',
-            icon: ViewWeekIcon
-        },
-        {
-            label: 'День',
-            value: 'timeGridDay',
-            icon: ViewDayIcon
-        },
+        // {
+        //     label: 'Неделя',
+        //     value: 'timeGridWeek',
+        //     icon: ViewWeekIcon
+        // },
+        // {
+        //     label: 'День',
+        //     value: 'timeGridDay',
+        //     icon: ViewDayIcon
+        // },
         {
             label: 'Задачи дня',
             value: 'listWeek',
@@ -124,7 +124,7 @@ const Toolbar = props => {
                 <Hidden smDown>
                     <Grid item>
                         <Typography variant="h4">
-                            {`Дата: ${moment(date).format('MM.DD.YYYY')}`}
+                            {`Дата: ${date}`}
                         </Typography>
                     </Grid>
                     <Grid item>
