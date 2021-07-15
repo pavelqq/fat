@@ -4,6 +4,8 @@ const postReducer = (postsList = [], action) => {
     switch (action.type) {
         case "GET_POSTS":
             return action.postsList.data;
+        case "GET_ALL_POSTS":
+            return action.postsList.data;
         case "ADD_POST":
             toast.info("Пост добавлен...", {
                 position: toast.POSITION.BOTTOM_RIGHT,

@@ -124,45 +124,19 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Todos = props => {
-    const {className, ...rest} = props;
+    const {title, todos, setTodos, className, ...rest} = props;
 
     const classes = useStyles();
-    const [todos, setTodos] = useState([]);
-
-    console.log(moment.now())
-
-    useEffect(() => {
-        let mounted = true;
-
-        if (mounted) {
-            setTodos(todos)
-        }
-
-        const fetchTodos = () => {
-            axios.get('/api/account/todos')
-                .then(response => {
-                    if (mounted) {
-                        setTodos(response.data.todos);
-                    }
-                });
-        };
-
-        fetchTodos();
-
-        return () => {
-            mounted = false;
-        };
-    }, []);
 
     const handleChange = (event, todo) => {
         event.persist();
 
-        if (!loading) {
-            setLoading(true);
-            timer.current = window.setTimeout(() => {
-                setLoading(false);
-            }, 1000);
-        }
+        // if (!loading) {
+        //     setLoading(true);
+        //     timer.current = window.setTimeout(() => {
+        //         setLoading(false);
+        //     }, 1000);
+        // }
 
         setTodos(todos =>
             todos.map(t => {
@@ -175,141 +149,192 @@ const Todos = props => {
         );
     };
 
-    const [loading, setLoading] = useState(false);
-    const timer = useRef();
-
-    useEffect(() => {
-        return () => {
-            clearTimeout(timer.current);
-        };
-    }, []);
+    // const [loading, setLoading] = useState(false);
+    // const timer = useRef();
+    //
+    // useEffect(() => {
+    //     return () => {
+    //         clearTimeout(timer.current);
+    //     };
+    // }, []);
 
     return (
-        <>
-            <Hidden smDown>
-            <div className={classes.header}>
-                <Typography
-                    className={classes.title}
-                    variant="h5"
-                >
-                    Задания на сегодня
-                </Typography>
-            </div>
-            <div
-                {...rest}
-                className={clsx(classes.root, className)}
-            >
-                <Timeline align="alternate">
+        <Card
+            {...rest}
+            className={clsx(classes.root, className)}
+        >
+            <CardHeader
+                action={
+                    <Button
+                        color="primary"
+                        size="small"
+                    >
+                        <AddIcon className={classes.addIcon}/>
+                        Посмотреть все задания
+                    </Button>
+                }
+                title={title}
+            />
+            <Divider/>
+            <CardContent className={classes.content}>
+                <List>
                     {todos.map((todo, i) => (
-                        <TimelineItem key={todo.id}>
-                            <TimelineOppositeContent>
-                                <Typography variant="body2" color="textSecondary" className={classes.date}>
-                                    {getLabel(todo)}
-                                    <div className={classes.wrapper}>
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            disabled={loading}
-                                            onClick={event => handleChange(event, todo)}
-                                        >
-                                            {(todo.done)
-                                                ? <><EventAvailable/>Выполнено!</>
-                                                : <><Today/>Выполнить</>}
-                                            {loading &&
-                                            <CircularProgress size={46} className={classes.fabProgress}/>
-                                            }
-                                        </Button>
-                                    </div>
-                                </Typography>
-                            </TimelineOppositeContent>
-                            <TimelineSeparator>
-                                <TimelineDot color="primary" variant={todo.done ? 'default' : 'outlined'}>
-                                    {todo.done ? <EventAvailable/> : <Today/>}
-                                </TimelineDot>
-                                {i < todos.length - 1 && <TimelineConnector/>}
-                            </TimelineSeparator>
-                            <TimelineContent>
-                                <Paper elevation={3} className={classes.paper}>
-                                    <Typography
-                                        variant="body1"
-                                        className={clsx({
-                                            [classes.done]: todo.done
-                                        }, classes.typo)}
-                                    >
-                                        {todo.title}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        className={clsx({
-                                            [classes.done]: todo.done
-                                        }, classes.typo)}
-                                    >
-                                        {todo.title}
-                                    </Typography>
-                                </Paper>
-                            </TimelineContent>
-                        </TimelineItem>
-                    ))}
-                </Timeline>
-            </div>
-        </Hidden>
-            <Hidden mdUp>
-                <Card
-                    {...rest}
-                    className={clsx(classes.root, className)}
-                >
-                    <CardHeader
-                        action={
-                            <Button
-                                color="primary"
-                                size="small"
-                            >
-                                <AddIcon className={classes.addIcon}/>
-                                Посмотреть все задания
-                            </Button>
-                        }
-                        title="Задания"
-                    />
-                    <Divider/>
-                    <CardContent className={classes.content}>
-                        <List>
-                            {todos.map((todo, i) => (
-                                <ListItem
-                                    divider={i < todos.length - 1}
-                                    key={todo.id}
+                        <ListItem
+                            divider={i < todos.length - 1}
+                            key={todo.id}
+                        >
+                            <ListItemIcon>
+                                <Radio
+                                    checked={todo.done}
+                                    onClick={event => handleChange(event, todo)}
+                                />
+                            </ListItemIcon>
+                            <ListItemText>
+                                <Typography
+                                    className={clsx({
+                                        [classes.done]: todo.done
+                                    })}
+                                    variant="body1"
                                 >
-                                    <ListItemIcon>
-                                        <Radio
-                                            checked={todo.done}
-                                            onClick={event => handleChange(event, todo)}
-                                        />
-                                    </ListItemIcon>
-                                    <ListItemText>
-                                        <Typography
-                                            className={clsx({
-                                                [classes.done]: todo.done
-                                            })}
-                                            variant="body1"
-                                        >
-                                            {todo.title}
-                                        </Typography>
-                                    </ListItemText>
-                                    {getLabel(todo)}
-                                    <Tooltip title="Archive">
-                                        <IconButton>
-                                            <ArchiveIcon/>
-                                        </IconButton>
-                                    </Tooltip>
-                                </ListItem>
-                            ))}
-                        </List>
-                    </CardContent>
-                </Card>
-            </Hidden>
-        </>
+                                    {todo.title}
+                                </Typography>
+                            </ListItemText>
+                            {getLabel(todo)}
+                            <Tooltip title="Archive">
+                                <IconButton>
+                                    <ArchiveIcon/>
+                                </IconButton>
+                            </Tooltip>
+                        </ListItem>
+                    ))}
+                </List>
+            </CardContent>
+        </Card>
     );
 };
 
+// <>
+//     <Hidden smDown>
+//         <div className={classes.header}>
+//             <Typography
+//                 className={classes.title}
+//                 variant="h5"
+//             >
+//                 Задания на сегодня
+//             </Typography>
+//         </div>
+//         <div
+//             {...rest}
+//             className={clsx(classes.root, className)}
+//         >
+//             <Timeline align="alternate">
+//                 {todos.map((todo, i) => (
+//                     <TimelineItem key={todo.id}>
+//                         <TimelineOppositeContent>
+//                             <Typography variant="body2" color="textSecondary" className={classes.date}>
+//                                 {getLabel(todo)}
+//                                 <div className={classes.wrapper}>
+//                                     <Button
+//                                         variant="contained"
+//                                         color="primary"
+//                                         disabled={loading}
+//                                         onClick={event => handleChange(event, todo)}
+//                                     >
+//                                         {(todo.done)
+//                                             ? <><EventAvailable/>Выполнено!</>
+//                                             : <><Today/>Выполнить</>}
+//                                         {loading &&
+//                                         <CircularProgress size={46} className={classes.fabProgress}/>
+//                                         }
+//                                     </Button>
+//                                 </div>
+//                             </Typography>
+//                         </TimelineOppositeContent>
+//                         <TimelineSeparator>
+//                             <TimelineDot color="primary" variant={todo.done ? 'default' : 'outlined'}>
+//                                 {todo.done ? <EventAvailable/> : <Today/>}
+//                             </TimelineDot>
+//                             {i < todos.length - 1 && <TimelineConnector/>}
+//                         </TimelineSeparator>
+//                         <TimelineContent>
+//                             <Paper elevation={3} className={classes.paper}>
+//                                 <Typography
+//                                     variant="body1"
+//                                     className={clsx({
+//                                         [classes.done]: todo.done
+//                                     }, classes.typo)}
+//                                 >
+//                                     {todo.title}
+//                                 </Typography>
+//                                 <Typography
+//                                     variant="body2"
+//                                     className={clsx({
+//                                         [classes.done]: todo.done
+//                                     }, classes.typo)}
+//                                 >
+//                                     {todo.title}
+//                                 </Typography>
+//                             </Paper>
+//                         </TimelineContent>
+//                     </TimelineItem>
+//                 ))}
+//             </Timeline>
+//         </div>
+//     </Hidden>
+//     <Hidden mdUp>
+//         <Card
+//             {...rest}
+//             className={clsx(classes.root, className)}
+//         >
+//             <CardHeader
+//                 action={
+//                     <Button
+//                         color="primary"
+//                         size="small"
+//                     >
+//                         <AddIcon className={classes.addIcon}/>
+//                         Посмотреть все задания
+//                     </Button>
+//                 }
+//                 title="Задания"
+//             />
+//             <Divider/>
+//             <CardContent className={classes.content}>
+//                 <List>
+//                     {todos.map((todo, i) => (
+//                         <ListItem
+//                             divider={i < todos.length - 1}
+//                             key={todo.id}
+//                         >
+//                             <ListItemIcon>
+//                                 <Radio
+//                                     checked={todo.done}
+//                                     onClick={event => handleChange(event, todo)}
+//                                 />
+//                             </ListItemIcon>
+//                             <ListItemText>
+//                                 <Typography
+//                                     className={clsx({
+//                                         [classes.done]: todo.done
+//                                     })}
+//                                     variant="body1"
+//                                 >
+//                                     {todo.title}
+//                                 </Typography>
+//                             </ListItemText>
+//                             {getLabel(todo)}
+//                             <Tooltip title="Archive">
+//                                 <IconButton>
+//                                     <ArchiveIcon/>
+//                                 </IconButton>
+//                             </Tooltip>
+//                         </ListItem>
+//                     ))}
+//                 </List>
+//             </CardContent>
+//         </Card>
+//     </Hidden>
+// </>
 
 // <Card
 //                 {...rest}

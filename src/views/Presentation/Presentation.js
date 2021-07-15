@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
 
 const Presentation = props => {
 
-    const {className, currentUser, ...rest} = props;
+    const {className, ...rest} = props;
 
     const classes = useStyles();
 

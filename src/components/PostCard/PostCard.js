@@ -31,10 +31,13 @@ import Gallery from "../../views/Profile/components/Gallery";
 import {convertFromRaw, Editor, EditorState} from "draft-js";
 import {likeDislikePost} from "../../store/actions/postActions";
 import {useDispatch, useSelector} from "react-redux";
+import PostImages from "../PostImages/PostImages";
 
 
 const useStyles = makeStyles(theme => ({
-    root: {},
+    root: {
+
+    },
     subheader: {
         display: 'flex',
         alignItems: 'center'
@@ -64,6 +67,9 @@ const useStyles = makeStyles(theme => ({
     divider: {
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(2)
+    },
+    postImages: {
+        display: 'flex'
     },
     expand: {
         transform: 'rotate(0deg)',

@@ -22,11 +22,13 @@ export const getUsersConversations = (currentUserId) => {
 };
 
 export const addConversation = (newConversation) => {
-    return (dispatch, getState) => {
-        const targetId = getState().auth._id;
+    return (dispatch) => {
         axios
-            .post(`${url}/conversations`, { ...newConversation, targetId }, setHeaders())
+            .post(`${url}/conversations`, { ...newConversation }, setHeaders())
             .then((conversation) => {
+                // dispatch({
+                //     type: "CLEAR_CONVERSATIONS",
+                // });
                 dispatch({
                     type: "ADD_CONVERSATION",
                     conversation,

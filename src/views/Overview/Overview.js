@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import {
     Header,
@@ -9,6 +9,8 @@ import {
 } from './components';
 import Page from "../../components/Page";
 import {useSelector} from "react-redux";
+import {Grid} from "@material-ui/core";
+import axios from "../../utils/axios";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -34,14 +36,48 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(6)
     },
     todos: {
-        marginTop: theme.spacing(3)
+        marginTop: theme.spacing(1)
     }
 }));
 
-const Overview = () => {
+const Overview = props => {
+    const {history} = props;
     const classes = useStyles();
 
     const authUserId = useSelector(state => state.auth._id)
+
+    const appState = useSelector((state) => state);
+    console.log(appState);
+
+    const auth = useSelector(state => state.auth)
+    if (!auth._id) (
+        history.push('/')
+    )
+
+    const [todos, setTodos] = useState([]);
+
+    useEffect(() => {
+        let mounted = true;
+
+        if (mounted) {
+            setTodos(todos)
+        }
+
+        const fetchTodos = () => {
+            axios.get('/api/account/todos')
+                .then(response => {
+                    if (mounted) {
+                        setTodos(response.data.todos);
+                    }
+                });
+        };
+
+        fetchTodos();
+
+        return () => {
+            mounted = false;
+        };
+    }, []);
 
     return (
         <Page
@@ -56,7 +92,30 @@ const Overview = () => {
                     fromProfilePage={false}
                     fromOverviewPage={true}
                 />
-                <Todos className={classes.todos}/>
+                <Grid
+                    container
+                    direction="row"
+                    justifyContent="flex-start"
+                    alignItems="center"
+                    spacing={4}
+                >
+                    <Grid item xs={6} sm={6} md={6} lg={6}>
+                        <Todos
+                            className={classes.todos}
+                            title={`Тренировочный план`}
+                            todos={todos}
+                            setTodos={setTodos}
+                        />
+                    </Grid>
+                    <Grid item xs={6} sm={6} md={6} lg={6}>
+                        <Todos
+                            className={classes.todos}
+                            title={`Диета`}
+                            todos={todos}
+                            setTodos={setTodos}
+                        />
+                    </Grid>
+                </Grid>
                 {/*<Statistics className={classes.statistics}/>*/}
                 {/*<Notifications className={classes.notifications}/>*/}
             </div>

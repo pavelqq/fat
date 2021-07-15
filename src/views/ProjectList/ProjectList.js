@@ -100,7 +100,8 @@ const useStyles = makeStyles(theme => ({
 //     label: PropTypes.string,
 //     control: PropTypes.element
 // };
-const ProjectList = () => {
+const ProjectList = props => {
+    const {history} = props;
 
     const classes = useStyles();
 
@@ -114,6 +115,11 @@ const ProjectList = () => {
 
     const appState = useSelector((state) => state);
     console.log(appState);
+
+    const auth = useSelector(state => state.auth)
+    if (!auth._id) (
+        history.push('/')
+    )
 
     const [inputValue, setInputValue] = useState('');
 

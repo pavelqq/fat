@@ -26,6 +26,9 @@ import {getFriends} from "../../../../store/actions/usersListActions";
 import _ from "lodash";
 import match from "autosuggest-highlight/match";
 import parse from "autosuggest-highlight/parse";
+import {v4 as uuidv4} from "uuid";
+import {addConversation} from "../../../../store/actions/conversationActions";
+import {useHistory} from "react-router";
 
 
 const useStyles = makeStyles(theme => ({
@@ -113,7 +116,7 @@ const Friends = props => {
     const [value, setValue] = useState("");
 
     const onChangeHandler = (event) => {
-        const { target } = event;
+        const {target} = event;
         const val = target.value;
         setValue(val);
     };
@@ -123,6 +126,29 @@ const Friends = props => {
     }
 
     const results = !value ? friendsList : filterByNames(friendsList, value);
+
+    const history = useHistory();
+
+    const handleConversation = (friend) => {
+        let newConversation = {
+            date: Date.now(),
+            conversationId: uuidv4(),
+            firstUser: {
+                uid: AuthedUser._id,
+                name: AuthedUser.name,
+                profilePicture: AuthedUser.profilePicture
+            },
+            secondUser: {
+                uid: friend._id,
+                name: friend.name,
+                profilePicture: friend.profilePicture
+            }
+        }
+        dispatch(addConversation(newConversation))
+        history.push('/chat')
+    }
+
+    debugger
 
     return (
         <Card
@@ -173,13 +199,12 @@ const Friends = props => {
                                 />
                                 <Button
                                     color="secondary"
-                                    component={RouterLink}
-                                    to="/chat"
+                                    onClick={() => handleConversation(friend)}
                                     variant="contained"
                                     className={classes.sendButton}
                                 >
                                     <ChatIcon className={classes.buttonIcon}/>
-                                    Отправить сообщение
+                                    Написать
                                 </Button>
                                 <Button
                                     className={classes.actionButtons}

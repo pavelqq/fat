@@ -18,6 +18,25 @@ export const getPosts = (currentUserId) => {
     };
 };
 
+export const getAllPosts = () => {
+    return (dispatch) => {
+        axios
+            .get(`${url}/posts/allPosts/all`, setHeaders())
+            .then((postsList) => {
+                dispatch({
+                    type: "CLEAR_POSTS"
+                });
+                dispatch({
+                    type: "GET_ALL_POSTS",
+                    postsList,
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+};
+
 export const addPost = (newPost) => {
     return (dispatch, getState) => {
         const profilePicture = getState().auth.profilePicture;

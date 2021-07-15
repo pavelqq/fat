@@ -119,7 +119,6 @@ const AddPost = props => {
         if (post._id) {
             const id = post._id;
             const updatedPost = {
-                //description: post.description,
                 description: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
                 profilePicture: post.profilePicture,
                 author: post.author,
@@ -132,7 +131,6 @@ const AddPost = props => {
         } else {
             const newPost = {
                 ...post,
-                //description: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
                 date: new Date()
             }
 
@@ -244,7 +242,7 @@ const AddPost = props => {
                         type="submit"
                     >
                         <IconButton
-                            color={post.description.length > 0 ? 'primary' : 'default'}
+                            color='primary'
                         >
                             <SendIcon/>
                         </IconButton>

@@ -52,7 +52,8 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Chat = () => {
+const Chat = props => {
+    const {history} = props;
     const classes = useStyles();
     const router = useRouter();
 
@@ -78,6 +79,11 @@ const Chat = () => {
 
     const appState = useSelector((state) => state);
     console.log(appState);
+
+    const auth = useSelector(state => state.auth)
+    if (!auth._id) (
+        history.push('/')
+    )
 
     // const [conversations, setConversations] = useState([]);
 

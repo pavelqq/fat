@@ -62,7 +62,6 @@ const Login = props => {
     const history = useHistory();
     const { from } = props.location.state || { from: {pathname: '/' } }
 
-    const auth = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const [creds, setCreds] = useState({
         email: "",
@@ -73,8 +72,10 @@ const Login = props => {
         e.preventDefault();
         dispatch(signIn(creds.email, creds.password));
         setCreds({ email: "", password: "" });
-        history.push('/');
     };
+
+    const auth = useSelector((state) => state.auth);
+    if (auth._id) return <Redirect to="/" />;
 
     return(
         <div

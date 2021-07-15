@@ -61,6 +61,10 @@ const ProjectDetails = props => {
     const appState = useSelector((state) => state);
     console.log(appState);
 
+    if (!authUserId) (
+        history.push('/')
+    )
+
     const handleTabsChange = (event, value) => {
         history.push(value);
     };

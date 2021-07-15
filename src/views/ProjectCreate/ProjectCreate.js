@@ -35,7 +35,7 @@ import {EditorToolbar} from "../../components/RichEditor/components";
 import {blockRenderMap} from "../../components/RichEditor/utils";
 
 import {addProject} from "../../store/actions/projectActions";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import _ from 'lodash';
 
@@ -165,8 +165,17 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const ProjectCreate = () => {
+const ProjectCreate = props => {
+    const {history} = props;
     const classes = useStyles();
+
+    const appState = useSelector((state) => state);
+    console.log(appState);
+
+    const auth = useSelector(state => state.auth)
+    if (!auth._id) (
+        history.push('/')
+    )
 
     // const [project, setProject] = useState({
     //     title: "",
@@ -243,49 +252,6 @@ const ProjectCreate = () => {
         return '';
     }
 
-    //about project
-
-    // const initialValues = {
-    //     tag: '',
-    //     tags: [],
-    // };
-    // const [values, setValues] = useState({...initialValues});
-    //const [calendarTrigger, setCalendarTrigger] = useState(null);
-    // const [selectedStartDate, setSelectedStartDate] = useState(moment.now());
-    // const handleStartDateChange = (date) => {
-    //     setSelectedStartDate(date);
-    // };
-    //
-    // const [selectedEndDate, setSelectedEndDate] = useState(moment.now());
-    // const handleEndDateChange = (date) => {
-    //     setSelectedEndDate(date);
-    // };
-    // const handleCalendarOpen = trigger => {
-    //     setCalendarTrigger(trigger);
-    // };
-    // const handleCalendarChange = () => {
-    // };
-    // const handleCalendarAccept = date => {
-    //     setValues(values => ({
-    //         ...values,
-    //         [calendarTrigger]: date
-    //     }));
-    // };
-    //
-    // const handleCalendarClose = () => {
-    //     setCalendarTrigger(false);
-    // };
-    //
-    // const calendarOpen = Boolean(calendarTrigger);
-    // const calendarMinDate =
-    //     calendarTrigger === 'startDate'
-    //         ? moment()
-    //         : moment(values.startDate).add(1, 'day');
-    // const calendarValue = values[calendarTrigger];
-    //Заворачиваем все в newProject и отправляем в аддПроджект и дальше на сервак
-    // const contentState = editorState.getCurrentContent();
-    // console.log('content state', convertToRaw(contentState));
-
     const handleFieldChange = (event, field, value) => {
         event.persist && event.persist();
         setProject(project => ({
@@ -328,8 +294,6 @@ const ProjectCreate = () => {
         startDate: '',
         endDate: ''
     });
-
-
 
     const dispatch = useDispatch();
 

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Link as RouterLink} from 'react-router-dom';
+import {Link as RouterLink, Redirect} from 'react-router-dom';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
 import {
@@ -21,6 +21,9 @@ import EditIcon from '@material-ui/icons/Edit';
 import {useDispatch, useSelector} from "react-redux";
 import {followUser, unfollowUser} from "../../../../store/actions/userActions";
 import moment from "moment";
+import {addConversation} from "../../../../store/actions/conversationActions";
+import {v4 as uuidv4} from 'uuid';
+import {useHistory} from "react-router";
 
 
 const useStyles = makeStyles(theme => ({
@@ -125,12 +128,19 @@ const Header = props => {
     const currentUser = useSelector((state) => state.userById);
     const AuthedUser = useSelector(state => state.auth)
 
-    let followBool = Boolean(AuthedUser.followings.indexOf(currentUser?._id))
+    let followBool;
+    try {
+        followBool = Boolean(AuthedUser.followings.indexOf(currentUser?._id))
+    } catch (e) {
+        console.log('Ошибка: ' + e)
+    }
+
     const [followed, setFollowed] = useState(
         followBool
     );
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleFollowUser = async () => {
         try {
@@ -142,6 +152,25 @@ const Header = props => {
             setFollowed(!followed);
         } catch (err) {
         }
+    }
+
+    const handleConversation = async () => {
+        let newConversation = {
+            date: Date.now(),
+            conversationId: uuidv4(),
+            firstUser: {
+                uid: AuthedUser._id,
+                name: AuthedUser.name,
+                profilePicture: AuthedUser.profilePicture
+            },
+            secondUser: {
+                uid: currentUser._id,
+                name: currentUser.name,
+                profilePicture: currentUser.profilePicture
+            }
+        }
+        dispatch(addConversation(newConversation))
+        history.push('/chat')
     }
 
     //const handleChangeCover = () => {};
@@ -196,8 +225,7 @@ const Header = props => {
                             <Button
                                 className={classes.actionButtons}
                                 color="secondary"
-                                component={RouterLink}
-                                to="/chat"
+                                onClick={handleConversation}
                                 variant="contained"
                             >
                                 <ChatIcon className={classes.mailIcon}/>

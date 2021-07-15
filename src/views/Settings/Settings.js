@@ -52,6 +52,11 @@ const Settings = props => {
     const appState = useSelector((state) => state);
     console.log(appState);
 
+    const auth = useSelector(state => state.auth)
+    if (!auth._id) (
+        history.push('/')
+    )
+
     const tabs = [
         {value: 'general', label: 'Редактировать профиль'},
         {value: 'access', label: 'Приватность'},

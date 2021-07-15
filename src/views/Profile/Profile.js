@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
-import {Tabs, Tab, Divider, colors} from '@material-ui/core';
+import {Tabs, Tab, Divider, colors, Grid} from '@material-ui/core';
 
 import Page from "../../components/Page";
 import Header from "./components/Header";
@@ -10,6 +10,9 @@ import Friends from "./components/Friends";
 import Projects from "../Overview/components/Projects";
 import {useDispatch, useSelector} from "react-redux";
 import {getProfileById} from "../../store/actions/userActions";
+import BMI from "./components/Bio/BMI";
+import BMR from "./components/Bio/BMR";
+import Anthropometry from "./components/Bio/Anthropometry";
 
 
 const useStyles = makeStyles(theme => ({
@@ -26,9 +29,10 @@ const useStyles = makeStyles(theme => ({
     content: {
         marginRight: theme.spacing(2),
         marginLeft: theme.spacing(2),
-        marginBottom: theme.spacing(6)
+        marginBottom: theme.spacing(12)
     },
-    innerContent: {}
+    innerContent: {},
+    BMI: {}
 }));
 
 const Profile = props => {
@@ -46,8 +50,13 @@ const Profile = props => {
         history.push(value);
     };
 
-    const appState = useSelector((state) => state);
+    const appState = useSelector(state => state);
     console.log(appState);
+
+    const auth = useSelector(state => state.auth)
+    if (!auth._id) (
+        history.push('/')
+    )
 
     const tabs = [
         {value: 'wall', label: 'Записи'},
@@ -87,15 +96,27 @@ const Profile = props => {
                 </Tabs>
                 <Divider className={classes.divider}/>
                 <div className={classes.content}>
-                    <div className={classes.innerContent}>
-                        {tab === 'wall' && <Wall/>}
-                        {tab === 'friends' && <Friends id={id}/>}
-                        {tab === 'projects' && <Projects
-                            authUserId={id}
-                            fromProfilePage={true}
-                            fromOverviewPage={false}
-                        />}
-                    </div>
+                    <Grid
+                        container
+                        direction="row"
+                        justifyContent="center"
+                        alignItems="flex-start"
+                    >
+                        <Grid item xs={12} md={6} lg={5}>
+                            <BMI classname={classes.BMI}/>
+                            <BMR classname={classes.BMR}/>
+                            <Anthropometry className={classes.anthropometry} />
+                        </Grid>
+                        <Grid item xs={12} md={6} lg={7}>
+                            {tab === 'wall' && <Wall/>}
+                            {tab === 'friends' && <Friends id={id}/>}
+                            {tab === 'projects' && <Projects
+                                authUserId={id}
+                                fromProfilePage={true}
+                                fromOverviewPage={false}
+                            />}
+                        </Grid>
+                    </Grid>
                 </div>
             </div>
         </Page>
