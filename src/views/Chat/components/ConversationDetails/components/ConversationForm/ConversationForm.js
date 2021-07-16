@@ -72,8 +72,6 @@ const ConversationForm = props => {
 
         dispatch(addMessage(newMessage));
         setMessage({ content: '' });
-
-        debugger
     }
 
     // const handleChange = event => {

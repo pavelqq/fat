@@ -11,7 +11,6 @@ import {
     ConversationPlaceholder
 } from './components';
 import {useDispatch, useSelector} from "react-redux";
-import {getAllProjects} from "../../store/actions/projectActions";
 import {getUsersConversations} from "../../store/actions/conversationActions";
 import {getConversationMessages} from "../../store/actions/messageActions";
 

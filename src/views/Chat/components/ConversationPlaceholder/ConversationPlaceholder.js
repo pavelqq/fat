@@ -31,17 +31,6 @@ const ConversationPlaceholder = props => {
             className={clsx(classes.root, className)}
         >
             <div className={classes.inner}>
-                <img
-                    alt="Начните диалог"
-                    className={classes.image}
-                    src="/images/undraw_work_chat_erdt.svg"
-                />
-                <Typography
-                    className={classes.title}
-                    variant="h4"
-                >
-                    Ваши сообщения
-                </Typography>
                 <Typography variant="subtitle1">
                     Выберете диалог слева, чтобы начать переписку
                 </Typography>

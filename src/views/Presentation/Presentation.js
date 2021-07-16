@@ -1,8 +1,8 @@
 import React from 'react';
 import {makeStyles} from "@material-ui/core/styles";
-import UserFlows from "./components/UserFlows";
-import PluginsSupport from "./components/PluginsSupport";
-import SourceFiles from "./components/SourceFiles";
+import Community from "./components/Community";
+import Functions from "./components/Functions";
+import Details from "./components/Details";
 import PresentationHeader from "./components/Header";
 import FAQ from "./components/FAQ";
 import Page from "./components/Page";
@@ -25,9 +25,9 @@ const Presentation = props => {
         >
             <PresentationHeader/>
             {/*<Concept />*/}
-            <UserFlows/>
-            <PluginsSupport/>
-            <SourceFiles/>
+            <Community/>
+            <Functions/>
+            <Details/>
             <FAQ/>
         </Page>
     );

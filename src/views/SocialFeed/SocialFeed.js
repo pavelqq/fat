@@ -1,13 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import {Header} from './components';
 import AddPost from "../../components/AddPost";
-import PostCard from "../../components/PostCard";
 import Page from "../../components/Page";
-import moment from "moment";
-import {v4 as uuidv4} from 'uuid';
 import Grid from "@material-ui/core/Grid";
-import TimelinePosts from "../Profile/components/TimelinePosts";
 import {useSelector} from "react-redux";
 import Posts from "./components/Posts";
 

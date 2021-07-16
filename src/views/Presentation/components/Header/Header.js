@@ -162,7 +162,7 @@ const PresentationHeader = props => {
                                 <CheckCircleOutlined style={{color: green[500]}}/>
                             </Grid>
                             <Grid item>
-                                <Typography variant="h6" component="h3">MongoDB</Typography>
+                                <Typography variant="h6" component="h3">Mongoose</Typography>
                             </Grid>
                         </Grid>
                         <Grid container item xs={false} md={2} lg={2} direction="row"

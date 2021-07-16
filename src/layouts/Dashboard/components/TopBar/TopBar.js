@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
         background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
         boxShadow: 'none',
         color: 'white',
-        padding: '0 3.5%',
+        padding: '0 0 0 4%',
     },
     title: {
         color: "white"
@@ -199,68 +199,68 @@ const TopBar = props => {
                   </Typography>
                 </RouterLink>
                 <div className={classes.flexGrow}/>
-                {currentUser.name &&
-                    <Hidden mdDown>
-                    <div
-                        className={classes.search}
-                        ref={searchRef}
-                    >
-                        <SearchIcon className={classes.searchIcon}/>
-                        <Input
-                            className={classes.searchInput}
-                            disableUnderline
-                            onChange={handleSearchChange}
-                            placeholder="Поиск..."
-                            value={searchValue}
-                        />
-                    </div>
-                    <Popper
-                        anchorEl={searchRef.current}
-                        className={classes.searchPopper}
-                        open={openSearchPopover}
-                        transition
-                    >
-                        <ClickAwayListener onClickAway={handleSearchPopverClose}>
-                            <Paper
-                                className={classes.searchPopperContent}
-                                elevation={3}
-                            >
-                                <List>
-                                    {popularSearches.map(search => (
-                                        <ListItem
-                                            button
-                                            key={search}
-                                            onClick={handleSearchPopverClose}
-                                        >
-                                            <ListItemIcon>
-                                                <SearchIcon/>
-                                            </ListItemIcon>
-                                            <ListItemText primary={search}/>
-                                        </ListItem>
-                                    ))}
-                                </List>
-                            </Paper>
-                        </ClickAwayListener>
-                    </Popper>
-                </Hidden>
-                }
+                {/*{currentUser.name &&*/}
+                {/*    <Hidden mdDown>*/}
+                {/*    <div*/}
+                {/*        className={classes.search}*/}
+                {/*        ref={searchRef}*/}
+                {/*    >*/}
+                {/*        <SearchIcon className={classes.searchIcon}/>*/}
+                {/*        <Input*/}
+                {/*            className={classes.searchInput}*/}
+                {/*            disableUnderline*/}
+                {/*            onChange={handleSearchChange}*/}
+                {/*            placeholder="Поиск..."*/}
+                {/*            value={searchValue}*/}
+                {/*        />*/}
+                {/*    </div>*/}
+                {/*    <Popper*/}
+                {/*        anchorEl={searchRef.current}*/}
+                {/*        className={classes.searchPopper}*/}
+                {/*        open={openSearchPopover}*/}
+                {/*        transition*/}
+                {/*    >*/}
+                {/*        <ClickAwayListener onClickAway={handleSearchPopverClose}>*/}
+                {/*            <Paper*/}
+                {/*                className={classes.searchPopperContent}*/}
+                {/*                elevation={3}*/}
+                {/*            >*/}
+                {/*                <List>*/}
+                {/*                    {popularSearches.map(search => (*/}
+                {/*                        <ListItem*/}
+                {/*                            button*/}
+                {/*                            key={search}*/}
+                {/*                            onClick={handleSearchPopverClose}*/}
+                {/*                        >*/}
+                {/*                            <ListItemIcon>*/}
+                {/*                                <SearchIcon/>*/}
+                {/*                            </ListItemIcon>*/}
+                {/*                            <ListItemText primary={search}/>*/}
+                {/*                        </ListItem>*/}
+                {/*                    ))}*/}
+                {/*                </List>*/}
+                {/*            </Paper>*/}
+                {/*        </ClickAwayListener>*/}
+                {/*    </Popper>*/}
+                {/*</Hidden>*/}
+                {/*}*/}
                 <Hidden mdDown>
-                    {currentUser.name &&
-                    <IconButton
-                        className={classes.notificationsButton}
-                        color="inherit"
-                        onClick={handleNotificationsOpen}
-                        ref={notificationsRef}
-                    >
-                        <Badge
-                            badgeContent={notifications.length}
-                            classes={{badge: classes.notificationsBadge}}
-                            variant="dot"
-                        >
-                            <NotificationsIcon/>
-                        </Badge>
-                    </IconButton>
-                    }
+                    {/*{currentUser.name &&*/}
+                    {/*<IconButton*/}
+                    {/*    className={classes.notificationsButton}*/}
+                    {/*    color="inherit"*/}
+                    {/*    onClick={handleNotificationsOpen}*/}
+                    {/*    ref={notificationsRef}*/}
+                    {/*>*/}
+                    {/*    <Badge*/}
+                    {/*        badgeContent={notifications.length}*/}
+                    {/*        classes={{badge: classes.notificationsBadge}}*/}
+                    {/*        variant="dot"*/}
+                    {/*    >*/}
+                    {/*        <NotificationsIcon/>*/}
+                    {/*    </Badge>*/}
+                    {/*</IconButton>*/}
+                    {/*}*/}
                     <Button
                         className={classes.logoutButton}
                         color="inherit"
@@ -303,16 +303,16 @@ const TopBar = props => {
                     }
                 </Hidden>
             </Toolbar>
-            <PricingModal
-                onClose={handlePricingClose}
-                open={pricingModalOpen}
-            />
-            <NotificationsPopover
-                anchorEl={notificationsRef.current}
-                notifications={notifications}
-                onClose={handleNotificationsClose}
-                open={openNotifications}
-            />
+            {/*<PricingModal*/}
+            {/*    onClose={handlePricingClose}*/}
+            {/*    open={pricingModalOpen}*/}
+            {/*/>*/}
+            {/*<NotificationsPopover*/}
+            {/*    anchorEl={notificationsRef.current}*/}
+            {/*    notifications={notifications}*/}
+            {/*    onClose={handleNotificationsClose}*/}
+            {/*    open={openNotifications}*/}
+            {/*/>*/}
         </AppBar>
     );
 };
