@@ -104,7 +104,7 @@ const Login = props => {
                             autoComplete="email"
                             autoFocus
                             value={creds.email}
-                            onChange={(e) => setCreds({ ...creds, email: e.target.value })}
+                            onChange={(e) => setCreds({ ...creds, email: e.target.value.toLowerCase() })}
                         />
                         <TextField
                             variant="outlined"

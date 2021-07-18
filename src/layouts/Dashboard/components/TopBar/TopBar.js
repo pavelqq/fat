@@ -37,10 +37,14 @@ const useStyles = makeStyles(theme => ({
         background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
         boxShadow: 'none',
         color: 'white',
-        padding: '0 0 0 4%',
+        padding: '0 0 0 3.5%',
     },
     title: {
         color: "white"
+    },
+    logo: {
+        height: 70,
+        width: 100
     },
     flexGrow: {
         flexGrow: 1
@@ -95,6 +99,9 @@ const useStyles = makeStyles(theme => ({
     },
     logoutIcon: {
         marginRight: theme.spacing(1)
+    },
+    name: {
+        color: "white"
     },
     breadcrumbsNav: {},
 }));
@@ -195,7 +202,7 @@ const TopBar = props => {
             <Toolbar>
                 <RouterLink to="/">
                   <Typography className={classes.title} component="h1" variant="h1">
-                    FAT
+                    Fatty
                   </Typography>
                 </RouterLink>
                 <div className={classes.flexGrow}/>
@@ -286,7 +293,9 @@ const TopBar = props => {
                         <InputIcon className={classes.logoutIcon}/>
                         {currentUser.name
                             ? <>
-                                {currentUser.name} Выйти
+                                <Typography variant='body2' className={classes.name}>
+                                    {currentUser.name} выйти
+                                </Typography>
                             </>
                             : <>
                                 Вход

@@ -1,70 +1,127 @@
-# Getting Started with Create React App
+<br />
+<p align="center">
+<img src="Fatty.png" alt="Logo" width="100" height="80">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  <h3 align="center">Спортивная социальная сеть</h3>
 
-## Available Scripts
+  <p align="center">
+    Это проект, позволяющий людям достичь спортивных целей через подбор подходящего плана тренировок и диеты, начиная 
+от офисных работяг, заканчивая профессиональными спортсменами.
+    <br />
+    <a href="https://fatclient.herokuapp.com/"><strong>Посмотреть демо »</strong></a>
+    <br />
+    <br />
+    <a href="https://t.me/begerzerverentempmiss">Телеграм автора</a>
+    ·
+    <a href="https://github.com/pavelqq/fatAPI">API проекта</a>
+    ·
+    <a href="https://github.com/pavelqq/fat/branches">История коммитов</a>
+  </p>
+</p>
 
-In the project directory, you can run:
+<details open="open">
+  <summary>Оглавление</summary>
+  <ol>
+    <li>
+      <a href="#О проекте">О проекте</a>
+      <ul>
+        <li><a href="#Технологии">Технологии</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#Локальный запуск">Локальный запуск</a>
+      <ul>
+        <li><a href="#Необходимая среда">Необходимая среда</a></li>
+        <li><a href="#Установка">Установка</a></li>
+      </ul>
+    </li>
+    <li><a href="#Контакты">Контакты</a></li>
+    <li><a href="#Благодарность">Благодарность</a></li>
+  </ol>
+</details>
 
-### `yarn start`
+## О проекте
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[comment]: <> ([![Product Name Screen Shot][product-screenshot]]&#40;https://fatclient.herokuapp.com/presentation&#41;)
+___
+Концепция проекта заключается в подборе идеальной программы тренировок и диеты для пользователя. Это происходит,
+благодаря постоянному взаимодействию пользователей между собой.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Выбрав план, они дают "фидбек" по нему, другие
+пользователи могут посмотреть статистику плана и узнать насколько эффективно будет следовать ему. Планы можно создавать
+самому или воспользоваться чужим. 
 
-### `yarn test`
+Данным сервисом предполагается использование не только простых обывателей, но и
+профессиональными спортсменами, которые могут "вести" своих клиентов за деньги или бесплатно помогать другим
+пользователям. Для реализации всего выше перечисленного сервис предоставляет множество возможностей: чат, профиль
+со "стенкой", комментарии, различные статистики. Концепция сервиса также подразумевает соревновательный интерес.
+Можно следить как за своими успехами, так и за успехами других пользователей.
+___
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Технологии
 
-### `yarn build`
+Здесь перечисленны технологии, которые использованы для создания
+клиентского приложения:
+* [HTML]() - based
+* [CSS]() - И это тоже база, разве есть нормальные альтернативы?)
+* [Material-UI]() - UI-библиотека, которая очень помогла с версткой в проекте. Вместо придумывания
+  ненужных "велосипедов", ускорила верстку проекта.
+* [JavaScript]() - Поскольку я хорошо знаю JS, стал писать на нём 
+* [React.js]() - Проще работать с интерфейсом и его состоянием. 
+* [Redux]() - В большом приложении без стейт менеджера никуда не деться, иначе будет большое спагетти, чтобы
+  достать состояние в любой точке приложения.
+* [redux-thunk]() - Если пользователь будет много тык-тык на странице, то будет много вызовов в СТМ, а
+  т.к. редакс работает синхронно, то нужна прослойка, которая будет выполнять операции асинхронно.
+* [Axios]() - HTTP-запросы.
+* [moment.js]() - Работа с датами.
+* [node-sass]() - Поэкспериментировал с SCSS. 
+* [react-chartjs-2]() - Графики.
+* [draft.js]() - Текстовый редактор. Позволяет пользователям отправлять форматированный текст.
+* [react-router]() - Навигация в приложении.
+* [react-router-config]() - Эксперименты с роутингом, понравилась концепция роутинга по заданному конфигу.
+* [react-toastify]() - Всплывающие уведомления, хоть и в Material-UI есть аналоги, но мне понравился больше этот вариант
+* [uuid]() - Генератор уникальных идентификаторов.
+* [react-perfect-scrollbar]() - Кастомный скролл, просто красивая декорация.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+В принципе в **package.json** есть много других библиотек, но это либо эксперименты не вошедшие в релиз, либо заготовки на
+будущее.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Локальный запуск
 
-### `yarn eject`
+Чтобы запустить копию проекта локально на компьютере, следуйте инструкциям ниже.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Необходимая среда
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Установите менеджер пакетов **npm**
+  ```sh
+  npm install npm@latest -g
+  ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Установка
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. Склонируй репозиторий
+   ```sh
+   git clone https://github.com/pavelqq/fat.git
+   ```
+2. Установи npm-пакеты
+   ```sh
+   npm install
+   ```
+3. В корне проекта запусти с помощью команды
+   ```sh
+   npm run dev
+   ```
+   Проект запустится на порту 3000.
 
-## Learn More
+## Контакты
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Email - [pavel.schardakov@gmail.com](mailto:pavel.schardakov@gmail.com)
+Telegram - [@begerzerverentempmiss](https://t.me/begerzerverentempmiss)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Благодарность
+***Хочу поблагодарить Сашку за то, что предоставил ноутбук для работы над этим проектом,
+без него всего этого бы не было. Появился только один нюанс, я забыл про SHH ключ, и все
+коммиты постились с его аккаунта, но думаю это не страшно.***
+<br/>
+<img src="notebook.jpg" alt="ноутбук Сани" width="800" height="500">

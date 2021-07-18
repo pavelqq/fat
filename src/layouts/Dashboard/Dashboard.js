@@ -37,7 +37,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Dashboard = props => {
-    const {route, history} = props;
+    const {route} = props;
 
     const authedUser = useSelector((state) => state.auth);
 

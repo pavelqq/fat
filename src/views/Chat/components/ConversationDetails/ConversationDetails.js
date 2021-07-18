@@ -31,7 +31,7 @@ const ConversationDetails = props => {
             <Divider/>
             <ConversationMessages messages={messages}/>
             <Divider/>
-            <ConversationForm cId={conversation.conversationId} authUser={authUser}/>
+            <ConversationForm conversation={conversation} authUser={authUser}/>
         </div>
     );
 };

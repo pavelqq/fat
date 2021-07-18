@@ -90,7 +90,7 @@ const PresentationHeader = props => {
                         variant="overline"
                         component="h2"
                     >
-                        презентация
+                        Презентация
                     </Typography>
                     <Typography
                         align="center"
@@ -98,7 +98,7 @@ const PresentationHeader = props => {
                         component="h1"
                         gutterBottom
                     >
-                        Fat - спортивная социальная сеть
+                        Fatty - спортивная социальная сеть
                     </Typography>
                     <Typography
                         align="center"

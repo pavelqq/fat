@@ -9,8 +9,7 @@ import {ThemeProvider} from '@material-ui/core/styles';
 import {MuiPickersUtilsProvider} from "@material-ui/pickers";
 
 import theme from './theme';
-import './mixins/moment';
-import './mock';
+// import './mock';
 import './assets/scss/index.scss';
 
 import MomentUtils from "@date-io/moment";
@@ -20,7 +19,6 @@ import 'moment/locale/ru';
 import {useDispatch} from 'react-redux';
 
 import {createBrowserHistory} from 'history';
-
 
 import {loadUser} from "./store/actions/authActions";
 

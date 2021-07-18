@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import moment from 'moment';
 import {makeStyles} from '@material-ui/core/styles';
 import {
+    Hidden,
     IconButton,
     Input,
     ListItemIcon,
@@ -126,6 +127,7 @@ const ConversationToolbar = props => {
                 {/*    )}*/}
                 {/*</div>*/}
             </div>
+            <Hidden mdDown>
             <Paper
                 className={classes.search}
                 elevation={1}
@@ -163,12 +165,6 @@ const ConversationToolbar = props => {
                     </ListItemIcon>
                     <ListItemText primary="Удалить сообщения"/>
                 </MenuItem>
-                {/*<MenuItem>*/}
-                {/*  <ListItemIcon>*/}
-                {/*    <ArchiveIcon />*/}
-                {/*  </ListItemIcon>*/}
-                {/*  <ListItemText primary="Архивировать сообщения" />*/}
-                {/*</MenuItem>*/}
                 <MenuItem>
                     <ListItemIcon>
                         <NotificationsOffIcon/>
@@ -176,6 +172,7 @@ const ConversationToolbar = props => {
                     <ListItemText primary="Отключить уведомления"/>
                 </MenuItem>
             </Menu>
+            </Hidden>
         </Toolbar>
     );
 };
