@@ -50,16 +50,6 @@ const routes = [
         route: '*',
         component: DashboardLayout,
         routes: [
-            // {
-            //     path: '/calendar',
-            //     exact: true,
-            //     component: lazy(() => import('views/Calendar'))
-            // },
-            // {
-            //     path: '/changelog',
-            //     exact: true,
-            //     component: lazy(() => import('views/Changelog'))
-            // },
             {
                 path: '/chat',
                 exact: true,
@@ -70,61 +60,6 @@ const routes = [
                 exact: true,
                 component: lazy(() => import('./views/Chat'))
             },
-            // {
-            //     path: '/dashboards/analytics',
-            //     exact: true,
-            //     component: DashboardAnalyticsView
-            // },
-            // {
-            //     path: '/dashboards/default',
-            //     exact: true,
-            //     component: DashboardDefaultView
-            // },
-            // {
-            //     path: '/invoices/:id',
-            //     exact: true,
-            //     component: lazy(() => import('views/InvoiceDetails'))
-            // },
-            // {
-            //     path: '/kanban-board',
-            //     exact: true,
-            //     component: lazy(() => import('views/KanbanBoard'))
-            // },
-            // {
-            //     path: '/mail',
-            //     exact: true,
-            //     component: lazy(() => import('views/Mail'))
-            // },
-            // {
-            //     path: '/management/customers',
-            //     exact: true,
-            //     component: lazy(() => import('views/CustomerManagementList'))
-            // },
-            // {
-            //     path: '/management/customers/:id',
-            //     exact: true,
-            //     component: lazy(() => import('views/CustomerManagementDetails'))
-            // },
-            // {
-            //     path: '/management/customers/:id/:tab',
-            //     exact: true,
-            //     component: lazy(() => import('views/CustomerManagementDetails'))
-            // },
-            // {
-            //     path: '/management/projects',
-            //     exact: true,
-            //     component: lazy(() => import('views/ProjectManagementList'))
-            // },
-            // {
-            //     path: '/management/orders',
-            //     exact: true,
-            //     component: lazy(() => import('views/OrderManagementList'))
-            // },
-            // {
-            //     path: '/management/orders/:id',
-            //     exact: true,
-            //     component: lazy(() => import('views/OrderManagementDetails'))
-            // },
             {
                 path: '/overview',
                 exact: true,
@@ -180,11 +115,6 @@ const routes = [
                 exact: true,
                 component: lazy(() => import('./views/SocialFeed'))
             },
-            // {
-            //     path: '/getting-started',
-            //     exact: true,
-            //     component: lazy(() => import('views/GettingStarted'))
-            // },
             {
                 component: () => <Redirect to="./errors/error-404" />
             }
