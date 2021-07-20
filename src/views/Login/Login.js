@@ -14,9 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {Redirect, useHistory} from "react-router";
-import {login} from "../../redux/actions/auth";
 import {useDispatch, useSelector} from "react-redux";
-import {clearMessage} from "../../redux/actions/messages";
 import {signIn} from "../../store/actions/authActions";
 
 

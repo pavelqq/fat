@@ -1,14 +1,10 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
 import AddPost from "../../../../components/AddPost";
-import PostCard from "../../../../components/PostCard";
-import TimelinePosts, {Timeline} from "../TimelinePosts";
-import Gallery from "../Gallery";
 import Posts from "./Components/Posts";
-import axios from "../../../../utils/axios";
-import {useDispatch, useSelector} from "react-redux";
-import {Grid, Hidden} from "@material-ui/core";
+import {useSelector} from "react-redux";
+import {Grid} from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
     root: {},

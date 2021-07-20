@@ -1,15 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import PostCard from "../../../../../components/PostCard";
 import {makeStyles} from "@material-ui/core/styles";
-import TextField from '@material-ui/core/TextField';
-import {findPostsByTitle, retrievePosts} from "../../../../../redux/actions/profilePosts";
-import Button from "@material-ui/core/Button";
-import {Link} from "react-router-dom";
 import clsx from "clsx";
-import {getProfileById} from "../../../../../store/actions/userActions";
 import {getPosts} from "../../../../../store/actions/postActions";
-import TimelinePosts from "../../TimelinePosts";
 
 
 const useStyles = makeStyles(theme => ({

@@ -4,7 +4,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import {LinearProgress} from '@material-ui/core';
 import {NavBar, TopBar, ChatBar} from './components';
 import {useSelector} from "react-redux";
-import {Redirect} from "react-router";
+
 
 const useStyles = makeStyles(() => ({
     root: {
