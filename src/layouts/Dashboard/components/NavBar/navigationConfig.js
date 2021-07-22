@@ -52,20 +52,6 @@ export default [
                     },
                 ]
             },
-            // {
-            //     title: 'Статистика',
-            //     href: '/dashboards',
-            //     icon: DashboardIcon,
-                // children: [
-                //   {
-                //     title: 'Default',
-                //     href: '/dashboards/default'
-                //   },
-                //   {
-                //     title: 'Analytics',
-                //     href: '/dashboards/analytics'
-                //   }
-                // ]
             {
                 title: 'Настройки',
                 href: '/settings',
@@ -91,12 +77,6 @@ export default [
                 href: '/presentation',
                 icon: PresentToAllIcon
             },
-            {
-                title: 'О проекте',
-                href: '#',
-                icon: ViewModuleIcon,
-                label: () => <Label color={colors.blue['500']}>v1.0.0</Label>
-            }
         ]
     }
 ];

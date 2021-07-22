@@ -24,10 +24,10 @@ const Presentation = props => {
             className={clsx(classes.root, className)}
         >
             <PresentationHeader/>
-            <Community/>
-            <Functions/>
-            <Details/>
-            <FAQ/>
+            {/*<Community/>*/}
+            {/*<Functions/>*/}
+            {/*<Details/>*/}
+            {/*<FAQ/>*/}
         </Page>
     );
 };

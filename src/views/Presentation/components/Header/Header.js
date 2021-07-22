@@ -9,7 +9,8 @@ import {green, orange} from "@material-ui/core/colors";
 const useStyles = makeStyles(theme => ({
     root: {
         animation: `$myEffect 1000ms ${theme.transitions.easing.easeOut}`,
-        backgroundColor: theme.palette.white
+        backgroundColor: theme.palette.white,
+        height: '100vh'
     },
     header: {
         width: theme.breakpoints.values.lg,

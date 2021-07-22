@@ -11,6 +11,8 @@ export const setHeaders = () => {
     return headers;
 };
 
+//не уверен, что это так работает
+
 export const setProjectHeaders = () => {
     const headers = {
         headers: {
