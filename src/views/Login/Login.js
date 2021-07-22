@@ -16,6 +16,7 @@ import Container from '@material-ui/core/Container';
 import {Redirect, useHistory} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {signIn} from "../../store/actions/authActions";
+import {Divider} from "@material-ui/core";
 
 
 function Copyright() {
@@ -43,8 +44,11 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(1),
         backgroundColor: theme.palette.secondary.main,
     },
+    divider: {
+        height: "10px"
+    },
     form: {
-        width: '100%', // Fix IE 11 issue.
+        width: '100%',
         marginTop: theme.spacing(1),
     },
     submit: {
@@ -90,6 +94,18 @@ const Login = props => {
                         Авторизация
                     </Typography>
                     <Typography align="center">Чтобы посмотреть эту страничку: {from.pathname}, тебе надо авторизоваться</Typography>
+                    <Divider className={classes.divider} />
+                    <Grid container justifyContent="center" direction="row"
+                          alignItems="center" spacing={3}>
+                        <Grid item>
+                            <Typography>Тестовый Логин:</Typography>
+                            <code>test@gmail.com</code>
+                        </Grid>
+                        <Grid item>
+                            <Typography>Тестовый Пароль:</Typography>
+                            <code>12345test</code>
+                        </Grid>
+                    </Grid>
                     <form className={classes.form} noValidate onSubmit={handleSubmit}>
                         <TextField
                             variant="outlined"
