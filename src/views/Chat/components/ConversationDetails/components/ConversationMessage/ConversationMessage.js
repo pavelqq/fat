@@ -106,7 +106,6 @@ const ConversationMessage = props => {
                     </div>
                     <div className={classes.footer}>
                         <Typography
-                            className={classes.time}
                             variant="body2"
                         >
                             {moment(message.date).fromNow()}

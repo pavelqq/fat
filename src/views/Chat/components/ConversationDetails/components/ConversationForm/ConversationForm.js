@@ -50,24 +50,25 @@ const ConversationForm = props => {
     const classes = useStyles();
 
     // const fileInputRef = useRef(null);
+    //
+    // let cId;
+    // if (!conversationId) {
+    //     cId = uuidv4()
+    // } else {
+    //     cId = conversation.cId;
+    // }
 
-    let conversationId = conversation.cId
-
-    let cId;
-    if (!conversationId) {
-        cId = uuidv4()
-    } else {
-        cId = conversation.cId;
-    }
+    debugger
 
     const [message, setMessage] = useState({
-        conversationId: cId,
+        conversationId: conversation.conversationId,
         content: '',
     });
 
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
+        e.preventDefault();
         e.persist();
 
         const newMessage = {
@@ -77,8 +78,6 @@ const ConversationForm = props => {
 
         dispatch(addMessage(newMessage));
         setMessage({content: ''});
-
-        debugger
     }
 
     // const handleChange = event => {

@@ -28,10 +28,10 @@ export const addMessage = (newMessage) => {
         const profilePicture = getState().auth.profilePicture;
         axios
             .post(`${url}/messages`, {...newMessage, sender:{uid,name,profilePicture}}, setHeaders())
-            .then((conversation) => {
+            .then((message) => {
                 dispatch({
                     type: "ADD_MESSAGE",
-                    conversation,
+                    message,
                 });
             })
             .catch((error) => {
