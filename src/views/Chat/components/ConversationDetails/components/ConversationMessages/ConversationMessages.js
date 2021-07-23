@@ -32,16 +32,6 @@ const ConversationMessages = props => {
         scrollToBottom()
     }, [messages]);
 
-    // не работает прокрутка вниз с перфект баром, позже сделаю
-    // const lastIndex = row.length - 1;
-    // row.map((rank, i) => {
-    //   if (i === lastIndex) {
-    //     // последнее сообщение
-    //   } else {
-    //     // не последнее сообщение
-    //   }
-    // })
-
     return (
         <div
             {...rest}
